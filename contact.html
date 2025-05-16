@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact Ambururu Waterfalls Resort in Siaya, Kenya for bookings and inquiries.">
+    <meta name="keywords" content="Ambururu Waterfalls, Siaya, Kenya, contact, bookings">
+    <title>Contact - Ambururu Waterfalls</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <h1>Ambururu Waterfalls</h1>
+            <div class="search-bar">
+                <input type="text" placeholder="Search..." aria-label="Search site">
+                <button type="submit" aria-label="Search"><i class="fas fa-search"></i></button>
+            </div>
+            <nav aria-label="Main navigation">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li class="dropdown">
+                        <a href="about.html">About <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="about.html#history">History</a></li>
+                            <li><a href="about.html#location">Location</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li class="dropdown">
+                        <a href="activities.html">Activities <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="activities.html#swimming">Swimming</a></li>
+                            <li><a href="activities.html#hiking">Hiking</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="accommodations.html">Accommodations</a></li>
+                    <li><a href="dining.html">Dining</a></li>
+                    <li><a href="events.html">Events</a></li>
+                    <li><a href="contact.html" class="active" aria-current="page">Contact</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <section class="content">
+            <h2>Contact Us</h2>
+            <p>Email: <a href="mailto:ambururuwaterfalls@gmail.com">ambururuwaterfalls@gmail.com</a></p>
+            <p>Phone: +254 720 215 511</p>
+            <p>Address: 5CQ9+62H, Musanda, Siaya, Kenya</p>
+            <div id="map" style="height: 400px; width: 100%;"></div>
+            
+            <!-- Contact Form for Ambururu Waterfalls -->
+<form action="https://formspree.io/f/xldbzjdz" method="POST">
+  <label for="email">Your email:</label>
+  <input
+    type="email"
+    id="email"
+    name="email"
+    placeholder="example@domain.com"
+    required
+    aria-label="Your email address"
+  >
+
+  <label for="message">Your message:</label>
+  <textarea
+    id="message"
+    name="message"
+    placeholder="Type your message here"
+    required
+    aria-label="Your message"
+  ></textarea>
+
+  <!-- Add other fields here if needed (e.g., name, subject) -->
+
+  <button type="submit">Send</button>
+</form>
+        </section>
+    </main>
+    <footer>
+        <div class="footer-container">
+            <p>© 2025 Ambururu Waterfalls. All rights reserved.</p>
+            <div class="social-links">
+                <a href="https://www.facebook.com/ambururu/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://x.com/Ambururu_W" target="_blank" aria-label="X"><i class="fab fa-x-twitter"></i></a>
+            </div>
+            <div class="newsletter">
+                <h4>Stay Updated</h4>
+                <form id="newsletter-form" action="https://formspree.io/f/your-form-id" method="POST">
+                    <input type="email" name="email" placeholder="Enter your email" required aria-label="Email address">
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="js/script.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"></script>
+    <script>
+        function initMap() {
+            const location = { lat: 0.1234, lng: 34.5678 }; // Replace with actual coordinates
+            const map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 15,
+                center: location
+            });
+            new google.maps.Marker({ position: location, map });
+        }
+    </script>
+</body>
+</html>

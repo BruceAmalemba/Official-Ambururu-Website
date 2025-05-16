@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore stunning photos of Ambururu Waterfalls and Resort in Siaya, Kenya.">
+    <meta name="keywords" content="Ambururu Waterfalls, Siaya, Kenya, gallery, photos">
+    <title>Gallery - Ambururu Waterfalls</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <h1>Ambururu Waterfalls</h1>
+            <div class="search-bar">
+                <input type="text" placeholder="Search..." aria-label="Search site">
+                <button type="submit" aria-label="Search"><i class="fas fa-search"></i></button>
+            </div>
+            <nav aria-label="Main navigation">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li class="dropdown">
+                        <a href="about.html">About <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="about.html#history">History</a></li>
+                            <li><a href="about.html#location">Location</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="gallery.html" class="active" aria-current="page">Gallery</a></li>
+                    <li class="dropdown">
+                        <a href="activities.html">Activities <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="activities.html#swimming">Swimming</a></li>
+                            <li><a href="activities.html#hiking">Hiking</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="accommodations.html">Accommodations</a></li>
+                    <li><a href="dining.html">Dining</a></li>
+                    <li><a href="events.html">Events</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <section class="content">
+            <h2>Photo Gallery</h2>
+            <div class="gallery-carousel">
+                <div><img src="images/29.jpg" alt="Waterfall View" loading="lazy"></div>
+                <div><img src="images/18.jpg" alt="Waterfall Scenery" loading="lazy"></div>
+                <div><img src="images/14.jpg" alt="Resort Room" loading="lazy"></div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="footer-container">
+            <p>© 2025 Ambururu Waterfalls. All rights reserved.</p>
+            <div class="social-links">
+                <a href="https://www.facebook.com/ambururu/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://x.com/Ambururu_W" target="_blank" aria-label="X"><i class="fab fa-x-twitter"></i></a>
+            </div>
+            <div class="newsletter">
+                <h4>Stay Updated</h4>
+                <form id="newsletter-form" action="https://formspree.io/f/your-form-id" method="POST">
+                    <input type="email" name="email" placeholder="Enter your email" required aria-label="Email address">
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
