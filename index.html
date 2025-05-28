@@ -3,42 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Discover Ambururu Waterfalls in Siaya, Kenya, a serene escape with stunning views, resort amenities, and adventure activities.">
-    <meta name="keywords" content="Ambururu Waterfalls, Siaya, Kenya, tourism, resort, waterfalls, adventure">
-    <title>Ambururu Waterfalls - Siaya, Kenya | Official Website</title>
+    <title>Ambururu Waterfalls & Resort | Kakamega, Kenya</title>
+    <meta name="description" content="Discover Ambururu Waterfalls & Resort in Kakamega, Kenya. Experience luxury stays, gourmet dining, and thrilling nature adventures amidst cascading waterfalls.">
+    <meta name="keywords" content="Ambururu Waterfalls, Kakamega, Kenya, resort, luxury, dining, adventure, eco-tourism">
+    <link rel="preload" href="images/29.jpg" as="image">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Playfair+Display:wght@700&display=swap" as="style">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
+    <header class="sticky-header" role="banner">
         <div class="header-container">
-            <h1>Ambururu Waterfalls</h1>
-            <div class="search-bar">
-                <input type="text" placeholder="Search..." aria-label="Search site">
-                <button type="submit" aria-label="Search"><i class="fas fa-search"></i></button>
+            <div class="brand">
+                <img src="logo/B2.jpg" alt="Ambururu Waterfalls & Resort Logo" class="logo" width="80" height="80">
+                <h1>Ambururu Waterfalls & Resort</h1>
             </div>
-            <nav aria-label="Main navigation">
+            <nav id="main-nav" aria-label="Main navigation">
                 <ul>
                     <li><a href="index.html" class="active" aria-current="page">Home</a></li>
-                    <li class="dropdown">
-                        <a href="about.html">About <i class="fas fa-chevron-down"></i></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="about.html#history">History</a></li>
-                            <li><a href="about.html#location">Location</a></li>
-                        </ul>
-                    </li>
+                    <li><a href="about.html">About</a></li>
                     <li><a href="gallery.html">Gallery</a></li>
-                    <li class="dropdown">
-                        <a href="activities.html">Activities <i class="fas fa-chevron-down"></i></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="activities.html#swimming">Swimming</a></li>
-                            <li><a href="activities.html#hiking">Hiking</a></li>
-                        </ul>
-                    </li>
+                    <li><a href="activities.html">Activities</a></li>
                     <li><a href="accommodations.html">Accommodations</a></li>
                     <li><a href="dining.html">Dining</a></li>
                     <li><a href="events.html">Events</a></li>
@@ -46,76 +34,115 @@
                     <li><a href="blog.html">Blog</a></li>
                 </ul>
             </nav>
+            <button class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </header>
     <main>
-        <section class="hero">
+        <!-- Hero Section -->
+        <section class="hero parallax" role="region" aria-label="Hero section">
             <div class="hero-carousel">
-                <div><img src="images/29.jpg" alt="Ambururu Waterfalls View 1" loading="lazy"></div>
-                <div><img src="images/30.jpg" alt="Ambururu Waterfalls View 2" loading="lazy"></div>
+                <div><img src="images/29.jpg" alt="Ambururu Waterfalls cascading over lush green rocks in Kakamega" width="1200" height="600" onerror="this.src='https://via.placeholder.com/1200x600?text=Ambururu+Waterfalls';"></div>
+                <div><img src="images/1.jpg" alt="Luxury eco-resort with a stunning waterfall backdrop" width="1200" height="600" onerror="this.src='https://via.placeholder.com/1200x600?text=Ambururu+Resort';"></div>
+                <div><img src="images/31.jpg" alt="Outdoor dining experience beside Ambururu Waterfalls" width="1200" height="600" onerror="this.src='https://via.placeholder.com/1200x600?text=Ambururu+Dining';"></div>
             </div>
-            <div class="hero-text">
+            <div class="carousel-controls">
+                <button class="carousel-prev" aria-label="Previous slide"><i class="fas fa-chevron-left"></i></button>
+                <button class="carousel-next" aria-label="Next slide"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div class="hero-overlay">
                 <h2>Welcome to Ambururu Waterfalls</h2>
-                <p>A hidden gem in Siaya, Kenya, offering nature, adventure, and luxury.</p>
-                <a href="contact.html" class="cta-button">Book Now</a>
-                <a href="gallery.html" class="cta-button">Explore Gallery</a>
+                <p>Immerse yourself in the serene beauty of Kakamega’s cascading falls, where eco-luxury meets thrilling adventures and delectable cuisine.</p>
+                <div class="hero-ctas">
+                    <a href="booking.html" class="cta-button">Book Your Stay</a>
+                    <a href="gallery.html" class="cta-button secondary">Explore Gallery</a>
+                </div>
             </div>
         </section>
-        <section class="features">
-            <h3>Experience Ambururu</h3>
+        <!-- Features Section -->
+        <section class="features" role="region" aria-label="Features section">
+    <div class="features-header">
+        <h3 id="features-heading" aria-describedby="features-subtitle">Why Choose Ambururu?</h3>
+        <p id="features-subtitle" class="features-subtitle">Unforgettable Eco-Luxury Awaits!</p>
+        <span class="header-decor"><i class="fas fa-leaf"></i></span>
+            </div>
             <div class="feature-grid">
-                <div class="feature">
-                    <i class="fas fa-swimmer"></i>
-                    <img src="images/9.jpg" alt="Waterfall Activities" class="feature-image" loading="lazy">
-                    <img src="images/27.jpg" alt="Waterfall Activities" class="feature-image" loading="lazy">
-                    <img src="images/21.jpg" alt="Waterfall Activities" class="feature-image" loading="lazy">
-                    <h4>Adventure Activities</h4>
-                    <p>Swim, hike, or explore nature trails.</p>
+                <div class="feature" tabindex="0" role="article">
+                    <i class="fas fa-tree fa-3x" aria-hidden="true"></i>
+                    <img src="images/9.jpg" alt="Guests planting native trees at Ambururu Waterfalls for conservation" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300?text=Tree+Planting';">
+                    <h4>Eco-Friendly Tree Planting</h4>
+                    <p>Join our conservation efforts by planting native trees, preserving Kakamega’s lush ecosystem for future generations.</p>
                 </div>
-                <div class="feature">
-                    <i class="fas fa-bed"></i>
-                    <img src="images/14.jpg" alt="Resort Accommodations" class="feature-image" loading="lazy">
-                    <h4>Luxury Stays</h4>
-                    <p>Comfortable rooms with scenic views.</p>
+                <div class="feature" tabindex="0" role="article">
+                    <i class="fas fa-bed fa-3x" aria-hidden="true"></i>
+                    <img src="images/14.jpg" alt="Eco-luxury suite with panoramic waterfall views at Ambururu" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300?text=Accommodation';">
+                    <h4>Eco-Luxury Stays</h4>
+                    <p>Relax in sustainable suites with breathtaking views of the falls.</p>
                 </div>
-                <div class="feature">
-                    <i class="fas fa-utensils"></i>
-                    <img src="images/31.jpg" alt="Dining Experience" class="feature-image" loading="lazy">
+                <div class="feature" tabindex="0" role="article">
+                    <i class="fas fa-utensils fa-3x" aria-hidden="true"></i>
+                    <img src="images/10.jpg" alt="Gourmet dining featuring local Kenyan flavors by Ambururu Waterfalls" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300?text=Dining';">
                     <h4>Gourmet Dining</h4>
-                    <p>Fresh local and international cuisine.</p>
+                    <p>Savor fresh tilapia, nyama choma, and tropical desserts by the falls.</p>
                 </div>
             </div>
         </section>
-        <section class="testimonials">
-            <h3>Visitor Stories</h3>
+        <!-- Testimonials Section -->
+        <section class="testimonials" role="region" aria-label="Testimonials section">
+            <h3>What Our Guests Say</h3>
             <div class="testimonials-slider">
                 <div class="testimonial">
-                    <p>"A magical escape with stunning waterfall views!" – Google Maps Review</p>
+                    <p>“A magical escape! The waterfalls and hospitality made our stay unforgettable.” – Sarah M., Google Maps</p>
                 </div>
                 <div class="testimonial">
-                    <p>"The resort’s hospitality and food were top-notch!" – Tripadvisor Review</p>
+                    <p>“The food was incredible, and the views are breathtaking!” – John K., Tripadvisor</p>
+                </div>
+                <div class="testimonial">
+                    <p>“Perfect blend of adventure and luxury. Highly recommend!” – Aisha L., Instagram</p>
                 </div>
             </div>
+            <div class="slider-controls">
+                <button class="slider-prev" aria-label="Previous testimonial"><i class="fas fa-chevron-left"></i></button>
+                <button class="slider-next" aria-label="Next testimonial"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </section>
+        <!-- CTA Section -->
+        <section class="cta-section" role="region" aria-label="Call to action section">
+            <h3>Start Your Adventure Today</h3>
+            <p>Join us at Ambururu Waterfalls for an unforgettable experience in Kakamega’s natural paradise.</p>
+            <a href="booking.html" class="cta-button">Book Now</a>
+        </section>
+        <!-- Map Section -->
+        <section class="map" role="region" aria-label="Map section">
+            <h3>Find Us in Kakamega</h3>
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.757411396458!2d34.75186561462929!3d0.282730699672199!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMMKwMTYnNTguMiJOIDM0wrA0NScwNi43IkU!5e0!3m2!1sen!2s!4v1698161234567" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" title="Map of Ambururu Waterfalls in Kakamega, Kenya"></iframe>
+            </div>
+            <p class="map-description">Nestled in Kakamega, Kenya, easily accessible via the Kisumu-Busia road.</p>
         </section>
     </main>
-    <footer>
+    <footer role="contentinfo">
         <div class="footer-container">
             <p>© 2025 Ambururu Waterfalls. All rights reserved.</p>
             <div class="social-links">
-                <a href="https://www.facebook.com/ambururu/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://x.com/Ambururu_W" target="_blank" aria-label="X"><i class="fab fa-x-twitter"></i></a>
+                <a href="https://www.facebook.com/ambururu/" target="_blank" aria-label="Visit our Facebook page"><i class="fab fa-facebook-f fa-2x"></i></a>
+                <a href="https://x.com/Ambururu_W" target="_blank" aria-label="Visit our Twitter profile"><i class="fab fa-twitter fa-2x"></i></a>
+                <a href="https://www.instagram.com/ambururu1/" target="_blank" aria-label="Visit our Instagram page"><i class="fab fa-instagram fa-2x"></i></a>
             </div>
             <div class="newsletter">
                 <h4>Stay Updated</h4>
                 <form id="newsletter-form" action="https://formspree.io/f/your-form-id" method="POST">
-                    <input type="email" name="email" placeholder="Enter your email" required aria-label="Email address">
+                    <input type="email" name="email" placeholder="Enter your email" required aria-label="Email address for newsletter">
                     <button type="submit">Subscribe</button>
                 </form>
             </div>
         </div>
     </footer>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
     <script src="js/script.js"></script>
 </body>
 </html>
