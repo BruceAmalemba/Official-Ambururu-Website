@@ -313,7 +313,72 @@ a:focus, button:focus, input:focus {
     outline-offset: 2px;
 }
 
-/* Animations */
-.hero-carousel img, .feature-image, .content-image {
-    will-change: transform, opacity;
+/* Menu Toggle */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: white;
+    cursor: pointer;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1001;
+}
+.booking {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.booking h2 {
+    color: #2c6e49; /* Nature-inspired color */
+    text-align: center;
+}
+
+.booking label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.booking input, .booking select {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s ease;
+}
+
+.booking input:focus, .booking select:focus {
+    border-color: #2c6e49;
+    outline: none;
+}
+
+.book-now-button, .booking button {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background-color: #2c6e49;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.book-now-button:hover, .booking button:hover {
+    background-color: #1f4e34;
+}
+
+nav ul li a.active {
+    color: var(--primary-color);
+    font-weight: bold;
+    border-bottom: 2px solid var(--primary-color);
+}
+
 }
