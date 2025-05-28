@@ -3,23 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Experience gourmet dining at Ambururu Waterfalls Resort in Siaya, Kenya.">
-    <meta name="keywords" content="Ambururu Waterfalls, Siaya, Kenya, dining, restaurant">
-    <title>Dining - Ambururu Waterfalls</title>
+    <meta name="description" content="Indulge in gourmet dining at Ambururu Waterfalls Resort in Siaya, Kenya, with fresh local and international cuisine.">
+    <meta name="keywords" content="Ambururu Waterfalls, Siaya, Kenya, dining, restaurant, gourmet, cuisine">
+    <title>Dining - Ambururu Waterfalls Resort</title>
+    <link rel="preload" href="images/11.jpg" as="image">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Playfair+Display:wght@700&display=swap" as="style">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
+    <header class="sticky-header" role="banner">
         <div class="header-container">
-            <h1>Ambururu Waterfalls</h1>
-            <div class="search-bar">
-                <input type="text" placeholder="Search..." aria-label="Search site">
-                <button type="submit" aria-label="Search"><i class="fas fa-search"></i></button>
+            <div class="brand">
+                <img src="logo/B2.jpg" alt="Ambururu Waterfalls & Resort Logo" class="logo" width="80" height="80">
+                <h1>Ambururu Waterfalls</h1>
             </div>
-            <nav aria-label="Main navigation">
+            <nav id="main-nav" aria-label="Main navigation">
                 <ul>
                     <li><a href="index.html">Home</a></li>
                     <li class="dropdown">
@@ -44,32 +46,97 @@
                     <li><a href="blog.html">Blog</a></li>
                 </ul>
             </nav>
+            <button class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </header>
     <main>
-        <section class="content">
-            <h2>Dining</h2>
-            <img src="images/31.jpg" alt="Dining Area" class="content-image" loading="lazy">
-            <p>Savor fresh local cuisine and international dishes at our resort restaurant, set against the backdrop of cascading waterfalls.</p>
+        <section class="hero-section" role="region" aria-label="Hero section">
+            <div class="hero-carousel">
+                <div><img src="images/11.jpg" alt="Grilled Tilapia with Ugali by Ambururu Waterfalls" width="1200" height="600" onerror="this.src='https://via.placeholder.com/1200x600?text=Dining';"></div>
+                <div><img src="images/13.jpg" alt="Nyama Choma with Sukuma Wiki at Ambururu Resort" width="1200" height="600" onerror="this.src='https://via.placeholder.com/1200x600?text=Nyama+Choma';"></div>
+                <div><img src="images/34.jpg" alt="Mango Coconut Panna Cotta dessert" width="1200" height="600" onerror="this.src='https://via.placeholder.com/1200x600?text=Dessert';"></div>
+            </div>
+            <div class="hero-overlay">
+                <h2>Exquisite Dining by the Falls</h2>
+                <p>Relish farm-fresh Kenyan flavors and global cuisine amidst the soothing sounds of Ambururu Waterfalls.</p>
+                <a href="#book-table" class="cta-button">Reserve Your Table</a>
+            </div>
+    <div class="teaser-button" role="button" tabindex="0" aria-label="Discover today’s dining special">
+        <span class="teaser-icon"><i class="fas fa-utensils"></i></span>
+        <span class="teaser-text">Today’s Special</span>
+        <div class="teaser-tooltip">
+            <p>Curious? Discover our chef’s exclusive dish of the day!</p>
+            <a href="#chef-special" class="tooltip-cta">Explore Now</a>
+        </div>
+    </div>
+</section>
+        </section>
+        <section class="menu-highlights" role="region" aria-label="Menu highlights">
+            <h2>Our Signature Dishes</h2>
+            <div class="menu-grid">
+                <div class="menu-item" data-dish="grilled-tilapia">
+                    <img src="images/11.jpg" alt="Grilled Tilapia with Ugali and Kachumbari at Ambururu" loading="lazy">
+                    <h3>Grilled Tilapia & Ugali</h3>
+                    <p>Freshly caught Lake Victoria tilapia, grilled to perfection, served with creamy ugali and kachumbari.</p>
+                </div>
+                <div class="menu-item" data-dish="nyama-choma">
+                    <img src="images/13.jpg" alt="Nyama Choma with Sukuma Wiki and Pili Pili Sauce" loading="lazy">
+                    <h3>Nyama Choma & Sukuma Wiki</h3>
+                    <p>Succulent grilled goat, paired with vibrant sukuma wiki and a side of spicy pili pili sauce.</p>
+                </div>
+                <div class="menu-item" data-dish="tropical-dessert">
+                    <img src="images/34.jpg" alt="Mango Coconut Panna Cotta with Passion Fruit Coulis" loading="lazy">
+                    <h3>Mango Coconut Panna Cotta</h3>
+                    <p>A silky dessert infused with local mangoes and creamy coconut, topped with passion fruit coulis.</p>
+                </div>
+            </div>
+        </section>
+        <section class="chef-special" role="region" aria-label="Chef’s special">
+            <h2>Chef’s Special</h2>
+            <div class="special-content">
+                <img src="images/32.jpg" alt="Kenyan Coastal Prawn Curry with Basmati Rice" loading="lazy" class="special-image">
+                <div class="special-text">
+                    <h3>Kenyan Coastal Curry</h3>
+                    <p>Indulge in our chef’s signature prawn curry, blending coastal spices with creamy coconut milk, served with fragrant basmati rice.</p>
+                    <a href="#book-table" class="cta-button">Taste It Now</a>
+                </div>
+            </div>
+        </section>
+        <section class="book-table" id="book-table" role="region" aria-label="Table reservation">
+            <h2>Reserve Your Dining Experience</h2>
+            <form id="booking-form" action="https://formspree.io/f/your-form-id" method="POST">
+                <input type="text" name="name" placeholder="Your Name" required aria-label="Your full name">
+                <input type="email" name="email" placeholder="Your Email" required aria-label="Your email address">
+                <input type="date" name="date" required aria-label="Preferred reservation date">
+                <input type="time" name="time" required aria-label="Preferred reservation time">
+                <button type="submit" class="cta-button">Book Now</button>
+            </form>
         </section>
     </main>
-    <footer>
+    <footer role="contentinfo">
         <div class="footer-container">
             <p>© 2025 Ambururu Waterfalls. All rights reserved.</p>
             <div class="social-links">
-                <a href="https://www.facebook.com/ambururu/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://x.com/Ambururu_W" target="_blank" aria-label="X"><i class="fab fa-x-twitter"></i></a>
+                <a href="https://www.facebook.com/ambururu/" target="_blank" aria-label="Visit our Facebook page"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://x.com/Ambururu_W" target="_blank" aria-label="Visit our Twitter profile"><i class="fab fa-x-twitter"></i></a>
+                <a href="https://www.instagram.com/ambururu1/" target="_blank" aria-label="Visit our Instagram page"><i class="fab fa-instagram"></i></a>
             </div>
             <div class="newsletter">
                 <h4>Stay Updated</h4>
                 <form id="newsletter-form" action="https://formspree.io/f/your-form-id" method="POST">
-                    <input type="email" name="email" placeholder="Enter your email" required aria-label="Email address">
+                    <input type="email" name="email" placeholder="Enter your email" required aria-label="Email address for newsletter">
                     <button type="submit">Subscribe</button>
                 </form>
             </div>
         </div>
     </footer>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <a href="#top" id="back-to-top" class="cta-button" aria-label="Back to top">↑</a>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
     <script src="js/script.js"></script>
 </body>
 </html>

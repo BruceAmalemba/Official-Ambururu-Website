@@ -3,23 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Explore stunning photos of Ambururu Waterfalls and Resort in Siaya, Kenya.">
-    <meta name="keywords" content="Ambururu Waterfalls, Siaya, Kenya, gallery, photos">
-    <title>Gallery - Ambururu Waterfalls</title>
+    <meta name="description" content="Immerse yourself in stunning photos and videos of Ambururu Waterfalls and Resort in Siaya, Kenya. Explore waterfalls, eco-luxury stays, and vibrant activities.">
+    <meta name="keywords" content="Ambururu Waterfalls, Siaya, Kenya, gallery, photos, videos, resort, eco-tourism">
+    <title>Gallery - Ambururu Waterfalls & Resort</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.36/dist/fancybox/fancybox.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 </head>
 <body>
-    <header>
+    <header class="sticky-header">
         <div class="header-container">
-            <h1>Ambururu Waterfalls</h1>
-            <div class="search-bar">
-                <input type="text" placeholder="Search..." aria-label="Search site">
-                <button type="submit" aria-label="Search"><i class="fas fa-search"></i></button>
-            </div>
+            <img src="logo/B2.jpg" alt="Ambururu Waterfalls Logo" class="logo">
+            <h1>Ambururu Waterfalls & Resort</h1>
             <nav aria-label="Main navigation">
                 <ul>
                     <li><a href="index.html">Home</a></li>
@@ -28,13 +26,14 @@
                         <ul class="dropdown-menu">
                             <li><a href="about.html#history">History</a></li>
                             <li><a href="about.html#location">Location</a></li>
+                            <li><a href="about.html#owner">Our Owner</a></li>
                         </ul>
                     </li>
                     <li><a href="gallery.html" class="active" aria-current="page">Gallery</a></li>
                     <li class="dropdown">
                         <a href="activities.html">Activities <i class="fas fa-chevron-down"></i></a>
                         <ul class="dropdown-menu">
-                            <li><a href="activities.html#swimming">Swimming</a></li>
+                            <li><a href="activities.html#tree-planting">Tree Planting</a></li>
                             <li><a href="activities.html#hiking">Hiking</a></li>
                         </ul>
                     </li>
@@ -45,25 +44,104 @@
                     <li><a href="blog.html">Blog</a></li>
                 </ul>
             </nav>
+            <button class="menu-toggle" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </header>
     <main>
-        <section class="content">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-overlay">
+                <h2>Explore Ambururu’s Beauty</h2>
+                <p>Dive into the breathtaking visuals of Siaya’s premier waterfall resort.</p>
+                <a href="#gallery" class="cta-button">View Gallery</a>
+            </div>
+        </section>
+        <!-- Video Showcase -->
+        <section class="gallery" role="region" aria-label="Gallery section">
+    <div class="video-hero">
+        <h2 class="video-title">Experience Ambururu Waterfalls</h2>
+        <div class="video-container">
+            <video controls poster="images/43.jpg" preload="none" aria-label="Video tour of Ambururu Waterfalls showcasing scenic views and dining">
+                <source src="images/41.mp4" type="video/mp4">
+                <track kind="captions" src="captions/41.vtt" srclang="en" label="English" default>
+                Your browser does not support the video tag.
+            </video>
+            <div class="video-overlay">
+                <span class="play-button"><i class="fas fa-play"></i></span>
+                <span class="waterfall-icon"><i class="fas fa-water"></i></span>
+            </div>
+            <p class="video-cta">Watch the Magic Unfold</p>
+        </div>
+        </section>
+        <!-- Gallery Section -->
+        <section class="gallery" id="gallery">
             <h2>Photo Gallery</h2>
-            <div class="gallery-carousel">
-                <div><img src="images/29.jpg" alt="Waterfall View" loading="lazy"></div>
-                <div><img src="images/18.jpg" alt="Waterfall Scenery" loading="lazy"></div>
-                <div><img src="images/14.jpg" alt="Resort Room" loading="lazy"></div>
+            <div class="gallery-filters">
+                <button data-filter="all" class="active">All</button>
+                <button data-filter="waterfalls">Waterfalls</button>
+                <button data-filter="resort">Resort</button>
+                <button data-filter="activities">Activities</button>
+                <button data-filter="events">Events</button>
+            </div>
+            <div class="gallery-grid">
+                <a href="images/1.jpg" data-fancybox="gallery" data-caption="Cascading Ambururu Waterfalls at sunrise" data-category="waterfalls">
+                    <img src="images/26.jpg" alt="Ambururu Waterfalls at sunrise" loading="lazy">
+                    <div class="caption">Sunrise Cascades</div>
+                </a>
+                <a href="images/21.jpg" data-fancybox="gallery" data-caption="Majestic falls surrounded by lush greenery" data-category="waterfalls">
+                    <img src="images/19.jpg" alt="Majestic Ambururu Waterfalls" loading="lazy">
+                    <div class="caption">Lush Falls</div>
+                </a>
+                <a href="images/39.jpg" data-fancybox="gallery" data-caption="Eco-luxury suite with waterfall view" data-category="resort">
+                    <img src="images/31.jpg" alt="Eco-luxury suite at Ambururu" loading="lazy">
+                    <div class="caption">Eco-Luxury Suite</div>
+                </a>
+                <a href="images/18.jpg" data-fancybox="gallery" data-caption="Infinity pool overlooking the falls" data-category="resort">
+                    <img src="images/2.jpg" alt="Infinity pool at Ambururu Resort" loading="lazy">
+                    <div class="caption">Infinity Pool</div>
+                </a>
+                <a href="images/27.jpg" data-fancybox="gallery" data-caption="Guests planting native trees" data-category="activities">
+                    <img src="images/28.jpg" alt="Tree planting activity at Ambururu" loading="lazy">
+                    <div class="caption">Tree Planting</div>
+                </a>
+                <a href="images/21.jpg" data-fancybox="gallery" data-caption="Scenic hiking trail near the falls" data-category="activities">
+                    <img src="images/4.jpg" alt="Hiking trail at Ambururu" loading="lazy">
+                    <div class="caption">Hiking Adventure</div>
+                </a>
+                <a href="images/25.jpg" data-fancybox="gallery" data-caption="Romantic wedding by the falls" data-category="events">
+                    <img src="images/40.jpg" alt="Wedding ceremony at Ambururu" loading="lazy">
+                    <div class="caption">Dream Wedding</div>
+                </a>
+                <a href="images/8.jpg" data-fancybox="gallery" data-caption="Luo cultural festival celebration" data-category="events">
+                    <img src="images/12.jpg" alt="Luo cultural festival at Ambururu" loading="lazy">
+                    <div class="caption">Cultural Festival</div>
+                </a>
+            </div>
+        </section>
+        <!-- Share Your Moments -->
+        <section class="share-moments" style="background: linear-gradient(90deg, #56cc9d 0%, #3498db 100%); color: #fff; padding: 2.5rem 1rem; border-radius: 1.5rem; text-align: center; margin: 2rem 0; box-shadow: 0 4px 24px rgba(52,152,219,0.15);">
+            <h2 style="font-size: 2rem; font-weight: 800; margin-bottom: 1rem; letter-spacing: 1px; text-shadow: 1px 2px 8px rgba(0,0,0,0.18);">
+                Share Your Ambururu Moments
+            </h2>
+            <p style="font-size: 1.2rem; margin-bottom: 1.5rem; font-weight: 500;">
+                Tag us on 
+                <a href="https://www.instagram.com/ambururu1/" target="_blank" style="color:#fff; text-decoration:underline;"><i class="fab fa-instagram"></i> Instagram</a>, 
+                <a href="https://x.com/Ambururu_W" target="_blank" style="color:#fff; text-decoration:underline;"><i class="fab fa-twitter"></i> Twitter</a> and 
+                <a href="https://www.facebook.com/ambururu/" target="_blank" style="color:#fff; text-decoration:underline;"><i class="fab fa-facebook-f"></i> Facebook</a> 
+                with <span style="font-weight:bold; color:#ffeb3b;">#AmbururuMoments</span> to be featured in our gallery!
+            </p>
+            <div style="font-size:2rem;">
+                <a href="https://www.instagram.com/ambururu1/" target="_blank" aria-label="Instagram" style="margin:0 1rem; color:#fff;"><i class="fab fa-instagram"></i></a>
+                <a href="https://x.com/Ambururu_W" target="_blank" aria-label="Twitter" style="margin:0 1rem; color:#fff;"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.facebook.com/ambururu/" target="_blank" aria-label="Facebook" style="margin:0 1rem; color:#fff;"><i class="fab fa-facebook-f"></i></a>
             </div>
         </section>
     </main>
     <footer>
         <div class="footer-container">
             <p>© 2025 Ambururu Waterfalls. All rights reserved.</p>
-            <div class="social-links">
-                <a href="https://www.facebook.com/ambururu/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://x.com/Ambururu_W" target="_blank" aria-label="X"><i class="fab fa-x-twitter"></i></a>
-            </div>
             <div class="newsletter">
                 <h4>Stay Updated</h4>
                 <form id="newsletter-form" action="https://formspree.io/f/your-form-id" method="POST">
@@ -74,7 +152,7 @@
         </div>
     </footer>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.36/dist/fancybox/fancybox.umd.js"></script>
     <script src="js/script.js"></script>
 </body>
 </html>

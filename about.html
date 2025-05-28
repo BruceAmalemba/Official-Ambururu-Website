@@ -3,22 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Learn about Ambururu Waterfalls in Siaya, Kenya, its history, and nearby attractions.">
-    <meta name="keywords" content="Ambururu Waterfalls, Siaya, Kenya, tourism, resort, history">
-    <title>About Ambururu Waterfalls</title>
+    <meta name="description" content="Uncover the captivating story, visionary leadership, and stunning surroundings of Ambururu Waterfalls and Resort in Siaya, Kenya. A beacon of eco-tourism and Luo heritage.">
+    <meta name="keywords" content="Ambururu Waterfalls, Siaya, Kenya, eco-tourism, resort, Luo culture, Justice Anthony Ombwayo, history, sustainable travel, nearby attractions">
+    <title>About Ambururu Waterfalls & Resort</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 </head>
 <body>
-    <header>
+    <header class="sticky-header">
         <div class="header-container">
-            <h1>Ambururu Waterfalls</h1>
-            <div class="search-bar">
-                <input type="text" placeholder="Search..." aria-label="Search site">
-                <button type="submit" aria-label="Search"><i class="fas fa-search"></i></button>
-            </div>
+            <img src="logo/B2.jpg" alt="Ambururu Waterfalls Logo" class="logo">
+            <h1>Ambururu Waterfalls & Resort</h1>
             <nav aria-label="Main navigation">
                 <ul>
                     <li><a href="index.html">Home</a></li>
@@ -27,14 +25,16 @@
                         <ul class="dropdown-menu">
                             <li><a href="#history">History</a></li>
                             <li><a href="#location">Location</a></li>
+                            <li><a href="#owner">Our Owner</a></li>
                         </ul>
                     </li>
                     <li><a href="gallery.html">Gallery</a></li>
                     <li class="dropdown">
                         <a href="activities.html">Activities <i class="fas fa-chevron-down"></i></a>
                         <ul class="dropdown-menu">
-                            <li><a href="activities.html#swimming">Swimming</a></li>
+                            <li><a href="activities.html#tree-planting">Tree Planting</a></li>
                             <li><a href="activities.html#hiking">Hiking</a></li>
+                            <li><a href="activities.html#trampolining">Trampolining</a></li>
                         </ul>
                     </li>
                     <li><a href="accommodations.html">Accommodations</a></li>
@@ -44,26 +44,136 @@
                     <li><a href="blog.html">Blog</a></li>
                 </ul>
             </nav>
+            <button class="menu-toggle" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </header>
     <main>
-        <section class="content">
-            <h2>About Ambururu Waterfalls</h2>
-            <img src="images/29.jpg" alt="Ambururu Waterfalls Scenery" class="content-image" loading="lazy">
-            <p>Located in Musanda, Siaya County, Ambururu Waterfalls is a natural wonder within the Ambururu Waterfall Resort, rated 4.3/5 on Google Maps. It’s a haven for relaxation and adventure, accessible via the Kisumu-Busia road.</p>
-            <h3 id="history">History</h3>
-            <p>Ambururu Waterfalls is part of Siaya’s rich natural heritage, formed by geological processes over centuries. The resort enhances its appeal with modern amenities, making it a top destination in Western Kenya.</p>
-            <h3 id="location">Location & Nearby Attractions</h3>
-            <p>Find us at 5CQ9+62H, Musanda, Siaya, Kenya. Nearby attractions include Ndanu Falls, Lake Victoria, and Siaya Town’s cultural markets.</p>
-            <div id="map" style="height: 400px; width: 100%;"></div>
+        <!-- Hero Section -->
+        <section class="hero parallax">
+            <video autoplay muted loop playsinline class="hero-video">
+                <source src="images/41.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="hero-overlay">
+                <h2>Discover Ambururu’s Soul</h2>
+                <p>A sanctuary of nature, culture, and sustainability in the heart of Siaya, Kenya.</p>
+                <a href="#history" class="cta-button">Explore Our Story</a>
+            </div>
         </section>
+        <!-- History Section -->
+        <section class="history" id="history">
+            <h2>Our Timeless Journey</h2>
+            <div class="timeline">
+                <div class="timeline-item" data-year="Ancient Times">
+                    <div class="timeline-content">
+                        <h3>Sacred Luo Site</h3>
+                        <p>Ambururu Waterfalls, revered by the Luo community, served as a spiritual haven where ancestors connected with nature along the Yala River.</p>
+                    </div>
+                </div>
+                <div class="timeline-item" data-year="20th Century">
+                    <div class="timeline-content">
+                        <h3>Natural Wonder Formed</h3>
+                        <p>Centuries of Yala River erosion crafted the majestic cascades, establishing Ambururu as a landmark in Musanda.</p>
+                    </div>
+                </div>
+                <div class="timeline-item" data-year="2010s">
+                    <div class="timeline-content">
+                        <h3>Vision Takes Root</h3>
+                        <p>Justice Anthony Ombwayo envisioned a sustainable resort to preserve Ambururu’s beauty, blending luxury with eco-tourism.</p>
+                    </div>
+                </div>
+                <div class="timeline-item" data-year="2020s">
+                    <div class="timeline-content">
+                        <h3>Global Destination</h3>
+                        <p>Ambururu Waterfall Resort opens, earning a 4.3/5 Google Maps rating and becoming a premier eco-tourism hub.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Owner Section -->
+        <section class="owner" id="owner">
+            <h2>Our Visionary Leader</h2>
+            <div class="owner-content">
+                <div class="owner-image">
+                    <img src="images/35.jpg" alt="Justice Anthony Ombwayo, founder of Ambururu Waterfall Resort" loading="lazy">
+                    <div class="image-overlay"><i class="fas fa-leaf"></i></div>
+                </div>
+                <div class="owner-text">
+                    <h3>Justice Anthony Ombwayo</h3>
+                    <p>A distinguished Kenyan judge and ardent conservationist, Justice Anthony Ombwayo transformed Ambururu into a world-class eco-resort. His passion for Siaya’s natural beauty and Luo heritage drives a mission of sustainable tourism, empowering local communities while offering guests an unforgettable experience.</p>
+                    <button class="learn-more" aria-label="Learn more about Justice Ombwayo">Learn More</button>
+                    <div class="owner-details hidden">
+                        <p>Rooted in Siaya, Justice Ombwayo’s legal career is matched by his dedication to environmental and cultural preservation. The resort employs over 50 locals and supports initiatives like tree planting and artisan crafts.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Community Impact Section -->
+        <section class="community-impact">
+            <h2>Building a Brighter Future</h2>
+            <div class="impact-grid">
+                <div class="impact-card">
+                    <i class="fas fa-tree fa-3x"></i>
+                    <h3>Environmental Stewardship</h3>
+                    <p>Over 1,000 native trees planted to preserve Siaya’s lush ecosystem.</p>
+                </div>
+                <div class="impact-card">
+                    <i class="fas fa-users fa-3x"></i>
+                    <h3>Community Empowerment</h3>
+                    <p>Employing 50+ locals, fostering economic growth in Musanda.</p>
+                </div>
+                <div class="impact-card">
+                    <i class="fas fa-paint-brush fa-3x"></i>
+                    <h3>Cultural Celebration</h3>
+                    <p>Promoting Luo traditions through art, festivals, and local crafts.</p>
+                </div>
+            </div>
+        </section>
+        <!-- Attractions Section -->
+        <section class="attractions" id="location">
+            <h2>Explore Nearby Wonders</h2>
+            <div class="attractions-carousel">
+                <div class="attraction-slide">
+                    <img src="images/36.jpg" alt="Ndanu Falls in Gem, Siaya County" loading="lazy">
+                    <h3>Ndanu Falls</h3>
+                    <p>A tranquil cascade just 200m from Kisumu-Busia road, ideal for photos and meditation.</p>
+                </div>
+                <div class="attraction-slide">
+                    <img src="images/37.jpg" alt="Sunset at Lake Victoria" loading="lazy">
+                    <h3>Lake Victoria</h3>
+                    <p>Relax with stunning sunsets at Usenge Beach by Africa’s largest lake.</p>
+                </div>
+                <div class="attraction-slide">
+                    <img src="images/38.jpg" alt="Got Ramogi Hill" loading="lazy">
+                    <h3>Got Ramogi Hill</h3>
+                    <p>A sacred Luo site with hiking trails and sweeping views of Yala Swamp.</p>
+                </div>
+            </div>
+            <div class="carousel-controls">
+                <button class="carousel-prev" aria-label="Previous slide"><i class="fas fa-chevron-left"></i></button>
+                <button class="carousel-next" aria-label="Next slide"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </section>
+        <!-- Map Section -->
+        <section class="map">
+            <h2>Find Your Way</h2>
+            <div class="map-container" id="map"></div>
+            <p>Located in Musanda, Siaya, Kenya, easily accessible via the Kisumu-Busia road.</p>
+        </section>
+        <!-- Sticky CTA -->
+        <div class="sticky-cta">
+            <a href="booking.html" class="cta-button">Plan Your Visit</a>
+        </div>
     </main>
     <footer>
         <div class="footer-container">
             <p>© 2025 Ambururu Waterfalls. All rights reserved.</p>
             <div class="social-links">
-                <a href="https://www.facebook.com/ambururu/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://x.com/Ambururu_W" target="_blank" aria-label="X"><i class="fab fa-x-twitter"></i></a>
+                <a href="https://www.facebook.com/ambururu/" target="_blank" aria-label="Visit our Facebook page"><i class="fab fa-facebook-f fa-2x"></i></a>
+                <a href="https://x.com/Ambururu_W" target="_blank" aria-label="Visit our Twitter profile"><i class="fab fa-twitter fa-2x"></i></a>
+                <a href="https://www.instagram.com/ambururu1/" target="_blank" aria-label="Visit our Instagram page"><i class="fab fa-instagram fa-2x"></i></a>
             </div>
             <div class="newsletter">
                 <h4>Stay Updated</h4>
@@ -76,16 +186,6 @@
     </footer>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="js/script.js"></script>
-    <script async defer src="https://maps.windows.com/?form=WNAMSH&entity=local_ypid%3AYN8091x9956867690424910424&collection=point.0.199973_34.741566_Ambururu%20Water%20Falls"></script>
-    <script>
-        function initMap() {
-            const location = { lat: 0.1234, lng: 34.5678 }; // Replace with actual coordinates
-            const map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 15,
-                center: location
-            });
-            new google.maps.Marker({ position: location, map });
-        }
-    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"></script>
 </body>
 </html>

@@ -3,23 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Read travel tips and updates about Ambururu Waterfalls in Siaya, Kenya.">
-    <meta name="keywords" content="Ambururu Waterfalls, Siaya, Kenya, blog, travel tips">
+    <meta name="description" content="Explore travel tips, news, and conservation stories from Ambururu Waterfalls & Resort in Siaya, Kenya.">
+    <meta name="keywords" content="Ambururu Waterfalls, Siaya, Kenya, blog, travel tips, conservation, resort news">
     <title>Blog - Ambururu Waterfalls</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-    <header>
+    <header class="sticky-header">
         <div class="header-container">
-            <h1>Ambururu Waterfalls</h1>
-            <div class="search-bar">
-                <input type="text" placeholder="Search..." aria-label="Search site">
-                <button type="submit" aria-label="Search"><i class="fas fa-search"></i></button>
-            </div>
-            <nav aria-label="Main navigation">
+            <div class="brand">
+                <img src="logo/B2.jpg" alt="Ambururu Waterfalls Logo" class="logo">
+                <h1>Ambururu Waterfalls</h1>
+                        </div>
+                        <script type="application/ld+json">
+[{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "5 Tips for Visiting Ambururu Waterfalls",
+    "datePublished": "2025-05-20",
+    "author": {"@type": "Organization", "name": "Ambururu Waterfalls"},
+    "image": "images/30.jpg",
+    "description": "Plan your trip with our expert advice for a memorable experience."
+}, {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "New Trail Opens at Ambururu Waterfalls",
+    "datePublished": "2025-05-15",
+    "author": {"@type": "Organization", "name": "Ambururu Waterfalls"},
+    "image": "images/trail.jpg",
+    "description": "Discover our new hiking trail with stunning views."
+}, {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Conservation Efforts at Ambururu",
+    "datePublished": "2025-05-10",
+    "author": {"@type": "Organization", "name": "Ambururu Waterfalls"},
+    "image": "images/conservation.jpg",
+    "description": "Learn about our initiatives to protect the local ecosystem."
+}]
+        </div>
+
+</script>
+            <nav id="main-nav" aria-label="Main navigation">
                 <ul>
                     <li><a href="index.html">Home</a></li>
                     <li class="dropdown">
@@ -42,21 +71,126 @@
                     <li><a href="events.html">Events</a></li>
                     <li><a href="contact.html">Contact</a></li>
                     <li><a href="blog.html" class="active" aria-current="page">Blog</a></li>
+                    <li><a href="booking.html" class="cta-button">Book Now</a></li>
                 </ul>
             </nav>
+            <button class="menu-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
         </div>
     </header>
+
     <main>
-        <section class="content">
-            <h2>Blog</h2>
-            <article>
-                <h3>5 Tips for Visiting Ambururu Waterfalls</h3>
-                <img src="images/30.jpg" alt="Waterfall Scenery" class="content-image" loading="lazy">
-                <p>Plan your trip with our expert advice for a memorable experience.</p>
-                <a href="#read-more">Read More</a>
-            </article>
+        <!-- Hero Section -->
+        <section class="hero parallax" aria-label="Blog hero section">
+            <video class="hero-video" autoplay muted loop playsinline>
+                <source src="images/41.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="hero-overlay">
+                <h2 class="hero-title">Ambururu Stories</h2>
+                <p class="hero-subtitle">Dive into travel tips, news, and conservation tales from the heart of Siaya.</p>
+                <a href="#blog-feed" class="cta-button pulse">Explore Now</a>
+            </div>
+        </section>
+
+        <!-- Blog Feed -->
+        <section class="blog-feed" id="blog-feed">
+            <div class="blog-container">
+                <aside class="blog-sidebar">
+                    <h3>Categories</h3>
+                    <ul class="category-filter">
+                        <li><button class="filter-btn active" data-category="all">All</button></li>
+                        <li><button class="filter-btn" data-category="travel-tips">Travel Tips</button></li>
+                        <li><button class="filter-btn" data-category="news">News</button></li>
+                        <li><button class="filter-btn" data-category="conservation">Conservation</button></li>
+                    </ul>
+                    <div class="newsletter">
+                        <h4>Stay Updated</h4>
+                        <form id="newsletter-form" action="https://formspree.io/f/xbloeqdy" method="POST">
+                            <input type="email" name="email" placeholder="Enter your email" required aria-label="Email for newsletter">
+                            <button type="submit" class="cta-button">Subscribe</button>
+                        </form>
+                    </div>
+                </aside>
+                <div class="blog-posts">
+                    <article class="blog-post" data-category="travel-tips">
+                        <img src="images/30.jpg" alt="Ambururu Waterfall scenery" class="blog-image" loading="lazy">
+                        <div class="blog-content">
+                            <h3>5 Tips for Visiting Ambururu Waterfalls</h3>
+                            <p class="blog-meta">Posted on May 20, 2025 | By Ambururu Team</p>
+                            <p>Plan your trip with our expert advice for a memorable experience at Ambururu Waterfalls.</p>
+                            <div class="blog-actions">
+                                <a href="#post-1" class="cta-button">Read More</a>
+                                <div class="social-share">
+                                    <a href="#" class="share-btn" data-platform="facebook"><i class="fab fa-facebook-f"></i></a>
+                                    <a href="#" class="share-btn" data-platform="twitter"><i class="fab fa-x-twitter"></i></a>
+                                    <a href="#" class="share-btn" data-platform="whatsapp"><i class="fab fa-whatsapp"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="blog-comments" id="disqus_thread_1"></div>
+                    </article>
+                    <article class="blog-post" data-category="news">
+                        <img src="images/4.jpg" alt="New hiking trail at Ambururu" class="blog-image" loading="lazy">
+                        <div class="blog-content">
+                            <h3>New Trail Opens at Ambururu Waterfalls</h3>
+                            <p class="blog-meta">Posted on May 15, 2025 | By Ambururu Team</p>
+                            <p>Discover our new hiking trail with stunning views of the falls.</p>
+                            <div class="blog-actions">
+                                <a href="#post-2" class="cta-button">Read More</a>
+                                <div class="social-share">
+                                    <a href="#" class="share-btn" data-platform="facebook"><i class="fab fa-facebook-f"></i></a>
+                                    <a href="#" class="share-btn" data-platform="twitter"><i class="fab fa-x-twitter"></i></a>
+                                    <a href="#" class="share-btn" data-platform="whatsapp"><i class="fab fa-whatsapp"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="blog-comments" id="disqus_thread_2"></div>
+                    </article>
+                    <article class="blog-post" data-category="conservation">
+                        <img src="images/26.jpg" alt="Conservation efforts at Ambururu" class="blog-image" loading="lazy">
+                        <div class="blog-content">
+                            <h3>Conservation Efforts at Ambururu</h3>
+                            <p class="blog-meta">Posted on May 10, 2025 | By Ambururu Team</p>
+                            <p>Learn about our initiatives to protect the local ecosystem.</p>
+                            <div class="blog-actions">
+                                <a href="#post-3" class="cta-button">Read More</a>
+                                <div class="social-share">
+                                    <a href="#" class="share-btn" data-platform="facebook"><i class="fab fa-facebook-f"></i></a>
+                                    <a href="#" class="share-btn" data-platform="twitter"><i class="fab fa-x-twitter"></i></a>
+                                    <a href="#" class="share-btn" data-platform="whatsapp"><i class="fab fa-whatsapp"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="blog-comments" id="disqus_thread_3"></div>
+                    </article>
+                    <div class="load-more">
+                        <button id="load-more-btn" class="cta-button">Load More</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact-section">
+            <h2>Contact Us</h2>
+            <p>For inquiries or feedback, reach out via the form below or contact us directly:</p>
+            <div class="contact-info">
+                <p><i class="fas fa-phone"></i> <a href="tel:+254720215511">+254 720 215 511</a></p>
+                <p><i class="fas fa-envelope"></i> <a href="mailto:ambururuwaterfalls@gmail.com">ambururuwaterfalls@gmail.com</a></p>
+            </div>
+            <form action="https://formspree.io/f/xldbzjdz" method="POST" id="contact-form" class="animated-form">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required aria-label="Your name">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required aria-label="Your email">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" required aria-label="Your message"></textarea>
+                <button type="submit" class="cta-button">Send</button>
+                <p class="form-success" style="display:none;">Message sent successfully!</p>
+            </form>
         </section>
     </main>
+
     <footer>
         <div class="footer-container">
             <p>© 2025 Ambururu Waterfalls. All rights reserved.</p>
@@ -66,14 +200,144 @@
             </div>
             <div class="newsletter">
                 <h4>Stay Updated</h4>
-                <form id="newsletter-form" action="https://formspree.io/f/your-form-id" method="POST">
-                    <input type="email" name="email" placeholder="Enter your email" required aria-label="Email address">
-                    <button type="submit">Subscribe</button>
+                <form id="newsletter-form-footer" action="https://formspree.io/f/xbloeqdy" method="POST">
+                    <input type="email" name="email" placeholder="Enter your email" required aria-label="Email for newsletter">
+                    <button type="submit" class="cta-button">Subscribe</button>
                 </form>
             </div>
         </div>
     </footer>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="js/script.js"></script>
+
+    <!-- Disqus Comments -->
+    <script>
+        (function() {
+            var d = document, s = d.createElement('script');
+            s.src = 'https://ambururu-waterfalls.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+
+    <!-- Tawk.to Live Chat -->
+    <script>
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/68360ce00f6bcf190fc26624/1is9i4jf2';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+
+    <script>
+        // GSAP Animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero animations
+        gsap.from(".hero-title", { opacity: 0, y: 50, duration: 1, delay: 0.5 });
+        gsap.from(".hero-subtitle", { opacity: 0, y: 50, duration: 1, delay: 0.7 });
+        gsap.from(".hero .cta-button", { opacity: 0, scale: 0.8, duration: 1, delay: 0.9 });
+
+        // Blog post animations
+        gsap.utils.toArray(".blog-post").forEach(post => {
+            gsap.from(post, {
+                opacity: 0,
+                y: 100,
+                duration: 1,
+                scrollTrigger: {
+                    trigger: post,
+                    start: "top 80%",
+                    toggleActions: "play none none reverse"
+                }
+            });
+        });
+
+        // Form animations
+        gsap.utils.toArray(".animated-form input, .animated-form textarea").forEach(input => {
+            input.addEventListener("focus", () => {
+                gsap.to(input, { scale: 1.02, borderColor: "var(--coral)", duration: 0.3 });
+            });
+            input.addEventListener("blur", () => {
+                gsap.to(input, { scale: 1, borderColor: "var(--teal-green)", duration: 0.3 });
+            });
+        });
+
+        // Blog filter and search
+        $(document).ready(function() {
+            // Category filter
+            $('.filter-btn').click(function() {
+                $('.filter-btn').removeClass('active');
+                $(this).addClass('active');
+                const category = $(this).data('category');
+                $('.blog-post').each(function() {
+                    const postCategory = $(this).data('category');
+                    if (category === 'all' || postCategory === category) {
+                        $(this).fadeIn(300);
+                    } else {
+                        $(this).fadeOut(300);
+                    }
+                });
+            });
+
+            // Search functionality
+            $('#blog-search').on('input', function() {
+                const query = $(this).val().toLowerCase();
+                $('.blog-post').each(function() {
+                    const title = $(this).find('h3').text().toLowerCase();
+                    const content = $(this).find('p').text().toLowerCase();
+                    if (title.includes(query) || content.includes(query)) {
+                        $(this).fadeIn(300);
+                    } else {
+                        $(this).fadeOut(300);
+                    }
+                });
+            });
+
+            // Contact form submission
+            $('#contact-form').on('submit', function(e) {
+                e.preventDefault();
+                $.ajax({
+                    url: this.action,
+                    method: this.method,
+                    data: $(this).serialize(),
+                    success: function() {
+                        $('.form-success').show();
+                        $('#contact-form')[0].reset();
+                        gsap.fromTo(".form-success", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5 });
+                        setTimeout(() => $('.form-success').fadeOut(), 3000);
+                    }
+                });
+            });
+
+            // Social sharing
+            $('.share-btn').click(function(e) {
+                e.preventDefault();
+                const platform = $(this).data('platform');
+                const url = window.location.href;
+                const title = $(this).closest('.blog-post').find('h3').text();
+                let shareUrl;
+                if (platform === 'facebook') {
+                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+                } else if (platform === 'twitter') {
+                    shareUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`;
+                } else if (platform === 'whatsapp') {
+                    shareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(title + ' ' + url)}`;
+                }
+                window.open(shareUrl, '_blank');
+            });
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
 </html>

@@ -3,22 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Explore exciting activities at Ambururu Waterfalls in Siaya, Kenya, including swimming and hiking.">
-    <meta name="keywords" content="Ambururu Waterfalls, Siaya, Kenya, activities, swimming, hiking">
-    <title>Activities - Ambururu Waterfalls</title>
+    <meta name="description" content="Discover exciting activities at Ambururu Waterfalls and Resort in Siaya, Kenya, including tree planting, hiking, and trampolining. Perfect for families and eco-adventurers!">
+    <meta name="keywords" content="Ambururu Waterfalls, Siaya, Kenya, activities, tree planting, hiking, trampolining, family-friendly, eco-tourism">
+    <title>Activities - Ambururu Waterfalls & Resort</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 </head>
 <body>
-    <header>
+    <header class="sticky-header">
         <div class="header-container">
-            <h1>Ambururu Waterfalls</h1>
-            <div class="search-bar">
-                <input type="text" placeholder="Search..." aria-label="Search site">
-                <button type="submit" aria-label="Search"><i class="fas fa-search"></i></button>
-            </div>
+            <img src="images/B.png" alt="Ambururu Waterfalls Logo" class="logo">
+            <h1>Ambururu Waterfalls & Resort</h1>
             <nav aria-label="Main navigation">
                 <ul>
                     <li><a href="index.html">Home</a></li>
@@ -27,14 +25,16 @@
                         <ul class="dropdown-menu">
                             <li><a href="about.html#history">History</a></li>
                             <li><a href="about.html#location">Location</a></li>
+                            <li><a href="about.html#owner">Our Owner</a></li>
                         </ul>
                     </li>
                     <li><a href="gallery.html">Gallery</a></li>
                     <li class="dropdown">
                         <a href="activities.html" class="active" aria-current="page">Activities <i class="fas fa-chevron-down"></i></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#swimming">Swimming</a></li>
+                            <li><a href="#tree-planting">Tree Planting</a></li>
                             <li><a href="#hiking">Hiking</a></li>
+                            <li><a href="#trampolining">Trampolining</a></li>
                         </ul>
                     </li>
                     <li><a href="accommodations.html">Accommodations</a></li>
@@ -44,25 +44,116 @@
                     <li><a href="blog.html">Blog</a></li>
                 </ul>
             </nav>
+            <button class="menu-toggle" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </header>
     <main>
-        <section class="content">
-            <h2>Activities</h2>
-            <img src="images/21.jpg" alt="Waterfall Activities" class="content-image" loading="lazy">
-            <img src="images/27.jpg" alt="Waterfall Activities" class="content-image" loading="lazy">
-            <h3 id="swimming">Swimming</h3>
-            <p>Dive into the refreshing natural pools of Ambururu Waterfalls.</p>
-            <h3 id="hiking">Hiking</h3>
-            <p>Explore scenic trails with guided tours around the resort.</p>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-carousel">
+                <div><img src="images/45.jpg" alt="Tree planting at Ambururu Waterfalls" loading="lazy" onerror="this.src='https://via.placeholder.com/1200x600?text=Tree+Planting';"></div>
+                <div><img src="images/21.jpg" alt="Hiking trails at Ambururu" loading="lazy" onerror="this.src='https://via.placeholder.com/1200x600?text=Hiking';"></div>
+                <div><img src="images/33.jpg" alt="Trampolining fun at Ambururu" loading="lazy" onerror="this.src='https://via.placeholder.com/1200x600?text=Trampolining';"></div>
+            </div>
+            <div class="carousel-controls">
+                <button class="carousel-prev" aria-label="Previous slide"><i class="fas fa-chevron-left"></i></button>
+                <button class="carousel-next" aria-label="Next slide"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div class="hero-overlay">
+                <h2>Adventure Awaits at Ambururu</h2>
+                <p>From eco-friendly tree planting to thrilling trampolining, experience fun for all ages in Siaya’s natural paradise.</p>
+                <a href="booking.html" class="cta-button">Plan Your Activity</a>
+            </div>
+        </section>
+        <!-- Video Section -->
+        <section class="video-section">
+            <h2>Family Fun in Action</h2>
+            <div class="video-container">
+                <video controls poster="images/42.mp4">
+                    <source src="images/42.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <p>Watch kids enjoy our exciting slide, perfect for family adventures!</p>
+        </section>
+        <!-- Activities Section -->
+        <section class="activities">
+            <h2>Our Activities</h2>
+            <div class="activity-grid">
+                <div class="activity-card" id="tree-planting" tabindex="0">
+                    <img src="images/49.jpg" alt="Guests planting trees at Ambururu" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300?text=Tree+Planting';">
+                    <div class="activity-content">
+                        <h3><i class="fas fa-tree fa-2x"></i> Tree Planting</h3>
+                        <p>Join our eco-mission to plant native trees, preserving Siaya’s lush ecosystem for future generations.</p>
+                        <ul>
+                            <li>Plant native species with expert guides</li>
+                            <li>Family-friendly activity</li>
+                            <li>Contribute to conservation efforts</li>
+                        </ul>
+                        <a href="booking.html" class="cta-button secondary">Book Now</a>
+                    </div>
+                </div>
+                <div class="activity-card" id="hiking" tabindex="0">
+                    <img src="images/47.jpg" alt="Scenic hiking trails at Ambururu" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300?text=Hiking';">
+                    <div class="activity-content">
+                        <h3><i class="fas fa-hiking fa-2x"></i> Hiking</h3>
+                        <p>Explore breathtaking trails through Siaya’s lush forests, guided by experts to spot local wildlife.</p>
+                        <ul>
+                            <li>Guided tours for all skill levels</li>
+                            <li>Discover unique flora and fauna</li>
+                            <li>Scenic views of the waterfalls</li>
+                        </ul>
+                        <a href="booking.html" class="cta-button secondary">Book Now</a>
+                    </div>
+                </div>
+                <div class="activity-card" id="trampolining" tabindex="0">
+                    <img src="images/33.jpg" alt="Trampolining fun at Ambururu" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300?text=Trampolining';">
+                    <div class="activity-content">
+                        <h3><i class="fas fa-child fa-2x"></i> Trampolining</h3>
+                        <p>Bounce with joy on our safe, family-friendly trampolines, perfect for kids and adults alike.</p>
+                        <ul>
+                            <li>Safe, supervised trampoline area</li>
+                            <li>Fun for all ages</li>
+                            <li>Outdoor setting with waterfall views</li>
+                        </ul>
+                        <a href="booking.html" class="cta-button secondary">Book Now</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Booking Form -->
+        <section class="book-activity" id="book-activity">
+            <h2>Plan Your Adventure</h2>
+            <form id="activity-booking-form" action="https://formspree.io/f/your-form-id" method="POST">
+                <input type="text" name="name" placeholder="Your Name" required aria-label="Your name">
+                <input type="email" name="email" placeholder="Your Email" required aria-label="Email address">
+                <select name="activity" required aria-label="Activity type">
+                    <option value="" disabled selected>Select Activity</option>
+                    <option value="tree-planting">Tree Planting</option>
+                    <option value="hiking">Hiking</option>
+                    <option value="trampolining">Trampolining</option>
+                </select>
+                <input type="date" name="date" required aria-label="Activity date">
+                <textarea name="details" placeholder="Additional Details" rows="5" aria-label="Additional details"></textarea>
+                <button type="submit" class="cta-button">Submit Inquiry</button>
+            </form>
+        </section>
+        <!-- Gallery Teaser -->
+        <section class="gallery-teaser">
+            <h2>See the Fun in Action</h2>
+            <p>Explore stunning photos of our activities and more!</p>
+            <a href="gallery.html" class="cta-button">View Gallery</a>
         </section>
     </main>
     <footer>
         <div class="footer-container">
             <p>© 2025 Ambururu Waterfalls. All rights reserved.</p>
             <div class="social-links">
-                <a href="https://www.facebook.com/ambururu/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://x.com/Ambururu_W" target="_blank" aria-label="X"><i class="fab fa-x-twitter"></i></a>
+                <a href="https://www.facebook.com/ambururu/" target="_blank" aria-label="Visit our Facebook page"><i class="fab fa-facebook-f fa-2x"></i></a>
+                <a href="https://x.com/Ambururu_W" target="_blank" aria-label="Visit our Twitter profile"><i class="fab fa-twitter fa-2x"></i></a>
+                <a href="https://www.instagram.com/ambururu1/" target="_blank" aria-label="Visit our Instagram page"><i class="fab fa-instagram fa-2x"></i></a>
             </div>
             <div class="newsletter">
                 <h4>Stay Updated</h4>

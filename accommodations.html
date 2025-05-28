@@ -3,23 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Find the best accommodations at Ambururu Waterfalls Resort and nearby hotels in Siaya, Kenya.">
-    <meta name="keywords" content="Ambururu Waterfalls, Siaya, Kenya, accommodations, resort, hotels">
+    <meta name="description" content="Discover eco-luxury accommodations at Ambururu Waterfalls Resort in Siaya, Kenya, with stunning views and refined amenities.">
+    <meta name="keywords" content="Ambururu Waterfalls, Siaya, Kenya, accommodations, eco-luxury, resort, hotels">
     <title>Accommodations - Ambururu Waterfalls</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="preload" href="images/4.jpg" as="image">
+    <link rel="preload" href="images/15.jpg" as="image">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header>
+    <header class="sticky-header" role="banner">
         <div class="header-container">
-            <h1>Ambururu Waterfalls</h1>
-            <div class="search-bar">
-                <input type="text" placeholder="Search..." aria-label="Search site">
-                <button type="submit" aria-label="Search"><i class="fas fa-search"></i></button>
+            <div class="brand">
+                <img src="logo/B2.jpg" alt="Ambururu Waterfalls & Resort Logo" class="logo" width="80" height="80">
+                <h1>Ambururu Waterfalls</h1>
             </div>
-            <nav aria-label="Main navigation">
+            <nav id="main-nav" aria-label="Main navigation">
                 <ul>
                     <li><a href="index.html">Home</a></li>
                     <li class="dropdown">
@@ -42,72 +45,145 @@
                     <li><a href="events.html">Events</a></li>
                     <li><a href="contact.html">Contact</a></li>
                     <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contact.html#booking-form" class="cta-button">Book Now</a></li>
                 </ul>
             </nav>
+            <button class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </header>
+
     <main>
-        <section class="content">
+        <section class="hero-section" role="region" aria-label="Hero section">
+            <div class="hero-carousel">
+                <div><img src="images/26.jpg" alt="Ambururu Waterfalls Resort exterior with lush greenery" width="1200" height="600"></div>
+                <div><img src="images/15.jpg" alt="Standard Room interior with eco-friendly design" width="1200" height="600"></div>
+                <div><img src="images/14.jpg" alt="Deluxe Suite balcony with waterfall view" width="1200" height="600"></div>
+            </div>
+            <div class="hero-overlay">
+                <h2>Unwind in Timeless Luxury at Ambururu</h2>
+                <p>Rejuvenate in eco-luxury with stunning waterfall vistas and refined amenities.</p>
+                <a href="contact.html#booking-form" class="cta-button" aria-label="Reserve your retreat">Reserve Your Retreat</a>
+            </div>
+        </section>
+
+        <section class="content accommodations-section" role="region" aria-label="Accommodations">
             <h2>Accommodations</h2>
-            <h3>Resort Rooms</h3>
-            <p>Stay in comfort at Ambururu Waterfall Resort with modern amenities and scenic views.</p>
-            <div class="room-carousel">
-                <div>
-                    <img src="images/15.jpg" alt="Standard Room" loading="lazy">
-                    <h4>Standard Room</h4>
-                    <p>Cozy and affordable for solo travelers or couples.</p>
-                </div>
-                <div>
-                    <img src="images/14.jpg" alt="Deluxe Suite" loading="lazy">
-                    <h4>Deluxe Suite</h4>
-                    <p>Spacious and luxurious for families or groups.</p>
+            <div class="check-availability">
+                <a href="booking.html" class="cta-button">Check Availability</a>
+            </div>
+            <div class="resort-rooms">
+    <h3>Resort Rooms</h3>
+    <p>Elegant accommodations blending modern luxury with nature’s serenity.</p>
+    <div class="rooms-grid">
+        <div class="room-card" data-room="standard">
+            <img src="images/15.jpg" alt="Standard Room with lush views at Ambururu Waterfalls Resort" loading="lazy">
+            <div class="room-overlay">
+                <span class="badge">Best Value</span>
+                <ul class="amenities">
+                    <li><i class="fas fa-wifi"></i> High-Speed WiFi</li>
+                    <li><i class="fas fa-bed"></i> Queen Bed</li>
+                    <li><i class="fas fa-coffee"></i> Coffee Maker</li>
+                </ul>
+                <button class="quick-view" aria-label="View Standard Room amenities">Quick View</button>
+            </div>
+            <h4>Standard Room</h4>
+            <p>Cozy elegance for solo travelers or couples.</p>
+            <p class="price">$100/night</p>
+            <div class="room-actions">
+                <a href="contact.html#booking-form" class="cta-button">Book Now</a>
+                <a href="#virtual-tour" class="virtual-tour" data-room="standard">Virtual Tour</a>
+            </div>
+        </div>
+        <div class="room-card" data-room="deluxe">
+            <img src="images/14.jpg" alt="Deluxe Suite with balcony at Ambururu Waterfalls Resort" loading="lazy">
+            <div class="room-overlay">
+                <span class="badge">Premium</span>
+                <ul class="amenities">
+                    <li><i class="fas fa-wifi"></i> High-Speed WiFi</li>
+                    <li><i class="fas fa-bed"></i> King Bed</li>
+                    <li><i class="fas fa-bath"></i> Jacuzzi</li>
+                    <li><i class="fas fa-tv"></i> Smart TV</li>
+                </ul>
+                <button class="quick-view" aria-label="View Deluxe Suite amenities">Quick View</button>
+            </div>
+            <h4>Deluxe Suite</h4>
+            <p>Spacious luxury for families or groups.</p>
+            <p class="price">$150/night</p>
+            <div class="room-actions">
+                <a href="contact.html#booking-form" class="cta-button">Book Now</a>
+                <a href="#virtual-tour" class="virtual-tour" data-room="deluxe">Virtual Tour</a>
+            </div>
+        </div>
+    </div>
+</div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
                 </div>
             </div>
-            <h3>Nearby Hotels</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Hotel Name</th>
-                        <th>Distance</th>
-                        <th>Rating</th>
-                        <th>Amenities</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Golf Hotel Kakamega</td>
-                        <td>5.67 mi</td>
-                        <td>7.6/10</td>
-                        <td>Pool, restaurant, WiFi</td>
-                    </tr>
-                    <tr>
-                        <td>Siaya Guest House</td>
-                        <td>5.88 mi</td>
-                        <td>4.5/5</td>
-                        <td>Breakfast, WiFi, parking</td>
-                    </tr>
-                </tbody>
-            </table>
+
+            <div class="nearby-hotels">
+                <h3>Nearby Hotels</h3>
+                <div class="hotel-grid">
+                    <div class="hotel-card">
+                        <h4>Golf Hotel Kakamega</h4>
+                        <p><i class="fas fa-map-marker-alt"></i> 5.67 mi</p>
+                        <p><i class="fas fa-star"></i> 7.6/10</p>
+                        <p><i class="fas fa-swimming-pool"></i> Pool, Restaurant, WiFi</p>
+                        <a href="#" class="cta-button">Book Now</a>
+                    </div>
+                    <div class="hotel-card">
+                        <h4>Siaya Guest House</h4>
+                        <p><i class="fas fa-map-marker-alt"></i> 5.88 mi</p>
+                        <p><i class="fas fa-star"></i> 4.5/5</p>
+                        <p><i class="fas fa-utensils"></i> Breakfast, WiFi, Parking</p>
+                        <a href="#" class="cta-button">Book Now</a>
+                    </div>
+                </div>
+                <div class="map-preview">
+                    <img src="images/map.jpg" alt="Map showing nearby hotels around Ambururu Waterfalls" loading="lazy">
+                </div>
+            </div>
+
+            <div class="booking-form" id="booking-form">
+                <h3>Check Availability</h3>
+                <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                    <input type="text" name="name" placeholder="Your Name" required aria-label="Your name">
+                    <input type="email" name="email" placeholder="Your Email" required aria-label="Email address">
+                    <input type="date" name="check-in" required aria-label="Check-in date">
+                    <input type="date" name="check-out" required aria-label="Check-out date">
+                    <button type="submit" class="cta-button">Submit</button>
+                </form>
+            </div>
         </section>
     </main>
-    <footer>
+
+    <footer role="contentinfo">
         <div class="footer-container">
             <p>© 2025 Ambururu Waterfalls. All rights reserved.</p>
             <div class="social-links">
                 <a href="https://www.facebook.com/ambururu/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://x.com/Ambururu_W" target="_blank" aria-label="X"><i class="fab fa-x-twitter"></i></a>
+                <a href="https://x.com/Ambururu_W" target="_blank" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+                <a href="https://www.instagram.com/ambururu1/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
             </div>
             <div class="newsletter">
                 <h4>Stay Updated</h4>
-                <form id="newsletter-form" action="https://formspree.io/f/your-form-id" method="POST">
-                    <input type="email" name="email" placeholder="Enter your email" required aria-label="Email address">
+                <form id="newsletter-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                    <input type="email" name="email" placeholder="Enter your email" required aria-label="Newsletter email">
                     <button type="submit">Subscribe</button>
                 </form>
             </div>
         </div>
     </footer>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
     <script src="js/script.js"></script>
 </body>
 </html>

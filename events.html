@@ -3,22 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Host weddings and events at Ambururu Waterfalls Resort in Siaya, Kenya.">
-    <meta name="keywords" content="Ambururu Waterfalls, Siaya, Kenya, events, weddings">
-    <title>Events - Ambururu Waterfalls</title>
+    <meta name="description" content="Host unforgettable weddings, conferences, and cultural festivals at Ambururu Waterfalls Resort in Siaya, Kenya. Explore our event packages and book today!">
+    <meta name="keywords" content="Ambururu Waterfalls, Siaya, Kenya, events, weddings, conferences, cultural festivals, resort">
+    <title>Events - Ambururu Waterfalls & Resort</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 </head>
 <body>
-    <header>
+    <header class="sticky-header">
         <div class="header-container">
-            <h1>Ambururu Waterfalls</h1>
-            <div class="search-bar">
-                <input type="text" placeholder="Search..." aria-label="Search site">
-                <button type="submit" aria-label="Search"><i class="fas fa-search"></i></button>
-            </div>
+            <img src="logo/B2.jpg" alt="Ambururu Waterfalls Logo" class="logo">
+            <h1>Ambururu Waterfalls & Resort</h1>
             <nav aria-label="Main navigation">
                 <ul>
                     <li><a href="index.html">Home</a></li>
@@ -27,13 +25,14 @@
                         <ul class="dropdown-menu">
                             <li><a href="about.html#history">History</a></li>
                             <li><a href="about.html#location">Location</a></li>
+                            <li><a href="about.html#owner">Our Owner</a></li>
                         </ul>
                     </li>
                     <li><a href="gallery.html">Gallery</a></li>
                     <li class="dropdown">
                         <a href="activities.html">Activities <i class="fas fa-chevron-down"></i></a>
                         <ul class="dropdown-menu">
-                            <li><a href="activities.html#swimming">Swimming</a></li>
+                            <li><a href="activities.html#tree-planting">Tree Planting</a></li>
                             <li><a href="activities.html#hiking">Hiking</a></li>
                         </ul>
                     </li>
@@ -44,21 +43,109 @@
                     <li><a href="blog.html">Blog</a></li>
                 </ul>
             </nav>
+            <button class="menu-toggle" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </header>
     <main>
-        <section class="content">
-            <h2>Events</h2>
-            <img src="images/25.jpg" alt="Event Venue" class="content-image" loading="lazy">
-            <p>Host unforgettable weddings, conferences, or parties at Ambururu Waterfalls Resort with tailored packages.</p>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-carousel">
+                <div><img src="images/50.jpg" alt="Wedding ceremony by Ambururu Waterfalls" loading="lazy" onerror="this.src='https://via.placeholder.com/1200x600?text=Wedding+Event';"></div>
+                <div><img src="images/conference-event.jpg" alt="Conference setup at Ambururu Resort" loading="lazy" onerror="this.src='https://via.placeholder.com/1200x600?text=Conference+Event';"></div>
+                <div><img src="images/44.jpg" alt="Luo cultural festival at Ambururu" loading="lazy" onerror="this.src='https://via.placeholder.com/1200x600?text=Cultural+Festival';"></div>
+            </div>
+            <div class="carousel-controls">
+                <button class="carousel-prev" aria-label="Previous slide"><i class="fas fa-chevron-left"></i></button>
+                <button class="carousel-next" aria-label="Next slide"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div class="hero-overlay">
+                <h2>Celebrate at Ambururu Waterfalls</h2>
+                <p>Host unforgettable events with the stunning backdrop of cascading waterfalls in Siaya, Kenya.</p>
+                <a href="booking.html" class="cta-button">Plan Your Event</a>
+            </div>
+        </section>
+        <!-- Upcoming Events -->
+        <section class="upcoming-events">
+            <h2>Upcoming Events</h2>
+            <div class="events-grid">
+                <div class="event-card" tabindex="0">
+                    <img src="images/44.jpg" alt="Luo Cultural Festival at Ambururu" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300?text=Luo+Festival';">
+                    <h3>Luo Cultural Festival</h3>
+                    <p><strong>Date:</strong> July 15, 2025</p>
+                    <p>Join us for a vibrant celebration of Luo traditions with music, dance, and local cuisine.</p>
+                    <a href="booking.html" class="cta-button secondary">Reserve Your Spot</a>
+                </div>
+                <div class="event-card" tabindex="0">
+                    <img src="images/wedding-showcase.jpg" alt="Wedding Showcase at Ambururu" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300?text=Wedding+Showcase';">
+                    <h3>Wedding Showcase</h3>
+                    <p><strong>Date:</strong> August 10, 2025</p>
+                    <p>Explore our romantic wedding venues and meet top planners for your dream day.</p>
+                    <a href="booking.html" class="cta-button secondary">Plan Your Visit</a>
+                </div>
+                <div class="event-card" tabindex="0">
+                    <img src="images/corporate-retreat.jpg" alt="Corporate Retreat at Ambururu" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300?text=Corporate+Retreat';">
+                    <h3>Corporate Retreat</h3>
+                    <p><strong>Date:</strong> September 5, 2025</p>
+                    <p>Boost team synergy with our tailored corporate packages in a serene setting.</p>
+                    <a href="#book-event" class="cta-button secondary">Book Now</a>
+                </div>
+            </div>
+        </section>
+        <!-- Event Types -->
+        <section class="event-types">
+            <h2>Event Types We Host</h2>
+            <div class="types-grid">
+                <div class="type-card">
+                    <img src="images/wedding-venue.jpg" alt="Outdoor wedding venue by the falls" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300?text=Wedding+Venue';">
+                    <h3>Weddings</h3>
+                    <p>Say “I do” amidst the romantic cascade of Ambururu Waterfalls with customized packages.</p>
+                </div>
+                <div class="type-card">
+                    <img src="images/conference-venue.jpg" alt="Conference room at Ambururu Resort" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300?text=Conference+Venue';">
+                    <h3>Conferences</h3>
+                    <p>Host impactful meetings with state-of-the-art facilities and scenic inspiration.</p>
+                </div>
+                <div class="type-card">
+                    <img src="images/cultural-event.jpg" alt="Cultural event at Ambururu" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300?text=Cultural+Event';">
+                    <h3>Cultural Festivals</h3>
+                    <p>Celebrate Siaya’s heritage with vibrant festivals featuring music, dance, and art.</p>
+                </div>
+            </div>
+        </section>
+        <!-- Booking Form -->
+        <section class="book-event" id="book-event">
+            <h2>Plan Your Event</h2>
+            <form id="event-booking-form" action="https://formspree.io/f/your-form-id" method="POST">
+                <input type="text" name="name" placeholder="Your Name" required aria-label="Your name">
+                <input type="email" name="email" placeholder="Your Email" required aria-label="Email address">
+                <select name="event-type" required aria-label="Event type">
+                    <option value="" disabled selected>Select Event Type</option>
+                    <option value="wedding">Wedding</option>
+                    <option value="conference">Conference</option>
+                    <option value="cultural-festival">Cultural Festival</option>
+                    <option value="other">Other</option>
+                </select>
+                <input type="date" name="date" required aria-label="Event date">
+                <textarea name="details" placeholder="Event Details" rows="5" required aria-label="Event details"></textarea>
+                <button type="submit" class="cta-button">Submit Inquiry</button>
+            </form>
+        </section>
+        <!-- Gallery Teaser -->
+        <section class="gallery-teaser">
+            <h2>See Our Event Spaces</h2>
+            <p>Explore stunning venues that make every occasion unforgettable.</p>
+            <a href="gallery.html" class="cta-button">View Gallery</a>
         </section>
     </main>
     <footer>
         <div class="footer-container">
             <p>© 2025 Ambururu Waterfalls. All rights reserved.</p>
             <div class="social-links">
-                <a href="https://www.facebook.com/ambururu/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://x.com/Ambururu_W" target="_blank" aria-label="X"><i class="fab fa-x-twitter"></i></a>
+                <a href="https://www.facebook.com/ambururu/" target="_blank" aria-label="Visit our Facebook page"><i class="fab fa-facebook-f fa-2x"></i></a>
+                <a href="https://x.com/Ambururu_W" target="_blank" aria-label="Visit our Twitter profile"><i class="fab fa-twitter fa-2x"></i></a>
+                <a href="https://www.instagram.com/ambururu1/" target="_blank" aria-label="Visit our Instagram page"><i class="fab fa-instagram fa-2x"></i></a>
             </div>
             <div class="newsletter">
                 <h4>Stay Updated</h4>
