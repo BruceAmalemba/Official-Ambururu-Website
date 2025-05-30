@@ -3,30 +3,627 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Book your stay at Ambururu Waterfalls & Resort in Siaya, Kenya with real-time availability, 360° room tours with hotspots, AI suggestions, and secure payments (M-Pesa, PayPal, pay on arrival).">
-    <meta name="keywords" content="Ambururu Waterfalls, Siaya, Kenya, booking, resort, M-Pesa, PayPal, 360 tour, secure">
+    <meta name="description" content="Book your stay at Ambururu Waterfalls & Resort in Siaya, Kenya with real-time availability, 360° room tours, AI suggestions, and secure payments (M-Pesa, PayPal, pay on arrival).">
+    <meta name="keywords" content="Ambururu Waterfalls, Siaya, Kenya, booking, resort, M-Pesa, PayPal, 360 tour, secure, conservation">
+    <meta name="author" content="Ambururu Waterfalls Team">
     <title>Book Your Stay - Ambururu Waterfalls</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-    <script src="https://www.paypal.com/sdk/js?client-id=AaKjsRN_r_62rxV_8WGNEo32fcXTeCPdhHpzvNTEN9ZGEGKOFQOHc921e4I1seyE1Q3JxdVL4SEhkDPUR"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.134.0/build/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/js-confetti@0.11.0/dist/js-confetti.browser.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-    <script src="js/script.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css" rel="stylesheet" integrity="sha256-7oJ3CkU3g3Kuq+ZuO9H2S4zSFU2gB/gXF4T0q3W+acE=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css" integrity="sha256-4v4uC+81sCA3Y3dEQr+CzD+twq+ogz3F0zT0q6L3q3Y=" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --mocha-mousse: #8C6F47; /* Pantone Mocha Mousse for 2025 */
+            --soft-green: #4CAF50; /* KWS-inspired vibrant green */
+            --earthy-brown: #3E2F1F;
+            --coral: #FF6F61;
+            --aqua-blue: #26A69A; /* Modern teal */
+            --light-cream: #F8F1E9;
+            --text-dark: #1A1A1A;
+            --text-light: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            background-color: var(--light-cream);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: var(--mocha-mousse);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-brand {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            width: 50px;
+            height: auto;
+        }
+
+        .header-brand h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--text-light);
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .search-bar input {
+            padding: 0.5rem;
+            border: 1px solid var(--soft-green);
+            border-radius: 5px;
+        }
+
+        .search-bar button {
+            padding: 0.5rem;
+            background-color: var(--aqua-blue);
+            color: var(--text-light);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav ul li a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover,
+        nav ul li a.active {
+            color: var(--aqua-blue);
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: var(--soft-green);
+            padding: 0.5rem;
+            border-radius: 5px;
+            top: 100%;
+            left: 0;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Modals */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+
+        .modal-content {
+            background: var(--light-cream);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 80vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .particles-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .hero-overlay {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 2rem;
+            border-radius: 10px;
+            color: var(--text-light);
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .urgency-timer,
+        .live-counter {
+            margin: 0.5rem 0;
+            font-size: 1.1rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background-color: var(--aqua-blue);
+            color: var(--text-light);
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 0.5rem;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            background-color: var(--coral);
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 3rem 2rem;
+            background-color: var(--soft-green);
+            text-align: center;
+        }
+
+        .testimonials h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 2rem;
+            color: var(--earthy-brown);
+        }
+
+        .testimonial-slider {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .testimonial {
+            display: none;
+            padding: 1rem;
+        }
+
+        .testimonial p {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .author {
+            font-style: italic;
+            color: var(--text-dark);
+        }
+
+        .trust-badges {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .badge {
+            width: 50px;
+            height: auto;
+        }
+
+        /* Booking Section */
+        .booking {
+            padding: 3rem 2rem;
+            background-color: var(--light-cream);
+        }
+
+        .booking h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--earthy-brown);
+        }
+
+        .progress-bar {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .progress-bar::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--soft-green);
+            z-index: -1;
+        }
+
+        .progress-bar .progress {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            height: 4px;
+            background: var(--aqua-blue);
+            transition: width 0.5s;
+        }
+
+        .progress-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 25%;
+            text-align: center;
+            color: var(--text-dark);
+            cursor: pointer;
+        }
+
+        .progress-step.active {
+            color: var(--aqua-blue);
+        }
+
+        .step-check {
+            display: none;
+        }
+
+        .step-check.visible {
+            display: inline-block;
+            color: var(--aqua-blue);
+        }
+
+        .booking-container {
+            display: flex;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .booking-container::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            width: 50px;
+            height: 50px;
+            background: var(--coral);
+            transform: rotate(45deg);
+            z-index: -1;
+        }
+
+        #booking-form-element {
+            flex: 2;
+            background: var(--light-cream);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-step {
+            display: none;
+        }
+
+        .form-step.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--soft-green);
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .ai-suggestion,
+        .availability-status,
+        .form-error,
+        .form-success {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .room-previews {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .room-preview {
+            flex: 1;
+            text-align: center;
+            padding: 1rem;
+            border: 1px solid var(--soft-green);
+            border-radius: 5px;
+        }
+
+        .room-canvas {
+            width: 100%;
+            height: 100px;
+        }
+
+        .view-360,
+        .view-ar {
+            margin: 0.5rem;
+            padding: 0.5rem 1rem;
+            background-color: var(--aqua-blue);
+            color: var(--text-light);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .payment-details {
+            margin-bottom: 1rem;
+        }
+
+        .discount-wheel {
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        .booking-summary {
+            flex: 1;
+            background: var(--soft-green);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .booking-summary h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+
+        .booking-summary p {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Map Section */
+        .map-section {
+            padding: 3rem 2rem;
+            background-color: var(--light-cream);
+            text-align: center;
+        }
+
+        .map-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 2rem;
+            color: var(--earthy-brown);
+        }
+
+        #map {
+            height: 400px;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: 10px;
+        }
+
+        /* Conservation Section */
+        .conservation {
+            padding: 3rem 2rem;
+            background-color: var(--soft-green);
+            text-align: center;
+        }
+
+        .conservation h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 2rem;
+            color: var(--earthy-brown);
+        }
+
+        .conservation-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .conservation-content p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+        .footer-container {
+            padding: 2rem;
+            background-color: var(--mocha-mousse);
+            color: var(--text-light);
+            text-align: center;
+        }
+
+        .social-links {
+            margin: 1rem 0;
+        }
+
+        .social-links a {
+            color: var(--text-light);
+            margin: 0 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .newsletter form {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .newsletter input {
+            padding: 0.5rem;
+            border: 1px solid var(--soft-green);
+            border-radius: 5px;
+        }
+
+        /* Chatbot */
+        #chatbot-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-wrap: wrap;
+                padding: 1rem;
+            }
+
+            nav ul {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background: var(--mocha-mousse);
+                padding: 1rem;
+                position: absolute;
+                top: 100%;
+                left: 0;
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .booking-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .booking-summary {
+                order: -1;
+            }
+
+            .hero-title {
+                font-size: 1.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .hero-video {
+                object-fit: cover;
+            }
+
+            .room-previews {
+                flex-direction: column;
+            }
+
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                font-size: 0.9rem;
+            }
+
+            .cta-button {
+                padding: 0.75rem 1.5rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <header class="sticky-header">
         <div class="header-container">
             <div class="header-brand">
-                <img src="logo/B2.jpg" alt="Ambururu Waterfalls Logo" class="logo">
+                <img src="logo/B2.jpg" alt="Ambururu Waterfalls Logo" class="logo" loading="lazy">
                 <h1>Ambururu Waterfalls</h1>
             </div>
             <div class="search-bar">
@@ -85,7 +682,7 @@
     <main>
         <section class="hero parallax" aria-label="Booking hero section">
             <div id="particles-js" class="particles-bg"></div>
-            <video class="hero-video" autoplay muted loop playsinline>
+            <video class="hero-video" autoplay muted loop playsinline preload="metadata">
                 <source src="images/41.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
@@ -99,6 +696,7 @@
                     <p><i class="fas fa-users"></i> <span id="booking-counter">127</span> bookings this week!</p>
                 </div>
                 <a href="#booking-wizard" class="cta-button pulse">Start Booking</a>
+                <a href="#360-modal" class="cta-button" onclick="$('#360-modal').fadeIn(300);">Explore 360° Tour</a>
             </div>
         </section>
 
@@ -119,16 +717,16 @@
                 </div>
             </div>
             <div class="trust-badges">
-                <img src="logo/B5.jpg" alt="Secure booking badge" class="badge">
-                <img src="logo/B4.jpg" alt="Satisfaction guarantee badge" class="badge">
-                <img src="logo/B3.jpg" alt="PayPal verified badge" class="badge">
+                <img src="logo/B5.jpg" alt="Secure booking badge" class="badge" loading="lazy">
+                <img src="logo/B4.jpg" alt="Satisfaction guarantee badge" class="badge" loading="lazy">
+                <img src="logo/B3.jpg" alt="PayPal verified badge" class="badge" loading="lazy">
             </div>
         </section>
-        
 
         <section class="booking" id="booking-wizard">
             <h2>Book Your Stay</h2>
             <div class="progress-bar">
+                <div class="progress" style="width: 25%;"></div>
                 <div class="progress-step active" data-step="1" title="Select your dates"><i class="fas fa-calendar"></i> Dates <span class="step-check"><i class="fas fa-check"></i></span></div>
                 <div class="progress-step" data-step="2" title="Choose your room"><i class="fas fa-bed"></i> Room <span class="step-check"><i class="fas fa-check"></i></span></div>
                 <div class="progress-step" data-step="3" title="Enter your details"><i class="fas fa-user"></i> Details <span class="step-check"><i class="fas fa-check"></i></span></div>
@@ -233,7 +831,8 @@
                         </div>
                         <div id="mpesa-details" class="payment-details" style="display:none;">
                             <p>Pay via M-Pesa to: <strong>+254720215511</strong></p>
-                            <p>Enter Transaction ID:</p>
+                            <button type="button" id="initiate-mpesa" class="cta-button">Initiate M-Pesa Payment</button>
+                            <p>Enter Transaction ID (after payment):</p>
                             <input type="text" id="mpesa-transaction-id" name="transaction-id" aria-label="M-Pesa transaction ID" title="Enter M-Pesa transaction ID">
                         </div>
                         <div id="paypal-button-container" class="payment-details" style="display:none;"></div>
@@ -241,9 +840,9 @@
                             <p>Payment will be processed during check-in at Ambururu Waterfalls.</p>
                         </div>
                         <div class="trust-badges payment-badges">
-                            <img src="logo/B5.jpg" alt="Secure booking badge" class="badge">
-                            <img src="logo/B4.jpg" alt="Satisfaction guarantee badge" class="badge">
-                            <img src="logo/B3.jpg" alt="PayPal verified badge" class="badge">
+                            <img src="logo/B5.jpg" alt="Secure booking badge" class="badge" loading="lazy">
+                            <img src="logo/B4.jpg" alt="Satisfaction guarantee badge" class="badge" loading="lazy">
+                            <img src="logo/B3.jpg" alt="PayPal verified badge" class="badge" loading="lazy">
                         </div>
                         <div class="discount-wheel">
                             <canvas id="discount-wheel" width="200" height="200" aria-label="Spin for a discount"></canvas>
@@ -266,6 +865,19 @@
                 </aside>
             </div>
         </section>
+
+        <section class="map-section">
+            <h2>Find Us</h2>
+            <div id="map"></div>
+        </section>
+
+        <section class="conservation">
+            <h2>Our Commitment to Conservation</h2>
+            <div class="conservation-content">
+                <p>Ambururu Waterfalls is dedicated to preserving the natural beauty of Siaya, Kenya. We work closely with local communities and conservation groups to protect the waterfall and its surrounding ecosystem.</p>
+                <p>Our initiatives include reforestation projects, wildlife protection programs, and sustainable tourism practices. By choosing to stay with us, you’re contributing to these efforts and helping us ensure that future generations can enjoy this natural wonder.</p>
+            </div>
+        </section>
     </main>
 
     <footer>
@@ -285,19 +897,41 @@
         </div>
     </footer>
 
-    <script>
-        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-        (function(){
-            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-            s1.async=true;
-            s1.src='https://embed.tawk.to/68360ce00f6bcf190fc26624/1is9i4jf2';
-            s1.charset='UTF-8';
-            s1.setAttribute('crossorigin','*');
-            s0.parentNode.insertBefore(s1,s0);
-        })();
-    </script>
+    <div id="chatbot-container"></div>
 
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" integrity="sha256-LC5FYR1t7cCN3DHVqFVLk4N3E+2NHJhuH2Fny9oFJIY=" crossorigin="anonymous" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" integrity="sha256-1BwnsQ1R0YJ/FX2vY0g7eA1zM3n0T0tCdW2Wv/0vJno=" crossorigin="anonymous" defer></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=AaKjsRN_r_62rxV_8WGNEo32fcXTeCPdhHpzvNTEN9ZGEGKOFQOHc921e4I1seyE1Q3JxdVL4SEhkDPUR" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.134.0/build/three.min.js" integrity="sha256-6Yg4j+0eJ3e6b6l9vE6b0f2l5QzY2z7Y8z2v2l5QzY=" crossorigin="anonymous" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js" integrity="sha256-rCuXJKOQAj7u0a0en0G0v6g2b0fN5u0enQzY3u2W0v6=" crossorigin="anonymous" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js" integrity="sha256-4v5u0C3Y4Y2vY3F0z0q6L3q3Y4YvY3F0z0q6L3q3Y=" crossorigin="anonymous" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-confetti@0.11.0/dist/js-confetti.browser.min.js" integrity="sha256-JO4c0G4l6f2l5QzY2z7Y3u0enQzY3u2W0v6QzY2z7Y=" crossorigin="anonymous" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js" integrity="sha256-4z7O4vY2z7Y3u0enQzY2z7Y3u0enQzY3u2W0v6QzY2z" crossorigin="anonymous" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@googlemaps/js-api-loader@1.12.8/dist/index.min.js" integrity="sha256-4v5u0C3Y4Y2vY3F0z0q6L3q3Y4YvY3F0z0q6L3q3Y=" crossorigin="anonymous" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@vladmandic/potato@0.0.14/dist/potato.js" integrity="sha256-4v5u0C3Y4Y2vY3F0z0q6L3q3Y4YvY3F0z0q6L3q3Y=" crossorigin="anonymous" defer></script>
     <script>
+        // jQuery Fallback
+        if (typeof jQuery === 'undefined') {
+            document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" defer></script>');
+        }
+
+// Tawk.to Chat
+var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+(function () {
+    var s1 = document.createElement("script");
+    s1.defer = true;
+    s1.src = 'https://embed.tawk.to/68360ce00f6bcf190fc26624/1is9i4jf2';
+    s1.charset = 'UTF-8';
+    s1.setAttribute('crossorigin', '*');
+    document.body.appendChild(s1);
+})();
+
+$(document).ready(function () {
+    console.log('Document ready. jQuery version:', $.fn.jquery);
+
+    try {
         gsap.registerPlugin(ScrollTrigger);
 
         // Animations
@@ -306,559 +940,644 @@
         gsap.from(".urgency-timer", { opacity: 0, y: 20, duration: 1, ease: "power2.out", delay: 0.9 });
         gsap.from(".live-counter", { opacity: 0, y: 20, duration: 1, ease: "power2.out", delay: 1.1 });
         gsap.from(".hero .cta-button", { opacity: 0, scale: 0.8, duration: 1, ease: "elastic.out(1, 0.5)", delay: 1.3 });
-
+        gsap.from(".booking h2", { opacity: 0, y: 100, duration: 1, scrollTrigger: { trigger: ".booking", start: "top 80%", toggleActions: "play none none reverse" } });
         gsap.from(".testimonials", { opacity: 0, y: 100, duration: 1, scrollTrigger: { trigger: ".testimonials", start: "top 80%" } });
         gsap.from(".booking", { opacity: 0, y: 100, duration: 1, scrollTrigger: { trigger: ".booking", start: "top 80%" } });
-
+        gsap.from(".map-section", { opacity: 0, y: 100, duration: 1, scrollTrigger: { trigger: ".map-section", start: "top 80%" } });
+        gsap.from(".conservation", { opacity: 0, y: 100, duration: 1, scrollTrigger: { trigger: ".conservation", start: "top 80%" } });
         gsap.utils.toArray(".form-step").forEach(step => {
             gsap.from(step, { opacity: 0, x: 50, duration: 0.5, scrollTrigger: { trigger: step, start: "top 90%" } });
         });
 
-        $(window).on('scroll', function() {
-            if ($(this).scrollTop() > 50) {
-                $('.sticky-header').addClass('scrolled');
-            } else {
-                $('.sticky-header').removeClass('scrolled');
+        // Menu Toggle for Mobile
+        $('.menu-toggle').on('click', function () {
+            $('#main-nav ul').toggleClass('active');
+        });
+
+        // Particles.js
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 100, density: { enable: true, value_area: 800 } },
+                color: { value: '#ffffff' },
+                shape: { type: 'circle' },
+                opacity: { value: 0.6, random: true },
+                size: { value: 3, random: true },
+                line_linked: { enable: true, distance: 150, color: '#ffffff', opacity: 0.4, width: 1 },
+                move: { enable: true, speed: 4, direction: 'none', random: false }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' } },
+                modes: { repulse: { distance: 100, duration: 0.4 } }
             }
         });
 
-        $(document).ready(function() {
-            console.log('Document ready. jQuery version:', $.fn.jquery);
-
-            // Particles.js
-            particlesJS('particles-js', {
-                particles: {
-                    number: { value: 100, density: { enable: true, value_area: 800 } },
-                    color: { value: '#ffffff' },
-                    shape: { type: 'circle' },
-                    opacity: { value: 0.6, random: true },
-                    size: { value: 3, random: true },
-                    line_linked: { enable: true, distance: 150, color: '#ffffff', opacity: 0.4, width: 1 },
-                    move: { enable: true, speed: 4, direction: 'none', random: false }
-                },
-                interactivity: {
-                    detect_on: 'canvas',
-                    events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' } },
-                    modes: { repulse: { distance: 100, duration: 0.4 } }
-                }
-            });
-
-            // Hero subtitle rotation
-            const subtitles = [
-                "Book now for an unforgettable experience!",
-                "Discover paradise with exclusive deals!",
-                "Your adventure starts with a click!",
-                "Secure your spot at Ambururu today!"
-            ];
-            let subtitleIndex = 0;
-            function rotateSubtitle() {
-                gsap.to("#dynamic-subtitle", { opacity: 0, duration: 0.3, onComplete: () => {
+        // Hero Subtitle Rotation
+        const subtitles = [
+            "Book now for an unforgettable experience!",
+            "Discover paradise with exclusive deals!",
+            "Your adventure starts with a click!",
+            "Secure your spot at Ambururu today!"
+        ];
+        let subtitleIndex = 0;
+        function rotateSubtitle() {
+            gsap.to("#dynamic-subtitle", {
+                opacity: 0,
+                duration: 0.3,
+                onComplete: () => {
                     $('#dynamic-subtitle').text(subtitles[subtitleIndex]);
                     gsap.to("#dynamic-subtitle", { opacity: 1, duration: 0.3 });
                     subtitleIndex = (subtitleIndex + 1) % subtitles.length;
-                }});
-            }
-            rotateSubtitle();
-            setInterval(rotateSubtitle, 5000);
-
-            // Countdown timer
-            function startCountdown() {
-                let time = 24 * 60 * 60;
-                const countdownElement = $('#countdown');
-                setInterval(() => {
-                    const hours = Math.floor(time / 3600);
-                    const minutes = Math.floor((time % 3600) / 60);
-                    const seconds = time % 60;
-                    countdownElement.text(`${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`);
-                    time--;
-                    if (time < 0) time = 24 * 60 * 60;
-                }, 1000);
-            }
-            startCountdown();
-
-            // Booking counter
-            let bookingCount = 127;
-            setInterval(() => {
-                bookingCount += Math.floor(Math.random() * 3);
-                $('#booking-counter').text(bookingCount);
-            }, 30000);
-
-            // Testimonial slider
-            let currentTestimonial = 0;
-            const testimonials = $('.testimonial');
-            function rotateTestimonials() {
-                testimonials.hide();
-                testimonials.eq(currentTestimonial).fadeIn(500);
-                currentTestimonial = (currentTestimonial + 1) % testimonials.length;
-            }
-            rotateTestimonials();
-            setInterval(rotateTestimonials, 5000);
-
-            // FullCalendar
-            const calendarEl = document.getElementById('availability-calendar');
-            const calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth',
-                selectable: true,
-                select: function(arg) {
-                    console.log('Calendar select:', arg.startStr, arg.endStr);
-                    $('#checkin').val(arg.startStr);
-                    const endDate = new Date(arg.endStr);
-                    endDate.setDate(endDate.getDate() - 1);
-                    $('#checkout').val(endDate.toISOString().split('T')[0]);
-                    checkAvailability();
-                    calculateTotal();
-                    suggestRoom();
-                    updateSummary();
-                },
-                events: [
-                    { title: 'Booked', start: '2025-06-01', end: '2025-06-03', color: '#e63946' },
-                    { title: 'Booked', start: '2025-06-10', end: '2025-06-12', color: '#e63946' }
-                ]
-            });
-            calendar.render();
-
-            // Step navigation
-            $(document).on('click', '.next-step', function(e) {
-                e.preventDefault();
-                console.log('Next button clicked');
-                const $button = $(this);
-                const nextStep = $button.data('next');
-                const currentStep = $button.closest('.form-step').data('step');
-                console.log('Current step:', currentStep, 'Next step:', nextStep);
-
-                let isValid = true;
-                $('#step-error, #form-error, #availability-status').hide();
-
-                if (currentStep === 1) {
-                    isValid = validateStep1();
-                } else if (currentStep === 2) {
-                    isValid = !!$('#room').val();
-                    if (!isValid) $('#availability-status').text('Please select a room type.').css('color', '#e63946').show();
-                } else if (currentStep === 3) {
-                    isValid = $('#name').val() && $('#email').val() && $('#phone').val();
-                    if (!isValid) $('#form-error').text('Please fill in all required fields.').show();
                 }
+            });
+        }
+        rotateSubtitle();
+        setInterval(rotateSubtitle, 5000);
 
-                if (isValid) {
-                    $button.prop('disabled', true).text('Loading...');
+        // Countdown Timer
+        function startCountdown() {
+            let time = 24 * 60 * 60;
+            const countdownElement = $('#countdown');
+            setInterval(() => {
+                const hours = Math.floor(time / 3600);
+                const minutes = Math.floor((time % 3600) / 60);
+                const seconds = time % 60;
+                countdownElement.text(`${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`);
+                time--;
+                if (time < 0) time = 24 * 60 * 60;
+            }, 1000);
+        }
+        startCountdown();
+
+        // Booking Counter
+        let bookingCount = 127;
+        setInterval(() => {
+            bookingCount += Math.floor(Math.random() * 3);
+            $('#booking-counter').text(bookingCount);
+        }, 30000);
+
+        // Testimonial Slider
+        let currentTestimonial = 0;
+        const testimonials = $('.testimonial');
+        function rotateTestimonials() {
+            testimonials.hide();
+            testimonials.eq(currentTestimonial).fadeIn(500);
+            currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+        }
+        rotateTestimonials();
+        setInterval(rotateTestimonials, 5000);
+
+        // FullCalendar
+        const calendarEl = document.getElementById('availability-calendar');
+        const calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            selectable: true,
+            select: function (arg) {
+                console.log('Calendar select:', arg.startStr, arg.endStr);
+                $('#checkin').val(arg.startStr);
+                const endDate = new Date(arg.endStr);
+                endDate.setDate(endDate.getDate() - 1);
+                $('#checkout').val(endDate.toISOString().split('T')[0]);
+                checkAvailability();
+                calculateTotal();
+                suggestRoom();
+                updateSummary();
+            },
+            events: [
+                { title: 'Booked', start: '2025-06-01', end: '2025-06-03', color: '#e63946' },
+                { title: 'Booked', start: '2025-06-10', end: '2025-06-12', color: '#e63946' }
+            ]
+        });
+        calendar.render();
+
+        // Step Navigation
+        $(document).on('click', '.next-step', function (e) {
+            e.preventDefault();
+            const $button = $(this);
+            const nextStep = $button.data('next');
+            const currentStep = $button.closest('.form-step').data('step');
+            console.log(`Navigating from step ${currentStep} to ${nextStep}`);
+
+            let isValid = true;
+            $('#step-error, #form-error, #availability-status').hide();
+
+            if (currentStep === 1) {
+                isValid = validateStep1();
+            } else if (currentStep === 2) {
+                isValid = !!$('#room').val();
+                if (!isValid) {
+                    $('#availability-status').text('Please select a room type.').css('color', '#e63946').show();
+                }
+            } else if (currentStep === 3) {
+                isValid = $('#name').val() && $('#email').val() && $('#phone').val();
+                if (!isValid) {
+                    $('#form-error').text('Please fill in all required fields.').css('color', '#e63946').show();
+                }
+            }
+
+            if (isValid) {
+                $button.prop('disabled', true).text('Loading...');
+                try {
                     $('.form-step').removeClass('active');
                     $(`.form-step[data-step="${nextStep}"]`).addClass('active');
                     $('.progress-step').removeClass('active');
                     $(`.progress-step[data-step="${nextStep}"]`).addClass('active');
                     $(`.progress-step[data-step="${currentStep}"] .step-check`).addClass('visible');
                     gsap.from(`.form-step[data-step="${nextStep}"]`, { opacity: 0, x: 50, duration: 0.5 });
-                    gsap.to('.progress-bar', { '--progress': `${nextStep * 25}%`, duration: 0.5 });
-                    setTimeout(() => $button.prop('disabled', false).text('Next'), 500);
+                    $('.progress-bar .progress').css('width', `${nextStep * 25}%`);
+                    updateSummary();
                     new Audio('https://freesound.org/data/previews/170/170621_2885980-lq.mp3').play().catch(() => {});
-                } else {
-                    gsap.to($button, { x: -10, duration: 0.1, repeat: 3, yoyo: true });
-                    console.log('Validation failed for step', currentStep);
+                } catch (err) {
+                    console.error('Step transition error:', err);
+                    $('#form-error').text('An error occurred. Please try again.').css('color', '#e63946').show();
+                } finally {
+                    $button.prop('disabled', false).text('Next');
                 }
-            });
+            } else {
+                gsap.to($button, { x: -10, duration: 0.1, repeat: 3, yoyo: true });
+                console.log('Validation failed for step', currentStep);
+            }
+        });
 
-            $(document).on('click', '.prev-step', function(e) {
-                e.preventDefault();
-                const prevStep = $(this).data('prev');
-                $('.form-step').removeClass('active');
-                $(`.form-step[data-step="${prevStep}"]`).addClass('active');
-                $('.progress-step').removeClass('active');
-                $(`.progress-step[data-step="${prevStep}"]`).addClass('active');
-                $(`.progress-step[data-step="${prevStep + 1}"] .step-check`).removeClass('visible');
-                gsap.from(`.form-step[data-step="${prevStep}"]`, { opacity: 0, x: -50, duration: 0.5 });
-                gsap.to('.progress-bar', { '--progress': `${prevStep * 25}%`, duration: 0.5 });
-            });
+        $(document).on('click', '.prev-step', function (e) {
+            e.preventDefault();
+            const prevStep = $(this).data('prev');
+            $('.form-step').removeClass('active');
+            $(`.form-step[data-step="${prevStep}"]`).addClass('active');
+            $('.progress-step').removeClass('active');
+            $(`.progress-step[data-step="${prevStep}"]`).addClass('active');
+            $(`.progress-step[data-step="${prevStep + 1}"] .step-check`).removeClass('visible');
+            gsap.from(`.form-step[data-step="${prevStep}"]`, { opacity: 0, x: -50, duration: 0.5 });
+            $('.progress-bar .progress').css('width', `${prevStep * 25}%`);
+        });
 
-            // Step 1 Validation
-            function validateStep1() {
-                const checkin = $('#checkin').val();
-                const checkout = $('#checkout').val();
-                const guests = $('#guests').val();
-                const today = new Date();
-                today.setHours(0, 0, 0, 0);
-                const stepError = $('#step-error');
+        // Step 1 Validation
+        function validateStep1() {
+            const checkin = $('#checkin').val();
+            const checkout = $('#checkout').val();
+            const guests = $('#guests').val();
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            const stepError = $('#step-error');
 
-                console.log('Validating Step 1:', { checkin, checkout, guests });
+            console.log('Validating Step 1:', { checkin, checkout, guests });
 
-                if (!checkin) {
-                    stepError.text('Please select a check-in date.').show();
-                    return false;
-                }
-                if (!checkout) {
-                    stepError.text('Please select a check-out date.').show();
-                    return false;
-                }
-                if (!guests) {
-                    stepError.text('Please select the number of guests.').show();
-                    return false;
-                }
-
-                const checkinDate = new Date(checkin);
-                const checkoutDate = new Date(checkout);
-
-                if (isNaN(checkinDate.getTime())) {
-                    stepError.text('Invalid check-in date format.').show();
-                    return false;
-                }
-                if (isNaN(checkoutDate.getTime())) {
-                    stepError.text('Invalid check-out date format.').show();
-                    return false;
-                }
-
-                if (checkinDate < today) {
-                    stepError.text('Check-in date cannot be in the past.').show();
-                    return false;
-                }
-                if (checkoutDate <= checkinDate) {
-                    stepError.text('Check-out must be after check-in.').show();
-                    return false;
-                }
-
-                if (!checkAvailability()) {
-                    stepError.text('No rooms available for selected dates.').show();
-                    return false;
-                }
-
-                stepError.hide();
-                return true;
+            if (!checkin) {
+                stepError.text('Please select a check-in date.').css('color', '#e63946').show();
+                return false;
+            }
+            if (!checkout) {
+                stepError.text('Please select a check-out date.').css('color', '#e63946').show();
+                return false;
+            }
+            if (!guests) {
+                stepError.text('Please select the number of guests.').css('color', '#e63946').show();
+                return false;
             }
 
-            // Booking Summary
-            function updateSummary() {
-                $('#summary-checkin').text($('#checkin').val() || '-');
-                $('#summary-checkout').text($('#checkout').val() || '-');
-                $('#summary-guests').text($('#guests').val() || '-');
-                $('#summary-room').text($('#room option:selected').text() || '-');
-                $('#summary-total').text($('#total-cost').text() || '-');
+            const checkinDate = new Date(checkin);
+            const checkoutDate = new Date(checkout);
+
+            if (isNaN(checkinDate.getTime())) {
+                stepError.text('Invalid check-in date format.').css('color', '#e63946').show();
+                return false;
+            }
+            if (isNaN(checkoutDate.getTime())) {
+                stepError.text('Invalid check-out date format.').css('color', '#e63946').show();
+                return false;
             }
 
-            // AI Room Suggestion
-            function suggestRoom() {
-                const guests = parseInt($('#guests').val()) || 0;
-                const checkin = new Date($('#checkin').val());
-                const checkout = new Date($('#checkout').val());
-                const nights = checkin && checkout ? Math.round((checkout - checkin) / (1000 * 60 * 60 * 24)) : 0;
-                let suggestion = '';
-                if (guests >= 3 || nights > 5) {
-                    suggestion = `Perfect for ${guests} guests and ${nights} nights: Our Suite offers spacious luxury!`;
-                } else if (guests === 2) {
-                    suggestion = `Ideal for couples: The Deluxe Room is cozy and romantic for ${nights} nights!`;
-                } else if (guests === 1) {
-                    suggestion = `Solo traveler? The Standard Room is just right for your ${nights}-night stay!`;
-                } else {
-                    suggestion = 'Select guests to get a personalized room suggestion!';
-                }
-                $('#ai-suggestion').text(suggestion).css('color', 'var(--aqua-blue)');
-                gsap.from('#ai-suggestion', { opacity: 0, y: 10, duration: 0.3 });
+            if (checkinDate < today) {
+                stepError.text('Check-in date cannot be in the past.').css('color', '#e63946').show();
+                return false;
+            }
+            if (checkoutDate <= checkinDate) {
+                stepError.text('Check-out must be after check-in.').css('color', '#e63946').show();
+                return false;
             }
 
-            // Availability
-            function checkAvailability() {
-                const checkin = new Date($('#checkin').val());
-                const checkout = new Date(document.getElementById('Checkout').value);
-                const availabilityStatus = $('#availability-status');
-
-                if (checkin && checkout && checkout > checkin) {
-                    const bookedDates = [
-                        { start: new Date('2025-06-01'), end: new Date('2025-06-03') },
-                        { start: new Date('2025-06-10'), end: new Date('2025-06-12') }
-                    ];
-                    const available = !bookedDates.some(range => 
-                        return (
-                            (checkin >= range.start && checkin <= range.end) ||
-                            (checkout >= range.start && checkout <= range.end) ||
-                            (checkin <= range.start && checkout >= range.end)
-                        );
-                    });
-                    availabilityStatus.text(available ? 'Rooms available!' : 'No rooms available, please try a different dates.').css('color', available ? 'var(--aqua-blue)' : '#e63946').show();
-                    return available;
-                } else {
-                    availabilityStatus.text('Please select a valid dates.').css('color', '#e63946').show();
-                    return false;
-                }
+            if (!checkAvailability()) {
+                stepError.text('No rooms available for selected dates.').css('color', '#e63946').show();
+                return false;
             }
 
-            // Total cost
-            function calculateTotal() {
-                const checkin = new Date(document.getElementById('checkin').value);
-                const checkout = new Date(document.getElementById('Checkout').value);
-                const roomType = $('#room').val();
-                const rates = { standard: 100, deluxe: 150, suite: 200 };
-                const today = new Date();
-                today.setHours(0, 0, 0, 0);
-                const totalCostElement = $('#total-cost');
+            stepError.hide();
+            return true;
+        }
 
-                if (checkin < today) {
-                    totalCostElement.text("Check-in date cannot be in the past.").css('color', '#e63946');
-                    return 0;
-                }
-                if (checkout <= checkin) {
-                    totalCostElement.text("Check-out must be after check-in.").css('color', '#e63946');
-                    return 0;
-                }
+        // Booking Summary
+        function updateSummary() {
+            $('#summary-checkin').text($('#checkin').val() || '-');
+            $('#summary-checkout').text($('#checkout').val() || '-');
+            $('#summary-guests').text($('#guests').val() || '-');
+            $('#summary-room').text($('#room option:selected').text() || '-');
+            $('#summary-total').text($('#total-cost').text() || '-');
+        }
 
-                if (checkin && checkout && roomType) {
-                    const nights = Math.round((checkout - checkin) / (1000 * 60 * 60 * 24));
-                    if (nights > 0) {
-                        let total = nights * rates[roomType];
-                        const discount = parseFloat($('#discount-result').data('discount') || 0);
-                        if (discount) total *= (1 - discount / 100);
-                        totalCostElement.text(`Estimated Total: $${total.toFixed(2)} ${discount ? `(includes ${discount}% discount)` : ''}`).css('color', 'var(--coral)');
-                        updateSummary();
-                        return total;
-                    }
-                }
-                totalCostElement.text('');
+        // AI Room Suggestion
+        function suggestRoom() {
+            const guests = parseInt($('#guests').val()) || 0;
+            const checkin = new Date($('#checkin').val());
+            const checkout = new Date($('#checkout').val());
+            const nights = checkin && checkout ? Math.round((checkout - checkin) / (1000 * 60 * 60 * 24)) : 0;
+            let suggestion = '';
+            if (guests >= 3 || nights > 5) {
+                suggestion = `Perfect for ${guests} guests and ${nights} nights: Our Suite offers spacious luxury!`;
+            } else if (guests === 2) {
+                suggestion = `Ideal for couples: The Deluxe Room is cozy and romantic for ${nights} nights!`;
+            } else if (guests === 1) {
+                suggestion = `Solo traveler? The Standard Room is just right for your ${nights}-night stay!`;
+            } else {
+                suggestion = 'Select guests to get a personalized room suggestion!';
+            }
+            $('#ai-suggestion').text(suggestion).css('color', 'var(--aqua-blue)');
+            gsap.from('#ai-suggestion', { opacity: 0, y: 10, duration: 0.3 });
+        }
+
+        // Availability
+        function checkAvailability() {
+            const checkin = new Date($('#checkin').val());
+            const checkout = new Date($('#checkout').val());
+            const availabilityStatus = $('#availability-status');
+
+            if (checkin && checkout && checkout > checkin) {
+                const bookedDates = [
+                    { start: new Date('2025-06-01'), end: new Date('2025-06-03') },
+                    { start: new Date('2025-06-10'), end: new Date('2025-06-12') }
+                ];
+                const available = !bookedDates.some(range =>
+                    (checkin >= range.start && checkin <= range.end) ||
+                    (checkout >= range.start && checkout <= range.end) ||
+                    (checkin <= range.start && checkout >= range.end)
+                );
+                availabilityStatus.text(available ? 'Rooms available!' : 'No rooms available, please try different dates.').css('color', available ? 'var(--aqua-blue)' : '#e63946').show();
+                return available;
+            } else {
+                availabilityStatus.text('Please select valid dates.').css('color', '#e63946').show();
+                return false;
+            }
+        }
+
+        // Total Cost
+        function calculateTotal() {
+            const checkin = new Date(document.getElementById('checkin').value);
+            const checkout = new Date(document.getElementById('checkout').value);
+            const roomType = $('#room').val();
+            const rates = { standard: 100, deluxe: 150, suite: 200 };
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            const totalCostElement = $('#total-cost');
+
+            if (checkin < today) {
+                totalCostElement.text("Check-in date cannot be in the past.").css('color', '#e63946');
+                return 0;
+            }
+            if (checkout <= checkin) {
+                totalCostElement.text("Check-out must be after check-in.").css('color', '#e63946');
                 return 0;
             }
 
-            $('#guests, #checkin, #checkout, #room').on('change', () => {
-                checkAvailability();
-                calculateTotal();
-                suggestRoom();
-                updateSummary();
-            });
-
-            // Payment method
-            $('#payment-method').on('change', function() {
-                $('.payment-details').hide();
-                if (this.value === 'mpesa') $('#mpesa-details').fadeIn(300);
-                else if (this.value === 'paypal') $('#paypal-button-container').fadeIn(300);
-                else if (this.value === 'on-arrival') $('#on-arrival-details').fadeIn(300);
-            });
-
-            // PayPal
-            paypal.Buttons({
-                createOrder: function(data, actions) {
-                    const total = calculateTotal();
-                    if (!total || !checkAvailability()) {
-                        $('#form-error').text('Please complete the form and ensure rooms are available.').show();
-                        return;
-                    }
-                    return actions.order.create({
-                        purchase_units: [{ amount: { value: total.toString() } }]
-                    });
-                },
-                onApprove: function(data, actions) {
-                    $('#loading-modal').show();
-                    return actions.order.capture().then(function(details) {
-                        $('#loading-modal').hide();
-                        $('#confirmation-modal').show();
-                        const confetti = new JSConfetti();
-                        confetti.addConfetti({ emojis: ['🎉', '🏞️', '🌊'] });
-                        $('#booking-form-element')[0].reset();
-                        $('#total-cost').text('');
-                        $('.payment-details').hide();
-                        $('.form-step').removeClass('active');
-                        $('.progress-step').removeClass('active');
-                        $('.step-check').removeClass('visible');
-                        $('.form-step[data-step="1"]').addClass('active');
-                        $('.progress-step[data-step="1"]').addClass('active');
-                        gsap.to('.progress-bar', { '--progress': '25%', duration: 0.5 });
-                        updateSummary();
-                        new Audio('https://freesound.org/data/previews/511/511484_6890478-lq.mp3').play().catch(() => {});
-                    });
-                },
-                onError: function(err) {
-                    $('#loading-modal').hide();
-                    $('#form-error').text('PayPal payment failed. Please try again.').show();
-                    console.error('PayPal error:', err);
+            if (checkin && checkout && roomType) {
+                const nights = Math.round((checkout - checkin) / (1000 * 60 * 60 * 24));
+                if (nights > 0) {
+                    let total = nights * rates[roomType];
+                    const discount = parseFloat($('#discount-result').data('discount') || 0);
+                    if (discount) total *= (1 - discount / 100);
+                    totalCostElement.text(`Estimated Total: $${total.toFixed(2)} ${discount ? `(includes ${discount}% discount)` : ''}`).css('color', 'var(--coral)');
+                    updateSummary();
+                    return total;
                 }
-            }).render('#paypal-button-container');
-
-            // Form submission
-            $('#booking-form-element').on('submit', function(e) {
-                e.preventDefault();
-                const paymentMethod = $('#payment-method').val();
-                const mpesaTransactionId = $('#mpesa-transaction-id').val();
-
-                if (!checkAvailability()) {
-                    $('#form-error').text('No rooms available for selected dates.').show();
-                    return;
-                }
-                if (paymentMethod === 'mpesa' && !mpesaTransactionId) {
-                    $('#form-error').text('Please enter a valid M-Pesa transaction ID.').show();
-                    return;
-                }
-
-                $('#loading-modal').show();
-                $.ajax({
-                    url: this.action,
-                    method: this.method,
-                    data: $(this).serialize(),
-                    success: function() {
-                        $('#loading-modal').hide();
-                        $('#form-success').show();
-                        const confetti = new JSConfetti();
-                        confetti.addConfetti({ emojis: ['🎉', '🏞️', '🌊'] });
-                        $('#booking-form-element')[0].reset();
-                        $('#total-cost').text('');
-                        $('.payment-details').hide();
-                        $('.form-step').removeClass('active');
-                        $('.progress-step').removeClass('active');
-                        $('.step-check').removeClass('visible');
-                        $('.form-step[data-step="1"]').addClass('active');
-                        $('.progress-step[data-step="1"]').addClass('active');
-                        gsap.to('.progress-bar', { '--progress': '25%', duration: 0.5 });
-                        gsap.fromTo("#form-success", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5 });
-                        setTimeout(() => $('#form-success').fadeOut(), 5000);
-                        updateSummary();
-                        new Audio('https://freesound.org/data/previews/511/511484_6890478-lq.mp3').play().catch(() => {});
-                    },
-                    error: function(xhr, status, error) {
-                        $('#loading-modal').hide();
-                        $('#form-error').text('An error occurred. Please try again.').show();
-                        console.error('Form submission error:', status, error);
-                    }
-                });
-            });
-
-            // 360° Viewer
-            $('.view-360').on('click', function() {
-                const panorama = $(this).data('panorama');
-                $('#360-modal').fadeIn(300);
-                pannellum.viewer('pannellum-viewer', {
-                    type: 'equirectangular',
-                    panorama: panorama,
-                    autoLoad: true,
-                    autoRotate: -2,
-                    hotSpots: [
-                        { pitch: 10, yaw: 180, type: 'info', text: 'King-Size Bed' },
-                        { pitch: -10, yaw: 90, type: 'info', text: 'Scenic Balcony' },
-                        { pitch: 0, yaw: 0, type: 'info', text: 'Luxury Bath' }
-                    ]
-                });
-            });
-
-            // AR Preview
-            $('.view-ar').on('click', function() {
-                alert('AR Preview is not fully supported. Please view the 360° tour or contact us for a demo.');
-            });
-
-            // Three.js Previews
-            function initRoomPreview(canvasId, color) {
-                const canvas = document.getElementById(canvasId);
-                if (!canvas) {
-                    console.error(`Canvas ${canvasId} not found.`);
-                    return;
-                }
-                const scene = new THREE.Scene();
-                const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
-                const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true });
-                renderer.setSize(100, 100);
-
-                const geometry = new THREE.BoxGeometry(1, 1, 1);
-                const material = new THREE.MeshBasicMaterial({ color: color });
-                const room = new THREE.Mesh(geometry, material);
-                scene.add(room);
-
-                camera.position.z = 2;
-
-                function animate() {
-                    requestAnimationFrame(animate);
-                    room.rotation.x += 0.01;
-                    room.rotation.y += 0.01;
-                    renderer.render(scene, camera);
-                }
-                animate();
             }
+            totalCostElement.text('');
+            return 0;
+        }
 
-            initRoomPreview('standard-canvas', 0x4DD0E1);
-            initRoomPreview('deluxe-canvas', 0xFF6347);
-            initRoomPreview('suite-canvas', 0xFFD700);
-
-            // Discount Wheel
-            const wheelCanvas = document.getElementById('discount-wheel');
-            const wheelCtx = wheelCanvas.getContext('2d');
-            const discounts = [
-                { value: 0, label: 'Try Again', color: '#e63946' },
-                { value: 5, label: '5% Off', color: '#4dd0e1' },
-                { value: 10, label: '10% Off', color: '#ff6347' },
-                { value: 15, label: '15% Off', color: '#ffd700' }
-            ];
-            function drawWheel() {
-                const arcSize = (2 * Math.PI) / discounts.length;
-                wheelCtx.clearRect(0, 0, wheelCanvas.width, wheelCanvas.height);
-                discounts.forEach((item, index) => {
-                    wheelCtx.beginPath();
-                    wheelCtx.fillStyle = item.color;
-                    wheelCtx.moveTo(100, 100);
-                    wheelCtx.arc(100, 100, 100, index * arcSize, (index + 1) * arcSize);
-                    wheelCtx.fill();
-                    wheelCtx.save();
-                    wheelCtx.translate(100, 100);
-                    wheelCtx.rotate(index * arcSize + arcSize / 2);
-                    wheelCtx.fillStyle = '#fff';
-                    wheelCtx.font = '16px Roboto';
-                    wheelCtx.fillText(item.label, 50, 10);
-                    wheelCtx.restore();
-                });
-            }
-            drawWheel();
-
-            $('#spin-wheel').on('click', function() {
-                const spins = 5 + Math.random() * 5;
-                const finalAngle = spins * 360 + Math.random() * 360;
-                gsap.to(wheelCanvas, {
-                    rotation: finalAngle,
-                    duration: 3,
-                    ease: 'power2.out',
-                    onComplete: () => {
-                        const index = Math.floor((finalAngle % 360) / (360 / discounts.length));
-                        const discount = discounts[index].value;
-                        $('#discount-result').text(discount ? `You won a ${discount}% discount!` : 'Try again next time!').data('discount', discount);
-                        gsap.from('#discount-result', { opacity: 0, y: 20, duration: 0.3 });
-                        calculateTotal();
-                        new Audio('https://freesound.org/data/previews/120/120375_1670642-lq.mp3').play().catch(() => {});
-                    }
-                });
-            });
-
-            // Voice Input
-            if ('webkitSpeechRecognition' in window) {
-                const recognition = new webkitSpeechRecognition();
-                recognition.continuous = false;
-                recognition.interimResults = false;
-
-                $('.voice-input').on('click', function() {
-                    const target = $(this).data('target');
-                    recognition.start();
-                    recognition.onresult = function(event) {
-                        const transcript = event.results[0][0].transcript;
-                        $(`#${target}`).val(transcript);
-                    };
-                    recognition.onerror = function() {
-                        console.error('Voice input failed.');
-                        alert('Voice input failed. Please try again.');
-                    };
-                });
-            } else {
-                $('.voice-input').hide();
-            }
-
-            // Smooth scrolling
-            $('a[href^="#"]').on('click', function(e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
-            });
-
-            // Tooltips
-            $('input, select').on('focus', function() {
-                const title = $(this).attr('title');
-                if (title) {
-                    const $tooltip = $('<div class="tooltip"></div>').text(title);
-                    $(this).after($tooltip);
-                    gsap.from($tooltip, { opacity: 0, y: 10, duration: 0.3 });
-                }
-            }).on('blur', function() {
-                $('.tooltip').remove();
-            });
-
-            // Initialize
+        $('#guests, #checkin, #checkout, #room').on('change', () => {
             checkAvailability();
             calculateTotal();
             suggestRoom();
             updateSummary();
         });
+
+        // Payment Method
+        $('#payment-method').on('change', function () {
+            $('.payment-details').hide();
+            if (this.value === 'mpesa') $('#mpesa-details').fadeIn(300);
+            else if (this.value === 'paypal') $('#paypal-button-container').fadeIn(300);
+            else if (this.value === 'on-arrival') $('#on-arrival-details').fadeIn(300);
+        });
+
+        // M-Pesa Integration
+        $('#initiate-mpesa').on('click', async function () {
+            const total = calculateTotal();
+            const phone = $('#phone').val();
+            if (!total || !checkAvailability() || !phone) {
+                $('#form-error').text('Please complete the form and provide a valid phone number.').css('color', '#e63946').show();
+                return;
+            }
+
+            $('#loading-modal').show();
+            try {
+                const response = await fetch('/api/mpesa', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ phone, amount: total })
+                });
+                const data = await response.json();
+                if (data.CheckoutRequestID) {
+                    $('#loading-modal').hide();
+                    alert('M-Pesa Payment Request Sent! Please check your phone to complete the payment and enter the transaction ID.');
+                } else {
+                    throw new Error('Payment initiation failed');
+                }
+            } catch (error) {
+                $('#loading-modal').hide();
+                $('#form-error').text('M-Pesa payment initiation failed. Please try again.').css('color', '#e63946').show();
+                console.error('M-Pesa error:', error);
+            }
+        });
+
+        // PayPal
+        paypal.Buttons({
+            createOrder: function (data, actions) {
+                const total = calculateTotal();
+                if (!total || !checkAvailability()) {
+                    $('#form-error').text('Please complete the form and ensure rooms are available.').css('color', '#e63946').show();
+                    return Promise.reject('Invalid form');
+                }
+                return actions.order.create({
+                    purchase_units: [{ amount: { value: total.toFixed(2) } }]
+                });
+            },
+            onApprove: function (data, actions) {
+                $('#loading-modal').show();
+                return actions.order.capture().then(function (details) {
+                    $('#loading-modal').hide();
+                    $('#confirmation-modal').show();
+                    const confetti = new JSConfetti();
+                    confetti.addConfetti({ emojis: ['🎉', '🏞️', '🌊'] });
+                    $('#booking-form-element')[0].reset();
+                    $('#total-cost').text('');
+                    $('.payment-details').hide();
+                    $('.form-step').removeClass('active');
+                    $('.progress-step').removeClass('active');
+                    $('.step-check').removeClass('visible');
+                    $('.form-step[data-step="1"]').addClass('active');
+                    $('.progress-step[data-step="1"]').addClass('active');
+                    $('.progress-bar .progress').css('width', '25%');
+                    updateSummary();
+                    new Audio('https://freesound.org/data/previews/511/511484_6890478-lq.mp3').play().catch(() => {});
+                });
+            },
+            onError: function (err) {
+                $('#loading-modal').hide();
+                $('#form-error').text('PayPal payment failed. Please try again or choose another method.').css('color', '#e63946').show();
+                console.error('PayPal error:', err);
+            }
+        }).render('#paypal-button-container');
+
+        // Form Submission
+        $('#booking-form-element').on('submit', function (e) {
+            e.preventDefault();
+            const paymentMethod = $('#payment-method').val();
+            const mpesaTransactionId = $('#mpesa-transaction-id').val();
+
+            if (!checkAvailability()) {
+                $('#form-error').text('No rooms available for selected dates.').css('color', '#e63946').show();
+                return;
+            }
+            if (paymentMethod === 'mpesa' && !mpesaTransactionId) {
+                $('#form-error').text('Please enter a valid M-Pesa transaction ID.').css('color', '#e63946').show();
+                return;
+            }
+            if (paymentMethod === 'on-arrival') {
+                $('#loading-modal').show();
+                setTimeout(() => {
+                    $('#loading-modal').hide();
+                    $('#confirmation-modal').show();
+                    const confetti = new JSConfetti();
+                    confetti.addConfetti({ emojis: ['🎉', '🏞️', '🌊'] });
+                    $('#form-success').text('Reservation confirmed! Payment will be processed on arrival.').css('color', 'var(--aqua-blue)').show();
+                    $('#booking-form-element')[0].reset();
+                    $('#total-cost').text('');
+                    $('.payment-details').hide();
+                    $('.form-step').removeClass('active');
+                    $('.progress-step').removeClass('active');
+                    $('.step-check').removeClass('visible');
+                    $('.form-step[data-step="1"]').addClass('active');
+                    $('.progress-step[data-step="1"]').addClass('active');
+                    $('.progress-bar .progress').css('width', '25%');
+                    updateSummary();
+                    new Audio('https://freesound.org/data/previews/511/511484_6890478-lq.mp3').play().catch(() => {});
+                }, 2000);
+                return;
+            }
+
+            $('#loading-modal').show();
+            $.ajax({
+                url: this.action,
+                method: this.method,
+                data: $(this).serialize(),
+                success: function () {
+                    $('#loading-modal').hide();
+                    $('#form-success').css('color', 'var(--aqua-blue)').show();
+                    const confetti = new JSConfetti();
+                    confetti.addConfetti({ emojis: ['🎉', '🏞️', '🌊'] });
+                    $('#booking-form-element')[0].reset();
+                    $('#total-cost').text('');
+                    $('.payment-details').hide();
+                    $('.form-step').removeClass('active');
+                    $('.progress-step').removeClass('active');
+                    $('.step-check').removeClass('visible');
+                    $('.form-step[data-step="1"]').addClass('active');
+                    $('.progress-step[data-step="1"]').addClass('active');
+                    $('.progress-bar .progress').css('width', '25%');
+                    gsap.fromTo("#form-success", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5 });
+                    setTimeout(() => $('#form-success').fadeOut(), 5000);
+                    updateSummary();
+                    new Audio('https://freesound.org/data/previews/511/511484_6890478-lq.mp3').play().catch(() => {});
+                },
+                error: function (xhr, status, error) {
+                    $('#loading-modal').hide();
+                    $('#form-error').text('An error occurred. Please try again.').css('color', '#e63946').show();
+                    console.error('Form submission error:', status, error);
+                }
+            });
+        });
+
+        // 360° Viewer
+        $('.view-360').on('click', function () {
+            const panorama = $(this).data('panorama');
+            $('#360-modal').fadeIn(300);
+            pannellum.viewer('pannellum-viewer', {
+                type: 'equirectangular',
+                panorama: panorama,
+                autoLoad: true,
+                autoRotate: -2,
+                hotSpots: [
+                    { pitch: 10, yaw: 180, type: 'info', text: 'King-Size Bed' },
+                    { pitch: -10, yaw: 90, type: 'info', text: 'Scenic Balcony' },
+                    { pitch: 0, yaw: 0, type: 'info', text: 'Luxury Bath' }
+                ]
+            });
+        });
+
+        // AR Preview
+        $('.view-ar').on('click', function () {
+            alert('AR Preview is not fully supported. Please view the 360° tour or contact us for a demo.');
+        });
+
+        // Three.js Previews
+        function initRoomPreview(canvasId, color) {
+            const canvas = document.getElementById(canvasId);
+            if (!canvas) {
+                console.error(`Canvas ${canvasId} not found.`);
+                return;
+            }
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true });
+            renderer.setSize(100, 100);
+
+            const geometry = new THREE.BoxGeometry(1, 1, 1);
+            const material = new THREE.MeshBasicMaterial({ color: color });
+            const room = new THREE.Mesh(geometry, material);
+            scene.add(room);
+
+            camera.position.z = 2;
+
+            function animate() {
+                requestAnimationFrame(animate);
+                room.rotation.x += 0.01;
+                room.rotation.y += 0.01;
+                renderer.render(scene, camera);
+            }
+            animate();
+        }
+
+        initRoomPreview('standard-canvas', 0x4DD0E1);
+        initRoomPreview('deluxe-canvas', 0xFF6347);
+        initRoomPreview('suite-canvas', 0xFFD700);
+
+        // Discount Wheel
+        const wheelCanvas = document.getElementById('discount-wheel');
+        const wheelCtx = wheelCanvas.getContext('2d');
+        const discounts = [
+            { value: 0, label: 'Try Again', color: '#e63946' },
+            { value: 5, label: '5% Off', color: '#4CAF50' },
+            { value: 10, label: '10% Off', color: '#26A69A' },
+            { value: 15, label: '15% Off', color: '#FF6F61' },
+            { value: 0, label: 'Try Again', color: '#e63946' },
+            { value: 20, label: '20% Off', color: '#8C6F47' }
+        ];
+        const arc = Math.PI / (discounts.length / 2);
+        let spinAngle = 0;
+        let isSpinning = false;
+
+        function drawWheel() {
+            wheelCtx.clearRect(0, 0, wheelCanvas.width, wheelCanvas.height);
+            discounts.forEach((discount, i) => {
+                wheelCtx.beginPath();
+                wheelCtx.fillStyle = discount.color;
+                wheelCtx.moveTo(100, 100);
+                wheelCtx.arc(100, 100, 100, i * arc, (i + 1) * arc);
+                wheelCtx.fill();
+                wheelCtx.fillStyle = '#fff';
+                wheelCtx.font = '12px Roboto';
+                wheelCtx.save();
+                wheelCtx.translate(100, 100);
+                wheelCtx.rotate(i * arc + arc / 2);
+                wheelCtx.fillText(discount.label, 50, 0);
+                wheelCtx.restore();
+            });
+        }
+
+        drawWheel();
+
+        $('#spin-wheel').on('click', function () {
+            if (isSpinning) return;
+            isSpinning = true;
+            $('#spin-wheel').prop('disabled', true).text('Spinning...');
+            const spinDuration = 4000;
+            const randomAngle = Math.random() * 360 + 720;
+            gsap.to(window, {
+                spinAngle: randomAngle,
+                duration: spinDuration / 1000,
+                ease: "power2.out",
+                onUpdate: () => {
+                    wheelCanvas.style.transform = `rotate(${spinAngle}deg)`;
+                },
+                onComplete: () => {
+                    const finalAngle = spinAngle % 360;
+                    const index = Math.floor((360 - finalAngle) / (360 / discounts.length)) % discounts.length;
+                    const result = discounts[index];
+                    $('#discount-result').text(`You won: ${result.label}!`).css('color', result.color).data('discount', result.value);
+                    calculateTotal();
+                    isSpinning = false;
+                    $('#spin-wheel').prop('disabled', false).text('Spin Again');
+                    new Audio('https://freesound.org/data/previews/511/511484_6890478-lq.mp3').play().catch(() => {});
+                }
+            });
+        });
+
+        // Google Maps
+        const loader = new google.maps.jsApiLoader.Loader({
+            apiKey: 'YOUR_ACTUAL_API_KEY', // Replace with your Google Maps API key
+            version: 'weekly'
+        });
+
+        loader.load().then(() => {
+            const map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: -0.0931, lng: 34.4833 }, // Siaya, Kenya
+                zoom: 12
+            });
+            new google.maps.Marker({
+                position: { lat: -0.0931, lng: 34.4833 },
+                map: map,
+                title: 'Ambururu Waterfalls'
+            });
+        }).catch(err => {
+            console.error('Google Maps error:', err);
+            $('#map').html('<p style="color:#e63946;">Failed to load map. Please try again later.</p>');
+        });
+
+        // Potato.js Chatbot
+        const potato = new Potato({
+            element: '#chatbot-container',
+            theme: 'light',
+            messages: [
+                { text: 'Welcome to Ambururu Waterfalls! Ready to book your dream getaway?', sender: 'bot' }
+            ],
+            responses: [
+                { keywords: ['book', 'reservation'], response: 'Let’s get you booked! Scroll to the "Book Your Stay" section or ask me for room suggestions.' },
+                { keywords: ['location', 'where'], response: 'We’re in Siaya, Kenya, near a stunning waterfall. Check the map below or ask for directions!' },
+                { keywords: ['conservation', 'environment'], response: 'We’re passionate about conservation! Learn about our reforestation and wildlife efforts below.' },
+                { keywords: ['room', 'stay'], response: 'We offer Standard ($100/night), Deluxe ($150/night), and Suite ($200/night). Want a 360° tour?' },
+                { keywords: ['discount', 'offer'], response: 'Spin the discount wheel in the booking section for a chance to save up to 20%! Want to try it now?' },
+                { keywords: [], response: 'Not sure what you need? Ask about bookings, conservation, or explore our site!' }
+            ]
+        });
+
+        // Voice Input
+        $('.voice-input').on('click', function () {
+            const targetId = $(this).data('target');
+            if ('webkitSpeechRecognition' in window) {
+                const recognition = new webkitSpeechRecognition();
+                recognition.lang = 'en-US';
+                recognition.onresult = function (event) {
+                    $('#' + targetId).val(event.results[0][0].transcript);
+                };
+                recognition.start();
+            } else {
+                alert('Voice input is not supported in this browser.');
+            }
+        });
+
+    } catch (err) {
+        console.error('Initialization error:', err);
+        $('#form-error').text('An error occurred while loading the page. Please refresh.').css('color', '#e63946').show();
+    }
+});
     </script>
 </body>
 </html>
