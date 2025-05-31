@@ -6,17 +6,677 @@
     <meta name="description" content="Uncover the captivating story, visionary leadership, and stunning surroundings of Ambururu Waterfalls and Resort in Siaya, Kenya. A beacon of eco-tourism and Luo heritage.">
     <meta name="keywords" content="Ambururu Waterfalls, Siaya, Kenya, eco-tourism, resort, Luo culture, Justice Anthony Ombwayo, history, sustainable travel, nearby attractions">
     <title>About Ambururu Waterfalls & Resort</title>
-    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <!-- Mapbox for 3D Globe -->
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
+    <!-- Three.js for 3D Effects -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <!-- GSAP for Animations -->
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <!-- Particles.js for Particle Effects -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: #ffffff;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .sticky-header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(0, 255, 153, 0.2);
+        }
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin-right: 1rem;
+            filter: drop-shadow(0 0 10px rgba(0, 255, 153, 0.5));
+            transition: transform 0.5s;
+        }
+        .logo:hover {
+            transform: rotate(360deg);
+        }
+        .header-container h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00ff99;
+            font-size: 1.8rem;
+            margin: 0;
+            text-shadow: 0 0 10px rgba(0, 255, 153, 0.7);
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        nav ul li {
+            position: relative;
+            margin-left: 2rem;
+        }
+        nav ul li a {
+            color: #00ff99;
+            text-decoration: none;
+            font-weight: 500;
+            font-family: 'Orbitron', sans-serif;
+            transition: all 0.3s;
+            text-shadow: 0 0 5px rgba(0, 255, 153, 0.5);
+        }
+        nav ul li a:hover,
+        nav ul li a.active {
+            color: #ffffff;
+            text-shadow: 0 0 15px rgba(0, 255, 153, 1);
+        }
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background: rgba(0, 0, 0, 0.8);
+            list-style: none;
+            padding: 0.5rem 0;
+            margin-top: 0.5rem;
+            border-radius: 5px;
+            box-shadow: 0 0 15px rgba(0, 255, 153, 0.3);
+        }
+        .dropdown-menu li a {
+            padding: 0.5rem 1rem;
+            display: block;
+            color: #00ff99;
+        }
+        .dropdown-menu li a:hover {
+            color: #ffffff;
+            background: rgba(0, 255, 153, 0.2);
+        }
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #00ff99;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+        }
+        #three-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 2;
+            max-width: 90%;
+        }
+        .hero-overlay h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 5rem;
+            color: #00ff99;
+            text-shadow: 0 0 20px rgba(0, 255, 153, 0.8);
+            animation: hologram 2s infinite alternate;
+        }
+        .hero-overlay p {
+            font-size: 1.5rem;
+            color: #ffffff;
+            margin: 1rem 0;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+        .cta-button {
+            background: linear-gradient(45deg, #00ff99, #00ccff);
+            color: #000000;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            transition: all 0.3s;
+            box-shadow: 0 0 20px rgba(0, 255, 153, 0.5);
+        }
+        .cta-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(0, 255, 153, 1);
+        }
+        @keyframes hologram {
+            0% { opacity: 0.8; transform: translateY(0); }
+            100% { opacity: 1; transform: translateY(-10px); }
+        }
+
+        /* History Section */
+        .history {
+            padding: 5rem 0;
+            text-align: center;
+            position: relative;
+        }
+        #history-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        .history h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            color: #00ff99;
+            text-shadow: 0 0 15px rgba(0, 255, 153, 0.7);
+            margin: 0 0 3rem;
+            z-index: 1;
+            position: relative;
+        }
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            z-index: 1;
+        }
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+        .timeline-content {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px rgba(0, 255, 153, 0.2);
+            padding: 2rem;
+            width: 45%;
+            transition: transform 0.5s, box-shadow 0.5s;
+        }
+        .timeline-content:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 30px rgba(0, 255, 153, 0.5);
+        }
+        .timeline-content h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            color: #00ff99;
+            margin: 0 0 1rem;
+            text-shadow: 0 0 10px rgba(0, 255, 153, 0.5);
+        }
+        .timeline-content p {
+            color: #ffffff;
+            line-height: 1.6;
+        }
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-left: 0;
+            margin-right: auto;
+        }
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: auto;
+            margin-right: 0;
+            order: 2;
+        }
+        .timeline-item::before {
+            content: attr(data-year);
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(45deg, #00ff99, #00ccff);
+            color: #000000;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            z-index: 3;
+            top: -2rem;
+            box-shadow: 0 0 15px rgba(0, 255, 153, 0.5);
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, #00ff99, #00ccff);
+            transform: translateX(-50%);
+            z-index: 1;
+            box-shadow: 0 0 15px rgba(0, 255, 153, 0.5);
+        }
+
+        /* Owner Section */
+        .owner {
+            padding: 5rem 0;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.3);
+        }
+        .owner h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            color: #00ff99;
+            text-shadow: 0 0 15px rgba(0, 255, 153, 0.7);
+            margin: 0 0 3rem;
+        }
+        .owner-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 3rem;
+            padding: 0 1.5rem;
+        }
+        .owner-image {
+            width: 40%;
+            max-width: 400px;
+            position: relative;
+        }
+        .owner-image img {
+            width: 100%;
+            border-radius: 15px;
+            filter: brightness(0.9);
+            box-shadow: 0 0 20px rgba(0, 255, 153, 0.3);
+        }
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 255, 153, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+            border-radius: 15px;
+        }
+        .owner-image:hover .image-overlay {
+            opacity: 1;
+        }
+        .image-overlay i {
+            font-size: 3rem;
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(0, 255, 153, 0.7);
+        }
+        .owner-text {
+            width: 50%;
+            max-width: 600px;
+            text-align: left;
+        }
+        .owner-text h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            color: #00ff99;
+            margin: 0 0 1.5rem;
+            text-shadow: 0 0 10px rgba(0, 255, 153, 0.5);
+        }
+        .owner-text p {
+            color: #ffffff;
+            line-height: 1.7;
+            margin: 0 0 1.5rem;
+        }
+        .learn-more {
+            background: linear-gradient(45deg, #00ff99, #00ccff);
+            color: #000000;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            transition: all 0.3s;
+            box-shadow: 0 0 20px rgba(0, 255, 153, 0.5);
+        }
+        .learn-more:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(0, 255, 153, 1);
+        }
+        .owner-details {
+            margin-top: 1.5rem;
+            display: none;
+        }
+        .owner-details.visible {
+            display: block;
+        }
+
+        /* Community Impact Section */
+        .community-impact {
+            padding: 5rem 0;
+            text-align: center;
+            position: relative;
+        }
+        #impact-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        .community-impact h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            color: #00ff99;
+            text-shadow: 0 0 15px rgba(0, 255, 153, 0.7);
+            margin: 0 0 3rem;
+            z-index: 1;
+            position: relative;
+        }
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            z-index: 1;
+            position: relative;
+        }
+        .impact-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 0 20px rgba(0, 255, 153, 0.2);
+        }
+        .impact-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(0, 255, 153, 0.5);
+        }
+        .impact-card i {
+            color: #00ff99;
+            margin-bottom: 1.5rem;
+            font-size: 2.5rem;
+            text-shadow: 0 0 10px rgba(0, 255, 153, 0.7);
+        }
+        .impact-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            color: #00ff99;
+            margin: 0 0 1rem;
+            text-shadow: 0 0 10px rgba(0, 255, 153, 0.5);
+        }
+        .impact-card p {
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        /* Attractions Section */
+        .attractions {
+            padding: 5rem 0;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.3);
+        }
+        .attractions h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            color: #00ff99;
+            text-shadow: 0 0 15px rgba(0, 255, 153, 0.7);
+            margin: 0 0 3rem;
+        }
+        .attractions-container {
+            perspective: 1000px;
+            max-width: 1200px;
+            margin: 0 auto;
+            height: 400px;
+        }
+        .attraction-slide {
+            position: absolute;
+            width: 320px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px rgba(0, 255, 153, 0.3);
+            opacity: 0;
+            transform: rotateY(90deg);
+            transition: all 0.5s;
+            left: 50%;
+            transform-origin: center;
+        }
+        .attraction-slide.active {
+            opacity: 1;
+            transform: translateX(-50%) rotateY(0deg);
+        }
+        .attraction-slide img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 10px 10px 0 0;
+            filter: brightness(0.9);
+        }
+        .attraction-slide h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            color: #00ff99;
+            margin: 1.5rem 0 1rem;
+            text-shadow: 0 0 10px rgba(0, 255, 153, 0.5);
+        }
+        .attraction-slide p {
+            padding: 0 1.5rem 1.5rem;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        /* Map Section */
+        .map {
+            padding: 5rem 0;
+            text-align: center;
+        }
+        .map h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            color: #00ff99;
+            text-shadow: 0 0 15px rgba(0, 255, 153, 0.7);
+            margin: 0 0 2rem;
+        }
+        #map {
+            width: 100%;
+            height: 500px;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(0, 255, 153, 0.3);
+        }
+        .map p {
+            font-size: 1.2rem;
+            color: #ffffff;
+            margin-top: 1.5rem;
+        }
+
+        /* Sticky CTA */
+        .sticky-cta {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.8);
+            color: #ffffff;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        .social-links a {
+            color: #00ff99;
+            margin: 0 1.5rem;
+            font-size: 1.8rem;
+            transition: all 0.3s;
+        }
+        .social-links a:hover {
+            color: #ffffff;
+            text-shadow: 0 0 15px rgba(0, 255, 153, 1);
+        }
+        .newsletter h4 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            color: #00ff99;
+            margin: 0 0 1.5rem;
+            text-shadow: 0 0 10px rgba(0, 255, 153, 0.5);
+        }
+        .newsletter form {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        .newsletter input {
+            padding: 0.75rem;
+            border: none;
+            border-radius: 5px;
+            width: 320px;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+        .newsletter button {
+            background: linear-gradient(45deg, #00ff99, #00ccff);
+            color: #000000;
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            box-shadow: 0 0 20px rgba(0, 255, 153, 0.5);
+        }
+        .newsletter button:hover {
+            box-shadow: 0 0 30px rgba(0, 255, 153, 1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .owner-content {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            .owner-image,
+            .owner-text {
+                width: 100%;
+                max-width: 100%;
+            }
+            .hero-overlay h2 {
+                font-size: 3.5rem;
+            }
+            .hero-overlay p {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-wrap: wrap;
+            }
+            .header-container h1 {
+                font-size: 1.5rem;
+            }
+            nav ul {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
+            }
+            nav ul.active {
+                display: flex;
+            }
+            nav ul li {
+                margin: 1rem 0;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .dropdown:hover .dropdown-menu {
+                display: none;
+            }
+            .dropdown.active .dropdown-menu {
+                display: block;
+                position: static;
+            }
+            .hero {
+                height: 60vh;
+            }
+            .hero-overlay h2 {
+                font-size: 2.5rem;
+            }
+            .hero-overlay p {
+                font-size: 1rem;
+            }
+            .timeline-item {
+                flex-direction: column;
+                align-items: center;
+            }
+            .timeline-content {
+                width: 100%;
+                margin: 2rem 0;
+            }
+            .timeline-item:nth-child(even) .timeline-content {
+                order: 0;
+            }
+            .timeline-item::before {
+                top: -1rem;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            .timeline::before {
+                left: 10px;
+            }
+            .history h2,
+            .owner h2,
+            .community-impact h2,
+            .attractions h2,
+            .map h2 {
+                font-size: 2.2rem;
+            }
+            .newsletter form {
+                flex-direction: column;
+                align-items: center;
+            }
+            .newsletter input {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
 </head>
 <body>
     <header class="sticky-header">
         <div class="header-container">
-            <img src="logo/B2.jpg" alt="Ambururu Waterfalls Logo" class="logo">
-            <h1>Ambururu Waterfalls & Resort</h1>
+            <img src="logo/B2.jpg" alt="Ambururu Waterfalls Logo" class="logo" onerror="this.src='https://via.placeholder.com/80?text=Logo';">
+            <h1>Ambururu Waterfalls</h1>
             <nav aria-label="Main navigation">
                 <ul>
                     <li><a href="index.html">Home</a></li>
@@ -50,20 +710,18 @@
         </div>
     </header>
     <main>
-        <!-- Hero Section -->
-        <section class="hero parallax">
-            <video autoplay muted loop playsinline class="hero-video">
-                <source src="images/41.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
+        <!-- Hero Section with 3D WebGL Background -->
+        <section class="hero">
+            <canvas id="three-canvas"></canvas>
             <div class="hero-overlay">
                 <h2>Discover Ambururu’s Soul</h2>
-                <p>A sanctuary of nature, culture, and sustainability in the heart of Siaya, Kenya.</p>
+                <p>A futuristic sanctuary of nature, culture, and sustainability in Siaya, Kenya.</p>
                 <a href="#history" class="cta-button">Explore Our Story</a>
             </div>
         </section>
-        <!-- History Section -->
+        <!-- History Section with Holographic Timeline -->
         <section class="history" id="history">
+            <div id="history-particles"></div>
             <h2>Our Timeless Journey</h2>
             <div class="timeline">
                 <div class="timeline-item" data-year="Ancient Times">
@@ -97,14 +755,14 @@
             <h2>Our Visionary Leader</h2>
             <div class="owner-content">
                 <div class="owner-image">
-                    <img src="images/35.jpg" alt="Justice Anthony Ombwayo, founder of Ambururu Waterfall Resort" loading="lazy">
+                    <img src="images/35.jpg" alt="Justice Anthony Ombwayo, founder of Ambururu Waterfall Resort" loading="lazy" onerror="this.src='https://via.placeholder.com/600x400?text=Justice+Anthony+Ombwayo';">
                     <div class="image-overlay"><i class="fas fa-leaf"></i></div>
                 </div>
                 <div class="owner-text">
                     <h3>Justice Anthony Ombwayo</h3>
                     <p>A distinguished Kenyan judge and ardent conservationist, Justice Anthony Ombwayo transformed Ambururu into a world-class eco-resort. His passion for Siaya’s natural beauty and Luo heritage drives a mission of sustainable tourism, empowering local communities while offering guests an unforgettable experience.</p>
                     <button class="learn-more" aria-label="Learn more about Justice Ombwayo">Learn More</button>
-                    <div class="owner-details hidden">
+                    <div class="owner-details">
                         <p>Rooted in Siaya, Justice Ombwayo’s legal career is matched by his dedication to environmental and cultural preservation. The resort employs over 50 locals and supports initiatives like tree planting and artisan crafts.</p>
                     </div>
                 </div>
@@ -112,6 +770,7 @@
         </section>
         <!-- Community Impact Section -->
         <section class="community-impact">
+            <div id="impact-particles"></div>
             <h2>Building a Brighter Future</h2>
             <div class="impact-grid">
                 <div class="impact-card">
@@ -134,32 +793,28 @@
         <!-- Attractions Section -->
         <section class="attractions" id="location">
             <h2>Explore Nearby Wonders</h2>
-            <div class="attractions-carousel">
+            <div class="attractions-container">
                 <div class="attraction-slide">
-                    <img src="images/36.jpg" alt="Ndanu Falls in Gem, Siaya County" loading="lazy">
+                    <img src="images/36.jpg" alt="Ndanu Falls in Gem, Siaya County" loading="lazy" onerror="this.src='https://via.placeholder.com/320x220?text=Ndanu+Falls';">
                     <h3>Ndanu Falls</h3>
                     <p>A tranquil cascade just 200m from Kisumu-Busia road, ideal for photos and meditation.</p>
                 </div>
                 <div class="attraction-slide">
-                    <img src="images/37.jpg" alt="Sunset at Lake Victoria" loading="lazy">
+                    <img src="images/37.jpg" alt="Sunset at Lake Victoria" loading="lazy" onerror="this.src='https://via.placeholder.com/320x220?text=Lake+Victoria';">
                     <h3>Lake Victoria</h3>
                     <p>Relax with stunning sunsets at Usenge Beach by Africa’s largest lake.</p>
                 </div>
                 <div class="attraction-slide">
-                    <img src="images/38.jpg" alt="Got Ramogi Hill" loading="lazy">
+                    <img src="images/38.jpg" alt="Got Ramogi Hill" loading="lazy" onerror="this.src='https://via.placeholder.com/320x220?text=Got+Ramogi+Hill';">
                     <h3>Got Ramogi Hill</h3>
                     <p>A sacred Luo site with hiking trails and sweeping views of Yala Swamp.</p>
                 </div>
-            </div>
-            <div class="carousel-controls">
-                <button class="carousel-prev" aria-label="Previous slide"><i class="fas fa-chevron-left"></i></button>
-                <button class="carousel-next" aria-label="Next slide"><i class="fas fa-chevron-right"></i></button>
             </div>
         </section>
         <!-- Map Section -->
         <section class="map">
             <h2>Find Your Way</h2>
-            <div class="map-container" id="map"></div>
+            <div id="map"></div>
             <p>Located in Musanda, Siaya, Kenya, easily accessible via the Kisumu-Busia road.</p>
         </section>
         <!-- Sticky CTA -->
@@ -171,9 +826,9 @@
         <div class="footer-container">
             <p>© 2025 Ambururu Waterfalls. All rights reserved.</p>
             <div class="social-links">
-                <a href="https://www.facebook.com/ambururu/" target="_blank" aria-label="Visit our Facebook page"><i class="fab fa-facebook-f fa-2x"></i></a>
-                <a href="https://x.com/Ambururu_W" target="_blank" aria-label="Visit our Twitter profile"><i class="fab fa-twitter fa-2x"></i></a>
-                <a href="https://www.instagram.com/ambururu1/" target="_blank" aria-label="Visit our Instagram page"><i class="fab fa-instagram fa-2x"></i></a>
+                <a href="https://www.facebook.com/ambururu/" target="_blank" aria-label="Visit our Facebook page"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://x.com/Ambururu_W" target="_blank" aria-label="Visit our Twitter profile"><i class="fab fa-x-twitter"></i></a>
+                <a href="https://www.instagram.com/ambururu1/" target="_blank" aria-label="Visit our Instagram page"><i class="fab fa-instagram"></i></a>
             </div>
             <div class="newsletter">
                 <h4>Stay Updated</h4>
@@ -185,7 +840,225 @@
         </div>
     </footer>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="js/script.js"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"></script>
+    <script>
+        // Menu Toggle
+        $(document).ready(function() {
+            $('.menu-toggle').on('click', function() {
+                $('nav ul').toggleClass('active');
+                const expanded = $(this).attr('aria-expanded') === 'true' ? 'false' : 'true';
+                $(this).attr('aria-expanded', expanded);
+            });
+
+            // Dropdown Toggle on Mobile
+            $('.dropdown').on('click', function() {
+                if ($(window).width() < 768) {
+                    $(this).toggleClass('active');
+                }
+            });
+
+            // Learn More Toggle
+            $('.learn-more').on('click', function() {
+                $('.owner-details').toggleClass('visible');
+                $(this).text($('.owner-details').hasClass('visible') ? 'Show Less' : 'Learn More');
+            });
+
+            // Form Submission
+            $('#newsletter-form').on('submit', function(e) {
+                e.preventDefault();
+                const email = $(this).find('input[name="email"]').val();
+                if (email) {
+                    this.animate([
+                        { transform: 'scale(1)', opacity: 1 },
+                        { transform: 'scale(0.95)', opacity: 0.7 },
+                        { transform: 'scale(1)', opacity: 1 }
+                    ], { duration: 500, easing: 'ease-in-out' });
+                    alert('Thank you for subscribing!');
+                    $(this)[0].reset();
+                }
+            });
+
+            // Debug Missing Assets
+            $('img').on('error', function() {
+                console.log(`Image not found: ${this.src}`);
+            });
+        });
+
+        // 3D Hero Background with Three.js
+        const canvas = document.getElementById('three-canvas');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+
+        // Particle System for Waterfall Effect
+        const particleCount = 5000;
+        const particles = new THREE.BufferGeometry();
+        const positions = new Float32Array(particleCount * 3);
+        const velocities = new Float32Array(particleCount * 3);
+        for (let i = 0; i < particleCount; i++) {
+            positions[i * 3] = Math.random() * 100 - 50;
+            positions[i * 3 + 1] = Math.random() * 100;
+            positions[i * 3 + 2] = Math.random() * 100 - 50;
+            velocities[i * 3] = 0;
+            velocities[i * 3 + 1] = -Math.random() * 2 - 1;
+            velocities[i * 3 + 2] = 0;
+        }
+        particles.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        const particleMaterial = new THREE.PointsMaterial({
+            color: 0x00ccff,
+            size: 0.5,
+            transparent: true,
+            opacity: 0.7
+        });
+        const particleSystem = new THREE.Points(particles, particleMaterial);
+        scene.add(particleSystem);
+
+        // Lighting
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+        scene.add(ambientLight);
+        const pointLight = new THREE.PointLight(0x00ff99, 1, 100);
+        pointLight.position.set(0, 50, 50);
+        scene.add(pointLight);
+
+        camera.position.z = 50;
+
+        function animate() {
+            requestAnimationFrame(animate);
+            const positions = particleSystem.geometry.attributes.position.array;
+            for (let i = 0; i < particleCount; i++) {
+                positions[i * 3 + 1] += velocities[i * 3 + 1];
+                if (positions[i * 3 + 1] < -50) {
+                    positions[i * 3 + 1] = 50;
+                }
+            }
+            particleSystem.geometry.attributes.position.needsUpdate = true;
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // Particles.js for History and Community Impact Sections
+        particlesJS('history-particles', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: '#00ff99' },
+                shape: { type: 'circle' },
+                opacity: { value: 0.5, random: true },
+                size: { value: 3, random: true },
+                line_linked: { enable: true, distance: 150, color: '#00ccff', opacity: 0.4, width: 1 },
+                move: { enable: true, speed: 2, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' }, resize: true },
+                modes: { repulse: { distance: 100, duration: 0.4 }, push: { particles_nb: 4 } }
+            },
+            retina_detect: true
+        });
+
+        particlesJS('impact-particles', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: '#00ff99' },
+                shape: { type: 'circle' },
+                opacity: { value: 0.5, random: true },
+                size: { value: 3, random: true },
+                line_linked: { enable: true, distance: 150, color: '#00ccff', opacity: 0.4, width: 1 },
+                move: { enable: true, speed: 2, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' }, resize: true },
+                modes: { repulse: { distance: 100, duration: 0.4 }, push: { particles_nb: 4 } }
+            },
+            retina_detect: true
+        });
+
+        // GSAP Scroll-Driven Timeline
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.utils.toArray('.timeline-item').forEach((item, index) => {
+            const content = item.querySelector('.timeline-content');
+            gsap.from(item, {
+                opacity: 0,
+                y: 50,
+                duration: 1.5,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: item,
+                    start: 'top 80%',
+                    end: 'bottom 60%',
+                    toggleActions: 'play none none reverse'
+                }
+            });
+            gsap.from(content, {
+                x: index % 2 === 0 ? -100 : 100,
+                opacity: 0,
+                duration: 1.5,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: item,
+                    start: 'top 80%',
+                    end: 'bottom 60%',
+                    toggleActions: 'play none none reverse'
+                }
+            });
+        });
+
+        // GSAP Animations for Other Sections
+        gsap.from('.impact-card', {
+            opacity: 0,
+            y: 100,
+            duration: 1.5,
+            stagger: 0.3,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.community-impact',
+                start: 'top 80%'
+            }
+        });
+
+        // 3D Attraction Carousel
+        const slides = document.querySelectorAll('.attraction-slide');
+        let currentSlide = 0;
+        slides[currentSlide].classList.add('active');
+        function rotateSlides() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+        setInterval(rotateSlides, 5000);
+
+        // Mapbox 3D Globe
+        mapboxgl.accessToken = 'pk.eyJ1IjoiZXhhbXBsZSIsImEiOiJja3Zhcmk1c3QwNTQ1MnFtb3J0c2d5c2E2In0.8fakeToken1234567890';
+        const map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/satellite-v9',
+            center: [34.267, -0.062], // Siaya, Kenya
+            zoom: 12,
+            pitch: 60,
+            bearing: -60,
+            projection: 'globe'
+        });
+        map.on('load', () => {
+            map.addLayer({
+                id: 'sky',
+                type: 'sky',
+                paint: {
+                    'sky-type': 'atmosphere',
+                    'sky-atmosphere-sun': [0, 0],
+                    'sky-atmosphere-sun-intensity': 5
+                }
+            });
+            new mapboxgl.Marker({ color: '#00ff99' })
+                .setLngLat([34.267, -0.062])
+                .setPopup(new mapboxgl.Popup().setHTML('<h3>Ambururu Waterfalls</h3><p>Musanda, Siaya, Kenya</p>'))
+                .addTo(map);
+        });
+    </script>
 </body>
 </html>

@@ -3,21 +3,599 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Immerse yourself in stunning photos and videos of Ambururu Waterfalls and Resort in Siaya, Kenya. Explore waterfalls, eco-luxury stays, and vibrant activities.">
-    <meta name="keywords" content="Ambururu Waterfalls, Siaya, Kenya, gallery, photos, videos, resort, eco-tourism">
+    <meta name="description" content="Dive into the joy and fun of Ambururu Waterfalls & Resort in Siaya, Kenya, through stunning photos, videos, and interactive experiences. Be inspired to visit!">
+    <meta name="keywords" content="Ambururu Waterfalls, Siaya, Kenya, gallery, photos, videos, resort, eco-tourism, fun, joy, activities, events">
     <title>Gallery - Ambururu Waterfalls & Resort</title>
-    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.36/dist/fancybox/fancybox.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <!-- Three.js for 3D Effects -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <!-- GSAP for Animations -->
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <!-- Particles.js for Particle Effects -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <!-- Pannellum for 360 Panorama -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pannellum/2.5.6/pannellum.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pannellum/2.5.6/pannellum.css">
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: #ffffff;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .sticky-header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(0, 255, 153, 0.2);
+        }
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin-right: 1rem;
+            filter: drop-shadow(0 0 10px rgba(0, 255, 153, 0.5));
+            transition: transform 0.5s;
+        }
+        .logo:hover {
+            transform: rotate(360deg);
+        }
+        .header-container h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00ff99;
+            font-size: 1.8rem;
+            margin: 0;
+            text-shadow: 0 0 10px rgba(0, 255, 153, 0.7);
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        nav ul li {
+            position: relative;
+            margin-left: 2rem;
+        }
+        nav ul li a {
+            color: #00ff99;
+            text-decoration: none;
+            font-weight: 500;
+            font-family: 'Orbitron', sans-serif;
+            transition: all 0.3s;
+            text-shadow: 0 0 5px rgba(0, 255, 153, 0.5);
+        }
+        nav ul li a:hover,
+        nav ul li a.active {
+            color: #ffffff;
+            text-shadow: 0 0 15px rgba(0, 255, 153, 1);
+        }
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background: rgba(0, 0, 0, 0.8);
+            list-style: none;
+            padding: 0.5rem 0;
+            margin-top: 0.5rem;
+            border-radius: 5px;
+            box-shadow: 0 0 15px rgba(0, 255, 153, 0.3);
+        }
+        .dropdown-menu li a {
+            padding: 0.5rem 1rem;
+            display: block;
+            color: #00ff99;
+        }
+        .dropdown-menu li a:hover {
+            color: #ffffff;
+            background: rgba(0, 255, 153, 0.2);
+        }
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #00ff99;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+        }
+        #three-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 2;
+            max-width: 90%;
+        }
+        .hero-overlay h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 5rem;
+            color: #00ff99;
+            text-shadow: 0 0 20px rgba(0, 255, 153, 0.8);
+            animation: hologram 2s infinite alternate;
+        }
+        .hero-overlay p {
+            font-size: 1.5rem;
+            color: #ffffff;
+            margin: 1rem 0;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+        .cta-button {
+            background: linear-gradient(45deg, #00ff99, #00ccff);
+            color: #000000;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            transition: all 0.3s;
+            box-shadow: 0 0 20px rgba(0, 255, 153, 0.5);
+        }
+        .cta-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(0, 255, 153, 1);
+        }
+        @keyframes hologram {
+            0% { opacity: 0.8; transform: translateY(0); }
+            100% { opacity: 1; transform: translateY(-10px); }
+        }
+
+        /* Video Showcase */
+        .video-hero {
+            padding: 5rem 0;
+            text-align: center;
+            position: relative;
+        }
+        #video-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        .video-hero h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            color: #00ff99;
+            text-shadow: 0 0 15px rgba(0, 255, 153, 0.7);
+            margin: 0 0 2rem;
+            z-index: 1;
+            position: relative;
+        }
+        .video-container {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(0, 255, 153, 0.3);
+            z-index: 1;
+        }
+        .video-container video {
+            width: 100%;
+            display: block;
+        }
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .video-container:hover .video-overlay {
+            opacity: 1;
+        }
+        .play-button i {
+            font-size: 4rem;
+            color: #00ff99;
+            cursor: pointer;
+            transition: transform 0.3s;
+            text-shadow: 0 0 15px rgba(0, 255, 153, 0.7);
+        }
+        .play-button i:hover {
+            transform: scale(1.2);
+        }
+        .waterfall-icon i {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2.5rem;
+            color: #00ff99;
+            animation: pulse 2s infinite;
+            text-shadow: 0 0 10px rgba(0, 255, 153, 0.5);
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .video-cta {
+            margin-top: 1.5rem;
+            font-size: 1.3rem;
+            color: #00ff99;
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(0, 255, 153, 0.5);
+            animation: fadeIn 2s infinite;
+        }
+        @keyframes fadeIn {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        /* Gallery Section */
+        .gallery {
+            padding: 5rem 0;
+            text-align: center;
+            position: relative;
+        }
+        #gallery-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        .gallery h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            color: #00ff99;
+            text-shadow: 0 0 15px rgba(0, 255, 153, 0.7);
+            margin: 0 0 2rem;
+            z-index: 1;
+            position: relative;
+        }
+        .gallery-filters {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+            z-index: 1;
+            position: relative;
+        }
+        .gallery-filters button {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            color: #ffffff;
+            transition: all 0.3s;
+            box-shadow: 0 0 10px rgba(0, 255, 153, 0.3);
+        }
+        .gallery-filters button.active,
+        .gallery-filters button:hover {
+            background: linear-gradient(45deg, #00ff99, #00ccff);
+            color: #000000;
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(0, 255, 153, 0.7);
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            z-index: 1;
+            position: relative;
+        }
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 255, 153, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(0, 255, 153, 0.7);
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.5s;
+            filter: brightness(0.9);
+        }
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        .caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            color: #00ff99;
+            padding: 1rem;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(0, 255, 153, 0.5);
+        }
+        .gallery-item:hover .caption {
+            opacity: 1;
+        }
+        .emoji-overlay {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 2rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .gallery-item:hover .emoji-overlay {
+            opacity: 1;
+        }
+
+        /* Interactive 360 Panorama Section */
+        .panorama-section {
+            padding: 5rem 0;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.3);
+        }
+        .panorama-section h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            color: #00ff99;
+            text-shadow: 0 0 15px rgba(0, 255, 153, 0.7);
+            margin: 0 0 2rem;
+        }
+        .panorama-container {
+            max-width: 900px;
+            margin: 0 auto;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(0, 255, 153, 0.3);
+            height: 400px;
+        }
+        .panorama-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .panorama-container:hover .panorama-overlay {
+            opacity: 1;
+        }
+        .panorama-overlay span {
+            font-size: 1.5rem;
+            color: #ffffff;
+            font-weight: 700;
+            background: linear-gradient(45deg, #00ff99, #00ccff);
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            box-shadow: 0 0 20px rgba(0, 255, 153, 0.5);
+        }
+
+        /* Share Your Moments */
+        .share-moments {
+            background: rgba(0, 0, 0, 0.8);
+            color: #ffffff;
+            padding: 3rem 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            margin: 3rem 0;
+            box-shadow: 0 0 30px rgba(0, 255, 153, 0.3);
+        }
+        .share-moments h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            color: #00ff99;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 15px rgba(0, 255, 153, 0.7);
+        }
+        .share-moments p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+        .share-moments a {
+            margin: 0 1rem;
+            color: #00ff99;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .share-moments a:hover {
+            color: #ffffff;
+            text-shadow: 0 0 15px rgba(0, 255, 153, 1);
+        }
+        .share-moments div a {
+            font-size: 2.5rem;
+            transition: transform 0.3s;
+        }
+        .share-moments div a:hover {
+            transform: scale(1.2);
+        }
+        .share-moments span {
+            color: #00ccff;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(0, 204, 255, 0.7);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.8);
+            color: #ffffff;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        .social-links a {
+            color: #00ff99;
+            margin: 0 1.5rem;
+            font-size: 1.8rem;
+            transition: all 0.3s;
+        }
+        .social-links a:hover {
+            color: #ffffff;
+            text-shadow: 0 0 15px rgba(0, 255, 153, 1);
+        }
+        .newsletter h4 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            color: #00ff99;
+            margin: 0 0 1.5rem;
+            text-shadow: 0 0 10px rgba(0, 255, 153, 0.5);
+        }
+        .newsletter form {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        .newsletter input {
+            padding: 0.75rem;
+            border: none;
+            border-radius: 5px;
+            width: 320px;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+        .newsletter button {
+            background: linear-gradient(45deg, #00ff99, #00ccff);
+            color: #000000;
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            box-shadow: 0 0 20px rgba(0, 255, 153, 0.5);
+        }
+        .newsletter button:hover {
+            box-shadow: 0 0 30px rgba(0, 255, 153, 1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+            .panorama-container {
+                height: 300px;
+            }
+        }
+        @media (max-width: 768px) {
+            .header-container {
+                flex-wrap: wrap;
+            }
+            nav ul {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
+            }
+            nav ul.active {
+                display: flex;
+            }
+            nav ul li {
+                margin: 1rem 0;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .dropdown:hover .dropdown-menu {
+                display: none;
+            }
+            .dropdown.active .dropdown-menu {
+                display: block;
+                position: static;
+            }
+            .hero {
+                height: 60vh;
+            }
+            .hero-overlay h2 {
+                font-size: 2.5rem;
+            }
+            .hero-overlay p {
+                font-size: 1rem;
+            }
+            .video-hero h2,
+            .gallery h2,
+            .panorama-section h2 {
+                font-size: 2.2rem;
+            }
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            .panorama-container {
+                height: 250px;
+            }
+            .newsletter form {
+                flex-direction: column;
+                align-items: center;
+            }
+            .newsletter input {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
 </head>
 <body>
     <header class="sticky-header">
         <div class="header-container">
-            <img src="logo/B2.jpg" alt="Ambururu Waterfalls Logo" class="logo">
-            <h1>Ambururu Waterfalls & Resort</h1>
+            <img src="logo/B2.jpg" alt="Ambururu Waterfalls Logo" class="logo" onerror="this.src='https://via.placeholder.com/80?text=Logo';">
+            <h1>Ambururu Waterfalls</h1>
             <nav aria-label="Main navigation">
                 <ul>
                     <li><a href="index.html">Home</a></li>
@@ -52,32 +630,34 @@
     <main>
         <!-- Hero Section -->
         <section class="hero">
+            <canvas id="three-canvas"></canvas>
             <div class="hero-overlay">
-                <h2>Explore Ambururu’s Beauty</h2>
-                <p>Dive into the breathtaking visuals of Siaya’s premier waterfall resort.</p>
-                <a href="#gallery" class="cta-button">View Gallery</a>
+                <h2>Feel the Joy of Ambururu!</h2>
+                <p>Explore vibrant visuals that capture the fun and magic of Siaya’s premier waterfall resort.</p>
+                <a href="#gallery" class="cta-button">Dive into the Fun</a>
             </div>
         </section>
         <!-- Video Showcase -->
-        <section class="gallery" role="region" aria-label="Gallery section">
-    <div class="video-hero">
-        <h2 class="video-title">Experience Ambururu Waterfalls</h2>
-        <div class="video-container">
-            <video controls poster="images/43.jpg" preload="none" aria-label="Video tour of Ambururu Waterfalls showcasing scenic views and dining">
-                <source src="images/41.mp4" type="video/mp4">
-                <track kind="captions" src="captions/41.vtt" srclang="en" label="English" default>
-                Your browser does not support the video tag.
-            </video>
-            <div class="video-overlay">
-                <span class="play-button"><i class="fas fa-play"></i></span>
-                <span class="waterfall-icon"><i class="fas fa-water"></i></span>
+        <section class="video-hero" role="region" aria-label="Video showcase section">
+            <div id="video-particles"></div>
+            <h2>Experience the Magic</h2>
+            <div class="video-container">
+                <video controls poster="images/43.jpg" preload="metadata" aria-label="Video tour of Ambururu Waterfalls showcasing scenic views and dining" onerror="this.poster='https://via.placeholder.com/900x506?text=Video+Poster';">
+                    <source src="images/41.mp4" type="video/mp4">
+                    <track kind="captions" src="captions/41.vtt" srclang="en" label="English" default>
+                    Your browser does not support the video tag.
+                </video>
+                <div class="video-overlay">
+                    <span class="play-button"><i class="fas fa-play"></i></span>
+                    <span class="waterfall-icon"><i class="fas fa-water"></i></span>
+                </div>
+                <p class="video-cta">Watch the Fun Unfold!</p>
             </div>
-            <p class="video-cta">Watch the Magic Unfold</p>
-        </div>
         </section>
         <!-- Gallery Section -->
         <section class="gallery" id="gallery">
-            <h2>Photo Gallery</h2>
+            <div id="gallery-particles"></div>
+            <h2>Moments of Joy</h2>
             <div class="gallery-filters">
                 <button data-filter="all" class="active">All</button>
                 <button data-filter="waterfalls">Waterfalls</button>
@@ -86,62 +666,78 @@
                 <button data-filter="events">Events</button>
             </div>
             <div class="gallery-grid">
-                <a href="images/1.jpg" data-fancybox="gallery" data-caption="Cascading Ambururu Waterfalls at sunrise" data-category="waterfalls">
-                    <img src="images/26.jpg" alt="Ambururu Waterfalls at sunrise" loading="lazy">
+                <a href="images/1.jpg" class="gallery-item" data-fancybox="gallery" data-caption="Cascading Ambururu Waterfalls at sunrise" data-category="waterfalls">
+                    <img src="images/26.jpg" alt="Ambururu Waterfalls at sunrise" loading="lazy" onerror="this.src='https://via.placeholder.com/320x250?text=Sunrise+Cascades';">
                     <div class="caption">Sunrise Cascades</div>
+                    <span class="emoji-overlay">🌅</span>
                 </a>
-                <a href="images/21.jpg" data-fancybox="gallery" data-caption="Majestic falls surrounded by lush greenery" data-category="waterfalls">
-                    <img src="images/19.jpg" alt="Majestic Ambururu Waterfalls" loading="lazy">
+                <a href="images/21.jpg" class="gallery-item" data-fancybox="gallery" data-caption="Majestic falls surrounded by lush greenery" data-category="waterfalls">
+                    <img src="images/19.jpg" alt="Majestic Ambururu Waterfalls" loading="lazy" onerror="this.src='https://via.placeholder.com/320x250?text=Lush+Falls';">
                     <div class="caption">Lush Falls</div>
+                    <span class="emoji-overlay">🌿</span>
                 </a>
-                <a href="images/39.jpg" data-fancybox="gallery" data-caption="Eco-luxury suite with waterfall view" data-category="resort">
-                    <img src="images/31.jpg" alt="Eco-luxury suite at Ambururu" loading="lazy">
+                <a href="images/39.jpg" class="gallery-item" data-fancybox="gallery" data-caption="Eco-luxury suite with waterfall view" data-category="resort">
+                    <img src="images/31.jpg" alt="Eco-luxury suite at Ambururu" loading="lazy" onerror="this.src='https://via.placeholder.com/320x250?text=Eco-Luxury+Suite';">
                     <div class="caption">Eco-Luxury Suite</div>
+                    <span class="emoji-overlay">🏡</span>
                 </a>
-                <a href="images/18.jpg" data-fancybox="gallery" data-caption="Infinity pool overlooking the falls" data-category="resort">
-                    <img src="images/2.jpg" alt="Infinity pool at Ambururu Resort" loading="lazy">
+                <a href="images/18.jpg" class="gallery-item" data-fancybox="gallery" data-caption="Infinity pool overlooking the falls" data-category="resort">
+                    <img src="images/2.jpg" alt="Infinity pool at Ambururu Resort" loading="lazy" onerror="this.src='https://via.placeholder.com/320x250?text=Infinity+Pool';">
                     <div class="caption">Infinity Pool</div>
+                    <span class="emoji-overlay">🏊</span>
                 </a>
-                <a href="images/27.jpg" data-fancybox="gallery" data-caption="Guests planting native trees" data-category="activities">
-                    <img src="images/28.jpg" alt="Tree planting activity at Ambururu" loading="lazy">
+                <a href="images/27.jpg" class="gallery-item" data-fancybox="gallery" data-caption="Guests planting native trees" data-category="activities">
+                    <img src="images/28.jpg" alt="Tree planting activity at Ambururu" loading="lazy" onerror="this.src='https://via.placeholder.com/320x250?text=Tree+Planting';">
                     <div class="caption">Tree Planting</div>
+                    <span class="emoji-overlay">🌳</span>
                 </a>
-                <a href="images/21.jpg" data-fancybox="gallery" data-caption="Scenic hiking trail near the falls" data-category="activities">
-                    <img src="images/4.jpg" alt="Hiking trail at Ambururu" loading="lazy">
+                <a href="images/21.jpg" class="gallery-item" data-fancybox="gallery" data-caption="Scenic hiking trail near the falls" data-category="activities">
+                    <img src="images/4.jpg" alt="Hiking trail at Ambururu" loading="lazy" onerror="this.src='https://via.placeholder.com/320x250?text=Hiking+Adventure';">
                     <div class="caption">Hiking Adventure</div>
+                    <span class="emoji-overlay">🥾</span>
                 </a>
-                <a href="images/25.jpg" data-fancybox="gallery" data-caption="Romantic wedding by the falls" data-category="events">
-                    <img src="images/40.jpg" alt="Wedding ceremony at Ambururu" loading="lazy">
+                <a href="images/25.jpg" class="gallery-item" data-fancybox="gallery" data-caption="Romantic wedding by the falls" data-category="events">
+                    <img src="images/40.jpg" alt="Wedding ceremony at Ambururu" loading="lazy" onerror="this.src='https://via.placeholder.com/320x250?text=Dream+Wedding';">
                     <div class="caption">Dream Wedding</div>
+                    <span class="emoji-overlay">💍</span>
                 </a>
-                <a href="images/8.jpg" data-fancybox="gallery" data-caption="Luo cultural festival celebration" data-category="events">
-                    <img src="images/12.jpg" alt="Luo cultural festival at Ambururu" loading="lazy">
+                <a href="images/8.jpg" class="gallery-item" data-fancybox="gallery" data-caption="Luo cultural festival celebration" data-category="events">
+                    <img src="images/12.jpg" alt="Luo cultural festival at Ambururu" loading="lazy" onerror="this.src='https://via.placeholder.com/320x250?text=Cultural+Festival';">
                     <div class="caption">Cultural Festival</div>
+                    <span class="emoji-overlay">🎉</span>
                 </a>
             </div>
         </section>
+        <!-- Interactive 360 Panorama Section -->
+        <section class="panorama-section">
+            <h2>Take a 360° Virtual Tour</h2>
+            <div class="panorama-container" id="panorama"></div>
+        </section>
         <!-- Share Your Moments -->
-        <section class="share-moments" style="background: linear-gradient(90deg, #56cc9d 0%, #3498db 100%); color: #fff; padding: 2.5rem 1rem; border-radius: 1.5rem; text-align: center; margin: 2rem 0; box-shadow: 0 4px 24px rgba(52,152,219,0.15);">
-            <h2 style="font-size: 2rem; font-weight: 800; margin-bottom: 1rem; letter-spacing: 1px; text-shadow: 1px 2px 8px rgba(0,0,0,0.18);">
-                Share Your Ambururu Moments
-            </h2>
-            <p style="font-size: 1.2rem; margin-bottom: 1.5rem; font-weight: 500;">
-                Tag us on 
-                <a href="https://www.instagram.com/ambururu1/" target="_blank" style="color:#fff; text-decoration:underline;"><i class="fab fa-instagram"></i> Instagram</a>, 
-                <a href="https://x.com/Ambururu_W" target="_blank" style="color:#fff; text-decoration:underline;"><i class="fab fa-twitter"></i> Twitter</a> and 
-                <a href="https://www.facebook.com/ambururu/" target="_blank" style="color:#fff; text-decoration:underline;"><i class="fab fa-facebook-f"></i> Facebook</a> 
-                with <span style="font-weight:bold; color:#ffeb3b;">#AmbururuMoments</span> to be featured in our gallery!
+        <section class="share-moments">
+            <h2>Share Your Ambururu Moments</h2>
+            <p>
+                Capture the fun and tag us on 
+                <a href="https://www.instagram.com/ambururu1/" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>, 
+                <a href="https://x.com/Ambururu_W" target="_blank"><i class="fab fa-x-twitter"></i> Twitter</a>, and 
+                <a href="https://www.facebook.com/ambururu/" target="_blank"><i class="fab fa-facebook-f"></i> Facebook</a> 
+                with <span>#AmbururuMoments</span> to be featured!
             </p>
-            <div style="font-size:2rem;">
-                <a href="https://www.instagram.com/ambururu1/" target="_blank" aria-label="Instagram" style="margin:0 1rem; color:#fff;"><i class="fab fa-instagram"></i></a>
-                <a href="https://x.com/Ambururu_W" target="_blank" aria-label="Twitter" style="margin:0 1rem; color:#fff;"><i class="fab fa-twitter"></i></a>
-                <a href="https://www.facebook.com/ambururu/" target="_blank" aria-label="Facebook" style="margin:0 1rem; color:#fff;"><i class="fab fa-facebook-f"></i></a>
+            <div>
+                <a href="https://www.instagram.com/ambururu1/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://x.com/Ambururu_W" target="_blank" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+                <a href="https://www.facebook.com/ambururu/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
             </div>
         </section>
     </main>
     <footer>
         <div class="footer-container">
             <p>© 2025 Ambururu Waterfalls. All rights reserved.</p>
+            <div class="social-links">
+                <a href="https://www.facebook.com/ambururu/" target="_blank" aria-label="Visit our Facebook page"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://x.com/Ambururu_W" target="_blank" aria-label="Visit our Twitter profile"><i class="fab fa-x-twitter"></i></a>
+                <a href="https://www.instagram.com/ambururu1/" target="_blank" aria-label="Visit our Instagram page"><i class="fab fa-instagram"></i></a>
+            </div>
             <div class="newsletter">
                 <h4>Stay Updated</h4>
                 <form id="newsletter-form" action="https://formspree.io/f/your-form-id" method="POST">
@@ -153,6 +749,218 @@
     </footer>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.36/dist/fancybox/fancybox.umd.js"></script>
-    <script src="js/script.js"></script>
+    <script>
+        // Menu Toggle
+        $(document).ready(function() {
+            $('.menu-toggle').on('click', function() {
+                $('nav ul').toggleClass('active');
+                const expanded = $(this).attr('aria-expanded') === 'true' ? 'false' : 'true';
+                $(this).attr('aria-expanded', expanded);
+            });
+
+            // Dropdown Toggle on Mobile
+            $('.dropdown').on('click', function() {
+                if ($(window).width() < 768) {
+                    $(this).toggleClass('active');
+                }
+            });
+
+            // Fancybox Initialization
+            Fancybox.bind('[data-fancybox="gallery"]', {
+                caption: function (fancybox, carousel, slide) {
+                    return slide.$trigger.dataset.caption || '';
+                },
+                keyboard: {
+                    Escape: "close",
+                    Delete: "close",
+                    Backspace: "close",
+                    PageUp: "next",
+                    PageDown: "prev",
+                    ArrowUp: "next",
+                    ArrowDown: "prev",
+                    ArrowRight: "next",
+                    ArrowLeft: "prev",
+                }
+            });
+
+            // Gallery Filters
+            $('.gallery-filters button').on('click', function() {
+                const filter = $(this).data('filter');
+                $('.gallery-filters button').removeClass('active');
+                $(this).addClass('active');
+
+                if (filter === 'all') {
+                    $('.gallery-item').show();
+                } else {
+                    $('.gallery-item').hide();
+                    $(`.gallery-item[data-category="${filter}"]`).show();
+                }
+            });
+
+            // Video Play Button
+            $('.play-button').on('click', function() {
+                const video = $(this).closest('.video-container').find('video')[0];
+                video.play();
+                $(this).closest('.video-overlay').fadeOut();
+            });
+
+            // Newsletter Form Submission
+            $('#newsletter-form').on('submit', function(e) {
+                e.preventDefault();
+                const email = $(this).find('input[name="email"]').val();
+                if (email) {
+                    this.animate([
+                        { transform: 'scale(1)', opacity: 1 },
+                        { transform: 'scale(0.95)', opacity: 0.7 },
+                        { transform: 'scale(1)', opacity: 1 }
+                    ], { duration: 500, easing: 'ease-in-out' });
+                    alert('Thank you for subscribing!');
+                    $(this)[0].reset();
+                }
+            });
+
+            // Debug Missing Assets
+            $('img').on('error', function() {
+                console.log(`Image not found: ${this.src}`);
+            });
+        });
+
+        // 3D Hero Background with Three.js
+        const canvas = document.getElementById('three-canvas');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+
+        // Particle System for Festive Effect
+        const particleCount = 5000;
+        const particles = new THREE.BufferGeometry();
+        const positions = new Float32Array(particleCount * 3);
+        const velocities = new Float32Array(particleCount * 3);
+        const colors = new Float32Array(particleCount * 3);
+        for (let i = 0; i < particleCount; i++) {
+            positions[i * 3] = Math.random() * 100 - 50;
+            positions[i * 3 + 1] = Math.random() * 100;
+            positions[i * 3 + 2] = Math.random() * 100 - 50;
+            velocities[i * 3] = 0;
+            velocities[i * 3 + 1] = -Math.random() * 2 - 1;
+            velocities[i * 3 + 2] = 0;
+            const color = Math.random();
+            if (color < 0.33) {
+                colors[i * 3] = 0; colors[i * 3 + 1] = 1; colors[i * 3 + 2] = 0.6; // Neon Green
+            } else if (color < 0.66) {
+                colors[i * 3] = 0; colors[i * 3 + 1] = 0.8; colors[i * 3 + 2] = 1; // Cyan
+            } else {
+                colors[i * 3] = 1; colors[i * 3 + 1] = 1; colors[i * 3 + 2] = 0.2; // Yellow
+            }
+        }
+        particles.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        particles.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+        const particleMaterial = new THREE.PointsMaterial({
+            size: 0.5,
+            vertexColors: true,
+            transparent: true,
+            opacity: 0.7
+        });
+        const particleSystem = new THREE.Points(particles, particleMaterial);
+        scene.add(particleSystem);
+
+        // Lighting
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+        scene.add(ambientLight);
+        const pointLight = new THREE.PointLight(0x00ff99, 1, 100);
+        pointLight.position.set(0, 50, 50);
+        scene.add(pointLight);
+
+        camera.position.z = 50;
+
+        function animate() {
+            requestAnimationFrame(animate);
+            const positions = particleSystem.geometry.attributes.position.array;
+            for (let i = 0; i < particleCount; i++) {
+                positions[i * 3 + 1] += velocities[i * 3 + 1];
+                if (positions[i * 3 + 1] < -50) {
+                    positions[i * 3 + 1] = 50;
+                }
+            }
+            particleSystem.geometry.attributes.position.needsUpdate = true;
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // Particles.js for Video and Gallery Sections
+        particlesJS('video-particles', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: '#00ff99' },
+                shape: { type: 'circle' },
+                opacity: { value: 0.5, random: true },
+                size: { value: 3, random: true },
+                line_linked: { enable: true, distance: 150, color: '#00ccff', opacity: 0.4, width: 1 },
+                move: { enable: true, speed: 2, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' }, resize: true },
+                modes: { repulse: { distance: 100, duration: 0.4 }, push: { particles_nb: 4 } }
+            },
+            retina_detect: true
+        });
+
+        particlesJS('gallery-particles', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: '#00ff99' },
+                shape: { type: 'circle' },
+                opacity: { value: 0.5, random: true },
+                size: { value: 3, random: true },
+                line_linked: { enable: true, distance: 150, color: '#00ccff', opacity: 0.4, width: 1 },
+                move: { enable: true, speed: 2, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' }, resize: true },
+                modes: { repulse: { distance: 100, duration: 0.4 }, push: { particles_nb: 4 } }
+            },
+            retina_detect: true
+        });
+
+        // GSAP Scroll Animations for Gallery Items
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.utils.toArray('.gallery-item').forEach((item, index) => {
+            gsap.from(item, {
+                opacity: 0,
+                scale: 0.8,
+                y: 50,
+                duration: 1.5,
+                ease: 'back.out(1.7)',
+                scrollTrigger: {
+                    trigger: item,
+                    start: 'top 80%',
+                    end: 'bottom 60%',
+                    toggleActions: 'play none none reverse'
+                },
+                delay: index * 0.1
+            });
+        });
+
+        // Pannellum 360 Panorama
+        pannellum.viewer('panorama', {
+            type: 'equirectangular',
+            panorama: 'images/panorama.jpg',
+            autoLoad: true,
+            autoRotate: -2,
+            showControls: false,
+            onError: function() {
+                document.getElementById('panorama').innerHTML = '<p>Panorama failed to load. Please try again later.</p>';
+            }
+        });
+    </script>
 </body>
 </html>

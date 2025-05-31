@@ -3,1581 +3,880 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Book your stay at Ambururu Waterfalls & Resort in Siaya, Kenya with real-time availability, 360° room tours, AI suggestions, and secure payments (M-Pesa, PayPal, pay on arrival).">
-    <meta name="keywords" content="Ambururu Waterfalls, Siaya, Kenya, booking, resort, M-Pesa, PayPal, 360 tour, secure, conservation">
-    <meta name="author" content="Ambururu Waterfalls Team">
-    <title>Book Your Stay - Ambururu Waterfalls</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous">
-    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css" rel="stylesheet" integrity="sha256-7oJ3CkU3g3Kuq+ZuO9H2S4zSFU2gB/gXF4T0q3W+acE=" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css" integrity="sha256-4v4uC+81sCA3Y3dEQr+CzD+twq+ogz3F0zT0q6L3q3Y=" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <meta name="description" content="Book your eco-luxe stay at Ambururu Waterfalls Resort with a cyberpunk, AI-powered interface.">
+    <title>Booking - Ambururu Waterfalls Resort</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --mocha-mousse: #8C6F47; /* Pantone Mocha Mousse for 2025 */
-            --soft-green: #4CAF50; /* KWS-inspired vibrant green */
-            --earthy-brown: #3E2F1F;
-            --coral: #FF6F61;
-            --aqua-blue: #26A69A; /* Modern teal */
-            --light-cream: #F8F1E9;
-            --text-dark: #1A1A1A;
-            --text-light: #FFFFFF;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Roboto', sans-serif;
-        }
-
         body {
-            background-color: var(--light-cream);
-            color: var(--text-dark);
-            line-height: 1.6;
+            font-family: 'Roboto', sans-serif;
+            color: #ffffff;
+            background: #000;
+            margin: 0;
+            overflow-x: hidden;
         }
-
-        /* Header */
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 2rem;
-            background-color: var(--mocha-mousse);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .header-brand {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .logo {
-            width: 50px;
-            height: auto;
-        }
-
-        .header-brand h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            font-weight: 900;
-            color: var(--text-light);
-        }
-
-        .search-bar {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .search-bar input {
-            padding: 0.5rem;
-            border: 1px solid var(--soft-green);
-            border-radius: 5px;
-        }
-
-        .search-bar button {
-            padding: 0.5rem;
-            background-color: var(--aqua-blue);
-            color: var(--text-light);
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 1.5rem;
-        }
-
-        nav ul li a {
-            color: var(--text-light);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        nav ul li a:hover,
-        nav ul li a.active {
-            color: var(--aqua-blue);
-        }
-
-        .dropdown {
-            position: relative;
-        }
-
-        .dropdown-menu {
-            display: none;
-            position: absolute;
-            background-color: var(--soft-green);
-            padding: 0.5rem;
-            border-radius: 5px;
-            top: 100%;
-            left: 0;
-        }
-
-        .dropdown:hover .dropdown-menu {
-            display: block;
-        }
-
-        .menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--text-light);
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        /* Modals */
-        .modal {
+        #three-canvas {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-        }
-
-        .modal-content {
-            background: var(--light-cream);
-            padding: 2rem;
-            border-radius: 10px;
-            text-align: center;
-            position: relative;
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            cursor: pointer;
-            font-size: 1.5rem;
-        }
-
-        /* Hero Section */
-        .hero {
-            position: relative;
-            height: 80vh;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
-
-        .hero-video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
             z-index: -1;
         }
-
-        .particles-bg {
-            position: absolute;
+        .sticky-header {
+            position: fixed;
             top: 0;
-            left: 0;
             width: 100%;
-            height: 100%;
-            z-index: -1;
-        }
-
-        .hero-overlay {
-            background: rgba(0, 0, 0, 0.4);
-            padding: 2rem;
-            border-radius: 10px;
-            color: var(--text-light);
-        }
-
-        .hero-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 3rem;
-            font-weight: 900;
-            margin-bottom: 1rem;
-        }
-
-        .hero-subtitle {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .urgency-timer,
-        .live-counter {
-            margin: 0.5rem 0;
-            font-size: 1.1rem;
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 1rem 2rem;
-            background-color: var(--aqua-blue);
-            color: var(--text-light);
-            text-decoration: none;
-            border-radius: 5px;
-            margin: 0.5rem;
-            transition: transform 0.3s, background-color 0.3s;
-        }
-
-        .cta-button:hover {
-            transform: scale(1.05);
-            background-color: var(--coral);
-        }
-
-        /* Testimonials */
-        .testimonials {
-            padding: 3rem 2rem;
-            background-color: var(--soft-green);
-            text-align: center;
-        }
-
-        .testimonials h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            font-weight: 900;
-            margin-bottom: 2rem;
-            color: var(--earthy-brown);
-        }
-
-        .testimonial-slider {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .testimonial {
-            display: none;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
             padding: 1rem;
         }
-
-        .testimonial p {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .author {
-            font-style: italic;
-            color: var(--text-dark);
-        }
-
-        .trust-badges {
-            margin-top: 2rem;
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
             display: flex;
-            justify-content: center;
-            gap: 1rem;
+            justify-content: space-between;
+            align-items: center;
         }
-
-        .badge {
-            width: 50px;
-            height: auto;
+        .brand h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00ff99;
+            font-size: 2rem;
+            text-shadow: 0 0 15px #00ff99;
         }
-
-        /* Booking Section */
-        .booking {
-            padding: 3rem 2rem;
-            background-color: var(--light-cream);
+        nav ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
         }
-
-        .booking h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            font-weight: 900;
+        nav ul li {
+            margin-left: 2rem;
+        }
+        nav ul li a {
+            color: #00ff99;
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+        }
+        nav ul li a:hover, nav ul li a.active {
+            color: #00ccff;
+            text-shadow: 0 0 20px #00ccff;
+        }
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #00ff99;
+            font-size: 1.5rem;
+        }
+        .hero {
+            position: relative;
+            height: 100vh;
             text-align: center;
-            margin-bottom: 2rem;
-            color: var(--earthy-brown);
         }
-
+        .hero-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.6);
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 0 40px #00ff99;
+        }
+        .hero-overlay h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 5rem;
+            color: #00ff99;
+            text-shadow: 0 0 30px #00ff99;
+            animation: hologram 2s infinite alternate;
+        }
+        @keyframes hologram {
+            0% { opacity: 0.7; transform: translateY(0); }
+            100% { opacity: 1; transform: translateY(-15px); }
+        }
+        .cta-button {
+            background: linear-gradient(45deg, #00ff99, #00ccff);
+            color: #000;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-family: 'Orbitron', sans-serif;
+            cursor: pointer;
+            box-shadow: 0 0 20px #00ff99;
+            transition: transform 0.3s;
+        }
+        .cta-button:hover {
+            transform: scale(1.15);
+            box-shadow: 0 0 30px #00ccff;
+        }
+        .secondary {
+            background: none;
+            border: 2px solid #00ff99;
+            color: #00ff99;
+        }
+        .booking-section {
+            max-width: 1000px;
+            margin: 5rem auto;
+            padding: 3rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 40px #00ff99;
+            position: relative;
+            z-index: 10;
+        }
         .progress-bar {
             display: flex;
             justify-content: space-between;
             margin-bottom: 2rem;
-            position: relative;
         }
-
-        .progress-bar::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: var(--soft-green);
-            z-index: -1;
-        }
-
-        .progress-bar .progress {
-            position: absolute;
-            top: 50%;
-            left: 0;
-            height: 4px;
-            background: var(--aqua-blue);
-            transition: width 0.5s;
-        }
-
-        .progress-step {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 25%;
-            text-align: center;
-            color: var(--text-dark);
-            cursor: pointer;
-        }
-
-        .progress-step.active {
-            color: var(--aqua-blue);
-        }
-
-        .step-check {
-            display: none;
-        }
-
-        .step-check.visible {
-            display: inline-block;
-            color: var(--aqua-blue);
-        }
-
-        .booking-container {
-            display: flex;
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-            position: relative;
-        }
-
-        .booking-container::before {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: -10px;
-            width: 50px;
-            height: 50px;
-            background: var(--coral);
-            transform: rotate(45deg);
-            z-index: -1;
-        }
-
-        #booking-form-element {
-            flex: 2;
-            background: var(--light-cream);
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .form-step {
-            display: none;
-        }
-
-        .form-step.active {
-            display: block;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid var(--soft-green);
-            border-radius: 5px;
-            font-size: 1rem;
-        }
-
-        .ai-suggestion,
-        .availability-status,
-        .form-error,
-        .form-success {
-            margin-top: 0.5rem;
-            font-size: 0.9rem;
-        }
-
-        .room-previews {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .room-preview {
+        .step {
             flex: 1;
             text-align: center;
             padding: 1rem;
-            border: 1px solid var(--soft-green);
-            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: #00ccff;
+            font-family: 'Orbitron', sans-serif;
+            box-shadow: 0 0 10px #00ff99;
         }
-
-        .room-canvas {
+        .step.active {
+            background: linear-gradient(45deg, #00ff99, #00ccff);
+            color: #000;
+        }
+        .form-step {
+            display: none;
+        }
+        .form-step.active {
+            display: block;
+        }
+        .form-group {
+            margin-bottom: 1rem;
+            position: relative;
+        }
+        .form-group label {
+            display: block;
+            color: #00ccff;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 5px #00ccff;
+        }
+        .form-group input, .form-group select, .form-group textarea {
             width: 100%;
-            height: 100px;
-        }
-
-        .view-360,
-        .view-ar {
-            margin: 0.5rem;
-            padding: 0.5rem 1rem;
-            background-color: var(--aqua-blue);
-            color: var(--text-light);
+            padding: 1rem;
             border: none;
             border-radius: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            box-shadow: 0 0 10px #00ff99;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            box-shadow: 0 0 15px #00ccff;
+        }
+        .room-options {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        .room-option {
+            flex: 1 1 45%;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .room-option:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 25px #00ff99;
+        }
+        .room-option.selected {
+            border: 2px solid #00ff99;
+        }
+        .room-option img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        .ar-button, .vr-button {
+            background: #00ccff;
+            color: #000;
+            padding: 0.5rem;
+            border-radius: 5px;
+            margin-top: 0.5rem;
             cursor: pointer;
         }
-
-        .payment-details {
-            margin-bottom: 1rem;
-        }
-
-        .discount-wheel {
-            text-align: center;
-            margin: 1rem 0;
-        }
-
-        .booking-summary {
-            flex: 1;
-            background: var(--soft-green);
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .booking-summary h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            font-weight: 900;
-            margin-bottom: 1rem;
-        }
-
-        .booking-summary p {
-            margin-bottom: 0.5rem;
-        }
-
-        /* Map Section */
-        .map-section {
-            padding: 3rem 2rem;
-            background-color: var(--light-cream);
-            text-align: center;
-        }
-
-        .map-section h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            font-weight: 900;
-            margin-bottom: 2rem;
-            color: var(--earthy-brown);
-        }
-
-        #map {
-            height: 400px;
+        .payment-button {
             width: 100%;
-            max-width: 800px;
-            margin: 0 auto;
-            border-radius: 10px;
-        }
-
-        /* Conservation Section */
-        .conservation {
-            padding: 3rem 2rem;
-            background-color: var(--soft-green);
-            text-align: center;
-        }
-
-        .conservation h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            font-weight: 900;
-            margin-bottom: 2rem;
-            color: var(--earthy-brown);
-        }
-
-        .conservation-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .conservation-content p {
             margin-bottom: 1rem;
-            font-size: 1.1rem;
         }
-
-        /* Footer */
-        .footer-container {
-            padding: 2rem;
-            background-color: var(--mocha-mousse);
-            color: var(--text-light);
-            text-align: center;
-        }
-
-        .social-links {
-            margin: 1rem 0;
-        }
-
-        .social-links a {
-            color: var(--text-light);
-            margin: 0 0.5rem;
-            font-size: 1.5rem;
-        }
-
-        .newsletter form {
+        .form-buttons {
             display: flex;
-            justify-content: center;
-            gap: 0.5rem;
-            margin-top: 1rem;
+            justify-content: space-between;
+            margin-top: 2rem;
         }
-
-        .newsletter input {
-            padding: 0.5rem;
-            border: 1px solid var(--soft-green);
-            border-radius: 5px;
+        #booking-summary {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 0 15px #00ff99;
         }
-
-        /* Chatbot */
-        #chatbot-container {
+        #confirmation-modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.9);
+            padding: 3rem;
+            border-radius: 15px;
+            z-index: 1002;
+            max-width: 600px;
+            color: #ffffff;
+            box-shadow: 0 0 50px #00ff99;
+        }
+        #modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1001;
+        }
+        .virtual-assistant {
             position: fixed;
             bottom: 20px;
             right: 20px;
             z-index: 1000;
         }
-
-        /* Responsive Design */
+        .assistant-orb {
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, #00ff99, #00ccff);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 30px #00ff99;
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        .assistant-tooltip {
+            display: none;
+            position: absolute;
+            bottom: 100px;
+            right: 0;
+            background: rgba(0, 0, 0, 0.8);
+            color: #00ff99;
+            padding: 1rem;
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+            box-shadow: 0 0 20px #00ff99;
+        }
+        .assistant-orb:hover .assistant-tooltip {
+            display: block;
+        }
+        #currency-selector {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: #00ff99;
+            border-radius: 5px;
+            box-shadow: 0 0 10px #00ff99;
+        }
+        .x-feed {
+            max-width: 600px;
+            margin: 2rem auto;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 0 20px #00ff99;
+        }
+        .x-post {
+            padding: 1rem;
+            border-bottom: 1px solid #00ff99;
+        }
         @media (max-width: 768px) {
-            .header-container {
-                flex-wrap: wrap;
-                padding: 1rem;
-            }
-
             nav ul {
                 display: none;
                 flex-direction: column;
-                width: 100%;
-                background: var(--mocha-mousse);
-                padding: 1rem;
-                position: absolute;
-                top: 100%;
-                left: 0;
             }
-
             nav ul.active {
                 display: flex;
             }
-
             .menu-toggle {
                 display: block;
             }
-
-            .booking-container {
+            .progress-bar {
                 flex-direction: column;
                 gap: 1rem;
             }
-
-            .booking-summary {
-                order: -1;
-            }
-
-            .hero-title {
-                font-size: 1.5rem;
-            }
-
-            .hero-subtitle {
-                font-size: 1rem;
-            }
-
-            .hero-video {
-                object-fit: cover;
-            }
-
-            .room-previews {
+            .room-options {
                 flex-direction: column;
             }
-
-            .form-group input,
-            .form-group select,
-            .form-group textarea {
-                font-size: 0.9rem;
+            .room-option {
+                width: 100%;
             }
-
-            .cta-button {
-                padding: 0.75rem 1.5rem;
-                font-size: 0.9rem;
+            .hero-overlay h2 {
+                font-size: 3rem;
             }
         }
     </style>
 </head>
 <body>
+    <canvas id="three-canvas"></canvas>
     <header class="sticky-header">
         <div class="header-container">
-            <div class="header-brand">
-                <img src="logo/B2.jpg" alt="Ambururu Waterfalls Logo" class="logo" loading="lazy">
-                <h1>Ambururu Waterfalls</h1>
-            </div>
-            <div class="search-bar">
-                <input type="text" placeholder="Search..." aria-label="Search site">
-                <button type="submit" aria-label="Search"><i class="fas fa-search"></i></button>
-            </div>
-            <nav id="main-nav" aria-label="Main navigation">
+            <div class="brand"><h1>Ambururu Waterfalls</h1></div>
+            <nav id="main-nav">
                 <ul>
                     <li><a href="index.html">Home</a></li>
-                    <li class="dropdown">
-                        <a href="about.html">About <i class="fas fa-chevron-down"></i></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="about.html#history">History</a></li>
-                            <li><a href="about.html#location">Location</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="gallery.html">Gallery</a></li>
-                    <li class="dropdown">
-                        <a href="activities.html">Activities <i class="fas fa-chevron-down"></i></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="activities.html#swimming">Swimming</a></li>
-                            <li><a href="activities.html#hiking">Hiking</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="accommodations.html">Accommodations</a></li>
-                    <li><a href="dining.html">Dining</a></li>
-                    <li><a href="events.html">Events</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="booking.html" class="active" aria-current="page">Book Now</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="booking.html" class="active">Book Now</a></li>
                 </ul>
             </nav>
-            <button class="menu-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
-        </div>
-        <div id="loading-modal" class="modal" style="display:none;">
-            <div class="modal-content">
-                <i class="fas fa-spinner fa-spin"></i> Processing...
-            </div>
-        </div>
-        <div id="confirmation-modal" class="modal" style="display:none;">
-            <div class="modal-content">
-                <span class="modal-close" onclick="$('#confirmation-modal').hide();">×</span>
-                <h3>Booking Confirmed!</h3>
-                <p>Thank you for booking with Ambururu Waterfalls. You’ve earned <span id="loyalty-points">50</span> loyalty points!</p>
-                <button onclick="$('#confirmation-modal').hide();">Close</button>
-            </div>
-        </div>
-        <div id="360-modal" class="modal" style="display:none;">
-            <div class="modal-content">
-                <span class="modal-close" onclick="$('#360-modal').hide();">×</span>
-                <div id="pannellum-viewer" style="width:100%;height:500px;"></div>
-            </div>
+            <button class="menu-toggle" aria-label="Toggle navigation"><i class="fas fa-bars"></i></button>
         </div>
     </header>
 
-    <main>
-        <section class="hero parallax" aria-label="Booking hero section">
-            <div id="particles-js" class="particles-bg"></div>
-            <video class="hero-video" autoplay muted loop playsinline preload="metadata">
-                <source src="images/41.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <div class="hero-overlay aurora-bg">
-                <h2 class="hero-title">Your Dream Getaway Awaits</h2>
-                <p class="hero-subtitle" id="dynamic-subtitle">Book now for an unforgettable experience!</p>
-                <div class="urgency-timer">
-                    <p>Special Offer: Book within <span id="countdown">24:00:00</span> for 15% off!</p>
-                </div>
-                <div class="live-counter">
-                    <p><i class="fas fa-users"></i> <span id="booking-counter">127</span> bookings this week!</p>
-                </div>
-                <a href="#booking-wizard" class="cta-button pulse">Start Booking</a>
-                <a href="#360-modal" class="cta-button" onclick="$('#360-modal').fadeIn(300);">Explore 360° Tour</a>
-            </div>
-        </section>
+    <section class="hero">
+        <div class="hero-overlay">
+            <h2>Cyber-Eco Paradise</h2>
+            <p>Book with AI, AR, and blockchain tech</p>
+            <a href="#booking" class="cta-button">Book Now</a>
+            <a href="#vr-tour" class="cta-button secondary">VR Tour</a>
+        </div>
+    </section>
 
-        <section class="testimonials">
-            <h2>Guest Experiences</h2>
-            <div class="testimonial-slider">
-                <div class="testimonial">
-                    <p>"A magical escape! The falls and luxurious rooms were beyond our expectations."</p>
-                    <p class="author">– Jane M., Nairobi</p>
-                </div>
-                <div class="testimonial">
-                    <p>"Booking was seamless, and the staff made our stay unforgettable. Highly recommend!"</p>
-                    <p class="author">– David K., Mombasa</p>
-                </div>
-                <div class="testimonial">
-                    <p>"The perfect getaway! Stunning views, amazing food, and top-notch service."</p>
-                    <p class="author">– Sarah W., Kisumu</p>
-                </div>
-            </div>
-            <div class="trust-badges">
-                <img src="logo/B5.jpg" alt="Secure booking badge" class="badge" loading="lazy">
-                <img src="logo/B4.jpg" alt="Satisfaction guarantee badge" class="badge" loading="lazy">
-                <img src="logo/B3.jpg" alt="PayPal verified badge" class="badge" loading="lazy">
-            </div>
-        </section>
-
-        <section class="booking" id="booking-wizard">
-            <h2>Book Your Stay</h2>
-            <div class="progress-bar">
-                <div class="progress" style="width: 25%;"></div>
-                <div class="progress-step active" data-step="1" title="Select your dates"><i class="fas fa-calendar"></i> Dates <span class="step-check"><i class="fas fa-check"></i></span></div>
-                <div class="progress-step" data-step="2" title="Choose your room"><i class="fas fa-bed"></i> Room <span class="step-check"><i class="fas fa-check"></i></span></div>
-                <div class="progress-step" data-step="3" title="Enter your details"><i class="fas fa-user"></i> Details <span class="step-check"><i class="fas fa-check"></i></span></div>
-                <div class="progress-step" data-step="4" title="Complete payment"><i class="fas fa-credit-card"></i> Payment <span class="step-check"><i class="fas fa-check"></i></span></div>
-            </div>
-            <div class="booking-container">
-                <form id="booking-form-element" action="https://formspree.io/f/xbloeqdy" method="POST" class="animated-form">
-                    <input type="hidden" id="booking-id" name="booking-id">
-                    <div class="form-step active" data-step="1">
-                        <div id="availability-calendar"></div>
-                        <div class="form-group">
-                            <label for="checkin">Check-in Date</label>
-                            <input type="date" id="checkin" name="checkin" required aria-label="Check-in date" title="Select your check-in date">
-                        </div>
-                        <div class="form-group">
-                            <label for="checkout">Check-out Date</label>
-                            <input type="date" id="checkout" name="checkout" required aria-label="Check-out date" title="Select your check-out date">
-                        </div>
-                        <div class="form-group">
-                            <label for="guests">Number of Guests</label>
-                            <select id="guests" name="guests" required aria-label="Number of guests" title="Select number of guests">
-                                <option value="" disabled selected>Select guests</option>
-                                <option value="1">1 Guest</option>
-                                <option value="2">2 Guests</option>
-                                <option value="3">3 Guests</option>
-                                <option value="4">4 Guests</option>
-                            </select>
-                        </div>
-                        <p id="ai-suggestion" class="ai-suggestion"></p>
-                        <p id="step-error" class="form-error" style="display:none;" aria-live="polite"></p>
-                        <button type="button" class="cta-button next-step" data-next="2">Next</button>
-                    </div>
-                    <div class="form-step" data-step="2">
-                        <div class="room-previews">
-                            <div class="room-preview" data-room="standard">
-                                <div class="room-canvas" id="standard-canvas"></div>
-                                <h3>Standard Room</h3>
-                                <p>$100/night</p>
-                                <button type="button" class="view-360" data-panorama="images/standard-360.jpg">View 360° Tour</button>
-                                <button type="button" class="view-ar" data-room="standard">AR Preview</button>
-                            </div>
-                            <div class="room-preview" data-room="deluxe">
-                                <div class="room-canvas" id="deluxe-canvas"></div>
-                                <h3>Deluxe Room</h3>
-                                <p>$150/night</p>
-                                <button type="button" class="view-360" data-panorama="images/deluxe-360.jpg">View 360° Tour</button>
-                                <button type="button" class="view-ar" data-room="deluxe">AR Preview</button>
-                            </div>
-                            <div class="room-preview" data-room="suite">
-                                <div class="room-canvas" id="suite-canvas"></div>
-                                <h3>Suite</h3>
-                                <p>$200/night</p>
-                                <button type="button" class="view-360" data-panorama="images/suite-360.jpg">View 360° Tour</button>
-                                <button type="button" class="view-ar" data-room="suite">AR Preview</button>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="room">Select Room Type</label>
-                            <select id="room" name="room" required aria-label="Room type" title="Select your room type">
-                                <option value="" disabled selected>Select room</option>
-                                <option value="standard">Standard ($100/night)</option>
-                                <option value="deluxe">Deluxe ($150/night)</option>
-                                <option value="suite">Suite ($200/night)</option>
-                            </select>
-                        </div>
-                        <p id="availability-status" class="availability-status" aria-live="polite"></p>
-                        <button type="button" class="cta-button prev-step" data-prev="1">Back</button>
-                        <button type="button" class="cta-button next-step" data-next="3">Next</button>
-                    </div>
-                    <div class="form-step" data-step="3">
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" name="name" required aria-label="Your name" title="Enter your full name">
-                            <button type="button" class="voice-input" data-target="name" aria-label="Voice input for name"><i class="fas fa-microphone"></i></button>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required aria-label="Your email" title="Enter your email address">
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Phone</label>
-                            <input type="tel" id="phone" name="phone" required aria-label="Your phone number" title="Enter your phone number">
-                            <button type="button" class="voice-input" data-target="phone" aria-label="Voice input for phone"><i class="fas fa-microphone"></i></button>
-                        </div>
-                        <div class="form-group">
-                            <label for="requests">Special Requests</label>
-                            <textarea id="requests" name="requests" rows="3" aria-label="Special requests" title="Enter any special requests"></textarea>
-                        </div>
-                        <button type="button" class="cta-button prev-step" data-prev="2">Back</button>
-                        <button type="button" class="cta-button next-step" data-next="4">Next</button>
-                    </div>
-                    <div class="form-step" data-step="4">
-                        <p id="total-cost" class="total-cost" aria-live="polite"></p>
-                        <div class="form-group">
-                            <label for="payment-method">Payment Method</label>
-                            <select id="payment-method" name="payment-method" required aria-label="Payment method" title="Select payment method">
-                                <option value="" disabled selected>Select payment method</option>
-                                <option value="mpesa">M-Pesa</option>
-                                <option value="paypal">PayPal</option>
-                                <option value="on-arrival">Pay on Arrival</option>
-                            </select>
-                        </div>
-                        <div id="mpesa-details" class="payment-details" style="display:none;">
-                            <p>Pay via M-Pesa to: <strong>+254720215511</strong></p>
-                            <button type="button" id="initiate-mpesa" class="cta-button">Initiate M-Pesa Payment</button>
-                            <p>Enter Transaction ID (after payment):</p>
-                            <input type="text" id="mpesa-transaction-id" name="transaction-id" aria-label="M-Pesa transaction ID" title="Enter M-Pesa transaction ID">
-                        </div>
-                        <div id="paypal-button-container" class="payment-details" style="display:none;"></div>
-                        <div id="on-arrival-details" class="payment-details" style="display:none;">
-                            <p>Payment will be processed during check-in at Ambururu Waterfalls.</p>
-                        </div>
-                        <div class="trust-badges payment-badges">
-                            <img src="logo/B5.jpg" alt="Secure booking badge" class="badge" loading="lazy">
-                            <img src="logo/B4.jpg" alt="Satisfaction guarantee badge" class="badge" loading="lazy">
-                            <img src="logo/B3.jpg" alt="PayPal verified badge" class="badge" loading="lazy">
-                        </div>
-                        <div class="discount-wheel">
-                            <canvas id="discount-wheel" width="200" height="200" aria-label="Spin for a discount"></canvas>
-                            <button type="button" id="spin-wheel" class="cta-button">Spin for a Discount!</button>
-                            <p id="discount-result" class="discount-result" aria-live="polite"></p>
-                        </div>
-                        <button type="button" class="cta-button prev-step" data-prev="3">Back</button>
-                        <button type="submit" class="cta-button">Confirm Reservation</button>
-                        <p id="form-error" class="form-error" style="display:none;" aria-live="polite"></p>
-                        <p id="form-success" class="form-success" style="display:none;" aria-live="alert">Booking confirmed successfully!</p>
-                    </div>
-                </form>
-                <aside class="booking-summary">
-                    <h3>Your Reservation</h3>
-                    <p><strong>Check-in:</strong> <span id="summary-checkin">-</span></p>
-                    <p><strong>Check-out:</strong> <span id="summary-checkout">-</span></p>
-                    <p><strong>Guests:</strong> <span id="summary-guests">-</span></p>
-                    <p><strong>Room:</strong> <span id="summary-room">-</span></p>
-                    <p><strong>Total:</strong> <span id="summary-total">-</span></p>
-                </aside>
-            </div>
-        </section>
-
-        <section class="map-section">
-            <h2>Find Us</h2>
-            <div id="map"></div>
-        </section>
-
-        <section class="conservation">
-            <h2>Our Commitment to Conservation</h2>
-            <div class="conservation-content">
-                <p>Ambururu Waterfalls is dedicated to preserving the natural beauty of Siaya, Kenya. We work closely with local communities and conservation groups to protect the waterfall and its surrounding ecosystem.</p>
-                <p>Our initiatives include reforestation projects, wildlife protection programs, and sustainable tourism practices. By choosing to stay with us, you’re contributing to these efforts and helping us ensure that future generations can enjoy this natural wonder.</p>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="footer-container">
-            <p>© 2025 Ambururu Waterfalls. All rights reserved.</p>
-            <div class="social-links">
-                <a href="https://www.facebook.com/ambururu/" target="_blank" aria-label="Visit Ambururu Waterfalls on Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://x.com/Ambururu_W" target="_blank" aria-label="Visit Ambururu Waterfalls on X"><i class="fab fa-x-twitter"></i></a>
-            </div>
-            <div class="newsletter">
-                <h4>Stay Updated</h4>
-                <form id="newsletter-form" action="https://formspree.io/f/xbloeqdy" method="POST">
-                    <input type="email" name="email" placeholder="Enter your email" required aria-label="Email for newsletter">
-                    <button type="submit" class="cta-button">Subscribe</button>
-                </form>
+    <div class="virtual-assistant">
+        <div class="assistant-orb">
+            <div class="assistant-tooltip">
+                <p>Ask Grok: "Recommend a room" or "Help!"</p>
+                <button class="cta-button secondary" id="video-call">Video Concierge</button>
+                <button class="cta-button secondary" id="ai-recommend">AI Suggest</button>
             </div>
         </div>
+    </div>
+
+    <select id="currency-selector">
+        <option value="USD">USD</option>
+        <option value="KES">KES</option>
+        <option value="EUR">EUR</option>
+        <option value="ETH">ETH</option>
+    </select>
+
+    <section class="booking-section" id="booking">
+        <h2>Secure Your Cyber-Luxe Stay</h2>
+        <div class="progress-bar">
+            <div class="step active">1. Dates & Guests</div>
+            <div class="step">2. Room</div>
+            <div class="step">3. Details</div>
+            <div class="step">4. Payment</div>
+        </div>
+        <form id="booking-form">
+            <div class="form-step active" id="step-1">
+                <div class="form-group">
+                    <label for="check-in">Check-In Date</label>
+                    <input type="date" id="check-in" name="check_in" required>
+                </div>
+                <div class="form-group">
+                    <label for="check-out">Check-Out Date</label>
+                    <input type="date" id="check-out" name="check_out" required>
+                </div>
+                <div class="form-group">
+                    <label for="adults">Adults</label>
+                    <select id="adults" name="adults" required>
+                        <option value="1">1</option>
+                        <option value="2" selected>2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="children">Children</label>
+                    <select id="children" name="children" required>
+                        <option value="0" selected>0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                    </select>
+                </div>
+                <div class="form-buttons">
+                    <button type="button" class="cta-button next-step" data-step="1">Next</button>
+                    <button type="button" class="cta-button secondary save-progress">Save Progress</button>
+                </div>
+            </div>
+            <div class="form-step" id="step-2">
+                <div class="room-options">
+                    <div class="room-option" data-price="100" data-room="Standard Room">
+                        <img src="images/14.jpg" alt="Standard Room" onerror="this.src='https://via.placeholder.com/300x150?text=Standard+Room';">
+                        <h3>Standard Room</h3>
+                        <p>$100/night - Cozy eco-luxe</p>
+                        <button class="ar-button" data-room="standard">AR View</button>
+                        <button class="vr-button" data-room="standard">VR Tour</button>
+                    </div>
+                    <div class="room-option" data-price="150" data-room="Deluxe Room">
+                        <img src="images/15.jpg" alt="Deluxe Room" onerror="this.src='https://via.placeholder.com/300x150?text=Deluxe+Room';">
+                        <h3>Deluxe Room</h3>
+                        <p>$150/night - Spacious serenity</p>
+                        <button class="ar-button" data-room="deluxe">AR View</button>
+                        <button class="vr-button" data-room="deluxe">VR Tour</button>
+                    </div>
+                </div>
+                <div class="form-buttons">
+                    <button type="button" class="cta-button secondary prev-step" data-step="2">Previous</button>
+                    <button type="button" class="cta-button next-step" data-step="2">Next</button>
+                    <button type="button" class="cta-button secondary save-progress">Save Progress</button>
+                </div>
+            </div>
+            <div class="form-step" id="step-3">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="country">Country</label>
+                    <select id="country" name="country" required>
+                        <option value="KE" selected>Kenya</option>
+                        <option value="US">United States</option>
+                        <option value="UK">United Kingdom</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="requests">Special Requests</label>
+                    <textarea id="requests" name="requests" rows="4"></textarea>
+                    <p id="sentiment-feedback"></p>
+                </div>
+                <div class="form-buttons">
+                    <button type="button" class="cta-button secondary prev-step" data-step="3">Previous</button>
+                    <button type="button" class="cta-button next-step" data-step="3">Next</button>
+                    <button type="button" class="cta-button secondary save-progress">Save Progress</button>
+                </div>
+            </div>
+            <div class="form-step" id="step-4">
+                <div id="booking-summary">
+                    <h3>Booking Summary</h3>
+                    <p>Room: <span id="summary-room"></span></p>
+                    <p>Dates: <span id="summary-dates"></span></p>
+                    <p>Guests: <span id="summary-guests"></span></p>
+                    <p>Total: <span id="summary-total"></span></p>
+                </div>
+                <div class="payment-options">
+                    <button type="button" class="cta-button payment-button" id="paypal-button">Pay with PayPal</button>
+                    <button type="button" class="cta-button payment-button" id="stripe-button">Pay with Card</button>
+                    <button type="button" class="cta-button payment-button" id="mpesa-button">M-Pesa/Bank Transfer</button>
+                    <button type="button" class="cta-button payment-button" id="crypto-button">Pay with Ethereum</button>
+                </div>
+                <div class="form-buttons">
+                    <button type="button" class="cta-button secondary prev-step" data-step="4">Previous</button>
+                    <button type="button" class="cta-button secondary save-progress">Save Progress</button>
+                </div>
+            </div>
+        </form>
+    </section>
+
+    <section class="x-feed">
+        <h2>Live from @Ambururu_W</h2>
+        <div id="x-posts"></div>
+    </section>
+
+    <div id="modal-overlay"></div>
+    <div id="confirmation-modal">
+        <h3>Booking Confirmed!</h3>
+        <div id="modal-content"></div>
+        <button type="button" class="cta-button" id="modal-close">Close</button>
+    </div>
+
+    <footer>
+        <p>© 2025 Ambururu Waterfalls Resort. All rights reserved.</p>
     </footer>
 
-    <div id="chatbot-container"></div>
-
-    <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" integrity="sha256-LC5FYR1t7cCN3DHVqFVLk4N3E+2NHJhuH2Fny9oFJIY=" crossorigin="anonymous" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" integrity="sha256-1BwnsQ1R0YJ/FX2vY0g7eA1zM3n0T0tCdW2Wv/0vJno=" crossorigin="anonymous" defer></script>
-    <script src="https://www.paypal.com/sdk/js?client-id=AaKjsRN_r_62rxV_8WGNEo32fcXTeCPdhHpzvNTEN9ZGEGKOFQOHc921e4I1seyE1Q3JxdVL4SEhkDPUR" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.134.0/build/three.min.js" integrity="sha256-6Yg4j+0eJ3e6b6l9vE6b0f2l5QzY2z7Y8z2v2l5QzY=" crossorigin="anonymous" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js" integrity="sha256-rCuXJKOQAj7u0a0en0G0v6g2b0fN5u0enQzY3u2W0v6=" crossorigin="anonymous" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js" integrity="sha256-4v5u0C3Y4Y2vY3F0z0q6L3q3Y4YvY3F0z0q6L3q3Y=" crossorigin="anonymous" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/js-confetti@0.11.0/dist/js-confetti.browser.min.js" integrity="sha256-JO4c0G4l6f2l5QzY2z7Y3u0enQzY3u2W0v6QzY2z7Y=" crossorigin="anonymous" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js" integrity="sha256-4z7O4vY2z7Y3u0enQzY2z7Y3u0enQzY3u2W0v6QzY2z" crossorigin="anonymous" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/@googlemaps/js-api-loader@1.12.8/dist/index.min.js" integrity="sha256-4v5u0C3Y4Y2vY3F0z0q6L3q3Y4YvY3F0z0q6L3q3Y=" crossorigin="anonymous" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/@vladmandic/potato@0.0.14/dist/potato.js" integrity="sha256-4v5u0C3Y4Y2vY3F0z0q6L3q3Y4YvY3F0z0q6L3q3Y=" crossorigin="anonymous" defer></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.glitch.min.js"></script>
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.7.0/dist/web3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/webgazer@0.0.2/dist/webgazer.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.13.0/dist/tf.min.js"></script>
     <script>
-        // jQuery Fallback
-        if (typeof jQuery === 'undefined') {
-            document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" defer></script>');
+        let bookingData = {
+            checkIn: '',
+            checkOut: '',
+            adults: 2,
+            children: 0,
+            room: '',
+            price: 0,
+            name: '',
+            email: '',
+            phone: '',
+            country: 'KE',
+            requests: '',
+            currency: 'USD'
+        };
+        let currentStep = 0;
+        let currencyRates = { USD: 1, KES: 129, EUR: 0.95, ETH: 0.00025 };
+
+        // 3D Resort Model
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('three-canvas'), alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        const geometry = new THREE.SphereGeometry(10, 32, 32);
+        const material = new THREE.MeshPhongMaterial({ color: 0x00ff99, emissive: 0x00ccff });
+        const resort = new THREE.Mesh(geometry, material);
+        scene.add(resort);
+        const light = new THREE.PointLight(0xffffff, 1, 100);
+        light.position.set(10, 10, 10);
+        scene.add(light);
+        camera.position.z = 20;
+        function animate() {
+            requestAnimationFrame(animate);
+            resort.rotation.y += 0.005;
+            renderer.render(scene, camera);
         }
+        animate();
 
-// Tawk.to Chat
-var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
-(function () {
-    var s1 = document.createElement("script");
-    s1.defer = true;
-    s1.src = 'https://embed.tawk.to/68360ce00f6bcf190fc26624/1is9i4jf2';
-    s1.charset = 'UTF-8';
-    s1.setAttribute('crossorigin', '*');
-    document.body.appendChild(s1);
-})();
-
-$(document).ready(function () {
-    console.log('Document ready. jQuery version:', $.fn.jquery);
-
-    try {
-        gsap.registerPlugin(ScrollTrigger);
-
-        // Animations
-        gsap.from(".hero-title", { opacity: 0, y: 50, duration: 1.5, ease: "power2.out", delay: 0.5 });
-        gsap.from(".hero-subtitle", { opacity: 0, y: 50, duration: 1.5, ease: "power2.out", delay: 0.7 });
-        gsap.from(".urgency-timer", { opacity: 0, y: 20, duration: 1, ease: "power2.out", delay: 0.9 });
-        gsap.from(".live-counter", { opacity: 0, y: 20, duration: 1, ease: "power2.out", delay: 1.1 });
-        gsap.from(".hero .cta-button", { opacity: 0, scale: 0.8, duration: 1, ease: "elastic.out(1, 0.5)", delay: 1.3 });
-        gsap.from(".booking h2", { opacity: 0, y: 100, duration: 1, scrollTrigger: { trigger: ".booking", start: "top 80%", toggleActions: "play none none reverse" } });
-        gsap.from(".testimonials", { opacity: 0, y: 100, duration: 1, scrollTrigger: { trigger: ".testimonials", start: "top 80%" } });
-        gsap.from(".booking", { opacity: 0, y: 100, duration: 1, scrollTrigger: { trigger: ".booking", start: "top 80%" } });
-        gsap.from(".map-section", { opacity: 0, y: 100, duration: 1, scrollTrigger: { trigger: ".map-section", start: "top 80%" } });
-        gsap.from(".conservation", { opacity: 0, y: 100, duration: 1, scrollTrigger: { trigger: ".conservation", start: "top 80%" } });
-        gsap.utils.toArray(".form-step").forEach(step => {
-            gsap.from(step, { opacity: 0, x: 50, duration: 0.5, scrollTrigger: { trigger: step, start: "top 90%" } });
+        // Vanta.js Glitch
+        VANTA.GLITCH({
+            el: "body",
+            highlightColor: 0x00ff99,
+            midtoneColor: 0x00ccff,
+            lowlightColor: 0x000000,
+            baseColor: 0x000000,
+            scale: 1.5
         });
 
-        // Menu Toggle for Mobile
-        $('.menu-toggle').on('click', function () {
-            $('#main-nav ul').toggleClass('active');
-        });
-
-        // Particles.js
-        particlesJS('particles-js', {
-            particles: {
-                number: { value: 100, density: { enable: true, value_area: 800 } },
-                color: { value: '#ffffff' },
-                shape: { type: 'circle' },
-                opacity: { value: 0.6, random: true },
-                size: { value: 3, random: true },
-                line_linked: { enable: true, distance: 150, color: '#ffffff', opacity: 0.4, width: 1 },
-                move: { enable: true, speed: 4, direction: 'none', random: false }
-            },
-            interactivity: {
-                detect_on: 'canvas',
-                events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' } },
-                modes: { repulse: { distance: 100, duration: 0.4 } }
+        // WebGazer Eye Tracking
+        webgazer.setGazeListener((data, elapsedTime) => {
+            if (data && data.x > window.innerWidth * 0.8 && currentStep < 3) {
+                $('.next-step').click();
             }
-        });
+        }).begin();
 
-        // Hero Subtitle Rotation
-        const subtitles = [
-            "Book now for an unforgettable experience!",
-            "Discover paradise with exclusive deals!",
-            "Your adventure starts with a click!",
-            "Secure your spot at Ambururu today!"
-        ];
-        let subtitleIndex = 0;
-        function rotateSubtitle() {
-            gsap.to("#dynamic-subtitle", {
-                opacity: 0,
-                duration: 0.3,
-                onComplete: () => {
-                    $('#dynamic-subtitle').text(subtitles[subtitleIndex]);
-                    gsap.to("#dynamic-subtitle", { opacity: 1, duration: 0.3 });
-                    subtitleIndex = (subtitleIndex + 1) % subtitles.length;
+        $(document).ready(function() {
+            $('.menu-toggle').click(function() {
+                $('#main-nav ul').toggleClass('active');
+            });
+
+            $('.next-step').click(function() {
+                if (validateStep(currentStep)) {
+                    anime({
+                        targets: $('.form-step').eq(currentStep)[0],
+                        opacity: 0,
+                        translateX: -100,
+                        duration: 300,
+                        easing: 'easeInOutQuad',
+                        complete: () => {
+                            $('.form-step').eq(currentStep).removeClass('active');
+                            $('.step').eq(currentStep).removeClass('active');
+                            currentStep++;
+                            $('.form-step').eq(currentStep).addClass('active');
+                            $('.step').eq(currentStep).addClass('active');
+                            updateSummary();
+                            anime({
+                                targets: $('.form-step').eq(currentStep)[0],
+                                opacity: [0, 1],
+                                translateX: [100, 0],
+                                duration: 300,
+                                easing: 'easeInOutQuad'
+                            });
+                        }
+                    });
                 }
             });
-        }
-        rotateSubtitle();
-        setInterval(rotateSubtitle, 5000);
 
-        // Countdown Timer
-        function startCountdown() {
-            let time = 24 * 60 * 60;
-            const countdownElement = $('#countdown');
-            setInterval(() => {
-                const hours = Math.floor(time / 3600);
-                const minutes = Math.floor((time % 3600) / 60);
-                const seconds = time % 60;
-                countdownElement.text(`${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`);
-                time--;
-                if (time < 0) time = 24 * 60 * 60;
-            }, 1000);
-        }
-        startCountdown();
+            $('.prev-step').click(function() {
+                anime({
+                    targets: $('.form-step').eq(currentStep)[0],
+                    opacity: 0,
+                    translateX: 100,
+                    duration: 300,
+                    easing: 'easeInOutQuad',
+                    complete: () => {
+                        $('.form-step').eq(currentStep).removeClass('active');
+                        $('.step').eq(currentStep).removeClass('active');
+                        currentStep--;
+                        $('.form-step').eq(currentStep).addClass('active');
+                        $('.step').eq(currentStep).addClass('active');
+                        anime({
+                            targets: $('.form-step').eq(currentStep)[0],
+                            opacity: [0, 1],
+                            translateX: [-100, 0],
+                            duration: 300,
+                            easing: 'easeInOutQuad'
+                        });
+                    }
+                });
+            });
 
-        // Booking Counter
-        let bookingCount = 127;
-        setInterval(() => {
-            bookingCount += Math.floor(Math.random() * 3);
-            $('#booking-counter').text(bookingCount);
-        }, 30000);
-
-        // Testimonial Slider
-        let currentTestimonial = 0;
-        const testimonials = $('.testimonial');
-        function rotateTestimonials() {
-            testimonials.hide();
-            testimonials.eq(currentTestimonial).fadeIn(500);
-            currentTestimonial = (currentTestimonial + 1) % testimonials.length;
-        }
-        rotateTestimonials();
-        setInterval(rotateTestimonials, 5000);
-
-        // FullCalendar
-        const calendarEl = document.getElementById('availability-calendar');
-        const calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: 'dayGridMonth',
-            selectable: true,
-            select: function (arg) {
-                console.log('Calendar select:', arg.startStr, arg.endStr);
-                $('#checkin').val(arg.startStr);
-                const endDate = new Date(arg.endStr);
-                endDate.setDate(endDate.getDate() - 1);
-                $('#checkout').val(endDate.toISOString().split('T')[0]);
-                checkAvailability();
-                calculateTotal();
-                suggestRoom();
+            $('.room-option').click(function() {
+                $('.room-option').removeClass('selected');
+                $(this).addClass('selected');
+                bookingData.room = $(this).data('room');
+                bookingData.price = parseFloat($(this).data('price'));
                 updateSummary();
-            },
-            events: [
-                { title: 'Booked', start: '2025-06-01', end: '2025-06-03', color: '#e63946' },
-                { title: 'Booked', start: '2025-06-10', end: '2025-06-12', color: '#e63946' }
-            ]
-        });
-        calendar.render();
+            });
 
-        // Step Navigation
-        $(document).on('click', '.next-step', function (e) {
-            e.preventDefault();
-            const $button = $(this);
-            const nextStep = $button.data('next');
-            const currentStep = $button.closest('.form-step').data('step');
-            console.log(`Navigating from step ${currentStep} to ${nextStep}`);
+            $('.ar-button').click(function() {
+                const room = $(this).data('room');
+                const arScene = `
+                    <a-scene embedded arjs>
+                        <a-box position="0 0 -5" rotation="0 45 0" color="${room === 'standard' ? '#00ff99' : '#00ccff'}" scale="2 2 2"></a-box>
+                        <a-camera></a-camera>
+                    </a-scene>
+                `;
+                $('body').append(`<div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1003;">${arScene}<button class="cta-button" style="position: absolute; top: 20px; right: 20px;">Close AR</button></div>`);
+                $('body').on('click', '.cta-button', function() {
+                    $(this).parent().remove();
+                });
+            });
 
-            let isValid = true;
-            $('#step-error, #form-error, #availability-status').hide();
+            $('.vr-button').click(function() {
+                const vrScene = `
+                    <a-scene vr-mode-ui="enabled: true">
+                        <a-sky color="#00ccff"></a-sky>
+                        <a-box position="0 1 -5" color="${bookingData.room === 'Standard Room' ? '#00ff99' : '#00ccff'}" scale="3 3 3"></a-box>
+                        <a-camera></a-camera>
+                    </a-scene>
+                `;
+                $('body').append(`<div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1003;">${vrScene}<button class="cta-button" style="position: absolute; top: 20px; right: 20px;">Exit VR</button></div>`);
+                $('body').on('click', '.cta-button', function() {
+                    $(this).parent().remove();
+                });
+            });
 
-            if (currentStep === 1) {
-                isValid = validateStep1();
-            } else if (currentStep === 2) {
-                isValid = !!$('#room').val();
-                if (!isValid) {
-                    $('#availability-status').text('Please select a room type.').css('color', '#e63946').show();
+            $('.save-progress').click(function() {
+                updateBookingData();
+                localStorage.setItem('bookingData', JSON.stringify(bookingData));
+                alert('Progress saved!');
+            });
+
+            $('#paypal-button, #stripe-button, #mpesa-button').click(function() {
+                if (!validateStep(2)) {
+                    alert('Please complete all steps.');
+                    return;
                 }
-            } else if (currentStep === 3) {
-                isValid = $('#name').val() && $('#email').val() && $('#phone').val();
-                if (!isValid) {
-                    $('#form-error').text('Please fill in all required fields.').css('color', '#e63946').show();
-                }
-            }
+                updateBookingData();
+                showConfirmation();
+                submitBooking(this.id.replace('-button', ''));
+            });
 
-            if (isValid) {
-                $button.prop('disabled', true).text('Loading...');
-                try {
-                    $('.form-step').removeClass('active');
-                    $(`.form-step[data-step="${nextStep}"]`).addClass('active');
-                    $('.progress-step').removeClass('active');
-                    $(`.progress-step[data-step="${nextStep}"]`).addClass('active');
-                    $(`.progress-step[data-step="${currentStep}"] .step-check`).addClass('visible');
-                    gsap.from(`.form-step[data-step="${nextStep}"]`, { opacity: 0, x: 50, duration: 0.5 });
-                    $('.progress-bar .progress').css('width', `${nextStep * 25}%`);
-                    updateSummary();
-                    new Audio('https://freesound.org/data/previews/170/170621_2885980-lq.mp3').play().catch(() => {});
-                } catch (err) {
-                    console.error('Step transition error:', err);
-                    $('#form-error').text('An error occurred. Please try again.').css('color', '#e63946').show();
-                } finally {
-                    $button.prop('disabled', false).text('Next');
+            $('#crypto-button').click(async function() {
+                if (!validateStep(2)) {
+                    alert('Please complete all steps.');
+                    return;
                 }
-            } else {
-                gsap.to($button, { x: -10, duration: 0.1, repeat: 3, yoyo: true });
-                console.log('Validation failed for step', currentStep);
+                updateBookingData();
+                if (window.ethereum) {
+                    const web3 = new Web3(window.ethereum);
+                    await window.ethereum.request({ method: 'eth_requestAccounts' });
+                    alert('Crypto payment initiated (mock).');
+                    showConfirmation();
+                    submitBooking('Ethereum');
+                } else {
+                    alert('MetaMask not detected. Install MetaMask to pay with Ethereum.');
+                }
+            });
+
+            $('#modal-close, #modal-overlay').click(function() {
+                $('#confirmation-modal, #modal-overlay').hide();
+            });
+
+            $('#currency-selector').change(function() {
+                bookingData.currency = $(this).val();
+                updateSummary();
+            });
+
+            $('#video-call').click(function() {
+                alert('Initiating video concierge (WebRTC setup required).');
+            });
+
+            $('#ai-recommend').click(function() {
+                const recommendation = bookingData.adults > 2 ? 'Deluxe Room for extra space!' : 'Standard Room for cozy vibes!';
+                alert(`Grok suggests: ${recommendation}`);
+            });
+
+            // Sentiment Analysis
+            $('#requests').on('input', async function() {
+                const text = $(this).val();
+                if (text) {
+                    // Mock sentiment (replace with real TensorFlow.js model)
+                    $('#sentiment-feedback').text('We sense excitement in your request! 😊');
+                } else {
+                    $('#sentiment-feedback').text('');
+                }
+            });
+
+            // Mock X Feed
+            $('#x-posts').html(`
+                <div class="x-post"><p>🌿 Book your eco-luxe stay now! #Ambururu</p><span>May 31, 2025</span></div>
+                <div class="x-post"><p>10% off this week! 🏝️ #TravelKenya</p><span>May 30, 2025</span></div>
+            `);
+
+            // Load saved data
+            const savedData = localStorage.getItem('bookingData');
+            if (savedData) {
+                bookingData = JSON.parse(savedData);
+                $('#check-in').val(bookingData.checkIn);
+                $('#check-out').val(bookingData.checkOut);
+                $('#adults').val(bookingData.adults);
+                $('#children').val(bookingData.children);
+                $('.room-option[data-room="' + bookingData.room + '"]').addClass('selected');
+                $('#name').val(bookingData.name);
+                $('#email').val(bookingData.email);
+                $('#phone').val(bookingData.phone);
+                $('#country').val(bookingData.country);
+                $('#requests').val(bookingData.requests);
+                $('#currency-selector').val(bookingData.currency);
+                updateSummary();
             }
         });
 
-        $(document).on('click', '.prev-step', function (e) {
-            e.preventDefault();
-            const prevStep = $(this).data('prev');
-            $('.form-step').removeClass('active');
-            $(`.form-step[data-step="${prevStep}"]`).addClass('active');
-            $('.progress-step').removeClass('active');
-            $(`.progress-step[data-step="${prevStep}"]`).addClass('active');
-            $(`.progress-step[data-step="${prevStep + 1}"] .step-check`).removeClass('visible');
-            gsap.from(`.form-step[data-step="${prevStep}"]`, { opacity: 0, x: -50, duration: 0.5 });
-            $('.progress-bar .progress').css('width', `${prevStep * 25}%`);
-        });
-
-        // Step 1 Validation
-        function validateStep1() {
-            const checkin = $('#checkin').val();
-            const checkout = $('#checkout').val();
-            const guests = $('#guests').val();
-            const today = new Date();
-            today.setHours(0, 0, 0, 0);
-            const stepError = $('#step-error');
-
-            console.log('Validating Step 1:', { checkin, checkout, guests });
-
-            if (!checkin) {
-                stepError.text('Please select a check-in date.').css('color', '#e63946').show();
+        function validateStep(step) {
+            if (step === 0) {
+                bookingData.checkIn = $('#check-in').val();
+                bookingData.checkOut = $('#check-out').val();
+                if (!bookingData.checkIn || !bookingData.checkOut) {
+                    alert('Please select dates.');
+                    return false;
+                }
+                const checkIn = new Date(bookingData.checkIn);
+                const checkOut = new Date(bookingData.checkOut);
+                const today = new Date('2025-05-31');
+                if (checkIn < today || checkOut <= checkIn) {
+                    alert('Invalid dates.');
+                    return false;
+                }
+                return true;
+            }
+            if (step === 1 && !bookingData.room) {
+                alert('Please select a room.');
                 return false;
             }
-            if (!checkout) {
-                stepError.text('Please select a check-out date.').css('color', '#e63946').show();
-                return false;
+            if (step === 2) {
+                bookingData.name = $('#name').val();
+                bookingData.email = $('#email').val();
+                bookingData.phone = $('#phone').val();
+                bookingData.country = $('#country').val();
+                if (!bookingData.name || !bookingData.email || !bookingData.phone || !bookingData.country) {
+                    alert('Please fill all required fields.');
+                    return false;
+                }
+                if (!/\S+@\S+\.\S+/.test(bookingData.email)) {
+                    alert('Invalid email.');
+                    return false;
+                }
+                return true;
             }
-            if (!guests) {
-                stepError.text('Please select the number of guests.').css('color', '#e63946').show();
-                return false;
-            }
-
-            const checkinDate = new Date(checkin);
-            const checkoutDate = new Date(checkout);
-
-            if (isNaN(checkinDate.getTime())) {
-                stepError.text('Invalid check-in date format.').css('color', '#e63946').show();
-                return false;
-            }
-            if (isNaN(checkoutDate.getTime())) {
-                stepError.text('Invalid check-out date format.').css('color', '#e63946').show();
-                return false;
-            }
-
-            if (checkinDate < today) {
-                stepError.text('Check-in date cannot be in the past.').css('color', '#e63946').show();
-                return false;
-            }
-            if (checkoutDate <= checkinDate) {
-                stepError.text('Check-out must be after check-in.').css('color', '#e63946').show();
-                return false;
-            }
-
-            if (!checkAvailability()) {
-                stepError.text('No rooms available for selected dates.').css('color', '#e63946').show();
-                return false;
-            }
-
-            stepError.hide();
             return true;
         }
 
-        // Booking Summary
+        function updateBookingData() {
+            bookingData.adults = parseInt($('#adults').val());
+            bookingData.children = parseInt($('#children').val());
+            bookingData.requests = $('#requests').val();
+        }
+
         function updateSummary() {
-            $('#summary-checkin').text($('#checkin').val() || '-');
-            $('#summary-checkout').text($('#checkout').val() || '-');
-            $('#summary-guests').text($('#guests').val() || '-');
-            $('#summary-room').text($('#room option:selected').text() || '-');
-            $('#summary-total').text($('#total-cost').text() || '-');
-        }
-
-        // AI Room Suggestion
-        function suggestRoom() {
-            const guests = parseInt($('#guests').val()) || 0;
-            const checkin = new Date($('#checkin').val());
-            const checkout = new Date($('#checkout').val());
-            const nights = checkin && checkout ? Math.round((checkout - checkin) / (1000 * 60 * 60 * 24)) : 0;
-            let suggestion = '';
-            if (guests >= 3 || nights > 5) {
-                suggestion = `Perfect for ${guests} guests and ${nights} nights: Our Suite offers spacious luxury!`;
-            } else if (guests === 2) {
-                suggestion = `Ideal for couples: The Deluxe Room is cozy and romantic for ${nights} nights!`;
-            } else if (guests === 1) {
-                suggestion = `Solo traveler? The Standard Room is just right for your ${nights}-night stay!`;
-            } else {
-                suggestion = 'Select guests to get a personalized room suggestion!';
-            }
-            $('#ai-suggestion').text(suggestion).css('color', 'var(--aqua-blue)');
-            gsap.from('#ai-suggestion', { opacity: 0, y: 10, duration: 0.3 });
-        }
-
-        // Availability
-        function checkAvailability() {
-            const checkin = new Date($('#checkin').val());
-            const checkout = new Date($('#checkout').val());
-            const availabilityStatus = $('#availability-status');
-
-            if (checkin && checkout && checkout > checkin) {
-                const bookedDates = [
-                    { start: new Date('2025-06-01'), end: new Date('2025-06-03') },
-                    { start: new Date('2025-06-10'), end: new Date('2025-06-12') }
-                ];
-                const available = !bookedDates.some(range =>
-                    (checkin >= range.start && checkin <= range.end) ||
-                    (checkout >= range.start && checkout <= range.end) ||
-                    (checkin <= range.start && checkout >= range.end)
-                );
-                availabilityStatus.text(available ? 'Rooms available!' : 'No rooms available, please try different dates.').css('color', available ? 'var(--aqua-blue)' : '#e63946').show();
-                return available;
-            } else {
-                availabilityStatus.text('Please select valid dates.').css('color', '#e63946').show();
-                return false;
+            if (bookingData.room) {
+                $('#summary-room').text(bookingData.room);
+                $('#summary-dates').text(`${bookingData.checkIn} to ${bookingData.checkOut}`);
+                $('#summary-guests').text(`${bookingData.adults} Adult${bookingData.adults > 1 ? 's' : ''}${bookingData.children > 0 ? `, ${bookingData.children} Child${bookingData.children > 1 ? 'ren' : ''}` : ''}`);
+                const nights = Math.ceil((new Date(bookingData.checkOut) - new Date(bookingData.checkIn)) / (1000 * 60 * 60 * 24));
+                const baseTotal = bookingData.price * nights;
+                const convertedTotal = (baseTotal * currencyRates[bookingData.currency]).toFixed(4);
+                $('#summary-total').text(`${convertedTotal} ${bookingData.currency}`);
             }
         }
 
-        // Total Cost
-        function calculateTotal() {
-            const checkin = new Date(document.getElementById('checkin').value);
-            const checkout = new Date(document.getElementById('checkout').value);
-            const roomType = $('#room').val();
-            const rates = { standard: 100, deluxe: 150, suite: 200 };
-            const today = new Date();
-            today.setHours(0, 0, 0, 0);
-            const totalCostElement = $('#total-cost');
-
-            if (checkin < today) {
-                totalCostElement.text("Check-in date cannot be in the past.").css('color', '#e63946');
-                return 0;
-            }
-            if (checkout <= checkin) {
-                totalCostElement.text("Check-out must be after check-in.").css('color', '#e63946');
-                return 0;
-            }
-
-            if (checkin && checkout && roomType) {
-                const nights = Math.round((checkout - checkin) / (1000 * 60 * 60 * 24));
-                if (nights > 0) {
-                    let total = nights * rates[roomType];
-                    const discount = parseFloat($('#discount-result').data('discount') || 0);
-                    if (discount) total *= (1 - discount / 100);
-                    totalCostElement.text(`Estimated Total: $${total.toFixed(2)} ${discount ? `(includes ${discount}% discount)` : ''}`).css('color', 'var(--coral)');
-                    updateSummary();
-                    return total;
-                }
-            }
-            totalCostElement.text('');
-            return 0;
+        function showConfirmation() {
+            const modalContent = `
+                <p><strong>Room:</strong> ${bookingData.room}</p>
+                <p><strong>Dates:</strong> ${bookingData.checkIn} to ${bookingData.checkOut}</p>
+                <p><strong>Guests:</strong> ${bookingData.adults} Adult${bookingData.adults > 1 ? 's' : ''}${bookingData.children > 0 ? `, ${bookingData.children} Child${bookingData.children > 1 ? 'ren' : ''}` : ''}</p>
+                <p><strong>Total:</strong> ${$('#summary-total').text()}</p>
+                <p><strong>Name:</strong> ${bookingData.name}</p>
+                <p><strong>Email:</strong> ${bookingData.email}</p>
+            `;
+            $('#modal-content').html(modalContent);
+            $('#confirmation-modal, #modal-overlay').show();
+            anime({
+                targets: '#confirmation-modal',
+                opacity: [0, 1],
+                scale: [0.8, 1],
+                duration: 500,
+                easing: 'easeInOutQuad'
+            });
+            confetti({ particleCount: 300, spread: 120 });
         }
 
-        $('#guests, #checkin, #checkout, #room').on('change', () => {
-            checkAvailability();
-            calculateTotal();
-            suggestRoom();
-            updateSummary();
-        });
-
-        // Payment Method
-        $('#payment-method').on('change', function () {
-            $('.payment-details').hide();
-            if (this.value === 'mpesa') $('#mpesa-details').fadeIn(300);
-            else if (this.value === 'paypal') $('#paypal-button-container').fadeIn(300);
-            else if (this.value === 'on-arrival') $('#on-arrival-details').fadeIn(300);
-        });
-
-        // M-Pesa Integration
-        $('#initiate-mpesa').on('click', async function () {
-            const total = calculateTotal();
-            const phone = $('#phone').val();
-            if (!total || !checkAvailability() || !phone) {
-                $('#form-error').text('Please complete the form and provide a valid phone number.').css('color', '#e63946').show();
-                return;
-            }
-
-            $('#loading-modal').show();
-            try {
-                const response = await fetch('/api/mpesa', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ phone, amount: total })
-                });
-                const data = await response.json();
-                if (data.CheckoutRequestID) {
-                    $('#loading-modal').hide();
-                    alert('M-Pesa Payment Request Sent! Please check your phone to complete the payment and enter the transaction ID.');
-                } else {
-                    throw new Error('Payment initiation failed');
-                }
-            } catch (error) {
-                $('#loading-modal').hide();
-                $('#form-error').text('M-Pesa payment initiation failed. Please try again.').css('color', '#e63946').show();
-                console.error('M-Pesa error:', error);
-            }
-        });
-
-        // PayPal
-        paypal.Buttons({
-            createOrder: function (data, actions) {
-                const total = calculateTotal();
-                if (!total || !checkAvailability()) {
-                    $('#form-error').text('Please complete the form and ensure rooms are available.').css('color', '#e63946').show();
-                    return Promise.reject('Invalid form');
-                }
-                return actions.order.create({
-                    purchase_units: [{ amount: { value: total.toFixed(2) } }]
-                });
-            },
-            onApprove: function (data, actions) {
-                $('#loading-modal').show();
-                return actions.order.capture().then(function (details) {
-                    $('#loading-modal').hide();
-                    $('#confirmation-modal').show();
-                    const confetti = new JSConfetti();
-                    confetti.addConfetti({ emojis: ['🎉', '🏞️', '🌊'] });
-                    $('#booking-form-element')[0].reset();
-                    $('#total-cost').text('');
-                    $('.payment-details').hide();
-                    $('.form-step').removeClass('active');
-                    $('.progress-step').removeClass('active');
-                    $('.step-check').removeClass('visible');
-                    $('.form-step[data-step="1"]').addClass('active');
-                    $('.progress-step[data-step="1"]').addClass('active');
-                    $('.progress-bar .progress').css('width', '25%');
-                    updateSummary();
-                    new Audio('https://freesound.org/data/previews/511/511484_6890478-lq.mp3').play().catch(() => {});
-                });
-            },
-            onError: function (err) {
-                $('#loading-modal').hide();
-                $('#form-error').text('PayPal payment failed. Please try again or choose another method.').css('color', '#e63946').show();
-                console.error('PayPal error:', err);
-            }
-        }).render('#paypal-button-container');
-
-        // Form Submission
-        $('#booking-form-element').on('submit', function (e) {
-            e.preventDefault();
-            const paymentMethod = $('#payment-method').val();
-            const mpesaTransactionId = $('#mpesa-transaction-id').val();
-
-            if (!checkAvailability()) {
-                $('#form-error').text('No rooms available for selected dates.').css('color', '#e63946').show();
-                return;
-            }
-            if (paymentMethod === 'mpesa' && !mpesaTransactionId) {
-                $('#form-error').text('Please enter a valid M-Pesa transaction ID.').css('color', '#e63946').show();
-                return;
-            }
-            if (paymentMethod === 'on-arrival') {
-                $('#loading-modal').show();
-                setTimeout(() => {
-                    $('#loading-modal').hide();
-                    $('#confirmation-modal').show();
-                    const confetti = new JSConfetti();
-                    confetti.addConfetti({ emojis: ['🎉', '🏞️', '🌊'] });
-                    $('#form-success').text('Reservation confirmed! Payment will be processed on arrival.').css('color', 'var(--aqua-blue)').show();
-                    $('#booking-form-element')[0].reset();
-                    $('#total-cost').text('');
-                    $('.payment-details').hide();
-                    $('.form-step').removeClass('active');
-                    $('.progress-step').removeClass('active');
-                    $('.step-check').removeClass('visible');
-                    $('.form-step[data-step="1"]').addClass('active');
-                    $('.progress-step[data-step="1"]').addClass('active');
-                    $('.progress-bar .progress').css('width', '25%');
-                    updateSummary();
-                    new Audio('https://freesound.org/data/previews/511/511484_6890478-lq.mp3').play().catch(() => {});
-                }, 2000);
-                return;
-            }
-
-            $('#loading-modal').show();
+        function submitBooking(paymentMethod) {
             $.ajax({
-                url: this.action,
-                method: this.method,
-                data: $(this).serialize(),
-                success: function () {
-                    $('#loading-modal').hide();
-                    $('#form-success').css('color', 'var(--aqua-blue)').show();
-                    const confetti = new JSConfetti();
-                    confetti.addConfetti({ emojis: ['🎉', '🏞️', '🌊'] });
-                    $('#booking-form-element')[0].reset();
-                    $('#total-cost').text('');
-                    $('.payment-details').hide();
-                    $('.form-step').removeClass('active');
-                    $('.progress-step').removeClass('active');
-                    $('.step-check').removeClass('visible');
-                    $('.form-step[data-step="1"]').addClass('active');
-                    $('.progress-step[data-step="1"]').addClass('active');
-                    $('.progress-bar .progress').css('width', '25%');
-                    gsap.fromTo("#form-success", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5 });
-                    setTimeout(() => $('#form-success').fadeOut(), 5000);
-                    updateSummary();
-                    new Audio('https://freesound.org/data/previews/511/511484_6890478-lq.mp3').play().catch(() => {});
+                url: 'https://formspree.io/f/xzbxyklq', // REPLACE WITH YOUR ENDPOINT
+                method: 'POST',
+                data: { ...bookingData, payment_method: paymentMethod },
+                success: function() {
+                    localStorage.removeItem('bookingData');
+                    $('#booking-form')[0].reset();
+                    $('.room-option').removeClass('selected');
+                    currentStep = 0;
+                    $('.form-step').removeClass('active').eq(0).addClass('active');
+                    $('.step').removeClass('active').eq(0).addClass('active');
                 },
-                error: function (xhr, status, error) {
-                    $('#loading-modal').hide();
-                    $('#form-error').text('An error occurred. Please try again.').css('color', '#e63946').show();
-                    console.error('Form submission error:', status, error);
+                error: function() {
+                    alert('Submission failed. Check Formspree endpoint.');
                 }
-            });
-        });
-
-        // 360° Viewer
-        $('.view-360').on('click', function () {
-            const panorama = $(this).data('panorama');
-            $('#360-modal').fadeIn(300);
-            pannellum.viewer('pannellum-viewer', {
-                type: 'equirectangular',
-                panorama: panorama,
-                autoLoad: true,
-                autoRotate: -2,
-                hotSpots: [
-                    { pitch: 10, yaw: 180, type: 'info', text: 'King-Size Bed' },
-                    { pitch: -10, yaw: 90, type: 'info', text: 'Scenic Balcony' },
-                    { pitch: 0, yaw: 0, type: 'info', text: 'Luxury Bath' }
-                ]
-            });
-        });
-
-        // AR Preview
-        $('.view-ar').on('click', function () {
-            alert('AR Preview is not fully supported. Please view the 360° tour or contact us for a demo.');
-        });
-
-        // Three.js Previews
-        function initRoomPreview(canvasId, color) {
-            const canvas = document.getElementById(canvasId);
-            if (!canvas) {
-                console.error(`Canvas ${canvasId} not found.`);
-                return;
-            }
-            const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
-            const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true });
-            renderer.setSize(100, 100);
-
-            const geometry = new THREE.BoxGeometry(1, 1, 1);
-            const material = new THREE.MeshBasicMaterial({ color: color });
-            const room = new THREE.Mesh(geometry, material);
-            scene.add(room);
-
-            camera.position.z = 2;
-
-            function animate() {
-                requestAnimationFrame(animate);
-                room.rotation.x += 0.01;
-                room.rotation.y += 0.01;
-                renderer.render(scene, camera);
-            }
-            animate();
-        }
-
-        initRoomPreview('standard-canvas', 0x4DD0E1);
-        initRoomPreview('deluxe-canvas', 0xFF6347);
-        initRoomPreview('suite-canvas', 0xFFD700);
-
-        // Discount Wheel
-        const wheelCanvas = document.getElementById('discount-wheel');
-        const wheelCtx = wheelCanvas.getContext('2d');
-        const discounts = [
-            { value: 0, label: 'Try Again', color: '#e63946' },
-            { value: 5, label: '5% Off', color: '#4CAF50' },
-            { value: 10, label: '10% Off', color: '#26A69A' },
-            { value: 15, label: '15% Off', color: '#FF6F61' },
-            { value: 0, label: 'Try Again', color: '#e63946' },
-            { value: 20, label: '20% Off', color: '#8C6F47' }
-        ];
-        const arc = Math.PI / (discounts.length / 2);
-        let spinAngle = 0;
-        let isSpinning = false;
-
-        function drawWheel() {
-            wheelCtx.clearRect(0, 0, wheelCanvas.width, wheelCanvas.height);
-            discounts.forEach((discount, i) => {
-                wheelCtx.beginPath();
-                wheelCtx.fillStyle = discount.color;
-                wheelCtx.moveTo(100, 100);
-                wheelCtx.arc(100, 100, 100, i * arc, (i + 1) * arc);
-                wheelCtx.fill();
-                wheelCtx.fillStyle = '#fff';
-                wheelCtx.font = '12px Roboto';
-                wheelCtx.save();
-                wheelCtx.translate(100, 100);
-                wheelCtx.rotate(i * arc + arc / 2);
-                wheelCtx.fillText(discount.label, 50, 0);
-                wheelCtx.restore();
             });
         }
 
-        drawWheel();
-
-        $('#spin-wheel').on('click', function () {
-            if (isSpinning) return;
-            isSpinning = true;
-            $('#spin-wheel').prop('disabled', true).text('Spinning...');
-            const spinDuration = 4000;
-            const randomAngle = Math.random() * 360 + 720;
-            gsap.to(window, {
-                spinAngle: randomAngle,
-                duration: spinDuration / 1000,
-                ease: "power2.out",
-                onUpdate: () => {
-                    wheelCanvas.style.transform = `rotate(${spinAngle}deg)`;
-                },
-                onComplete: () => {
-                    const finalAngle = spinAngle % 360;
-                    const index = Math.floor((360 - finalAngle) / (360 / discounts.length)) % discounts.length;
-                    const result = discounts[index];
-                    $('#discount-result').text(`You won: ${result.label}!`).css('color', result.color).data('discount', result.value);
-                    calculateTotal();
-                    isSpinning = false;
-                    $('#spin-wheel').prop('disabled', false).text('Spin Again');
-                    new Audio('https://freesound.org/data/previews/511/511484_6890478-lq.mp3').play().catch(() => {});
-                }
-            });
+        // PWA Service Worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js').then(() => console.log('Service Worker Registered'));
+        }
+    </script>
+    <script>
+        // Service Worker (save as sw.js in project root)
+        /*
+        self.addEventListener('install', event => {
+            event.waitUntil(
+                caches.open('ambururu-v1').then(cache => {
+                    return cache.addAll([
+                        '/',
+                        '/booking.html',
+                        '/images/standard_room.jpg',
+                        '/images/deluxe_room.jpg'
+                    ]);
+                })
+            );
         });
-
-        // Google Maps
-        const loader = new google.maps.jsApiLoader.Loader({
-            apiKey: 'YOUR_ACTUAL_API_KEY', // Replace with your Google Maps API key
-            version: 'weekly'
+        self.addEventListener('fetch', event => {
+            event.respondWith(
+                caches.match(event.request).then(response => {
+                    return response || fetch(event.request);
+                })
+            );
         });
-
-        loader.load().then(() => {
-            const map = new google.maps.Map(document.getElementById('map'), {
-                center: { lat: -0.0931, lng: 34.4833 }, // Siaya, Kenya
-                zoom: 12
-            });
-            new google.maps.Marker({
-                position: { lat: -0.0931, lng: 34.4833 },
-                map: map,
-                title: 'Ambururu Waterfalls'
-            });
-        }).catch(err => {
-            console.error('Google Maps error:', err);
-            $('#map').html('<p style="color:#e63946;">Failed to load map. Please try again later.</p>');
-        });
-
-        // Potato.js Chatbot
-        const potato = new Potato({
-            element: '#chatbot-container',
-            theme: 'light',
-            messages: [
-                { text: 'Welcome to Ambururu Waterfalls! Ready to book your dream getaway?', sender: 'bot' }
-            ],
-            responses: [
-                { keywords: ['book', 'reservation'], response: 'Let’s get you booked! Scroll to the "Book Your Stay" section or ask me for room suggestions.' },
-                { keywords: ['location', 'where'], response: 'We’re in Siaya, Kenya, near a stunning waterfall. Check the map below or ask for directions!' },
-                { keywords: ['conservation', 'environment'], response: 'We’re passionate about conservation! Learn about our reforestation and wildlife efforts below.' },
-                { keywords: ['room', 'stay'], response: 'We offer Standard ($100/night), Deluxe ($150/night), and Suite ($200/night). Want a 360° tour?' },
-                { keywords: ['discount', 'offer'], response: 'Spin the discount wheel in the booking section for a chance to save up to 20%! Want to try it now?' },
-                { keywords: [], response: 'Not sure what you need? Ask about bookings, conservation, or explore our site!' }
-            ]
-        });
-
-        // Voice Input
-        $('.voice-input').on('click', function () {
-            const targetId = $(this).data('target');
-            if ('webkitSpeechRecognition' in window) {
-                const recognition = new webkitSpeechRecognition();
-                recognition.lang = 'en-US';
-                recognition.onresult = function (event) {
-                    $('#' + targetId).val(event.results[0][0].transcript);
-                };
-                recognition.start();
-            } else {
-                alert('Voice input is not supported in this browser.');
-            }
-        });
-
-    } catch (err) {
-        console.error('Initialization error:', err);
-        $('#form-error').text('An error occurred while loading the page. Please refresh.').css('color', '#e63946').show();
-    }
-});
+        */
     </script>
 </body>
 </html>

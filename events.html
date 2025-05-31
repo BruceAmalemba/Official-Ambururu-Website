@@ -3,21 +3,762 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Host unforgettable weddings, conferences, and cultural festivals at Ambururu Waterfalls Resort in Siaya, Kenya. Explore our event packages and book today!">
-    <meta name="keywords" content="Ambururu Waterfalls, Siaya, Kenya, events, weddings, conferences, cultural festivals, resort">
-    <title>Events - Ambururu Waterfalls & Resort</title>
-    <link rel="stylesheet" href="css/style.css">
+    <meta name="description" content="Host unforgettable weddings, conferences, and cultural festivals at Ambururu Waterfalls Resort in Kakamega, Kenya. Explore our event packages and book today!">
+    <meta name="keywords" content="Ambururu Waterfalls, Kakamega, Kenya, events, weddings, conferences, cultural festivals, resort">
+    <title>Events - Ambururu Waterfalls Resort</title>
+    <link rel="preload" href="images/50.jpg" as="image">
+    <link rel="preload" href="images/conference-event.jpg" as="image">
+    <link rel="preload" href="images/44.jpg" as="image">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        /* General Styles (from index.html) */
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: #ffffff;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        /* Header (from index.html, with dropdowns) */
+        .sticky-header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(0, 255, 153, 0.2);
+        }
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        .brand {
+            display: flex;
+            align-items: center;
+        }
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin-right: 1rem;
+            filter: drop-shadow(0 0 10px rgba(0, 255, 153, 0.5));
+            transition: transform 0.5s;
+        }
+        .logo:hover {
+            transform: rotate(360deg);
+        }
+        .brand h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00ff99;
+            font-size: 1.8rem;
+            margin: 0;
+            text-shadow: 0 0 10px rgba(0, 255, 153, 0.7);
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        nav ul li {
+            position: relative;
+            margin-left: 2rem;
+        }
+        nav ul li a {
+            color: #00ff99;
+            text-decoration: none;
+            font-weight: 500;
+            font-family: 'Orbitron', sans-serif;
+            transition: all 0.3s;
+            text-shadow: 0 0 5px rgba(0, 255, 153, 0.5);
+        }
+        nav ul li a:hover,
+        nav ul li a.active {
+            color: #ffffff;
+            text-shadow: 0 0 15px rgba(0, 255, 153, 1);
+        }
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            list-style: none;
+            padding: 0.5rem 0;
+            margin-top: 0.5rem;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 255, 153, 0.2);
+            z-index: 1001;
+        }
+        .dropdown-menu li a {
+            padding: 0.5rem 1rem;
+            display: block;
+            color: #00ff99;
+            text-shadow: none;
+        }
+        .dropdown-menu li a:hover {
+            background: rgba(0, 255, 153, 0.2);
+            color: #ffffff;
+        }
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #00ff99;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+        }
+        #hero-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        .hero-images {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem;
+        }
+        .hero-image {
+            width: 30%;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 255, 153, 0.3);
+            opacity: 0.8;
+            transition: transform 0.5s;
+        }
+        .hero-image:hover {
+            transform: scale(1.1);
+            opacity: 1;
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 3;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 3rem;
+            border-radius: 15px;
+            max-width: 90%;
+            box-shadow: 0 0 20px rgba(0, 255, 153, 0.3);
+        }
+        .hero-overlay h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            color: #00ff99;
+            text-shadow: 0 0 20px rgba(0, 255, 153, 0.8);
+            animation: hologram 2s infinite alternate;
+            margin: 0 0 1.5rem;
+        }
+        .hero-overlay p {
+            font-size: 1.5rem;
+            color: #ffffff;
+            margin: 0 0 2rem;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+        .cta-button {
+            background: linear-gradient(45deg, #00ff99, #00ccff);
+            color: #000000;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            transition: all 0.3s;
+            box-shadow: 0 0 20px rgba(0, 255, 153, 0.5);
+            display: inline-block;
+        }
+        .cta-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(0, 255, 153, 1);
+        }
+        .secondary {
+            background: transparent;
+            border: 2px solid #00ff99;
+            margin-left: 1rem;
+            color: #00ff99;
+        }
+        .secondary:hover {
+            background: #00ff99;
+            color: #000000;
+        }
+        @keyframes hologram {
+            0% { opacity: 0.8; transform: translateY(0); }
+            100% { opacity: 1; transform: translateY(-10px); }
+        }
+
+        /* Virtual Assistant */
+        .virtual-assistant {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        .assistant-orb {
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, #00ff99, #00ccff);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(0, 255, 153, 0.7);
+            animation: pulse 2s infinite;
+        }
+        .assistant-tooltip {
+            display: none;
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            background: rgba(0, 0, 0, 0.8);
+            color: #00ff99;
+            padding: 1rem;
+            border-radius: 10px;
+            width: 250px;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(0, 255, 153, 0.5);
+        }
+        .assistant-orb:hover .assistant-tooltip {
+            display: block;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 20px rgba(0, 255, 153, 0.7); }
+            50% { transform: scale(1.1); box-shadow: 0 0 30px rgba(0, 255, 153, 1); }
+            100% { transform: scale(1); box-shadow: 0 0 20px rgba(0, 255, 153, 0.7); }
+        }
+
+        /* Upcoming Events */
+        .upcoming-events {
+            padding: 5rem 0;
+            text-align: center;
+            position: relative;
+        }
+        #particles-js {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        .upcoming-events h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            color: #00ff99;
+            text-shadow: 0 0 15px rgba(0, 255, 153, 0.7);
+            margin: 0 0 3rem;
+            position: relative;
+            z-index: 1;
+        }
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        .event-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px rgba(0, 255, 153, 0.2);
+            transition: transform 0.5s, box-shadow 0.5s;
+            min-height: 450px;
+            position: relative;
+            overflow: hidden;
+        }
+        .event-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 30px rgba(0, 255, 153, 0.5);
+        }
+        .event-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            transition: transform 0.5s;
+        }
+        .event-card:hover img {
+            transform: scale(1.1);
+        }
+        .event-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            color: #00ff99;
+            margin: 0 0 0.5rem;
+            text-shadow: 0 0 10px rgba(0, 255, 153, 0.5);
+        }
+        .event-card p {
+            color: #ffffff;
+            margin: 0 0 1rem;
+            line-height: 1.6;
+        }
+        .calendar-button {
+            background: linear-gradient(45deg, #00ccff, #00ff99);
+            color: #000000;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            display: inline-block;
+            box-shadow: 0 0 10px rgba(0, 255, 153, 0.5);
+        }
+        .calendar-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(0, 255, 153, 1);
+        }
+
+        /* Event Types */
+        .event-types {
+            padding: 5rem 0;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.3);
+        }
+        .event-types h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            color: #00ff99;
+            text-shadow: 0 0 15px rgba(0, 255, 153, 0.7);
+            margin: 0 0 3rem;
+        }
+        .types-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        .type-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px rgba(0, 255, 153, 0.2);
+            transition: transform 0.5s, box-shadow 0.5s;
+            min-height: 400px;
+        }
+        .type-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 30px rgba(0, 255, 153, 0.5);
+        }
+        .type-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+        .type-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            color: #00ff99;
+            margin: 0 0 0.5rem;
+            text-shadow: 0 0 10px rgba(0, 255, 153, 0.5);
+        }
+        .type-card p {
+            color: #ffffff;
+            margin: 0 0 1rem;
+            line-height: 1.6;
+        }
+
+        /* Booking Form */
+        .book-event {
+            padding: 5rem 0;
+            text-align: center;
+            background: linear-gradient(45deg, #00ff99, #00ccff);
+            margin-bottom: 2rem;
+            box-shadow: 0 0 50px rgba(0, 255, 153, 0.5);
+        }
+        .book-event h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            color: #000000;
+            margin: 0 0 3rem;
+        }
+        #event-booking-form {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        #event-booking-form input,
+        #event-booking-form select,
+        #event-booking-form textarea {
+            padding: 1rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            width: 100%;
+            max-width: 360px;
+        }
+        #event-booking-form textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        #event-booking-form input:focus,
+        #event-booking-form select:focus,
+        #event-booking-form textarea:focus {
+            outline: none;
+            box-shadow: 0 0 10px rgba(0, 255, 153, 0.5);
+        }
+        #event-booking-form input.valid,
+        #event-booking-form select.valid,
+        #event-booking-form textarea.valid {
+            box-shadow: 0 0 10px rgba(0, 255, 153, 1);
+        }
+        #event-booking-form input.invalid,
+        #event-booking-form select.invalid,
+        #event-booking-form textarea.invalid {
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+        }
+        #event-booking-form button {
+            background: linear-gradient(45deg, #00ff99, #00ccff);
+            color: #000000;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            box-shadow: 0 0 20px rgba(0, 255, 153, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        #event-booking-form button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(0, 255, 153, 1);
+        }
+        #event-booking-form button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            border: 3px solid #ffffff;
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        /* Gallery Teaser */
+        .gallery-teaser {
+            padding: 5rem 0;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.3);
+        }
+        .gallery-teaser h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            color: #00ff99;
+            text-shadow: 0 0 15px rgba(0, 255, 153, 0.7);
+            margin: 0 0 2rem;
+        }
+        .gallery-teaser p {
+            font-size: 1.2rem;
+            color: #ffffff;
+            margin: 0 0 2rem;
+        }
+        .mini-gallery {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        .mini-gallery img {
+            width: 200px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 255, 153, 0.3);
+            transition: transform 0.5s;
+        }
+        .mini-gallery img:hover {
+            transform: scale(1.1);
+        }
+
+        /* Social Media */
+        .social-media {
+            padding: 3rem 0;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.3);
+        }
+        .social-media h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            color: #00ff99;
+            text-shadow: 0 0 15px rgba(0, 255, 153, 0.7);
+            margin: 0 0 2rem;
+        }
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+        .social-links a {
+            color: #00ff99;
+            font-size: 2.5rem;
+            transition: all 0.3s;
+            text-shadow: 0 0 10px rgba(0, 255, 153, 0.5);
+        }
+        .social-links a:hover {
+            color: #ffffff;
+            transform: scale(1.2);
+            text-shadow: 0 0 20px rgba(0, 255, 153, 1);
+        }
+        .x-feed {
+            max-width: 600px;
+            margin: 2rem auto;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px rgba(0, 255, 153, 0.2);
+        }
+        .x-post {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(0, 255, 153, 0.2);
+        }
+        .x-post:last-child {
+            border-bottom: none;
+        }
+        .x-post p {
+            margin: 0;
+            color: #ffffff;
+        }
+        .x-post span {
+            font-size: 0.8rem;
+            color: #00ccff;
+        }
+
+        /* Map Section */
+        .map {
+            padding: 5rem 0;
+            text-align: center;
+        }
+        .map h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            color: #00ff99;
+            text-shadow: 0 0 15px rgba(0, 255, 153, 0.7);
+            margin: 0 0 2rem;
+        }
+        #map {
+            width: 100%;
+            height: 500px;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(0, 255, 153, 0.3);
+        }
+        .map-description {
+            margin-top: 1rem;
+            font-size: 1.2rem;
+            color: #ffffff;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.8);
+            color: #ffffff;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        .footer-container p {
+            margin: 0 0 1rem;
+        }
+        .newsletter h4 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            color: #00ff99;
+            margin: 0 0 1.5rem;
+        }
+        .newsletter form {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+        .newsletter input {
+            padding: 0.75rem;
+            border: none;
+            border-radius: 5px;
+            width: 320px;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+        .newsletter button {
+            background: linear-gradient(45deg, #00ff99, #00ccff);
+            color: #000000;
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            box-shadow: 0 0 20px rgba(0, 255, 153, 0.5);
+        }
+        .newsletter button:hover {
+            box-shadow: 0 0 30px rgba(0, 255, 153, 1);
+        }
+
+        /* Back to Top */
+        #back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(45deg, #00ff99, #00ccff);
+            color: #000000;
+            padding: 1rem;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            display: none;
+            z-index: 1000;
+            box-shadow: 0 0 15px rgba(0, 255, 153, 0.5);
+        }
+        #back-to-top:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 25px rgba(0, 255, 153, 1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-images {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+            .hero-image {
+                width: 80%;
+            }
+        }
+        @media (max-width: 768px) {
+            .header-container {
+                flex-wrap: wrap;
+            }
+            nav ul {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
+            }
+            nav ul.active {
+                display: flex;
+            }
+            nav ul li {
+                margin: 1rem 0;
+            }
+            .dropdown:hover .dropdown-menu {
+                display: none;
+            }
+            .dropdown.active .dropdown-menu {
+                display: block;
+                position: static;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .hero-overlay h2 {
+                font-size: 2.5rem;
+            }
+            .hero-overlay p {
+                font-size: 1.2rem;
+            }
+            .events-grid,
+            .types-grid {
+                grid-template-columns: 1fr;
+            }
+            #event-booking-form input,
+            #event-booking-form select,
+            #event-booking-form textarea {
+                max-width: 100%;
+            }
+            .newsletter form {
+                flex-direction: column;
+                align-items: center;
+            }
+            .newsletter input {
+                width: 100%;
+                max-width: 300px;
+            }
+            .mini-gallery {
+                flex-direction: column;
+                align-items: center;
+            }
+            .mini-gallery img {
+                width: 100%;
+                max-width: 300px;
+            }
+            .assistant-tooltip {
+                width: 200px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <header class="sticky-header">
+    <!-- Header -->
+    <header class="sticky-header" role="banner">
         <div class="header-container">
-            <img src="logo/B2.jpg" alt="Ambururu Waterfalls Logo" class="logo">
-            <h1>Ambururu Waterfalls & Resort</h1>
-            <nav aria-label="Main navigation">
+            <div class="brand">
+                <img src="logo/B2.jpg" alt="Ambururu Waterfalls & Resort Logo" class="logo" width="80" height="80" onerror="this.src='https://via.placeholder.com/80?text=Logo';">
+                <h1>Ambururu Waterfalls</h1>
+            </div>
+            <nav id="main-nav" aria-label="Main navigation">
                 <ul>
                     <li><a href="index.html">Home</a></li>
                     <li class="dropdown">
@@ -43,82 +784,105 @@
                     <li><a href="blog.html">Blog</a></li>
                 </ul>
             </nav>
-            <button class="menu-toggle" aria-label="Toggle menu">
+            <button class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
                 <i class="fas fa-bars"></i>
             </button>
         </div>
     </header>
+
     <main>
         <!-- Hero Section -->
-        <section class="hero">
-            <div class="hero-carousel">
-                <div><img src="images/50.jpg" alt="Wedding ceremony by Ambururu Waterfalls" loading="lazy" onerror="this.src='https://via.placeholder.com/1200x600?text=Wedding+Event';"></div>
-                <div><img src="images/conference-event.jpg" alt="Conference setup at Ambururu Resort" loading="lazy" onerror="this.src='https://via.placeholder.com/1200x600?text=Conference+Event';"></div>
-                <div><img src="images/44.jpg" alt="Luo cultural festival at Ambururu" loading="lazy" onerror="this.src='https://via.placeholder.com/1200x600?text=Cultural+Festival';"></div>
-            </div>
-            <div class="carousel-controls">
-                <button class="carousel-prev" aria-label="Previous slide"><i class="fas fa-chevron-left"></i></button>
-                <button class="carousel-next" aria-label="Next slide"><i class="fas fa-chevron-right"></i></button>
+        <section class="hero" role="region" aria-label="Hero section">
+            <canvas id="hero-canvas"></canvas>
+            <div class="hero-images">
+                <img src="images/50.jpg" alt="Wedding ceremony by Ambururu Waterfalls" class="hero-image" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300?text=Wedding+Event';">
+                <img src="images/conference-event.jpg" alt="Conference setup at Ambururu Resort" class="hero-image" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300?text=Conference+Event';">
+                <img src="images/44.jpg" alt="Luo cultural festival at Ambururu" class="hero-image" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300?text=Cultural+Festival';">
             </div>
             <div class="hero-overlay">
                 <h2>Celebrate at Ambururu Waterfalls</h2>
-                <p>Host unforgettable events with the stunning backdrop of cascading waterfalls in Siaya, Kenya.</p>
-                <a href="booking.html" class="cta-button">Plan Your Event</a>
+                <p>Host unforgettable events with the stunning backdrop of cascading waterfalls in Kakamega, Kenya.</p>
+                <div class="hero-ctas">
+                    <a href="#book-event" class="cta-button">Plan Your Event</a>
+                    <a href="#upcoming-events" class="cta-button secondary">Explore Events</a>
+                </div>
             </div>
         </section>
+
+        <!-- Virtual Assistant -->
+        <div class="virtual-assistant">
+            <div class="assistant-orb">
+                <div class="assistant-tooltip">
+                    <p>Plan your perfect event!</p>
+                    <a href="#upcoming-events" style="color: #00ccff;">Upcoming Events</a> | 
+                    <a href="#event-types" style="color: #00ccff;">Event Types</a> | 
+                    <a href="#book-event" style="color: #00ccff;">Book Now</a>
+                </div>
+            </div>
+        </div>
+
         <!-- Upcoming Events -->
-        <section class="upcoming-events">
+        <section class="upcoming-events" id="upcoming-events" role="region" aria-label="Upcoming events">
+            <div id="particles-js"></div>
             <h2>Upcoming Events</h2>
             <div class="events-grid">
-                <div class="event-card" tabindex="0">
+                <div class="event-card" tabindex="0" role="article">
                     <img src="images/44.jpg" alt="Luo Cultural Festival at Ambururu" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300?text=Luo+Festival';">
                     <h3>Luo Cultural Festival</h3>
                     <p><strong>Date:</strong> July 15, 2025</p>
                     <p>Join us for a vibrant celebration of Luo traditions with music, dance, and local cuisine.</p>
-                    <a href="booking.html" class="cta-button secondary">Reserve Your Spot</a>
+                    <a href="#book-event" class="cta-button secondary">Reserve Your Spot</a>
+                    <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Luo+Cultural+Festival&dates=20250715T090000Z/20250715T220000Z&details=Join+us+at+Ambururu+Waterfalls+for+a+vibrant+celebration+of+Luo+traditions!&location=Ambururu+Waterfalls+Resort,+Kakamega,+Kenya" target="_blank" class="calendar-button">Add to Calendar</a>
                 </div>
-                <div class="event-card" tabindex="0">
+                <div class="event-card" tabindex="0" role="article">
                     <img src="images/wedding-showcase.jpg" alt="Wedding Showcase at Ambururu" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300?text=Wedding+Showcase';">
                     <h3>Wedding Showcase</h3>
                     <p><strong>Date:</strong> August 10, 2025</p>
                     <p>Explore our romantic wedding venues and meet top planners for your dream day.</p>
-                    <a href="booking.html" class="cta-button secondary">Plan Your Visit</a>
+                    <a href="#book-event" class="cta-button secondary">Plan Your Visit</a>
+                    <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Wedding+Showcase&dates=20250810T100000Z/20250810T180000Z&details=Explore+wedding+venues+at+Ambururu+Waterfalls+Resort!&location=Ambururu+Waterfalls+Resort,+Kakamega,+Kenya" target="_blank" class="calendar-button">Add to Calendar</a>
                 </div>
-                <div class="event-card" tabindex="0">
+                <div class="event-card" tabindex="0" role="article">
                     <img src="images/corporate-retreat.jpg" alt="Corporate Retreat at Ambururu" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300?text=Corporate+Retreat';">
                     <h3>Corporate Retreat</h3>
                     <p><strong>Date:</strong> September 5, 2025</p>
                     <p>Boost team synergy with our tailored corporate packages in a serene setting.</p>
                     <a href="#book-event" class="cta-button secondary">Book Now</a>
+                    <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Corporate+Retreat&dates=20250905T080000Z/20250905T170000Z&details=Corporate+retreat+at+Ambururu+Waterfalls+Resort!&location=Ambururu+Waterfalls+Resort,+Kakamega,+Kenya" target="_blank" class="calendar-button">Add to Calendar</a>
                 </div>
             </div>
         </section>
+
         <!-- Event Types -->
-        <section class="event-types">
+        <section class="event-types" id="event-types" role="region" aria-label="Event types">
             <h2>Event Types We Host</h2>
             <div class="types-grid">
-                <div class="type-card">
+                <div class="type-card" role="article">
                     <img src="images/wedding-venue.jpg" alt="Outdoor wedding venue by the falls" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300?text=Wedding+Venue';">
                     <h3>Weddings</h3>
                     <p>Say “I do” amidst the romantic cascade of Ambururu Waterfalls with customized packages.</p>
+                    <a href="#book-event" class="cta-button secondary" onclick="document.querySelector('select[name=event-type]').value='wedding'">Request Quote</a>
                 </div>
-                <div class="type-card">
+                <div class="type-card" role="article">
                     <img src="images/conference-venue.jpg" alt="Conference room at Ambururu Resort" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300?text=Conference+Venue';">
                     <h3>Conferences</h3>
                     <p>Host impactful meetings with state-of-the-art facilities and scenic inspiration.</p>
+                    <a href="#book-event" class="cta-button secondary" onclick="document.querySelector('select[name=event-type]').value='conference'">Request Quote</a>
                 </div>
-                <div class="type-card">
+                <div class="type-card" role="article">
                     <img src="images/cultural-event.jpg" alt="Cultural event at Ambururu" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300?text=Cultural+Event';">
                     <h3>Cultural Festivals</h3>
-                    <p>Celebrate Siaya’s heritage with vibrant festivals featuring music, dance, and art.</p>
+                    <p>Celebrate Kakamega’s heritage with vibrant festivals featuring music, dance, and art.</p>
+                    <a href="#book-event" class="cta-button secondary" onclick="document.querySelector('select[name=event-type]').value='cultural-festival'">Request Quote</a>
                 </div>
             </div>
         </section>
+
         <!-- Booking Form -->
-        <section class="book-event" id="book-event">
+        <section class="book-event" id="book-event" role="region" aria-label="Event booking">
             <h2>Plan Your Event</h2>
-            <form id="event-booking-form" action="https://formspree.io/f/your-form-id" method="POST">
-                <input type="text" name="name" placeholder="Your Name" required aria-label="Your name">
+            <form id="event-booking-form" action="https://formspree.io/f/your-form-id" method="POST" enctype="multipart/form-data">
+                <input type="text" name="name" placeholder="Your Name" required aria-label="Your full name">
                 <input type="email" name="email" placeholder="Your Email" required aria-label="Email address">
                 <select name="event-type" required aria-label="Event type">
                     <option value="" disabled selected>Select Event Type</option>
@@ -127,36 +891,325 @@
                     <option value="cultural-festival">Cultural Festival</option>
                     <option value="other">Other</option>
                 </select>
-                <input type="date" name="date" required aria-label="Event date">
+                <input type="date" name="date" required aria-label="Event date" min="2025-05-31">
                 <textarea name="details" placeholder="Event Details" rows="5" required aria-label="Event details"></textarea>
-                <button type="submit" class="cta-button">Submit Inquiry</button>
+                <input type="file" name="proposal" accept=".pdf,.jpg,.png" aria-label="Upload event proposal or mood board">
+                <button type="submit" class="cta-button" aria-label="Submit event inquiry">Submit Inquiry</button>
             </form>
         </section>
+
         <!-- Gallery Teaser -->
-        <section class="gallery-teaser">
+        <section class="gallery-teaser" role="region" aria-label="Gallery teaser">
             <h2>See Our Event Spaces</h2>
             <p>Explore stunning venues that make every occasion unforgettable.</p>
-            <a href="gallery.html" class="cta-button">View Gallery</a>
+            <div class="mini-gallery">
+                <img src="images/50.jpg" alt="Wedding venue at Ambururu" loading="lazy" onerror="this.src='https://via.placeholder.com/200x150?text=Wedding+Venue';">
+                <img src="images/conference-venue.jpg" alt="Conference venue at Ambururu" loading="lazy" onerror="this.src='https://via.placeholder.com/200x150?text=Conference+Venue';">
+                <img src="images/cultural-event.jpg" alt="Cultural event venue at Ambururu" loading="lazy" onerror="this.src='https://via.placeholder.com/200x150?text=Cultural+Event';">
+            </div>
+            <a href="gallery.html" class="cta-button" style="margin-top: 2rem;">View Full Gallery</a>
+        </section>
+
+        <!-- Social Media -->
+        <section class="social-media" role="region" aria-label="Social media">
+            <h2>Connect With Us</h2>
+            <div class="social-links">
+                <a href="https://www.facebook.com/ambururu/" target="_blank" aria-label="Visit our Facebook page"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://x.com/Ambururu_W" target="_blank" aria-label="Visit our Twitter profile"><i class="fab fa-x-twitter"></i></a>
+                <a href="https://www.instagram.com/ambururu1/" target="_blank" aria-label="Visit our Instagram page"><i class="fab fa-instagram"></i></a>
+            </div>
+            <div class="x-feed" id="x-feed">
+                <div class="x-post"><p>Planning a wedding? Our venues are perfect! 💍 #AmbururuEvents</p><span class="x-posted">Posted May 31, 2025</span></div>
+                <div class="x-post"><p>Join our Luo Cultural Festival this July! 🌟 #Kakamega</p><span class="x-posted">Posted May 30, 2025</span></div>
+            </div>
+        </section>
+
+        <!-- Map Section -->
+        <section class="map" role="region" aria-label="Map section">
+            <h2>Our Location</h2>
+            <div id="map"></div>
+            <p class="map-description">Nestled in Kakamega, Kenya, easily accessible via the Kisumu-Kakamega road.</p>
         </section>
     </main>
-    <footer>
+
+    <footer role="contentinfo">
         <div class="footer-container">
             <p>© 2025 Ambururu Waterfalls. All rights reserved.</p>
             <div class="social-links">
-                <a href="https://www.facebook.com/ambururu/" target="_blank" aria-label="Visit our Facebook page"><i class="fab fa-facebook-f fa-2x"></i></a>
-                <a href="https://x.com/Ambururu_W" target="_blank" aria-label="Visit our Twitter profile"><i class="fab fa-twitter fa-2x"></i></a>
-                <a href="https://www.instagram.com/ambururu1/" target="_blank" aria-label="Visit our Instagram page"><i class="fab fa-instagram fa-2x"></i></a>
+                <a href="https://www.facebook.com/ambururu/" target="_blank" aria-label="Visit our Facebook page"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://x.com/Ambururu_W" target="_blank" aria-label="Visit our Twitter profile"><i class="fab fa-x-twitter"></i></a>
+                <a href="https://www.instagram.com/ambururu1/" target="_blank" aria-label="Visit our Instagram page"><i class="fab fa-instagram"></i></a>
             </div>
             <div class="newsletter">
                 <h4>Stay Updated</h4>
                 <form id="newsletter-form" action="https://formspree.io/f/your-form-id" method="POST">
-                    <input type="email" name="email" placeholder="Enter your email" required aria-label="Email address">
+                    <input type="email" name="email" placeholder="Enter your email" required aria-label="Email address for newsletter">
                     <button type="submit">Subscribe</button>
                 </form>
             </div>
         </div>
     </footer>
+
+    <a href="#" id="back-to-top" class="cta-button" aria-label="Back to top">↑</a>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="js/script.js"></script>
+    <script>
+        // Menu Toggle
+        $(document).ready(function() {
+            $('.menu-toggle').on('click', function() {
+                $('#main-nav ul').toggleClass('active');
+                const expanded = $(this).attr('aria-expanded') === 'true' ? 'false' : 'true';
+                $(this).attr('aria-expanded', expanded);
+            });
+
+            // Dropdown Toggle on Mobile
+            $('.dropdown').on('click', function() {
+                if ($(window).width() < 768) {
+                    $(this).toggleClass('active');
+                }
+            });
+
+            // Form Validation
+            const form = $('#event-booking-form');
+            const inputs = form.find('input, select, textarea');
+            inputs.on('input change', function() {
+                const input = $(this);
+                if (input[0].checkValidity()) {
+                    input.addClass('valid').removeClass('invalid');
+                } else {
+                    input.addClass('invalid').removeClass('valid');
+                }
+            });
+
+            // Form Submission
+            form.on('submit', function(e) {
+                e.preventDefault();
+                const button = form.find('button');
+                button.prop('disabled', true).append('<span class="loading"></span>');
+                const formData = new FormData(this);
+                $.ajax({
+                    url: form.attr('action'),
+                    method: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function() {
+                        button.remove();
+                        confetti({
+                            particleCount: 100,
+                            spread: 70,
+                            origin: { y: 0.6 }
+                        });
+                        form.prepend('<p style="color: #00ff99; font-family: Orbitron;">Inquiry Sent! We’ll get back to you soon.</p>');
+                        form[0].reset();
+                        inputs.removeClass('valid invalid');
+                    },
+                    error: function() {
+                        alert('Error sending inquiry. Please try again later.');
+                        button.prop('disabled', false).find('.loading').remove();
+                    }
+                });
+            });
+
+            // Debug Missing Images
+            $('img').on('error', function() {
+                console.log(`Image not found: ${this.src}`);
+            });
+        });
+
+        // Newsletter Form
+        $('#newsletter-form').on('submit', function(e) {
+            e.preventDefault();
+            const email = $(this).find('input[name="email"]').val();
+            if (email) {
+                alert('Thank you for subscribing!');
+                $(this)[0].reset();
+            }
+        });
+
+        // 3D Waterfall Animation
+        const canvas = document.getElementById('hero-canvas');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        const particleCount = 5000;
+        const particles = new THREE.BufferGeometry();
+        const positions = new Float32Array(particleCount * 3);
+        const velocities = new Float32Array(particleCount * 3);
+        for (let i = 0; i < particleCount; i++) {
+            positions[i * 3] = Math.random() * 100 - 50;
+            positions[i * 3 + 1] = Math.random() * 100;
+            positions[i * 3 + 2] = Math.random() * 100 - 50;
+            velocities[i * 3] = 0;
+            velocities[i * 3 + 1] = -Math.random() * 2 - 1;
+            velocities[i * 3 + 2] = 0;
+        }
+        particles.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        const particleMaterial = new THREE.PointsMaterial({
+            color: 0x00ccff,
+            size: 0.5,
+            transparent: true,
+            opacity: 0.7
+        });
+        const particleSystem = new THREE.Points(particles, particleMaterial);
+        scene.add(particleSystem);
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+        scene.add(ambientLight);
+        const pointLight = new THREE.PointLight(0x00ff99, 1, 100);
+        pointLight.position.set(0, 50, 50);
+        scene.add(pointLight);
+        camera.position.z = 50;
+        function animate() {
+            requestAnimationFrame(animate);
+            const positions = particleSystem.geometry.attributes.position.array;
+            for (let i = 0; i < particleCount; i++) {
+                positions[i * 3 + 1] += velocities[i * 3 + 1];
+                if (positions[i * 3 + 1] < -50) {
+                    positions[i * 3 + 1] = 50;
+                }
+            }
+            particleSystem.geometry.attributes.position.needsUpdate = true;
+            renderer.render(scene, camera);
+        }
+        animate();
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // Particles.js for Upcoming Events
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: '#00ff99' },
+                shape: { type: 'circle' },
+                opacity: { value: 0.5, random: true },
+                size: { value: 3, random: true },
+                line_linked: { enable: true, distance: 150, color: '#00ccff', opacity: 0.4, width: 1 },
+                move: { enable: true, speed: 2, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' }, resize: true },
+                modes: { repulse: { distance: 100, duration: 0.4 }, push: { particles_nb: 4 } }
+            },
+            retina_detect: true
+        });
+
+        // GSAP Animations
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.from('.hero-image', {
+            opacity: 0,
+            scale: 0.8,
+            duration: 1.5,
+            stagger: 0.3,
+            ease: 'power3.out'
+        });
+        gsap.from('.event-card', {
+            opacity: 0,
+            y: 100,
+            duration: 1.5,
+            stagger: 0.3,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.upcoming-events',
+                start: 'top 80%'
+            }
+        });
+        gsap.from('.type-card', {
+            opacity: 0,
+            y: 100,
+            duration: 1.5,
+            stagger: 0.3,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.event-types',
+                start: 'top 80%'
+            }
+        });
+        gsap.from('#event-booking-form', {
+            opacity: 0,
+            y: 100,
+            duration: 1.5,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.book-event',
+                start: 'top 80%'
+            }
+        });
+        gsap.from('.mini-gallery img', {
+            opacity: 0,
+            scale: 0.8,
+            duration: 1,
+            stagger: 0.2,
+            ease: 'backOut',
+            scrollTrigger: {
+                trigger: '.gallery-teaser',
+                start: 'top 80%'
+            }
+        });
+        gsap.from('#map', {
+            opacity: 0,
+            scale: 0.8,
+            duration: 1.5,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.map',
+                start: 'top 80%'
+            }
+        });
+
+        // Back to Top Button
+        $(window).on('scroll', function() {
+            if ($(this).scrollTop() > 300) {
+                $('#back-to-top').fadeIn();
+            } else {
+                $('#back-to-top').fadeOut();
+            }
+        });
+        $('#back-to-top').on('click', function(e) {
+            e.preventDefault();
+            $('html, body').animate({ scrollTop: 0 }, 500);
+        });
+
+        // Ambient Waterfall Sound
+        const audio = new Audio('https://www.zapsplat.com/wp-content/uploads/2015/sound-effects-77317/zapsplat_nature_waterfall_small_flowing_loop_001_81338.mp3');
+        audio.loop = true;
+        audio.volume = 0.3;
+        audio.play().catch(() => console.log('Audio playback failed. Autoplay may be blocked.'));
+
+        // Mapbox 3D Globe
+        mapboxgl.accessToken = 'pk.eyJ1IjoiZXhhbXBsZSIsImEiOiJja3Zhcmk1c3QwNTQ1MnFtb3J0c2d5c2E2In0.8fakeToken1234567890';
+        const map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/satellite-v9',
+            center: [34.751865, 0.282730],
+            zoom: 12,
+            pitch: 60,
+            bearing: -60,
+            projection: 'globe'
+        });
+        map.on('load', () => {
+            map.addLayer({
+                id: 'sky',
+                type: 'sky',
+                paint: {
+                    'sky-type': 'atmosphere',
+                    'sky-atmosphere-sun': [0, 0],
+                    'sky-atmosphere-sun-intensity': 5
+                }
+            });
+            new mapboxgl.Marker({ color: '#00ff99' })
+                .setLngLat([34.751865, 0.282730])
+                .setPopup(new mapboxgl.Popup().setHTML(`
+                    <h3>Ambururu Waterfalls</h3>
+                    <p>Kakamega, Kenya</p>
+                    <a href="https://www.google.com/maps/dir/?api=1&destination=0.282730,34.751865" target="_blank" style="color: #00ccff;">Get Directions</a>
+                `))
+                .addTo(map);
+        });
+    </script>
 </body>
 </html>

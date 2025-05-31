@@ -4,24 +4,477 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ambururu Waterfalls & Resort | Kakamega, Kenya</title>
-    <meta name="description" content="Discover Ambururu Waterfalls & Resort in Kakamega, Kenya. Experience luxury stays, gourmet dining, and thrilling nature adventures amidst cascading waterfalls.">
-    <meta name="keywords" content="Ambururu Waterfalls, Kakamega, Kenya, resort, luxury, dining, adventure, eco-tourism">
+    <meta name="description" content="Experience the future of eco-luxury at Ambururu Waterfalls & Resort in Kakamega, Kenya. Immerse yourself in 3D adventures, gourmet dining, and cascading waterfalls like never before.">
+    <meta name="keywords" content="Ambururu Waterfalls, Kakamega, Kenya, resort, luxury, dining, adventure, eco-tourism, futuristic travel">
     <link rel="preload" href="images/29.jpg" as="image">
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Playfair+Display:wght@700&display=swap" as="style">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Playfair+Display:wght@700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <!-- Mapbox for 3D Globe -->
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
+    <!-- Three.js for 3D Effects -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <!-- GSAP for Animations -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <!-- Particles.js for Particle Effects -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: #ffffff;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .sticky-header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(0, 255, 153, 0.2);
+        }
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        .brand {
+            display: flex;
+            align-items: center;
+        }
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin-right: 1rem;
+            filter: drop-shadow(0 0 10px rgba(0, 255, 153, 0.5));
+            transition: transform 0.5s;
+        }
+        .logo:hover {
+            transform: rotate(360deg);
+        }
+        .brand h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00ff99;
+            font-size: 1.8rem;
+            margin: 0;
+            text-shadow: 0 0 10px rgba(0, 255, 153, 0.7);
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        nav ul li {
+            margin-left: 2rem;
+        }
+        nav ul li a {
+            color: #00ff99;
+            text-decoration: none;
+            font-weight: 500;
+            font-family: 'Orbitron', sans-serif;
+            transition: all 0.3s;
+            text-shadow: 0 0 5px rgba(0, 255, 153, 0.5);
+        }
+        nav ul li a:hover,
+        nav ul li a.active {
+            color: #ffffff;
+            text-shadow: 0 0 15px rgba(0, 255, 153, 1);
+        }
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #00ff99;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+        }
+        #hero-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 2;
+        }
+        .hero-overlay h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 5rem;
+            color: #00ff99;
+            text-shadow: 0 0 20px rgba(0, 255, 153, 0.8);
+            animation: hologram 2s infinite alternate;
+        }
+        .hero-overlay p {
+            font-size: 1.5rem;
+            color: #ffffff;
+            margin: 1rem 0;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+        .cta-button {
+            background: linear-gradient(45deg, #00ff99, #00ccff);
+            color: #000000;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            transition: all 0.3s;
+            box-shadow: 0 0 20px rgba(0, 255, 153, 0.5);
+        }
+        .cta-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(0, 255, 153, 1);
+        }
+        .secondary {
+            background: transparent;
+            border: 2px solid #00ff99;
+            margin-left: 1rem;
+            color: #00ff99;
+        }
+        .secondary:hover {
+            background: #00ff99;
+            color: #000000;
+        }
+        @keyframes hologram {
+            0% { opacity: 0.8; transform: translateY(0); }
+            100% { opacity: 1; transform: translateY(-10px); }
+        }
+
+        /* Virtual Assistant */
+        .virtual-assistant {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        .assistant-orb {
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, #00ff99, #00ccff);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(0, 255, 153, 0.7);
+            animation: pulse 2s infinite;
+        }
+        .assistant-tooltip {
+            display: none;
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            background: rgba(0, 0, 0, 0.8);
+            color: #00ff99;
+            padding: 1rem;
+            border-radius: 10px;
+            width: 250px;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(0, 255, 153, 0.5);
+        }
+        .assistant-orb:hover .assistant-tooltip {
+            display: block;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 20px rgba(0, 255, 153, 0.7); }
+            50% { transform: scale(1.1); box-shadow: 0 0 30px rgba(0, 255, 153, 1); }
+            100% { transform: scale(1); box-shadow: 0 0 20px rgba(0, 255, 153, 0.7); }
+        }
+
+        /* Features Section */
+        .features {
+            padding: 5rem 0;
+            text-align: center;
+            position: relative;
+        }
+        #particles-js {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        .features-header h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            color: #00ff99;
+            text-shadow: 0 0 15px rgba(0, 255, 153, 0.7);
+            margin: 0 0 1rem;
+            z-index: 1;
+            position: relative;
+        }
+        .features-subtitle {
+            font-size: 1.2rem;
+            color: #ffffff;
+            margin: 0 0 3rem;
+            z-index: 1;
+            position: relative;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        .feature {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px rgba(0, 255, 153, 0.2);
+            transition: transform 0.5s, box-shadow 0.5s;
+        }
+        .feature:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 30px rgba(0, 255, 153, 0.5);
+        }
+        .feature img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            filter: brightness(0.9);
+        }
+        .feature h4 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            color: #00ff99;
+            margin: 0 0 0.5rem;
+            text-shadow: 0 0 10px rgba(0, 255, 153, 0.5);
+        }
+        .feature p {
+            color: #ffffff;
+            margin: 0;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 5rem 0;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+        .testimonials h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            color: #00ff99;
+            text-shadow: 0 0 15px rgba(0, 255, 153, 0.7);
+            margin: 0 0 3rem;
+        }
+        .testimonials-container {
+            perspective: 1000px;
+            max-width: 800px;
+            margin: 0 auto;
+            height: 300px;
+        }
+        .testimonial {
+            position: absolute;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px rgba(0, 255, 153, 0.3);
+            opacity: 0;
+            transform: rotateY(90deg);
+            transition: all 0.5s;
+        }
+        .testimonial.active {
+            opacity: 1;
+            transform: rotateY(0deg);
+        }
+        .testimonial p {
+            font-size: 1.2rem;
+            color: #ffffff;
+            font-style: italic;
+            margin: 0;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 5rem 0;
+            background: linear-gradient(45deg, #00ff99, #00ccff);
+            position: relative;
+            box-shadow: 0 0 50px rgba(0, 255, 153, 0.5);
+        }
+        .cta-section h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            color: #000000;
+            margin: 0 0 1rem;
+        }
+        .cta-section p {
+            font-size: 1.2rem;
+            color: #000000;
+            margin: 0 0 2rem;
+        }
+        .countdown {
+            font-size: 2rem;
+            font-family: 'Orbitron', sans-serif;
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+            margin-bottom: 2rem;
+        }
+
+        /* Map Section */
+        .map {
+            padding: 5rem 0;
+            text-align: center;
+        }
+        .map h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            color: #00ff99;
+            text-shadow: 0 0 15px rgba(0, 255, 153, 0.7);
+            margin: 0 0 2rem;
+        }
+        #map {
+            width: 100%;
+            height: 500px;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(0, 255, 153, 0.3);
+        }
+        .map-description {
+            margin-top: 1rem;
+            font-size: 1.2rem;
+            color: #ffffff;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.8);
+            color: #ffffff;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        .social-links a {
+            color: #00ff99;
+            margin: 0 1.5rem;
+            font-size: 1.8rem;
+            transition: all 0.3s;
+        }
+        .social-links a:hover {
+            color: #ffffff;
+            text-shadow: 0 0 15px rgba(0, 255, 153, 1);
+        }
+        .newsletter h4 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            color: #00ff99;
+            margin: 0 0 1.5rem;
+        }
+        .newsletter form {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+        .newsletter input {
+            padding: 0.75rem;
+            border: none;
+            border-radius: 5px;
+            width: 320px;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+        .newsletter button {
+            background: linear-gradient(45deg, #00ff99, #00ccff);
+            color: #000000;
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            box-shadow: 0 0 20px rgba(0, 255, 153, 0.5);
+        }
+        .newsletter button:hover {
+            box-shadow: 0 0 30px rgba(0, 255, 153, 1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-wrap: wrap;
+            }
+            nav ul {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
+            }
+            nav ul.active {
+                display: flex;
+            }
+            nav ul li {
+                margin: 1rem 0;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .hero-overlay h2 {
+                font-size: 3rem;
+            }
+            .hero-overlay p {
+                font-size: 1.2rem;
+            }
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            .newsletter form {
+                flex-direction: column;
+                align-items: center;
+            }
+            .newsletter input {
+                width: 100%;
+                max-width: 300px;
+            }
+            .assistant-tooltip {
+                width: 200px;
+            }
+        }
+    </style>
 </head>
 <body>
     <header class="sticky-header" role="banner">
         <div class="header-container">
             <div class="brand">
-                <img src="logo/B2.jpg" alt="Ambururu Waterfalls & Resort Logo" class="logo" width="80" height="80">
-                <h1>Ambururu Waterfalls & Resort</h1>
+                <img src="logo/B2.jpg" alt="Ambururu Waterfalls & Resort Logo" class="logo" width="80" height="80" onerror="this.src='https://via.placeholder.com/80?text=Logo';">
+                <h1>Ambururu Waterfalls</h1>
             </div>
             <nav id="main-nav" aria-label="Main navigation">
                 <ul>
@@ -42,85 +495,73 @@
         </div>
     </header>
     <main>
-        <!-- Hero Section -->
-        <section class="hero parallax" role="region" aria-label="Hero section">
-            <div class="hero-carousel">
-                <div><img src="images/29.jpg" alt="Ambururu Waterfalls cascading over lush green rocks in Kakamega" width="1200" height="600" onerror="this.src='https://via.placeholder.com/1200x600?text=Ambururu+Waterfalls';"></div>
-                <div><img src="images/1.jpg" alt="Luxury eco-resort with a stunning waterfall backdrop" width="1200" height="600" onerror="this.src='https://via.placeholder.com/1200x600?text=Ambururu+Resort';"></div>
-                <div><img src="images/31.jpg" alt="Outdoor dining experience beside Ambururu Waterfalls" width="1200" height="600" onerror="this.src='https://via.placeholder.com/1200x600?text=Ambururu+Dining';"></div>
-            </div>
-            <div class="carousel-controls">
-                <button class="carousel-prev" aria-label="Previous slide"><i class="fas fa-chevron-left"></i></button>
-                <button class="carousel-next" aria-label="Next slide"><i class="fas fa-chevron-right"></i></button>
-            </div>
+        <!-- Hero Section with 3D Waterfall -->
+        <section class="hero" role="region" aria-label="Hero section">
+            <canvas id="hero-canvas"></canvas>
             <div class="hero-overlay">
-                <h2>Welcome to Ambururu Waterfalls</h2>
-                <p>Immerse yourself in the serene beauty of Kakamega’s cascading falls, where eco-luxury meets thrilling adventures and delectable cuisine.</p>
+                <h2>Welcome to Ambururu</h2>
+                <p>A futuristic eco-luxury experience amidst Kakamega’s cascading waterfalls.</p>
                 <div class="hero-ctas">
-                    <a href="booking.html" class="cta-button">Book Your Stay</a>
-                    <a href="gallery.html" class="cta-button secondary">Explore Gallery</a>
+                    <a href="booking.html" class="cta-button">Book Your Journey</a>
+                    <a href="gallery.html" class="cta-button secondary">Explore Now</a>
                 </div>
             </div>
         </section>
-        <!-- Features Section -->
+        <!-- Virtual Assistant -->
+        <div class="virtual-assistant">
+            <div class="assistant-orb">
+                <div class="assistant-tooltip">
+                    <p>Welcome to Ambururu! Let me guide you through a futuristic adventure. Where would you like to start?</p>
+                    <a href="dining.html" style="color: #00ccff;">Dining</a> | 
+                    <a href="activities.html" style="color: #00ccff;">Activities</a>
+                </div>
+            </div>
+        </div>
+        <!-- Features Section with Particles -->
         <section class="features" role="region" aria-label="Features section">
-    <div class="features-header">
-        <h3 id="features-heading" aria-describedby="features-subtitle">Why Choose Ambururu?</h3>
-        <p id="features-subtitle" class="features-subtitle">Unforgettable Eco-Luxury Awaits!</p>
-        <span class="header-decor"><i class="fas fa-leaf"></i></span>
+            <div id="particles-js"></div>
+            <div class="features-header">
+                <h3 id="features-heading">Discover the Future of Travel</h3>
+                <p class="features-subtitle">Unforgettable Eco-Luxury Awaits!</p>
             </div>
             <div class="feature-grid">
                 <div class="feature" tabindex="0" role="article">
-                    <i class="fas fa-tree fa-3x" aria-hidden="true"></i>
-                    <img src="images/9.jpg" alt="Guests planting native trees at Ambururu Waterfalls for conservation" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300?text=Tree+Planting';">
-                    <h4>Eco-Friendly Tree Planting</h4>
-                    <p>Join our conservation efforts by planting native trees, preserving Kakamega’s lush ecosystem for future generations.</p>
+                    <img src="images/9.jpg" alt="Guests planting native trees at Ambururu Waterfalls" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300?text=Tree+Planting';">
+                    <h4>Eco-Futuristic Conservation</h4>
+                    <p>Plant native trees with AR guidance to preserve Kakamega’s ecosystem.</p>
                 </div>
                 <div class="feature" tabindex="0" role="article">
-                    <i class="fas fa-bed fa-3x" aria-hidden="true"></i>
                     <img src="images/14.jpg" alt="Eco-luxury suite with panoramic waterfall views at Ambururu" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300?text=Accommodation';">
-                    <h4>Eco-Luxury Stays</h4>
-                    <p>Relax in sustainable suites with breathtaking views of the falls.</p>
+                    <h4>Holographic Suites</h4>
+                    <p>Stay in smart suites with 3D waterfall projections.</p>
                 </div>
                 <div class="feature" tabindex="0" role="article">
-                    <i class="fas fa-utensils fa-3x" aria-hidden="true"></i>
                     <img src="images/10.jpg" alt="Gourmet dining featuring local Kenyan flavors by Ambururu Waterfalls" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300?text=Dining';">
-                    <h4>Gourmet Dining</h4>
-                    <p>Savor fresh tilapia, nyama choma, and tropical desserts by the falls.</p>
+                    <h4>AI-Curated Dining</h4>
+                    <p>Enjoy dishes tailored to your taste with AI recommendations.</p>
                 </div>
             </div>
         </section>
-        <!-- Testimonials Section -->
+        <!-- Testimonials Section with 3D Carousel -->
         <section class="testimonials" role="region" aria-label="Testimonials section">
             <h3>What Our Guests Say</h3>
-            <div class="testimonials-slider">
-                <div class="testimonial">
-                    <p>“A magical escape! The waterfalls and hospitality made our stay unforgettable.” – Sarah M., Google Maps</p>
-                </div>
-                <div class="testimonial">
-                    <p>“The food was incredible, and the views are breathtaking!” – John K., Tripadvisor</p>
-                </div>
-                <div class="testimonial">
-                    <p>“Perfect blend of adventure and luxury. Highly recommend!” – Aisha L., Instagram</p>
-                </div>
-            </div>
-            <div class="slider-controls">
-                <button class="slider-prev" aria-label="Previous testimonial"><i class="fas fa-chevron-left"></i></button>
-                <button class="slider-next" aria-label="Next testimonial"><i class="fas fa-chevron-right"></i></button>
+            <div class="testimonials-container">
+                <div class="testimonial"><p>“A magical escape! The waterfalls and hospitality made our stay unforgettable.” – Sarah M., Google Maps</p></div>
+                <div class="testimonial"><p>“The food was incredible, and the views are breathtaking!” – John K., Tripadvisor</p></div>
+                <div class="testimonial"><p>“Perfect blend of adventure and luxury. Highly recommend!” – Aisha L., Instagram</p></div>
             </div>
         </section>
-        <!-- CTA Section -->
+        <!-- CTA Section with Countdown -->
         <section class="cta-section" role="region" aria-label="Call to action section">
-            <h3>Start Your Adventure Today</h3>
-            <p>Join us at Ambururu Waterfalls for an unforgettable experience in Kakamega’s natural paradise.</p>
+            <h3>Limited Time Offer!</h3>
+            <p>Book by midnight on May 31, 2025, for an exclusive futuristic experience.</p>
+            <div class="countdown" id="countdown"></div>
             <a href="booking.html" class="cta-button">Book Now</a>
         </section>
-        <!-- Map Section -->
+        <!-- Map Section with 3D Globe -->
         <section class="map" role="region" aria-label="Map section">
             <h3>Find Us in Kakamega</h3>
-            <div class="map-container">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.757411396458!2d34.75186561462929!3d0.282730699672199!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMMKwMTYnNTguMiJOIDM0wrA0NScwNi43IkU!5e0!3m2!1sen!2s!4v1698161234567" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" title="Map of Ambururu Waterfalls in Kakamega, Kenya"></iframe>
-            </div>
+            <div id="map"></div>
             <p class="map-description">Nestled in Kakamega, Kenya, easily accessible via the Kisumu-Busia road.</p>
         </section>
     </main>
@@ -128,9 +569,9 @@
         <div class="footer-container">
             <p>© 2025 Ambururu Waterfalls. All rights reserved.</p>
             <div class="social-links">
-                <a href="https://www.facebook.com/ambururu/" target="_blank" aria-label="Visit our Facebook page"><i class="fab fa-facebook-f fa-2x"></i></a>
-                <a href="https://x.com/Ambururu_W" target="_blank" aria-label="Visit our Twitter profile"><i class="fab fa-twitter fa-2x"></i></a>
-                <a href="https://www.instagram.com/ambururu1/" target="_blank" aria-label="Visit our Instagram page"><i class="fab fa-instagram fa-2x"></i></a>
+                <a href="https://www.facebook.com/ambururu/" target="_blank" aria-label="Visit our Facebook page"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://x.com/Ambururu_W" target="_blank" aria-label="Visit our Twitter profile"><i class="fab fa-x-twitter"></i></a>
+                <a href="https://www.instagram.com/ambururu1/" target="_blank" aria-label="Visit our Instagram page"><i class="fab fa-instagram"></i></a>
             </div>
             <div class="newsletter">
                 <h4>Stay Updated</h4>
@@ -141,10 +582,185 @@
             </div>
         </div>
     </footer>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-    <script src="js/script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // Menu Toggle
+        $(document).ready(function() {
+            $('.menu-toggle').on('click', function() {
+                $('#main-nav ul').toggleClass('active');
+                const expanded = $(this).attr('aria-expanded') === 'true' ? 'false' : 'true';
+                $(this).attr('aria-expanded', expanded);
+            });
+
+            // Newsletter Form Submission
+            $('#newsletter-form').on('submit', function(e) {
+                e.preventDefault();
+                const email = $(this).find('input[name="email"]').val();
+                if (email) {
+                    alert('Thank you for subscribing!');
+                    $(this)[0].reset();
+                }
+            });
+
+            // Debug Missing Images
+            $('img').on('error', function() {
+                console.log(`Image not found: ${this.src}`);
+            });
+        });
+
+        // 3D Waterfall Animation in Hero Section
+        const canvas = document.getElementById('hero-canvas');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+
+        // Particle System for Waterfall Effect
+        const particleCount = 5000;
+        const particles = new THREE.BufferGeometry();
+        const positions = new Float32Array(particleCount * 3);
+        const velocities = new Float32Array(particleCount * 3);
+        for (let i = 0; i < particleCount; i++) {
+            positions[i * 3] = Math.random() * 100 - 50;
+            positions[i * 3 + 1] = Math.random() * 100;
+            positions[i * 3 + 2] = Math.random() * 100 - 50;
+            velocities[i * 3] = 0;
+            velocities[i * 3 + 1] = -Math.random() * 2 - 1;
+            velocities[i * 3 + 2] = 0;
+        }
+        particles.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        const particleMaterial = new THREE.PointsMaterial({
+            color: 0x00ccff,
+            size: 0.5,
+            transparent: true,
+            opacity: 0.7
+        });
+        const particleSystem = new THREE.Points(particles, particleMaterial);
+        scene.add(particleSystem);
+
+        // Lighting
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+        scene.add(ambientLight);
+        const pointLight = new THREE.PointLight(0x00ff99, 1, 100);
+        pointLight.position.set(0, 50, 50);
+        scene.add(pointLight);
+
+        camera.position.z = 50;
+
+        function animate() {
+            requestAnimationFrame(animate);
+            const positions = particleSystem.geometry.attributes.position.array;
+            for (let i = 0; i < particleCount; i++) {
+                positions[i * 3 + 1] += velocities[i * 3 + 1];
+                if (positions[i * 3 + 1] < -50) {
+                    positions[i * 3 + 1] = 50;
+                }
+            }
+            particleSystem.geometry.attributes.position.needsUpdate = true;
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // Particles.js for Features Section
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: '#00ff99' },
+                shape: { type: 'circle' },
+                opacity: { value: 0.5, random: true },
+                size: { value: 3, random: true },
+                line_linked: { enable: true, distance: 150, color: '#00ccff', opacity: 0.4, width: 1 },
+                move: { enable: true, speed: 2, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' }, resize: true },
+                modes: { repulse: { distance: 100, duration: 0.4 }, push: { particles_nb: 4 } }
+            },
+            retina_detect: true
+        });
+
+        // GSAP Animations for Features
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.from('.feature', {
+            opacity: 0,
+            y: 100,
+            duration: 1.5,
+            stagger: 0.3,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.features',
+                start: 'top 80%'
+            }
+        });
+
+        // 3D Testimonial Carousel
+        const testimonials = document.querySelectorAll('.testimonial');
+        let currentTestimonial = 0;
+        testimonials[currentTestimonial].classList.add('active');
+        function rotateTestimonials() {
+            testimonials[currentTestimonial].classList.remove('active');
+            currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+            testimonials[currentTestimonial].classList.add('active');
+        }
+        setInterval(rotateTestimonials, 5000);
+
+        // Ambient Waterfall Sound
+        const audio = new Audio('https://www.zapsplat.com/wp-content/uploads/2015/sound-effects-77317/zapsplat_nature_waterfall_small_flowing_loop_001_81338.mp3');
+        audio.loop = true;
+        audio.volume = 0.3;
+        audio.play().catch(() => console.log('Audio playback failed. Autoplay may be blocked.'));
+
+        // Countdown Timer for CTA
+        const countdownElement = document.getElementById('countdown');
+        const endTime = new Date('May 31, 2025 23:59:59').getTime();
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const timeLeft = endTime - now;
+            if (timeLeft <= 0) {
+                countdownElement.textContent = 'Offer Expired!';
+                return;
+            }
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+            countdownElement.textContent = `${hours}h ${minutes}m ${seconds}s Left`;
+            setTimeout(updateCountdown, 1000);
+        }
+        updateCountdown();
+
+        // Mapbox 3D Globe
+        mapboxgl.accessToken = 'pk.eyJ1IjoiZXhhbXBsZSIsImEiOiJja3Zhcmk1c3QwNTQ1MnFtb3J0c2d5c2E2In0.8fakeToken1234567890';
+        const map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/satellite-v9',
+            center: [34.751865, 0.282730], // Kakamega, Kenya
+            zoom: 12,
+            pitch: 60,
+            bearing: -60,
+            projection: 'globe'
+        });
+        map.on('load', () => {
+            map.addLayer({
+                id: 'sky',
+                type: 'sky',
+                paint: {
+                    'sky-type': 'atmosphere',
+                    'sky-atmosphere-sun': [0, 0],
+                    'sky-atmosphere-sun-intensity': 5
+                }
+            });
+            new mapboxgl.Marker({ color: '#00ff99' })
+                .setLngLat([34.751865, 0.282730])
+                .setPopup(new mapboxgl.Popup().setHTML('<h3>Ambururu Waterfalls</h3><p>Kakamega, Kenya</p>'))
+                .addTo(map);
+        });
+    </script>
 </body>
 </html>

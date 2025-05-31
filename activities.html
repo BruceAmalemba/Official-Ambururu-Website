@@ -3,40 +3,524 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Discover exciting activities at Ambururu Waterfalls and Resort in Siaya, Kenya, including tree planting, hiking, and trampolining. Perfect for families and eco-adventurers!">
-    <meta name="keywords" content="Ambururu Waterfalls, Siaya, Kenya, activities, tree planting, hiking, trampolining, family-friendly, eco-tourism">
     <title>Activities - Ambururu Waterfalls & Resort</title>
-    <link rel="stylesheet" href="css/style.css">
+    <meta name="description" content="Discover exciting activities at Ambururu Waterfalls & Resort in Kakamega, Kenya, including tree planting, hiking, and trampolining. Perfect for families and eco-adventurers!">
+    <meta name="keywords" content="Ambururu Waterfalls, Kakamega, Kenya, activities, tree planting, hiking, trampolining, family-friendly, eco-tourism">
+    <link rel="preload" href="images/activities-hero.jpg" as="image">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Playfair+Display:wght@700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <style>
+        /* General Styles (from index.html) */
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: #ffffff;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        /* Header (from index.html) */
+        .sticky-header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(0, 255, 153, 0.2);
+        }
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        .brand {
+            display: flex;
+            align-items: center;
+        }
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin-right: 1rem;
+            filter: drop-shadow(0 0 10px rgba(0, 255, 153, 0.5));
+            transition: transform 0.5s;
+        }
+        .logo:hover {
+            transform: rotate(360deg);
+        }
+        .brand h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00ff99;
+            font-size: 1.8rem;
+            margin: 0;
+            text-shadow: 0 0 10px rgba(0, 255, 153, 0.7);
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        nav ul li {
+            margin-left: 2rem;
+        }
+        nav ul li a {
+            color: #00ff99;
+            text-decoration: none;
+            font-weight: 500;
+            font-family: 'Orbitron', sans-serif;
+            transition: all 0.3s;
+            text-shadow: 0 0 5px rgba(0, 255, 153, 0.5);
+        }
+        nav ul li a:hover,
+        nav ul li a.active {
+            color: #ffffff;
+            text-shadow: 0 0 15px rgba(0, 255, 153, 1);
+        }
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #00ff99;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section (from index.html) */
+        .hero {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+        }
+        #hero-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 2;
+        }
+        .hero-overlay h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 5rem;
+            color: #00ff99;
+            text-shadow: 0 0 20px rgba(0, 255, 153, 0.8);
+            animation: hologram 2s infinite alternate;
+        }
+        .hero-overlay p {
+            font-size: 1.5rem;
+            color: #ffffff;
+            margin: 1rem 0;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+        .cta-button {
+            background: linear-gradient(45deg, #00ff99, #00ccff);
+            color: #000000;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            transition: all 0.3s;
+            box-shadow: 0 0 20px rgba(0, 255, 153, 0.5);
+        }
+        .cta-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(0, 255, 153, 1);
+        }
+        .secondary {
+            background: transparent;
+            border: 2px solid #00ff99;
+            margin-left: 1rem;
+            color: #00ff99;
+        }
+        .secondary:hover {
+            background: #00ff99;
+            color: #000000;
+        }
+        @keyframes hologram {
+            0% { opacity: 0.8; transform: translateY(0); }
+            100% { opacity: 1; transform: translateY(-10px); }
+        }
+
+        /* Virtual Assistant (from index.html) */
+        .virtual-assistant {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        .assistant-orb {
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, #00ff99, #00ccff);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(0, 255, 153, 0.7);
+            animation: pulse 2s infinite;
+        }
+        .assistant-tooltip {
+            display: none;
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            background: rgba(0, 0, 0, 0.8);
+            color: #00ff99;
+            padding: 1rem;
+            border-radius: 10px;
+            width: 250px;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(0, 255, 153, 0.5);
+        }
+        .assistant-orb:hover .assistant-tooltip {
+            display: block;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 20px rgba(0, 255, 153, 0.7); }
+            50% { transform: scale(1.1); box-shadow: 0 0 30px rgba(0, 255, 153, 1); }
+            100% { transform: scale(1); box-shadow: 0 0 20px rgba(0, 255, 153, 0.7); }
+        }
+
+        /* Activities Section (adapted from index.html's features) */
+        .activities {
+            padding: 5rem 0;
+            text-align: center;
+            position: relative;
+        }
+        #particles-js {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        .activities h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            color: #00ff99;
+            text-shadow: 0 0 15px rgba(0, 255, 153, 0.7);
+            margin: 0 0 2rem;
+            z-index: 1;
+            position: relative;
+        }
+        .activity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        .activity-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px rgba(0, 255, 153, 0.2);
+            transition: transform 0.5s, box-shadow 0.5s;
+        }
+        .activity-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 30px rgba(0, 255, 153, 0.5);
+        }
+        .activity-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            filter: brightness(0.9);
+        }
+        .activity-card h4 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            color: #00ff99;
+            margin: 0 0 0.5rem;
+            text-shadow: 0 0 10px rgba(0, 255, 153, 0.5);
+        }
+        .activity-card p {
+            color: #ffffff;
+            margin: 0 0 1rem;
+        }
+        .activity-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 1rem;
+            text-align: left;
+            color: #ffffff;
+        }
+        .activity-card ul li {
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        .activity-card ul li:before {
+            content: '\f058';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: #00ff99;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Video Section (styled like index.html) */
+        .video-section {
+            padding: 5rem 0;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+        .video-section h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            color: #00ff99;
+            text-shadow: 0 0 15px rgba(0, 255, 153, 0.7);
+            margin: 0 0 1rem;
+        }
+        .video-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        .video-container video {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 255, 153, 0.3);
+        }
+        .video-section p {
+            font-size: 1.2rem;
+            color: #ffffff;
+            margin: 1rem 0 0;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        /* Booking Form (styled like index.html) */
+        .book-activity {
+            padding: 5rem 0;
+            text-align: center;
+            background: linear-gradient(45deg, #00ff99, #00ccff);
+            position: relative;
+            box-shadow: 0 0 50px rgba(0, 255, 153, 0.5);
+        }
+        .book-activity h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            color: #000000;
+            margin: 0 0 2rem;
+        }
+        .book-activity form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            padding: 0 1.5rem;
+        }
+        .book-activity input,
+        .book-activity select,
+        .book-activity textarea {
+            padding: 0.75rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+        .book-activity textarea {
+            resize: vertical;
+        }
+        .book-activity button {
+            background: linear-gradient(45deg, #00ff99, #00ccff);
+            color: #000000;
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            box-shadow: 0 0 20px rgba(0, 255, 153, 0.5);
+        }
+        .book-activity button:hover {
+            box-shadow: 0 0 30px rgba(0, 255, 153, 1);
+        }
+
+        /* Gallery Teaser (styled like index.html) */
+        .gallery-teaser {
+            padding: 5rem 0;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+        .gallery-teaser h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            color: #00ff99;
+            text-shadow: 0 0 15px rgba(0, 255, 153, 0.7);
+            margin: 0 0 1rem;
+        }
+        .gallery-teaser p {
+            font-size: 1.2rem;
+            color: #ffffff;
+            margin: 0 0 2rem;
+        }
+
+        /* Map Section (from index.html) */
+        .map {
+            padding: 5rem 0;
+            text-align: center;
+        }
+        .map h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            color: #00ff99;
+            text-shadow: 0 0 15px rgba(0, 255, 153, 0.7);
+            margin: 0 0 2rem;
+        }
+        #map {
+            width: 100%;
+            height: 500px;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(0, 255, 153, 0.3);
+        }
+        .map-description {
+            margin-top: 1rem;
+            font-size: 1.2rem;
+            color: #ffffff;
+        }
+
+        /* Footer (from index.html) */
+        footer {
+            background: rgba(0, 0, 0, 0.8);
+            color: #ffffff;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        .social-links a {
+            color: #00ff99;
+            margin: 0 1.5rem;
+            font-size: 1.8rem;
+            transition: all 0.3s;
+        }
+        .social-links a:hover {
+            color: #ffffff;
+            text-shadow: 0 0 15px rgba(0, 255, 153, 1);
+        }
+        .newsletter h4 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            color: #00ff99;
+            margin: 0 0 1.5rem;
+        }
+        .newsletter form {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+        .newsletter input {
+            padding: 0.75rem;
+            border: none;
+            border-radius: 5px;
+            width: 320px;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+        .newsletter button {
+            background: linear-gradient(45deg, #00ff99, #00ccff);
+            color: #000000;
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            box-shadow: 0 0 20px rgba(0, 255, 153, 0.5);
+        }
+        .newsletter button:hover {
+            box-shadow: 0 0 30px rgba(0, 255, 153, 1);
+        }
+
+        /* Responsive Design (from index.html) */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-wrap: wrap;
+            }
+            nav ul {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
+            }
+            nav ul.active {
+                display: flex;
+            }
+            nav ul li {
+                margin: 1rem 0;
+            }
+            .hero-overlay h2 {
+                font-size: 3rem;
+            }
+            .hero-overlay p {
+                font-size: 1.2rem;
+            }
+            .activity-grid {
+                grid-template-columns: 1fr;
+            }
+            .newsletter form {
+                flex-direction: column;
+                align-items: center;
+            }
+            .newsletter input {
+                width: 100%;
+                max-width: 300px;
+            }
+            .assistant-tooltip {
+                width: 200px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <header class="sticky-header">
+    <!-- Header (from index.html, removed dropdowns) -->
+    <header class="sticky-header" role="banner">
         <div class="header-container">
-            <img src="images/B.png" alt="Ambururu Waterfalls Logo" class="logo">
-            <h1>Ambururu Waterfalls & Resort</h1>
-            <nav aria-label="Main navigation">
+            <div class="brand">
+                <img src="logo/B2.jpg" alt="Ambururu Waterfalls & Resort Logo" class="logo" width="80" height="80" onerror="this.src='https://via.placeholder.com/80?text=Logo';">
+                <h1>Ambururu Waterfalls</h1>
+            </div>
+            <nav id="main-nav" aria-label="Main navigation">
                 <ul>
                     <li><a href="index.html">Home</a></li>
-                    <li class="dropdown">
-                        <a href="about.html">About <i class="fas fa-chevron-down"></i></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="about.html#history">History</a></li>
-                            <li><a href="about.html#location">Location</a></li>
-                            <li><a href="about.html#owner">Our Owner</a></li>
-                        </ul>
-                    </li>
+                    <li><a href="about.html">About</a></li>
                     <li><a href="gallery.html">Gallery</a></li>
-                    <li class="dropdown">
-                        <a href="activities.html" class="active" aria-current="page">Activities <i class="fas fa-chevron-down"></i></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#tree-planting">Tree Planting</a></li>
-                            <li><a href="#hiking">Hiking</a></li>
-                            <li><a href="#trampolining">Trampolining</a></li>
-                        </ul>
-                    </li>
+                    <li><a href="activities.html" class="active" aria-current="page">Activities</a></li>
                     <li><a href="accommodations.html">Accommodations</a></li>
                     <li><a href="dining.html">Dining</a></li>
                     <li><a href="events.html">Events</a></li>
@@ -44,88 +528,90 @@
                     <li><a href="blog.html">Blog</a></li>
                 </ul>
             </nav>
-            <button class="menu-toggle" aria-label="Toggle menu">
+            <button class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
                 <i class="fas fa-bars"></i>
             </button>
         </div>
     </header>
     <main>
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="hero-carousel">
-                <div><img src="images/45.jpg" alt="Tree planting at Ambururu Waterfalls" loading="lazy" onerror="this.src='https://via.placeholder.com/1200x600?text=Tree+Planting';"></div>
-                <div><img src="images/21.jpg" alt="Hiking trails at Ambururu" loading="lazy" onerror="this.src='https://via.placeholder.com/1200x600?text=Hiking';"></div>
-                <div><img src="images/33.jpg" alt="Trampolining fun at Ambururu" loading="lazy" onerror="this.src='https://via.placeholder.com/1200x600?text=Trampolining';"></div>
-            </div>
-            <div class="carousel-controls">
-                <button class="carousel-prev" aria-label="Previous slide"><i class="fas fa-chevron-left"></i></button>
-                <button class="carousel-next" aria-label="Next slide"><i class="fas fa-chevron-right"></i></button>
-            </div>
+        <!-- Hero Section (from index.html) -->
+        <section class="hero" role="region" aria-label="Hero section">
+            <canvas id="hero-canvas"></canvas>
             <div class="hero-overlay">
                 <h2>Adventure Awaits at Ambururu</h2>
-                <p>From eco-friendly tree planting to thrilling trampolining, experience fun for all ages in Siaya’s natural paradise.</p>
-                <a href="booking.html" class="cta-button">Plan Your Activity</a>
+                <p>From eco-friendly tree planting to thrilling trampolining, experience fun for all ages in Kakamega’s natural paradise.</p>
+                <div class="hero-ctas">
+                    <a href="booking.html" class="cta-button">Plan Your Activity</a>
+                    <a href="#activities" class="cta-button secondary">Explore Activities</a>
+                </div>
             </div>
         </section>
-        <!-- Video Section -->
-        <section class="video-section">
-            <h2>Family Fun in Action</h2>
+        <!-- Virtual Assistant (from index.html) -->
+        <div class="virtual-assistant">
+            <div class="assistant-orb">
+                <div class="assistant-tooltip">
+                    <p>Ready for adventure? Let me help you explore our activities!</p>
+                    <a href="#tree-planting" style="color: #00ccff;">Tree Planting</a> | 
+                    <a href="#hiking" style="color: #00ccff;">Hiking</a> | 
+                    <a href="#trampolining" style="color: #00ccff;">Trampolining</a>
+                </div>
+            </div>
+        </div>
+        <!-- Video Section (styled like index.html) -->
+        <section class="video-section" role="region" aria-label="Video section">
+            <div id="particles-js"></div>
+            <h3>Family Fun in Action</h3>
             <div class="video-container">
-                <video controls poster="images/42.mp4">
+                <video controls poster="images/42.jpg" preload="none" aria-label="Video of kids enjoying the slide at Ambururu Waterfalls" onerror="this.poster='https://via.placeholder.com/800x450?text=Video+Poster';">
                     <source src="images/42.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
             </div>
             <p>Watch kids enjoy our exciting slide, perfect for family adventures!</p>
         </section>
-        <!-- Activities Section -->
-        <section class="activities">
-            <h2>Our Activities</h2>
+        <!-- Activities Section (styled like index.html's features) -->
+        <section class="activities" role="region" aria-label="Activities section" id="activities">
+            <div id="particles-js"></div>
+            <h3>Our Activities</h3>
             <div class="activity-grid">
-                <div class="activity-card" id="tree-planting" tabindex="0">
+                <div class="activity-card" id="tree-planting" tabindex="0" role="article">
                     <img src="images/49.jpg" alt="Guests planting trees at Ambururu" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300?text=Tree+Planting';">
-                    <div class="activity-content">
-                        <h3><i class="fas fa-tree fa-2x"></i> Tree Planting</h3>
-                        <p>Join our eco-mission to plant native trees, preserving Siaya’s lush ecosystem for future generations.</p>
-                        <ul>
-                            <li>Plant native species with expert guides</li>
-                            <li>Family-friendly activity</li>
-                            <li>Contribute to conservation efforts</li>
-                        </ul>
-                        <a href="booking.html" class="cta-button secondary">Book Now</a>
-                    </div>
+                    <h4>Tree Planting</h4>
+                    <p>Join our eco-mission to plant native trees, preserving Kakamega’s lush ecosystem for future generations.</p>
+                    <ul>
+                        <li>Plant native species with AR-guided experts</li>
+                        <li>Family-friendly activity</li>
+                        <li>Contribute to conservation efforts</li>
+                    </ul>
+                    <a href="booking.html" class="cta-button secondary">Book Now</a>
                 </div>
-                <div class="activity-card" id="hiking" tabindex="0">
+                <div class="activity-card" id="hiking" tabindex="0" role="article">
                     <img src="images/47.jpg" alt="Scenic hiking trails at Ambururu" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300?text=Hiking';">
-                    <div class="activity-content">
-                        <h3><i class="fas fa-hiking fa-2x"></i> Hiking</h3>
-                        <p>Explore breathtaking trails through Siaya’s lush forests, guided by experts to spot local wildlife.</p>
-                        <ul>
-                            <li>Guided tours for all skill levels</li>
-                            <li>Discover unique flora and fauna</li>
-                            <li>Scenic views of the waterfalls</li>
-                        </ul>
-                        <a href="booking.html" class="cta-button secondary">Book Now</a>
-                    </div>
+                    <h4>Hiking</h4>
+                    <p>Explore breathtaking trails through Kakamega’s lush forests, guided by experts to spot local wildlife.</p>
+                    <ul>
+                        <li>Guided tours for all skill levels</li>
+                        <li>Discover unique flora and fauna</li>
+                        <li>Scenic views of the waterfalls</li>
+                    </ul>
+                    <a href="booking.html" class="cta-button secondary">Book Now</a>
                 </div>
-                <div class="activity-card" id="trampolining" tabindex="0">
+                <div class="activity-card" id="trampolining" tabindex="0" role="article">
                     <img src="images/33.jpg" alt="Trampolining fun at Ambururu" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300?text=Trampolining';">
-                    <div class="activity-content">
-                        <h3><i class="fas fa-child fa-2x"></i> Trampolining</h3>
-                        <p>Bounce with joy on our safe, family-friendly trampolines, perfect for kids and adults alike.</p>
-                        <ul>
-                            <li>Safe, supervised trampoline area</li>
-                            <li>Fun for all ages</li>
-                            <li>Outdoor setting with waterfall views</li>
-                        </ul>
-                        <a href="booking.html" class="cta-button secondary">Book Now</a>
-                    </div>
+                    <h4>Trampolining</h4>
+                    <p>Bounce with joy on our safe, family-friendly trampolines, perfect for kids and adults alike.</p>
+                    <ul>
+                        <li>Safe, supervised trampoline area</li>
+                        <li>Fun for all ages</li>
+                        <li>Outdoor setting with waterfall views</li>
+                    </ul>
+                    <a href="booking.html" class="cta-button secondary">Book Now</a>
                 </div>
             </div>
         </section>
-        <!-- Booking Form -->
-        <section class="book-activity" id="book-activity">
-            <h2>Plan Your Adventure</h2>
+        <!-- Booking Form (styled like index.html) -->
+        <section class="book-activity" role="region" aria-label="Booking section" id="book-activity">
+            <h3>Plan Your Adventure</h3>
             <form id="activity-booking-form" action="https://formspree.io/f/your-form-id" method="POST">
                 <input type="text" name="name" placeholder="Your Name" required aria-label="Your name">
                 <input type="email" name="email" placeholder="Your Email" required aria-label="Email address">
@@ -135,36 +621,231 @@
                     <option value="hiking">Hiking</option>
                     <option value="trampolining">Trampolining</option>
                 </select>
-                <input type="date" name="date" required aria-label="Activity date">
+                <input type="date" name="date" required aria-label="Activity date" min="2025-06-01">
                 <textarea name="details" placeholder="Additional Details" rows="5" aria-label="Additional details"></textarea>
                 <button type="submit" class="cta-button">Submit Inquiry</button>
             </form>
         </section>
-        <!-- Gallery Teaser -->
-        <section class="gallery-teaser">
-            <h2>See the Fun in Action</h2>
+        <!-- Gallery Teaser (styled like index.html) -->
+        <section class="gallery-teaser" role="region" aria-label="Gallery teaser section">
+            <h3>See the Fun in Action</h3>
             <p>Explore stunning photos of our activities and more!</p>
             <a href="gallery.html" class="cta-button">View Gallery</a>
         </section>
+        <!-- Map Section (from index.html) -->
+        <section class="map" role="region" aria-label="Map section">
+            <h3>Find Us in Kakamega</h3>
+            <div id="map"></div>
+            <p class="map-description">Nestled in Kakamega, Kenya, easily accessible via the Kisumu-Busia road.</p>
+        </section>
     </main>
-    <footer>
+    <!-- Footer (from index.html) -->
+    <footer role="contentinfo">
         <div class="footer-container">
             <p>© 2025 Ambururu Waterfalls. All rights reserved.</p>
             <div class="social-links">
-                <a href="https://www.facebook.com/ambururu/" target="_blank" aria-label="Visit our Facebook page"><i class="fab fa-facebook-f fa-2x"></i></a>
-                <a href="https://x.com/Ambururu_W" target="_blank" aria-label="Visit our Twitter profile"><i class="fab fa-twitter fa-2x"></i></a>
-                <a href="https://www.instagram.com/ambururu1/" target="_blank" aria-label="Visit our Instagram page"><i class="fab fa-instagram fa-2x"></i></a>
+                <a href="https://www.facebook.com/ambururu/" target="_blank" aria-label="Visit our Facebook page"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://x.com/Ambururu_W" target="_blank" aria-label="Visit our Twitter profile"><i class="fab fa-x-twitter"></i></a>
+                <a href="https://www.instagram.com/ambururu1/" target="_blank" aria-label="Visit our Instagram page"><i class="fab fa-instagram"></i></a>
             </div>
             <div class="newsletter">
                 <h4>Stay Updated</h4>
                 <form id="newsletter-form" action="https://formspree.io/f/your-form-id" method="POST">
-                    <input type="email" name="email" placeholder="Enter your email" required aria-label="Email address">
+                    <input type="email" name="email" placeholder="Enter your email" required aria-label="Email address for newsletter">
                     <button type="submit">Subscribe</button>
                 </form>
             </div>
         </div>
     </footer>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="js/script.js"></script>
+    <script>
+        // Menu Toggle (from index.html)
+        $(document).ready(function() {
+            $('.menu-toggle').on('click', function() {
+                $('#main-nav ul').toggleClass('active');
+                const expanded = $(this).attr('aria-expanded') === 'true' ? 'false' : 'true';
+                $(this).attr('aria-expanded', expanded);
+            });
+
+            // Form Submission Handling
+            $('#activity-booking-form').on('submit', function(e) {
+                e.preventDefault();
+                const name = $(this).find('input[name="name"]').val();
+                const email = $(this).find('input[name="email"]').val();
+                if (name && email) {
+                    alert('Thank you for your inquiry! We’ll get back to you soon.');
+                    $(this)[0].reset();
+                }
+            });
+
+            $('#newsletter-form').on('submit', function(e) {
+                e.preventDefault();
+                const email = $(this).find('input[name="email"]').val();
+                if (email) {
+                    alert('Thank you for subscribing!');
+                    $(this)[0].reset();
+                }
+            });
+
+            // Debug Missing Assets
+            $('img').on('error', function() {
+                console.log(`Image not found: ${this.src}`);
+            });
+            $('video source').on('error', function() {
+                console.log(`Video not found: ${this.src}`);
+            });
+        });
+
+        // 3D Waterfall Animation (from index.html)
+        const canvas = document.getElementById('hero-canvas');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        const particleCount = 5000;
+        const particles = new THREE.BufferGeometry();
+        const positions = new Float32Array(particleCount * 3);
+        const velocities = new Float32Array(particleCount * 3);
+        for (let i = 0; i < particleCount; i++) {
+            positions[i * 3] = Math.random() * 100 - 50;
+            positions[i * 3 + 1] = Math.random() * 100;
+            positions[i * 3 + 2] = Math.random() * 100 - 50;
+            velocities[i * 3] = 0;
+            velocities[i * 3 + 1] = -Math.random() * 2 - 1;
+            velocities[i * 3 + 2] = 0;
+        }
+        particles.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        const particleMaterial = new THREE.PointsMaterial({
+            color: 0x00ccff,
+            size: 0.5,
+            transparent: true,
+            opacity: 0.7
+        });
+        const particleSystem = new THREE.Points(particles, particleMaterial);
+        scene.add(particleSystem);
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+        scene.add(ambientLight);
+        const pointLight = new THREE.PointLight(0x00ff99, 1, 100);
+        pointLight.position.set(0, 50, 50);
+        scene.add(pointLight);
+        camera.position.z = 50;
+        function animate() {
+            requestAnimationFrame(animate);
+            const positions = particleSystem.geometry.attributes.position.array;
+            for (let i = 0; i < particleCount; i++) {
+                positions[i * 3 + 1] += velocities[i * 3 + 1];
+                if (positions[i * 3 + 1] < -50) {
+                    positions[i * 3 + 1] = 50;
+                }
+            }
+            particleSystem.geometry.attributes.position.needsUpdate = true;
+            renderer.render(scene, camera);
+        }
+        animate();
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // Particles.js for Activities and Video Sections
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: '#00ff99' },
+                shape: { type: 'circle' },
+                opacity: { value: 0.5, random: true },
+                size: { value: 3, random: true },
+                line_linked: { enable: true, distance: 150, color: '#00ccff', opacity: 0.4, width: 1 },
+                move: { enable: true, speed: 2, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' }, resize: true },
+                modes: { repulse: { distance: 100, duration: 0.4 }, push: { particles_nb: 4 } }
+            },
+            retina_detect: true
+        });
+
+        // GSAP Animations for Activities
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.from('.activity-card', {
+            opacity: 0,
+            y: 100,
+            duration: 1.5,
+            stagger: 0.3,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.activities',
+                start: 'top 80%'
+            }
+        });
+
+        gsap.from('.video-container', {
+            opacity: 0,
+            y: 100,
+            duration: 1.5,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.video-section',
+                start: 'top 80%'
+            }
+        });
+
+        gsap.from('.book-activity form', {
+            opacity: 0,
+            y: 100,
+            duration: 1.5,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.book-activity',
+                start: 'top 80%'
+            }
+        });
+
+        gsap.from('.gallery-teaser', {
+            opacity: 0,
+            y: 100,
+            duration: 1.5,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.gallery-teaser',
+                start: 'top 80%'
+            }
+        });
+
+        // Ambient Waterfall Sound
+        const audio = new Audio('https://www.zapsplat.com/wp-content/uploads/2015/sound-effects-77317/zapsplat_nature_waterfall_small_flowing_loop_001_81338.mp3');
+        audio.loop = true;
+        audio.volume = 0.3;
+        audio.play().catch(() => console.log('Audio playback failed. Autoplay may be blocked.'));
+
+        // Mapbox 3D Globe
+        mapboxgl.accessToken = 'pk.eyJ1IjoiZXhhbXBsZSIsImEiOiJja3Zhcmk1c3QwNTQ1MnFtb3J0c2d5c2E2In0.8fakeToken1234567890';
+        const map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/satellite-v9',
+            center: [34.751865, 0.282730],
+            zoom: 12,
+            pitch: 60,
+            bearing: -60,
+            projection: 'globe'
+        });
+        map.on('load', () => {
+            map.addLayer({
+                id: 'sky',
+                type: 'sky',
+                paint: {
+                    'sky-type': 'atmosphere',
+                    'sky-atmosphere-sun': [0, 0],
+                    'sky-atmosphere-sun-intensity': 5
+                }
+            });
+            new mapboxgl.Marker({ color: '#00ff99' })
+                .setLngLat([34.751865, 0.282730])
+                .setPopup(new mapboxgl.Popup().setHTML('<h3>Ambururu Waterfalls</h3><p>Kakamega, Kenya</p>'))
+                .addTo(map);
+        });
+    </script>
 </body>
 </html>

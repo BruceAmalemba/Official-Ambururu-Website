@@ -3,56 +3,633 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Contact Ambururu Waterfalls Resort in Siaya, Kenya for bookings, inquiries, or live chat support.">
-    <meta name="keywords" content="Ambururu Waterfalls, Siaya, Kenya, contact, bookings, live chat, resort">
-    <title>Contact - Ambururu Waterfalls</title>
-    <link rel="stylesheet" href="css/style.css">
+    <meta name="description" content="Get in touch with Ambururu Waterfalls Resort in Kakamega, Kenya. Contact us for bookings, inquiries, or to plan your eco-luxury getaway.">
+    <meta name="keywords" content="Ambururu Waterfalls, Kakamega, Kenya, contact, resort, eco-tourism, bookings, inquiries">
+    <title>Contact Us - Ambururu Waterfalls Resort</title>
+    <link rel="preload" href="images/contact-hero.jpg" as="image">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-    <script src="https://www.paypal.com/sdk/js?client-id=AaKSRN_r_62rxV_8WGNEo32fcXTeCPdhHpzvNTEN9ZGEGKOFQOHc921e4I1seyE1Q3SxdVL4SEhkDPUR"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        /* General Styles (from index.html) */
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: #ffffff;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        /* Header (from index.html, with dropdowns) */
+        .sticky-header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(0, 255, 153, 0.2);
+        }
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        .brand {
+            display: flex;
+            align-items: center;
+        }
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin-right: 1rem;
+            filter: drop-shadow(0 0 10px rgba(0, 255, 153, 0.5));
+            transition: transform 0.5s;
+        }
+        .logo:hover {
+            transform: rotate(360deg);
+        }
+        .brand h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00ff99;
+            font-size: 1.8rem;
+            margin: 0;
+            text-shadow: 0 0 10px rgba(0, 255, 153, 0.7);
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        nav ul li {
+            position: relative;
+            margin-left: 2rem;
+        }
+        nav ul li a {
+            color: #00ff99;
+            text-decoration: none;
+            font-weight: 500;
+            font-family: 'Orbitron', sans-serif;
+            transition: all 0.3s;
+            text-shadow: 0 0 5px rgba(0, 255, 153, 0.5);
+        }
+        nav ul li a:hover,
+        nav ul li a.active {
+            color: #ffffff;
+            text-shadow: 0 0 15px rgba(0, 255, 153, 1);
+        }
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            list-style: none;
+            padding: 0.5rem 0;
+            margin-top: 0.5rem;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 255, 153, 0.2);
+            z-index: 1001;
+        }
+        .dropdown-menu li a {
+            padding: 0.5rem 1rem;
+            display: block;
+            color: #00ff99;
+            text-shadow: none;
+        }
+        .dropdown-menu li a:hover {
+            background: rgba(0, 255, 153, 0.2);
+            color: #ffffff;
+        }
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #00ff99;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+        }
+        #hero-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 3;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 3rem;
+            border-radius: 15px;
+            max-width: 90%;
+            box-shadow: 0 0 20px rgba(0, 255, 153, 0.3);
+        }
+        .hero-overlay h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            color: #00ff99;
+            text-shadow: 0 0 20px rgba(0, 255, 153, 0.8);
+            animation: hologram 2s infinite alternate;
+            margin: 0 0 1.5rem;
+        }
+        .hero-overlay p {
+            font-size: 1.5rem;
+            color: #ffffff;
+            margin: 0 0 2rem;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+        .cta-button {
+            background: linear-gradient(45deg, #00ff99, #00ccff);
+            color: #000000;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            transition: all 0.3s;
+            box-shadow: 0 0 20px rgba(0, 255, 153, 0.5);
+            display: inline-block;
+        }
+        .cta-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(0, 255, 153, 1);
+        }
+        .secondary {
+            background: transparent;
+            border: 2px solid #00ff99;
+            margin-left: 1rem;
+            color: #00ff99;
+        }
+        .secondary:hover {
+            background: #00ff99;
+            color: #000000;
+        }
+        @keyframes hologram {
+            0% { opacity: 0.8; transform: translateY(0); }
+            100% { opacity: 1; transform: translateY(-10px); }
+        }
+
+        /* Virtual Assistant */
+        .virtual-assistant {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        .assistant-orb {
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, #00ff99, #00ccff);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(0, 255, 153, 0.7);
+            animation: pulse 2s infinite;
+        }
+        .assistant-tooltip {
+            display: none;
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            background: rgba(0, 0, 0, 0.8);
+            color: #00ff99;
+            padding: 1rem;
+            border-radius: 10px;
+            width: 250px;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(0, 255, 153, 0.5);
+        }
+        .assistant-orb:hover .assistant-tooltip {
+            display: block;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 20px rgba(0, 255, 153, 0.7); }
+            50% { transform: scale(1.1); box-shadow: 0 0 30px rgba(0, 255, 153, 1); }
+            100% { transform: scale(1); box-shadow: 0 0 20px rgba(0, 255, 153, 0.7); }
+        }
+
+        /* Contact Form */
+        .contact-form {
+            padding: 5rem 0;
+            text-align: center;
+            background: linear-gradient(45deg, #00ff99, #00ccff);
+            margin-bottom: 2rem;
+            box-shadow: 0 0 50px rgba(0, 255, 153, 0.5);
+        }
+        .contact-form h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            color: #000000;
+            margin: 0 0 3rem;
+        }
+        #contact-form {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        #contact-form input,
+        #contact-form textarea {
+            padding: 1rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            width: 100%;
+            max-width: 360px;
+        }
+        #contact-form textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        #contact-form input:focus,
+        #contact-form textarea:focus {
+            outline: none;
+            box-shadow: 0 0 10px rgba(0, 255, 153, 0.5);
+        }
+        #contact-form input.valid {
+            box-shadow: 0 0 10px rgba(0, 255, 153, 1);
+        }
+        #contact-form input.invalid {
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+        }
+        #contact-form button {
+            background: linear-gradient(45deg, #00ff99, #00ccff);
+            color: #000000;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            box-shadow: 0 0 20px rgba(0, 255, 153, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        #contact-form button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(0, 255, 153, 1);
+        }
+        #contact-form button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            border: 3px solid #ffffff;
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        /* Contact Details */
+        .contact-details {
+            padding: 5rem 0;
+            text-align: center;
+            position: relative;
+        }
+        #particles-js {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        .contact-details h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            color: #00ff99;
+            text-shadow: 0 0 15px rgba(0, 255, 153, 0.7);
+            margin: 0 0 3rem;
+            position: relative;
+            z-index: 1;
+        }
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        .detail-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px rgba(0, 255, 153, 0.2);
+            transition: transform 0.5s, box-shadow 0.5s;
+        }
+        .detail-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 30px rgba(0, 255, 153, 0.5);
+        }
+        .detail-item i {
+            font-size: 2rem;
+            color: #00ff99;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px rgba(0, 255, 153, 0.5);
+        }
+        .detail-item p {
+            margin: 0;
+            color: #ffffff;
+        }
+        .detail-item a {
+            color: #00ccff;
+            text-decoration: none;
+        }
+        .detail-item a:hover {
+            text-decoration: underline;
+        }
+        .copy-button {
+            background: linear-gradient(45deg, #00ff99, #00ccff);
+            color: #000000;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            margin-top: 1rem;
+            box-shadow: 0 0 10px rgba(0, 255, 153, 0.5);
+        }
+        .copy-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(0, 255, 153, 1);
+        }
+        .status-indicator {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+        .open {
+            background: #00ff99;
+            color: #000000;
+        }
+        .closed {
+            background: #ff0000;
+            color: #ffffff;
+        }
+
+        /* Social Media */
+        .social-media {
+            padding: 3rem 0;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.3);
+        }
+        .social-media h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            color: #00ff99;
+            text-shadow: 0 0 15px rgba(0, 255, 153, 0.7);
+            margin: 0 0 2rem;
+        }
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+        .social-links a {
+            color: #00ff99;
+            font-size: 2.5rem;
+            transition: all 0.3s;
+            text-shadow: 0 0 10px rgba(0, 255, 153, 0.5);
+        }
+        .social-links a:hover {
+            color: #ffffff;
+            transform: scale(1.2);
+            text-shadow: 0 0 20px rgba(0, 255, 153, 1);
+        }
+        .x-feed {
+            max-width: 600px;
+            margin: 2rem auto;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px rgba(0, 255, 153, 0.2);
+        }
+        .x-post {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(0, 255, 153, 0.2);
+        }
+        .x-post:last-child {
+            border-bottom: none;
+        }
+        .x-post p {
+            margin: 0;
+            color: #ffffff;
+        }
+        .x-post span {
+            font-size: 0.8rem;
+            color: #00ccff;
+        }
+
+        /* Map Section */
+        .map {
+            padding: 5rem 0;
+            text-align: center;
+        }
+        .map h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            color: #00ff99;
+            text-shadow: 0 0 15px rgba(0, 255, 153, 0.7);
+            margin: 0 0 2rem;
+        }
+        #map {
+            width: 100%;
+            height: 500px;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(0, 255, 153, 0.3);
+        }
+        .map-description {
+            margin-top: 1rem;
+            font-size: 1.2rem;
+            color: #ffffff;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.8);
+            color: #ffffff;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        .footer-container p {
+            margin: 0 0 1rem;
+        }
+        .newsletter h4 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            color: #00ff99;
+            margin: 0 0 1.5rem;
+        }
+        .newsletter form {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+        .newsletter input {
+            padding: 0.75rem;
+            border: none;
+            border-radius: 5px;
+            width: 320px;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+        .newsletter button {
+            background: linear-gradient(45deg, #00ff99, #00ccff);
+            color: #000000;
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            box-shadow: 0 0 20px rgba(0, 255, 153, 0.5);
+        }
+        .newsletter button:hover {
+            box-shadow: 0 0 30px rgba(0, 255, 153, 1);
+        }
+
+        /* Back to Top */
+        #back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(45deg, #00ff99, #00ccff);
+            color: #000000;
+            padding: 1rem;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            display: none;
+            z-index: 1000;
+            box-shadow: 0 0 15px rgba(0, 255, 153, 0.5);
+        }
+        #back-to-top:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 25px rgba(0, 255, 153, 1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        @media (max-width: 768px) {
+            .header-container {
+                flex-wrap: wrap;
+            }
+            nav ul {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
+            }
+            nav ul.active {
+                display: flex;
+            }
+            nav ul li {
+                margin: 1rem 0;
+            }
+            .dropdown:hover .dropdown-menu {
+                display: none;
+            }
+            .dropdown.active .dropdown-menu {
+                display: block;
+                position: static;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .hero-overlay h2 {
+                font-size: 2.5rem;
+            }
+            .hero-overlay p {
+                font-size: 1.2rem;
+            }
+            .contact-form h2,
+            .contact-details h2,
+            .map h2 {
+                font-size: 2.2rem;
+            }
+            #contact-form input,
+            #contact-form textarea {
+                max-width: 100%;
+            }
+            .newsletter form {
+                flex-direction: column;
+                align-items: center;
+            }
+            .newsletter input {
+                width: 100%;
+                max-width: 300px;
+            }
+            .social-links {
+                flex-wrap: wrap;
+            }
+            .assistant-tooltip {
+                width: 200px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <header class="sticky-header">
+    <!-- Header -->
+    <header class="sticky-header" role="banner">
         <div class="header-container">
             <div class="brand">
-                <img src="logo/B2.jpg" alt="Ambururu Waterfalls Logo" class="logo">
+                <img src="logo/B2.jpg" alt="Ambururu Waterfalls & Resort Logo" class="logo" width="80" height="80" onerror="this.src='https://via.placeholder.com/80?text=Logo';">
                 <h1>Ambururu Waterfalls</h1>
             </div>
-            <div class="search-bar">
-                <input type="text" placeholder="Search..." aria-label="Search site">
-                <button type="submit" aria-label="Search"><i class="fas fa-search"></i></button>
-            </div>
-            <script type="application/ld+json">
-{
-    "@context": "https://schema.org",
-    "@type": "TouristAttraction",
-    "name": "Ambururu Waterfalls",
-    "description": "A serene waterfall and resort in Siaya, Kenya, offering swimming, hiking, and dining.",
-    "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "5CQ9+62H",
-        "addressLocality": "Musanda",
-        "addressRegion": "Siaya",
-        "postalCode": "",
-        "addressCountry": "KE"
-    },
-    "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": "0.199973",
-        "longitude": "34.741566"
-    },
-    "openingHours": "Mo-Su 09:00-17:00",
-    "telephone": "+254 720 215 511",
-    "url": "https://bruceamalemba.github.io/ambururu-waterfall/",
-    "contactPoint": {
-        "@type": "ContactPoint",
-        "telephone": "+254720215511",
-        "contactType": "Customer Service",
-        "email": "ambururuwaterfalls@gmail.com"
-    }
-}
-</script>
             <nav id="main-nav" aria-label="Main navigation">
                 <ul>
                     <li><a href="index.html">Home</a></li>
@@ -76,286 +653,373 @@
                     <li><a href="events.html">Events</a></li>
                     <li><a href="contact.html" class="active" aria-current="page">Contact</a></li>
                     <li><a href="blog.html">Blog</a></li>
-                    <li><a href="booking.html" class="cta-button">Book Now</a></li>
                 </ul>
             </nav>
-            <button class="menu-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
-        </div>
-        <div id="loading-spinner" class="spinner" style="display:none;">
-            <i class="fas fa-spinner fa-spin"></i> Processing...
-        </div>
-        <div id="confirmation-modal" class="modal" style="display:none;">
-            <div class="modal-content">
-                <span class="modal-close" onclick="$('#confirmation-modal').hide();">&times;</span>
-                <h3>Booking Confirmed!</h3>
-                <p>Thank you for your booking. We’ll send a confirmation email shortly.</p>
-                <button onclick="$('#confirmation-modal').hide();">Close</button>
-            </div>
+            <button class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </header>
+
     <main>
         <!-- Hero Section -->
-        <section class="hero parallax" aria-label="Contact hero section">
-            <video class="hero-video" autoplay muted loop playsinline>
-                <source src="images/41.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
+        <section class="hero" role="region" aria-label="Hero section">
+            <canvas id="hero-canvas"></canvas>
             <div class="hero-overlay">
-                <h2 class="hero-title">Connect with Paradise</h2>
-                <p class="hero-subtitle">Reach out or book your stay at Ambururu Waterfalls!</p>
-                <a href="#booking-form" class="cta-button pulse">Book Now</a>
+                <h2>Contact Us</h2>
+                <p>Reach out to plan your eco-luxury getaway at Ambururu Waterfalls Resort in Kakamega, Kenya.</p>
+                <div class="hero-ctas">
+                    <a href="#contact-form" class="cta-button">Send a Message</a>
+                    <a href="#map" class="cta-button secondary">View Location</a>
+                </div>
             </div>
         </section>
 
-        <!-- Contact Section -->
-        <section class="contact" id="contact-form">
-            <h2>Contact Us</h2>
-            <div class="contact-info">
-                <p><i class="fas fa-envelope"></i> <a href="mailto:ambururuwaterfalls@gmail.com">ambururuwaterfalls@gmail.com</a></p>
-                <p><i class="fas fa-phone"></i> <a href="tel:+254720215511">+254 720 215 511</a></p>
-                <p><i class="fas fa-map-marker-alt"></i> 5CQ9+62H, Musanda, Siaya, Kenya</p>
+        <!-- Virtual Assistant -->
+        <div class="virtual-assistant">
+            <div class="assistant-orb">
+                <div class="assistant-tooltip">
+                    <p>Need help? Contact us now!</p>
+                    <a href="#contact-form" style="color: #00ccff;">Send Message</a> | 
+                    <a href="#contact-details" style="color: #00ccff;">View Details</a> | 
+                    <a href="#map" style="color: #00ccff;">Find Us</a>
+                </div>
             </div>
-            <div id="map" class="map-container"></div>
-            <form action="https://formspree.io/f/xldbzjdz" method="POST" id="contact-form-element" class="animated-form">
-                <label for="contact-email">Your Email</label>
-                <input type="email" id="contact-email" name="email" placeholder="example@domain.com" required aria-label="Your email address">
-                <label for="contact-message">Your Message</label>
-                <textarea id="contact-message" name="message" placeholder="Type your message here" required aria-label="Your message"></textarea>
-                <button type="submit" class="cta-button">Send Message</button>
-                <p class="form-success" style="display:none;">Message sent successfully!</p>
+        </div>
+
+        <!-- Contact Form -->
+        <section class="contact-form" id="contact-form" role="region" aria-label="Contact form">
+            <h2>Send Us a Message</h2>
+            <form id="contact-form" action="https://formspree.io/f/your-form-id" method="POST">
+                <input type="text" name="name" placeholder="Your Name" required aria-label="Your full name">
+                <input type="email" name="email" placeholder="Your Email" required aria-label="Your email address">
+                <input type="text" name="subject" placeholder="Subject" required aria-label="Message subject">
+                <textarea name="message" placeholder="Your Message" required aria-label="Your message"></textarea>
+                <button type="submit" class="cta-button" aria-label="Submit contact form">Send Message</button>
             </form>
         </section>
 
-        <!-- Booking Section -->
-        <section class="booking" id="booking-form">
-            <h2>Book Your Stay</h2>
-            <form id="booking-form-element" action="https://formspree.io/f/xbloeqdy" method="POST" class="animated-form">
-                <input type="hidden" id="booking-id" name="booking-id">
-                <label for="checkin">Check-in Date</label>
-                <input type="date" id="checkin" name="checkin" required aria-label="Check-in date">
-                <label for="checkout">Check-out Date</label>
-                <input type="date" id="checkout" name="checkout" required aria-label="Check-out date">
-                <label for="guests">Number of Guests</label>
-                <input type="number" id="guests" name="guests" min="1" required aria-label="Number of guests">
-                <label for="room">Room Type</label>
-                <select id="room" name="room" required aria-label="Room type">
-                    <option value="standard">Standard ($100/night)</option>
-                    <option value="deluxe">Deluxe ($150/night)</option>
-                    <option value="suite">Suite ($200/night)</option>
-                </select>
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name" required aria-label="Your name">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required aria-label="Your email">
-                <label for="phone">Phone</label>
-                <input type="tel" id="phone" name="phone" required aria-label="Your phone number">
-                <label for="requests">Special Requests</label>
-                <textarea id="requests" name="requests" rows="3" aria-label="Special requests"></textarea>
-                <p id="total-cost" class="total-cost"></p>
-                <button type="submit" class="cta-button">Confirm Booking</button>
-                <div id="paypal-button-container"></div>
-            </form>
+        <!-- Contact Details -->
+        <section class="contact-details" id="contact-details" role="region" aria-label="Contact details">
+            <div id="particles-js"></div>
+            <h2>Get in Touch</h2>
+            <div class="details-grid">
+                <div class="detail-item" role="article">
+                    <i class="fas fa-phone-alt"></i>
+                    <p><a href="tel:+254700123456">+254 700 123 456</a></p>
+                </div>
+                <div class="detail-item" role="article">
+                    <i class="fas fa-envelope"></i>
+                    <p><a href="mailto:info@ambururu.com">info@ambururu.com</a></p>
+                </div>
+                <div class="detail-item" role="article">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <p>Ambururu Waterfalls Resort, Kakamega, Kenya</p>
+                    <button class="copy-button" data-copy="Ambururu Waterfalls Resort, Kakamega, Kenya">Copy Address</button>
+                </div>
+                <div class="detail-item" role="article">
+                    <i class="fas fa-clock"></i>
+                    <p>Monday - Sunday: 8:00 AM - 10:00 PM</p>
+                    <span class="status-indicator closed">Currently Closed</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Social Media -->
+        <section class="social-media" role="region" aria-label="Social media">
+            <h2>Connect With Us</h2>
+            <div class="social-links">
+                <a href="https://www.facebook.com/ambururu/" target="_blank" aria-label="Visit our Facebook page"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://x.com/Ambururu_W" target="_blank" aria-label="Visit our Twitter profile"><i class="fab fa-x-twitter"></i></a>
+                <a href="https://www.instagram.com/ambururu1/" target="_blank" aria-label="Visit our Instagram page"><i class="fab fa-instagram"></i></a>
+            </div>
+            <div class="x-feed" id="x-feed">
+                <div class="x-post"><p>Excited to welcome guests to Ambururu Waterfalls! 🌊</p><span class="x-posted">Posted May 31, 2025</span></div>
+                <div class="x-post"><p>Join us for a gourmet dining experience tonight! 🍽️</p><span class="x-posted">Posted May 30, 2025</span></div>
+            </div>
+        </section>
+
+        <!-- Map Section -->
+        <section class="map" id="map" role="region" aria-label="Map section">
+            <h2>Our Location</h2>
+            <div id="map"></div>
+            <p class="map-description">Nestled in Kakamega, Kenya, easily accessible via the Kisumu-Kakamega road.</p>
         </section>
     </main>
-    <footer>
+
+    <footer role="contentinfo">
         <div class="footer-container">
             <p>© 2025 Ambururu Waterfalls. All rights reserved.</p>
             <div class="social-links">
                 <a href="https://www.facebook.com/ambururu/" target="_blank" aria-label="Visit our Facebook page"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://x.com/Ambururu_W" target="_blank" aria-label="Visit our X page"><i class="fab fa-x-twitter"></i></a>
+                <a href="https://x.com/Ambururu_W" target="_blank" aria-label="Visit our Twitter profile"><i class="fab fa-x-twitter"></i></a>
+                <a href="https://www.instagram.com/ambururu1/" target="_blank" aria-label="Visit our Instagram page"><i class="fab fa-instagram"></i></a>
             </div>
             <div class="newsletter">
                 <h4>Stay Updated</h4>
-                <form id="newsletter-form" action="https://formspree.io/f/xbloeqdy" method="POST">
+                <form id="newsletter-form" action="https://formspree.io/f/your-form-id" method="POST">
                     <input type="email" name="email" placeholder="Enter your email" required aria-label="Email address for newsletter">
-                    <button type="submit" class="cta-button">Subscribe</button>
+                    <button type="submit">Subscribe</button>
                 </form>
             </div>
         </div>
     </footer>
 
-    <!-- Tawk.to Live Chat -->
-    <!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/68360ce00f6bcf190fc26624/1is9i4jf2';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<!--End of Tawk.to Script-->
-        })();
-    </script>
+    <a href="#" id="back-to-top" class="cta-button" aria-label="Back to top">↑</a>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"></script>
     <script>
+        // Menu Toggle
+        $(document).ready(function() {
+            $('.menu-toggle').on('click', function() {
+                $('#main-nav ul').toggleClass('active');
+                const expanded = $(this).attr('aria-expanded') === 'true' ? 'false' : 'true';
+                $(this).attr('aria-expanded', expanded);
+            });
+
+            // Dropdown Toggle on Mobile
+            $('.dropdown').on('click', function() {
+                if ($(window).width() < 768) {
+                    $(this).toggleClass('active');
+                }
+            });
+
+            // Form Validation
+            const form = $('#contact-form');
+            const inputs = form.find('input, textarea');
+            inputs.on('input', function() {
+                const input = $(this);
+                if (input[0].checkValidity()) {
+                    input.addClass('valid').removeClass('invalid');
+                } else {
+                    input.addClass('invalid').removeClass('valid');
+                }
+            });
+
+            // Form Submission
+            form.on('submit', function(e) {
+                e.preventDefault();
+                const button = form.find('button');
+                button.prop('disabled', true).append('<span class="loading"></span>');
+                const formData = form.serialize();
+                $.ajax({
+                    url: form.attr('action'),
+                    method: 'POST',
+                    data: formData,
+                    success: function() {
+                        button.remove();
+                        confetti({
+                            particleCount: 100,
+                            spread: 70,
+                            origin: { y: 0.6 }
+                        });
+                        form.prepend('<p style="color: #00ff99; font-family: Orbitron;">Message Sent! We’ll get back to you soon.</p>');
+                        form[0].reset();
+                        inputs.removeClass('valid invalid');
+                    },
+                    error: function() {
+                        alert('Error sending message. Please try again later.');
+                        button.prop('disabled', false).find('.loading').remove();
+                    }
+                });
+            });
+
+            // Copy to Clipboard
+            $('.copy-button').on('click', function() {
+                const text = $(this).data('copy');
+                navigator.clipboard.writeText(text).then(() => {
+                    $(this).text('Copied!');
+                    setTimeout(() => $(this).text('Copy Address'), 2000);
+                }).catch(() => alert('Failed to copy address.'));
+            });
+
+            // Debug Missing Images
+            $('img').on('error', function() {
+                console.log(`Image not found: ${this.src}`);
+            });
+        });
+
+        // Newsletter Form
+        $('#newsletter-form').on('submit', function(e) {
+            e.preventDefault();
+            const email = $(this).find('input[name="email"]').val();
+            if (email) {
+                alert('Thank you for subscribing!');
+                $(this)[0].reset();
+            }
+        });
+
+        // 3D Waterfall Animation
+        const canvas = document.getElementById('hero-canvas');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        const particleCount = 5000;
+        const particles = new THREE.BufferGeometry();
+        const positions = new Float32Array(particleCount * 3);
+        const velocities = new Float32Array(particleCount * 3);
+        for (let i = 0; i < particleCount; i++) {
+            positions[i * 3] = Math.random() * 100 - 50;
+            positions[i * 3 + 1] = Math.random() * 100;
+            positions[i * 3 + 2] = Math.random() * 100 - 50;
+            velocities[i * 3] = 0;
+            velocities[i * 3 + 1] = -Math.random() * 2 - 1;
+            velocities[i * 3 + 2] = 0;
+        }
+        particles.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        const particleMaterial = new THREE.PointsMaterial({
+            color: 0x00ccff,
+            size: 0.5,
+            transparent: true,
+            opacity: 0.7
+        });
+        const particleSystem = new THREE.Points(particles, particleMaterial);
+        scene.add(particleSystem);
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+        scene.add(ambientLight);
+        const pointLight = new THREE.PointLight(0x00ff99, 1, 100);
+        pointLight.position.set(0, 50, 50);
+        scene.add(pointLight);
+        camera.position.z = 50;
+        function animate() {
+            requestAnimationFrame(animate);
+            const positions = particleSystem.geometry.attributes.position.array;
+            for (let i = 0; i < particleCount; i++) {
+                positions[i * 3 + 1] += velocities[i * 3 + 1];
+                if (positions[i * 3 + 1] < -50) {
+                    positions[i * 3 + 1] = 50;
+                }
+            }
+            particleSystem.geometry.attributes.position.needsUpdate = true;
+            renderer.render(scene, camera);
+        }
+        animate();
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // Particles.js for Contact Details
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: '#00ff99' },
+                shape: { type: 'circle' },
+                opacity: { value: 0.5, random: true },
+                size: { value: 3, random: true },
+                line_linked: { enable: true, distance: 150, color: '#00ccff', opacity: 0.4, width: 1 },
+                move: { enable: true, speed: 2, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' }, resize: true },
+                modes: { repulse: { distance: 100, duration: 0.4 }, push: { particles_nb: 4 } }
+            },
+            retina_detect: true
+        });
+
         // GSAP Animations
         gsap.registerPlugin(ScrollTrigger);
-
-        // Hero animations
-        gsap.from(".hero-title", {
+        gsap.from('.hero-overlay', {
             opacity: 0,
-            y: 50,
-            duration: 1,
-            delay: 0.5
+            y: 100,
+            duration: 1.5,
+            ease: 'power3.out'
         });
-        gsap.from(".hero-subtitle", {
+        gsap.from('#contact-form form', {
             opacity: 0,
-            y: 50,
-            duration: 1,
-            delay: 0.7
+            y: 100,
+            duration: 1.5,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.contact-form',
+                start: 'top 80%'
+            }
         });
-        gsap.from(".hero .cta-button", {
+        gsap.from('.detail-item', {
+            opacity: 0,
+            y: 100,
+            duration: 1.5,
+            stagger: 0.3,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.contact-details',
+                start: 'top 80%'
+            }
+        });
+        gsap.from('.social-links a', {
+            opacity: 0,
+            scale: 0.5,
+            duration: 1,
+            stagger: 0.2,
+            ease: 'backOut',
+            scrollTrigger: {
+                trigger: '.social-media',
+                start: 'top 80%'
+            }
+        });
+        gsap.from('#map', {
             opacity: 0,
             scale: 0.8,
-            duration: 1,
-            delay: 0.9
-        });
-
-        // Section reveal animations
-        gsap.utils.toArray(".contact, .booking").forEach(section => {
-            gsap.from(section, {
-                opacity: 0,
-                y: 100,
-                duration: 1,
-                scrollTrigger: {
-                    trigger: section,
-                    start: "top 80%",
-                    toggleActions: "play none none reverse"
-                }
-            });
-        });
-
-        // Form input animations
-        gsap.utils.toArray(".animated-form input, .animated-form textarea, .animated-form select").forEach(input => {
-            input.addEventListener("focus", () => {
-                gsap.to(input, { scale: 1.02, borderColor: "var(--coral)", duration: 0.3 });
-            });
-            input.addEventListener("blur", () => {
-                gsap.to(input, { scale: 1, borderColor: "var(--teal-green)", duration: 0.3 });
-            });
-        });
-
-        // Initialize Google Map
-        function initMap() {
-            const location = { lat: 0.199973, lng: 34.741566 };
-            const map = new google.maps.Map(document.getElementById("map"), {
-                zoom: 15,
-                center: location,
-                styles: [
-                    { featureType: "water", elementType: "geometry", stylers: [{ color: "#4DD0E1" }] },
-                    { featureType: "landscape", elementType: "geometry", stylers: [{ color: "#E0F7FA" }] }
-                ]
-            });
-            new google.maps.Marker({
-                position: location,
-                map,
-                title: "Ambururu Waterfalls",
-                icon: {
-                    url: "images/marker.png",
-                    scaledSize: new google.maps.Size(40, 40)
-                }
-            });
-        }
-
-        // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-
-        // Total cost calculator and validation
-        document.addEventListener('DOMContentLoaded', function() {
-            const checkinInput = document.getElementById('checkin');
-            const checkoutInput = document.getElementById('checkout');
-            const roomInput = document.getElementById('room');
-            const totalCostElement = document.getElementById('total-cost');
-            const bookingForm = document.getElementById('booking-form-element');
-
-            function calculateTotal() {
-                const checkin = new Date(checkinInput.value);
-                const checkout = new Date(checkoutInput.value);
-                const roomType = roomInput.value;
-                const rates = { standard: 100, deluxe: 150, suite: 200 };
-                const today = new Date();
-                today.setHours(0, 0, 0, 0);
-
-                if (checkin < today) {
-                    totalCostElement.innerText = "Check-in date cannot be in the past.";
-                    return;
-                }
-                if (checkout <= checkin) {
-                    totalCostElement.innerText = "Check-out must be after check-in.";
-                    return;
-                }
-
-                if (checkin && checkout && roomType) {
-                    const nights = Math.round((checkout - checkin) / (1000 * 60 * 60 * 24));
-                    if (nights > 0) {
-                        const total = nights * rates[roomType];
-                        totalCostElement.innerText = `Estimated Total: $${total}`;
-                        return total;
-                    }
-                }
-                totalCostElement.innerText = '';
+            duration: 1.5,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.map',
+                start: 'top 80%'
             }
-
-            checkinInput.addEventListener('change', calculateTotal);
-            checkoutInput.addEventListener('change', calculateTotal);
-            roomInput.addEventListener('change', calculateTotal);
-
-            // PayPal Integration
-            paypal.Buttons({
-                createOrder: function(data, actions) {
-                    const total = calculateTotal();
-                    if (!total) {
-                        alert("Please complete the booking form to calculate the total.");
-                        return;
-                    }
-                    return actions.order.create({
-                        purchase_units: [{
-                            amount: { value: total.toString() }
-                        }]
-                    });
-                },
-                onApprove: function(data, actions) {
-                    return actions.order.capture().then(function(details) {
-                        $('#loading-spinner').show();
-                        setTimeout(() => {
-                            $('#loading-spinner').hide();
-                            $('#confirmation-modal').show();
-                            bookingForm.reset();
-                            totalCostElement.innerText = '';
-                        }, 1000);
-                    });
-                }
-            }).render('#paypal-button-container');
-
-            // Contact form submission
-            $('#contact-form-element').on('submit', function(e) {
-                e.preventDefault();
-                $.ajax({
-                    url: this.action,
-                    method: this.method,
-                    data: $(this).serialize(),
-                    success: function() {
-                        $('.form-success').show();
-                        $('#contact-form-element')[0].reset();
-                        gsap.fromTo(".form-success", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5 });
-                        setTimeout(() => $('.form-success').fadeOut(), 3000);
-                    }
-                });
-            });
         });
+
+        // Back to Top Button
+        $(window).on('scroll', function() {
+            if ($(this).scrollTop() > 300) {
+                $('#back-to-top').fadeIn();
+            } else {
+                $('#back-to-top').fadeOut();
+            }
+        });
+        $('#back-to-top').on('click', function(e) {
+            e.preventDefault();
+            $('html, body').animate({ scrollTop: 0 }, 500);
+        });
+
+        // Mapbox 3D Globe
+        mapboxgl.accessToken = 'pk.eyJ1IjoiZXhhbXBsZSIsImEiOiJja3Zhcmk1c3QwNTQ1MnFtb3J0c2d5c2E2In0.8fakeToken1234567890';
+        const map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/satellite-v9',
+            center: [34.751865, 0.282730],
+            zoom: 12,
+            pitch: 60,
+            bearing: -60,
+            projection: 'globe'
+        });
+        map.on('load', () => {
+            map.addLayer({
+                id: 'sky',
+                type: 'sky',
+                paint: {
+                    'sky-type': 'atmosphere',
+                    'sky-atmosphere-sun': [0, 0],
+                    'sky-atmosphere-sun-intensity': 5
+                }
+            });
+            new mapboxgl.Marker({ color: '#00ff99' })
+                .setLngLat([34.751865, 0.282730])
+                .setPopup(new mapboxgl.Popup().setHTML(`
+                    <h3>Ambururu Waterfalls</h3>
+                    <p>Kakamega, Kenya</p>
+                    <a href="https://www.google.com/maps/dir/?api=1&destination=0.282730,34.751865" target="_blank" style="color: #00ccff;">Get Directions</a>
+                `))
+                .addTo(map);
+        });
+
+        // Ambient Waterfall Sound
+        const audio = new Audio('https://www.zapsplat.com/wp-content/uploads/2015/sound-effects-77317/zapsplat_nature_waterfall_small_flowing_loop_001_81338.mp3');
+        audio.loop = true;
+        audio.volume = 0.3;
+        audio.play().catch(() => console.log('Audio playback failed. Autoplay may be blocked.'));
     </script>
 </body>
 </html>

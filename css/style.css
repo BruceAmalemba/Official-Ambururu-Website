@@ -4215,3 +4215,176 @@ $(document).ready(() => {
   to { opacity: 1; }
 }
 .fade-in { animation: fadeIn 1s ease-in; }
+
+#chatbot-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 300px;
+    height: 400px;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+}
+
+#chatbot-header {
+    background: var(--aqua-blue);
+    color: #fff;
+    padding: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
+#chatbot-messages {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+    border-bottom: 1px solid #ccc;
+}
+
+.chatbot-message {
+    margin: 5px 0;
+    padding: 8px;
+    border-radius: 5px;
+    max-width: 80%;
+}
+
+.chatbot-message.bot {
+    background: var(--soft-green);
+    color: #333;
+    align-self: flex-start;
+}
+
+.chatbot-message.user {
+    background: var(--coral);
+    color: #fff;
+    margin-left: auto;
+    text-align: right;
+}
+
+#chatbot-input {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #ccc;
+}
+
+#chatbot-input input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+}
+
+#chatbot-input button {
+    padding: 8px 15px;
+    background: var(--aqua-blue);
+    color: #fff;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+#chatbot-input button:hover {
+    background: var(--coral);
+}
+
+// Discount Wheel
+const wheelCanvas = document.getElementById('discount-wheel');
+const wheelCtx = wheelCanvas.getContext('2d');
+const discounts = [
+    { value: 0, label: 'Try Again', color: '#e63946' },
+    { value: 5, label: '5% Off', color: '#4CAF50' },
+    { value: 10, label: '10% Off', color: '#26A69A' },
+    { value: 15, label: '15% Off', color: '#FF6F61' },
+    { value: 0, label: 'Try Again', color: '#e63946' },
+    { value: 20, label: '20% Off', color: '#8C6F47' }
+];
+const arc = Math.PI / (discounts.length / 2);
+let spinAngle = 0;
+let isSpinning = false;
+
+function drawWheel() {
+    wheelCtx.clearRect(0, 0, wheelCanvas.width, wheelCanvas.height);
+    discounts.forEach((discount, i) => {
+        wheelCtx.beginPath();
+        wheelCtx.fillStyle = discount.color;
+        wheelCtx.moveTo(100, 100);
+        wheelCtx.arc(100, 100, 100, i * arc, (i + 1) * arc);
+        wheelCtx.fill();
+        wheelCtx.fillStyle = '#fff';
+        wheelCtx.font = '12px Roboto';
+        wheelCtx.save();
+        wheelCtx.translate(100, 100);
+        wheelCtx.rotate(i * arc + arc / 2);
+        wheelCtx.fillText(discount.label, 50, 0);
+        wheelCtx.restore();
+    });
+}
+
+drawWheel();
+
+$('#spin-wheel').on('click', function () {
+    if (isSpinning) return;
+    isSpinning = true;
+    $('#spin-wheel').prop('disabled', true).text('Spinning...');
+    const spinDuration = 4000;
+    const randomAngle = Math.random() * 360 + 720;
+    gsap.to(window, {
+        spinAngle: randomAngle,
+        duration: spinDuration / 1000,
+        ease: "power2.out",
+        onUpdate: () => {
+            wheelCanvas.style.transform = `rotate(${spinAngle}deg)`;
+        },
+        onComplete: () => {
+            const finalAngle = spinAngle % 360;
+            const index = Math.floor((360 - finalAngle) / (360 / discounts.length)) % discounts.length;
+            const result = discounts[index];
+            $('#discount-result').text(`You won: ${result.label}!`).css('color', result.color).data('discount', result.value);
+            calculateTotal();
+            isSpinning = false;
+            $('#spin-wheel').prop('disabled', false).text('Spin Again');
+            new Audio('https://freesound.org/data/previews/511/511484_6890478-lq.mp3').play().catch(() => {});
+        }
+    });
+});
+$('#initiate-mpesa').on('click', async function () {
+    const total = calculateTotal();
+    const phone = $('#phone').val();
+    if (!total || !checkAvailability() || !phone) {
+        $('#form-error').text('Please complete the form and provide a valid phone number.').css('color', '#e63946').show();
+        return;
+    }
+
+    $('#loading-modal').show();
+    try {
+        const response = await fetch('/api/mpesa', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ phone, amount: total })
+        });
+        const data = await response.json();
+        if (data.CheckoutRequestID) {
+            $('#loading-modal').hide();
+            alert('M-Pesa Payment Request Sent! Please check your phone to complete the payment and enter the transaction ID.');
+        } else {
+            throw new Error('Payment initiation failed');
+        }
+    } catch (error) {
+        $('#loading-modal').hide();
+        $('#form-error').text('M-Pesa payment initiation failed. Please try again.').css('color', '#e63946').show();
+        console.error('M-Pesa error:', error);
+    }
+});
+$.get('https://api.exchangerate-api.com/v4/latest/USD', data => {
+    currencyRates = { USD: 1, KES: data.rates.KES, EUR: data.rates.EUR, ETH: 1 / data.rates.ETH };
+    updateSummary();
+});
