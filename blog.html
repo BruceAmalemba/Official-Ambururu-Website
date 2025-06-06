@@ -7,32 +7,123 @@
     <meta name="keywords" content="Ambururu Waterfalls, Kakamega, Kenya, blog, travel tips, conservation, resort news">
     <meta property="og:title" content="Blog - Ambururu Waterfalls Resort">
     <meta property="og:description" content="Dive into travel tips, news, and conservation tales from Ambururu Waterfalls in Kakamega, Kenya.">
-    <meta property="og:image" content="images/30.jpg">
+    <meta property="og:image" content="/images/30.jpg">
     <meta property="og:url" content="https://ambururuwaterfalls.com/blog.html">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@Ambururu_W">
+    <link rel="canonical" href="https://ambururuwaterfalls.com/blog.html">
     <title>Blog - Ambururu Waterfalls Resort</title>
-    <link rel="preload" href="images/30.jpg" as="image">
-    <link rel="preload" href="images/4.jpg" as="image">
-    <link rel="preload" href="images/26.jpg" as="image">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preload" href="/images/30.jpg" as="image">
+    <link rel="preload" href="/images/4.jpg" as="image">
+    <link rel="preload" href="/images/26.jpg" as="image">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
-    <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet">
-    <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet" integrity="sha512-BNtp5L8I2hBOJ2b2WjJuY8OKaW0oq0yG2eXe0rT0aBBRu5zMW1k0k6jU7T8zO3zVON9LhH3OK0fI7OtsOcEyEyA==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <style>
-        /* General Styles (from index.html) */
+        /* General Reset */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* CSS Variables */
+        :root {
+            --primary: #006994;
+            --aqua-blue: hsl(180, 70%, 45%);
+            --teal-green: hsl(160, 50%, 20%);
+            --coral: hsl(10, 80%, 60%);
+            --coral-hover: hsl(10, 80%, 50%);
+            --neon-green: #33ffaa;
+            --neon-blue: #00ccff;
+            --off-white: lab(95% 0 10);
+            --text-color: hsl(160, 50%, 15%);
+            --shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.15);
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            --transition: all 0.3s ease;
+        }
+
+        /* Body Styles */
         body {
             font-family: 'Roboto', sans-serif;
-            color: #ffffff;
-            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
-            margin: 0;
+            color: #fff;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
             overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Headings */
+        h1, h2, h3, h4 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--neon-green);
+        }
+
+        h2 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        /* Reusable Classes */
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            backdrop-filter: blur(6px);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 20px rgba(51, 255, 170, 0.5);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: linear-gradient(45deg, var(--neon-green), var(--neon-blue));
+            color: #000;
+            border: none;
+            border-radius: 2rem;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(51, 255, 170, 0.5);
+        }
+
+        .btn.secondary {
+            background: none;
+            border: 2px solid var(--neon-green);
+            color: var(--neon-green);
+        }
+
+        .btn.secondary:hover {
+            background: var(--neon-green);
+            color: #000;
         }
 
         /* Header */
@@ -42,105 +133,95 @@
             width: 100%;
             z-index: 1000;
             background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(6px);
             padding: 1rem 0;
-            box-shadow: 0 2px 20px rgba(0, 255, 153, 0.2);
+            box-shadow: var(--shadow-sm);
         }
+
         .header-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 0 1.5rem;
         }
+
         .brand {
             display: flex;
             align-items: center;
+            gap: 1rem;
         }
+
         .logo {
             width: 80px;
             height: 80px;
-            margin-right: 1rem;
-            filter: drop-shadow(0 0 10px rgba(0, 255, 153, 0.5));
-            transition: transform 0.5s;
+            border-radius: 50%;
+            transition: var(--transition);
         }
+
         .logo:hover {
             transform: rotate(360deg);
+            box-shadow: 0 0 15px rgba(51, 255, 170, 0.5);
         }
+
         .brand h1 {
-            font-family: 'Orbitron', sans-serif;
-            color: #00ff99;
-            font-size: 1.8rem;
-            margin: 0;
-            text-shadow: 0 0 10px rgba(0, 255, 153, 0.7);
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            text-shadow: 0 0 10px rgba(51, 255, 170, 0.7);
         }
+
         nav ul {
             display: flex;
+            gap: 2rem;
             list-style: none;
-            padding: 0;
-            margin: 0;
         }
-        nav ul li {
-            position: relative;
-            margin-left: 2rem;
-        }
+
         nav ul li a {
-            color: #00ff99;
+            color: var(--neon-green);
             text-decoration: none;
-            font-weight: 500;
             font-family: 'Orbitron', sans-serif;
-            transition: all 0.3s;
-            text-shadow: 0 0 5px rgba(0, 255, 153, 0.5);
+            font-weight: 500;
+            transition: var(--transition);
         }
-        nav ul li a:hover,
-        nav ul li a.active {
-            color: #ffffff;
-            text-shadow: 0 0 15px rgba(0, 255, 153, 1);
+
+        nav ul li a:hover, nav ul li a.active {
+            color: #fff;
+            text-shadow: 0 0 15px rgba(51, 255, 170, 1);
         }
-        .dropdown:hover .dropdown-menu {
-            display: block;
-        }
+
         .dropdown-menu {
             display: none;
             position: absolute;
             background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(5px);
-            list-style: none;
+            backdrop-filter: blur(6px);
+            border-radius: 0.5rem;
             padding: 0.5rem 0;
-            margin-top: 0.5rem;
-            border-radius: 5px;
-            box-shadow: 0 2px 10px rgba(0, 255, 153, 0.2);
-            z-index: 1001;
+            box-shadow: var(--shadow);
+            min-width: 150px;
         }
+
+        .dropdown:hover .dropdown-menu, .dropdown:focus-within .dropdown-menu {
+            display: block;
+        }
+
         .dropdown-menu li a {
             padding: 0.5rem 1rem;
             display: block;
-            color: #00ff99;
-            text-shadow: none;
+            color: var(--neon-green);
         }
+
         .dropdown-menu li a:hover {
-            background: rgba(0, 255, 153, 0.2);
-            color: #ffffff;
+            background: rgba(51, 255, 170, 0.2);
+            color: #fff;
         }
+
         .menu-toggle {
             display: none;
             background: none;
             border: none;
-            color: #00ff99;
+            color: var(--neon-green);
             font-size: 1.5rem;
             cursor: pointer;
-        }
-        .cta-button.nav-cta {
-            background: linear-gradient(45deg, #00ff99, #00ccff);
-            color: #000000;
-            padding: 0.5rem 1.5rem;
-            border-radius: 50px;
-            box-shadow: 0 0 10px rgba(0, 255, 153, 0.5);
-        }
-        .cta-button.nav-cta:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 20px rgba(0, 255, 153, 1);
         }
 
         /* Hero Section */
@@ -148,7 +229,20 @@
             position: relative;
             height: 100vh;
             overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(51, 255, 170, 0.3), rgba(0, 204, 255, 0.3));
+            background-size: 200% 200%;
+            animation: aurora 12s ease-in-out infinite;
         }
+
+        @keyframes aurora {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
         #hero-canvas {
             position: absolute;
             top: 0;
@@ -157,6 +251,7 @@
             height: 100%;
             z-index: 1;
         }
+
         .hero-video-container {
             position: absolute;
             top: 50%;
@@ -164,67 +259,46 @@
             transform: translate(-50%, -50%);
             width: 60%;
             z-index: 2;
-            border-radius: 15px;
+            border-radius: 1rem;
             overflow: hidden;
-            box-shadow: 0 0 30px rgba(0, 255, 153, 0.3);
+            box-shadow: 0 0 20px rgba(51, 255, 170, 0.3);
         }
+
         .hero-video {
             width: 100%;
             height: auto;
+            display: block;
         }
+
+        .hero-video-container img {
+            width: 100%;
+            height: auto;
+            display: none;
+        }
+
         .hero-overlay {
-            position: absolute;
-            top: 50%;
-            left: translateY(-50%);
-            text-align: center;
+            position: relative;
             z-index: 3;
             background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(6px);
             padding: 3rem;
-            border-radius: 15px;
+            border-radius: 1rem;
             max-width: 90%;
-            box-shadow: 0 0 20px rgba(0, 255, 153, 0.3);
-            margin: 0 auto;
+            text-align: center;
+            box-shadow: var(--shadow);
         }
+
         .hero-overlay h2 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 4rem;
-            color: #00ff99;
-            text-shadow: 0 0 20px rgba(0, 255, 153, 0.8);
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            text-shadow: 0 0 20px rgba(51, 255, 170, 0.8);
             animation: hologram 2s infinite alternate;
-            margin: 0 0 1.5rem;
         }
+
         .hero-overlay p {
-            font-size: 1.5rem;
-            color: #ffffff;
-            margin: 0 0 2rem;
-            text-shadow: 0 0 10px rgba(255, 255, 0.5);
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            margin-bottom: 2rem;
         }
-        .cta-button {
-            background: linear-gradient(45deg, #00ff99, #00ccff);
-            color: #000000;
-            padding: 1rem 2rem;
-            text-decoration: none;
-            border-radius: 50px;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
-            transition: all 0.3s;
-            box-shadow: 0 0 20px rgba(0, 255, 153, 0.5);
-            display: inline-block;
-        }
-        .cta-button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 30px rgba(0, 255, 153, 1);
-        }
-        .secondary {
-            background: none;
-            border: 2px solid #00ff99;
-            margin-left: 1rem;
-            color: #00ff99;
-        }
-        .secondary:hover {
-            background: #00ff99;
-            color: #000000;
-        }
+
         @keyframes hologram {
             0% { opacity: 0.8; transform: translateY(0); }
             100% { opacity: 1; transform: translateY(-10px); }
@@ -237,35 +311,39 @@
             right: 20px;
             z-index: 1000;
         }
+
         .assistant-orb {
             width: 60px;
             height: 60px;
-            background: radial-gradient(circle, #00ff99, #00ccff);
+            background: radial-gradient(circle, var(--neon-green), var(--neon-blue));
             border-radius: 50%;
             cursor: pointer;
-            box-shadow: 0 0 20px rgba(0, 255, 153, 0.7);
+            box-shadow: 0 0 20px rgba(51, 255, 170, 0.7);
             animation: pulse 2s infinite;
         }
+
         .assistant-tooltip {
             display: none;
             position: absolute;
             bottom: 80px;
             right: 0;
             background: rgba(0, 0, 0, 0.8);
-            color: #00ff99;
+            color: var(--neon-green);
             padding: 1rem;
-            border-radius: 10px;
+            border-radius: 0.5rem;
             width: 250px;
             text-align: center;
-            box-shadow: 0 0 15px rgba(0, 255, 153, 0.5);
+            box-shadow: var(--shadow);
         }
-        .assistant-orb:hover .assistant-tooltip {
+
+        .assistant-orb:hover .assistant-tooltip, .assistant-orb:focus .assistant-tooltip {
             display: block;
         }
+
         @keyframes pulse {
-            0% { transform: scale(1); box-shadow: 0 0 20px rgba(0, 255, 153, 0.7); }
-            50% { transform: scale(1.1); box-shadow: 0 0 30px rgba(0, 255, 153, 1); }
-            100% { transform: scale(1); box-shadow: 0 0 20px rgba(0, 255, 153, 0.7); }
+            0% { transform: scale(1); box-shadow: 0 0 20px rgba(51, 255, 170, 0.7); }
+            50% { transform: scale(1.1); box-shadow: 0 0 30px rgba(51, 255, 170, 1); }
+            100% { transform: scale(1); box-shadow: 0 0 20px rgba(51, 255, 170, 0.7); }
         }
 
         /* Blog Feed */
@@ -274,6 +352,7 @@
             position: relative;
             text-align: center;
         }
+
         #particles-js {
             position: absolute;
             top: 0;
@@ -282,268 +361,207 @@
             height: 100%;
             z-index: 0;
         }
+
         .blog-container {
             display: flex;
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 0 1.5rem;
             gap: 2rem;
             position: relative;
             z-index: 1;
         }
+
         .blog-sidebar {
             flex: 1;
-            background: rgba(255, 255, 255, 0.1);
             padding: 2rem;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 0 20px rgba(0, 255, 153, 0.2);
+            border-radius: 1rem;
         }
+
         .blog-sidebar h3 {
-            font-family: 'Orbitron', sans-serif;
             font-size: 2rem;
-            color: #00ff99;
-            text-shadow: 0 0 10px rgba(0, 255, 153, 0.5);
-            margin: 0 0 1.5rem;
+            text-shadow: 0 0 10px rgba(51, 255, 170, 0.5);
+            margin-bottom: 1.5rem;
         }
-        .category-filter {
-            list-style: none;
-            padding: 0;
-            margin: 2rem 0;
-        }
-        .filter-btn {
-            display: block;
-            background: none;
-            border: 2px solid #00ccff;
-            color: #00ff99;
-            padding: 0.5rem 1rem;
-            margin-bottom: 0.5rem;
-            border-radius: 5px;
-            cursor: pointer;
-            font-family: 'Orbitron', sans-serif;
-            transition: allEating0.3s;
-            box-shadow: 0 0 5px rgba(0, 255, 153, 0.3);
-        }
-        .filter-btn:hover,
-        .filter-btn.active {
-            background: linear-gradient(45deg, #00ccff, #00ff99);
-            color: #000000;
-            box-shadow: 0 0 10px rgba(0, 255, 153, 1);
-        }
+
         .blog-search {
             width: 100%;
             padding: 1rem;
             border: none;
-            border-radius: 5px;
+            border-radius: 0.5rem;
             background: rgba(255, 255, 255, 0.1);
-            color: #ffffff;
+            color: #fff;
             font-size: 1rem;
             margin-bottom: 2rem;
         }
+
         .blog-search:focus {
             outline: none;
-            box-shadow: 0 0 10px rgba(0, 255, 153, 0.5);
+            box-shadow: 0 0 10px rgba(51, 255, 170, 0.5);
         }
-        .recent-posts {
-            margin-top: 2rem;
+
+        .category-filter {
+            list-style: none;
+            margin: 2rem 0;
         }
+
+        .filter-btn {
+            display: block;
+            background: none;
+            border: 2px solid var(--neon-blue);
+            color: var(--neon-green);
+            padding: 0.5rem 1rem;
+            margin-bottom: 0.5rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            transition: var(--transition);
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-green));
+            color: #000;
+        }
+
         .recent-posts ul {
             list-style: none;
-            padding: 0;
         }
+
         .recent-posts li a {
-            color: #00ccff;
+            color: var(--neon-blue);
             text-decoration: none;
             font-size: 0.9rem;
             display: block;
             margin-bottom: 1rem;
-            transition: color 0.3s;
+            transition: var(--transition);
         }
+
         .recent-posts li a:hover {
-            color: #00ff99;
+            color: var(--neon-green);
         }
+
         .blog-posts {
             flex: 3;
         }
+
         .blog-post {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 2rem;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 0 20px rgba(0, 255, 153, 0.2);
-            margin-bottom: 2rem;
-            transition: transform 0.5s, box-shadow 0.5s;
             display: flex;
             align-items: center;
             gap: 2rem;
+            margin-bottom: 2rem;
+            padding: 2rem;
+            border-radius: 1rem;
         }
-        .blog-post:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 0 30px rgba(0, 255, 153, 0.5);
-        }
+
         .blog-image {
             width: 200px;
             height: 150px;
             object-fit: cover;
-            border-radius: 10px;
-            transition: transform 0.5s;
+            border-radius: 0.5rem;
+            transition: var(--transition);
         }
+
         .blog-post:hover .blog-image {
             transform: scale(1.1);
         }
-        .blog-content {
-            flex: 1;
-        }
+
         .blog-content h3 {
-            font-family: 'Orbitron', sans-serif;
             font-size: 1.8rem;
-            color: #00ff99;
-            margin: 0 0 0.5rem;
-            text-shadow: 0 0 10px rgba(0, 255, 153, 0.5);
+            margin-bottom: 0.5rem;
         }
+
         .blog-meta {
-            color: #00ccff;
+            color: var(--neon-blue);
             font-size: 0.9rem;
-            margin: 0 0 1rem;
+            margin-bottom: 1rem;
         }
-        .blog-content p {
-            color: #ffffff;
-            margin: 0 0 1rem;
-            line-height: 1.6;
-        }
+
         .blog-actions {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
+
         .social-share {
             display: flex;
             gap: 0.5rem;
         }
+
         .share-btn {
-            color: #00ff99;
+            color: var(--neon-green);
             font-size: 1.2rem;
-            transition: color 0.3s, transform 0.3s;
+            transition: var(--transition);
         }
+
         .share-btn:hover {
-            color: #ffffff;
+            color: #fff;
             transform: scale(1.2);
         }
+
         .save-btn {
             background: none;
-            border: 2px solid #00ccff;
-            color: #00ff99;
+            border: 2px solid var(--neon-blue);
+            color: var(--neon-green);
             padding: 0.5rem 1rem;
-            border-radius: 5px;
+            border-radius: 0.5rem;
             cursor: pointer;
             font-family: 'Orbitron', sans-serif;
-            box-shadow: 0 0 5px rgba(0, 255, 153, 0.3);
         }
+
         .save-btn.saved {
-            background: linear-gradient(45deg, #00ccff, #00ff99);
-            color: #000000;
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-green));
+            color: #000;
         }
+
         .blog-comments {
             margin-top: 2rem;
             background: rgba(0, 0, 0, 0.3);
             padding: 1rem;
-            border-radius: 10px;
+            border-radius: 0.5rem;
         }
+
         .load-more {
             text-align: center;
             margin-top: 2rem;
         }
-        #load-more-btn {
-            background: linear-gradient(45deg, #00ff99, #00ccff);
-            color: #000000;
-            box-shadow: 0 0 10px rgba(0, 255, 153, 0.5);
-        }
-        #load-more-btn:hover {
-            transform: scale(1.1);
-        }
 
         /* Newsletter Form */
-        .newsletter {
-            margin-top: 2rem;
-        }
-        .newsletter h4 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2rem;
-            color: #00ff99;
-            text-shadow: 0 0 10px rgba(0, 255, 153, 0.5);
-            margin: 0 0 1.5rem;
-        }
-        .newsletter form {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
         .newsletter input {
             padding: 1rem;
             border: none;
-            border-radius: 5px;
+            border-radius: 0.5rem;
             background: rgba(255, 255, 255, 0.1);
-            color: #ffffff;
+            color: #fff;
             font-size: 1rem;
-        }
-        .newsletter input:focus {
-            outline: none;
-            box-shadow(0 0 10px rgba(0, 255, 153, 0.5));
-        }
-        .newsletter input.valid {
-            box-shadow(0 0 10px rgba(0, 255, 153, 1));
-        }
-        .newsletter input.invalid {
-            box-shadow(0 0 10px rgba(255, 0, 0, 0.5));
-        }
-        .newsletter button {
-            background: linear-gradient(45deg, #00ff99, #00ccff);
-            color: #000000;
-            padding: 1rem;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            font-family: 'Orbitron', sans-serif;
-            box-shadow(0 0 10px rgba(0, 255, 153, 0.5));
-        }
-        .newsletter button:hover {
-            transform: scale(1.1);
-            box-shadow(0 0 20px rgba(0, 255, 153, 1));
+            width: 100%;
         }
 
-        /* Contact Form */
+        .newsletter input:focus {
+            outline: none;
+            box-shadow: 0 0 10px rgba(51, 255, 170, 0.5);
+        }
+
+        /* Contact Section */
         .contact-section {
             padding: 5rem 0;
+            background: linear-gradient(45deg, var(--neon-green), var(--neon-blue));
             text-align: center;
-            background: linear-gradient(45deg, #00ff99, #00ccff);
-            margin-bottom: 2rem;
-            box-shadow(0 0 50px rgba(0, 255, 153, 0.5));
         }
-        .contact-section h2 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 3rem;
-            color: #000000;
-            margin: 0 0 2rem;
-        }
-        .contact-info {
-            margin-bottom: 2rem;
-        }
+
         .contact-info p {
             margin: 0.5rem 0;
             font-size: 1.2rem;
         }
+
         .contact-info a {
-            color: #000000;
+            color: #000;
             text-decoration: none;
-            transition: color 0.3s;
         }
+
         .contact-info a:hover {
-            color: #ffffff;
+            color: #fff;
         }
-        .contact-info i {
-            margin-right: 0.5rem;
-            color: #000000;
-        }
+
         #contact-form {
             max-width: 600px;
             margin: 0 auto;
@@ -552,72 +570,28 @@
             gap: 1.5rem;
             padding: 0 1.5rem;
         }
-        #contact-form label {
-            display: none;
-        }
-        #contact-form input,
-        #contact-form textarea {
+
+        #contact-form input, #contact-form textarea {
             padding: 1rem;
             border: none;
-            border-radius: 5px;
+            border-radius: 0.5rem;
             background: rgba(255, 255, 255, 0.1);
-            color: #ffffff;
+            color: #fff;
             font-size: 1rem;
         }
+
         #contact-form textarea {
             height: 150px;
             resize: vertical;
         }
-        #contact-form input:focus,
-        #contact-form textarea:focus {
+
+        #contact-form input:focus, #contact-form textarea:focus {
             outline: none;
-            box-shadow(0 0 10px rgba(0, 255, 153, 0.5));
+            box-shadow: 0 0 10px rgba(51, 255, 170, 0.5);
         }
-        #contact-form input.valid,
-        #contact-form textarea.valid {
-            box-shadow(0 0 10px rgba(0, 255, 153, 1));
-        }
-        #contact-form input.invalid,
-        #contact-form textarea.invalid {
-            box-shadow(0 0 10px rgba(255, 0, 0, 0.5));
-        }
-        #contact-form button {
-            background: linear-gradient(45deg, #00ff99, #00ccff);
-            color: #000000;
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            font-family: 'Orbitron', sans-serif;
-            box-shadow(0 0 20px rgba(0, 255, 153, 0.5));
-            position: relative;
-            overflow: hidden;
-        }
-        #contact-form button:hover {
-            transform: scale(1.1);
-            box-shadow(0 0 30px rgba(0, 255, 153, 1));
-        }
-        #contact-form button:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-        .loading {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 20px;
-            height: 20px;
-            border: 3px solid #ffffff;
-            border-top-color: transparent;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin {
-            to { transform: translate(-50%, -50%) rotate(360deg); }
-        }
+
         .form-success {
-            color: #000000;
+            color: #000;
             font-family: 'Orbitron', sans-serif;
             font-size: 1.2rem;
             margin-top: 1rem;
@@ -626,55 +600,46 @@
         /* Social Media */
         .social-media {
             padding: 3rem 0;
-            text-align: center;
             background: rgba(0, 0, 0, 0.3);
+            text-align: center;
         }
-        .social-media h2 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2.5rem;
-            color: #00ff99;
-            text-shadow: 0 0 15px rgba(0, 255, 153, 0.7);
-            margin: 0 0 2rem;
-        }
+
         .social-links {
             display: flex;
             justify-content: center;
             gap: 2rem;
         }
+
         .social-links a {
-            color: #00ff99;
+            color: var(--neon-green);
             font-size: 2.5rem;
-            transition: all 0.3s;
-            text-shadow: 0 0 10px rgba(0, 255, 153, 0.5);
+            transition: var(--transition);
         }
+
         .social-links a:hover {
-            color: #ffffff;
+            color: #fff;
             transform: scale(1.2);
-            text-shadow: 0 0 20px rgba(0, 255, 153, 1);
         }
+
         .x-feed {
             max-width: 600px;
             margin: 2rem auto;
-            background: rgba(255, 255, 255, 0.1);
             padding: 1.5rem;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 0 20px rgba(0, 255, 153, 0.2);
+            border-radius: 1rem;
         }
+
         .x-post {
             padding: 1rem;
-            border-bottom: 1px solid rgba(0, 255, 153, 0.2);
+            border-bottom: 1px solid rgba(51, 255, 170, 0.2);
         }
+
         .x-post:last-child {
             border-bottom: none;
         }
-        .x-post p {
-            margin: 0;
-            color: #ffffff;
-        }
+
         .x-post span {
             font-size: 0.8rem;
-            color: #00ccff;
+            color: var(--neon-blue);
         }
 
         /* Map Section */
@@ -682,42 +647,31 @@
             padding: 5rem 0;
             text-align: center;
         }
-        .map h2 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 3rem;
-            color: #00ff99;
-            text-shadow: 0 0 15px rgba(0, 255, 153, 0.7);
-            margin: 0 0 2rem;
-        }
+
         #map {
             width: 100%;
             height: 500px;
-            border-radius: 15px;
-            box-shadow(0 0 30px rgba(0, 255, 153, 0.3));
+            border-radius: 1rem;
+            box-shadow: 0 0 20px rgba(51, 255, 170, 0.3);
         }
+
         .map-description {
             margin-top: 1rem;
             font-size: 1.2rem;
-            color: #ffffff;
         }
 
         /* Footer */
         footer {
             background: rgba(0, 0, 0, 0.8);
-            color: #ffffff;
+            color: #fff;
             padding: 3rem 0;
             text-align: center;
         }
+
         .footer-container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 0 1.5rem;
-        }
-        .footer-container p {
-            margin: 0 0 1rem;
-        }
-        .footer-container .newsletter button {
-            padding: 0.75rem 2rem;
         }
 
         /* Back to Top */
@@ -725,30 +679,77 @@
             position: fixed;
             bottom: 30px;
             right: 30px;
-            background: linear-gradient(45deg, #00ff99, #00ccff);
-            color: #000000;
+            background: linear-gradient(45deg, var(--neon-green), var(--neon-blue));
+            color: #000;
             padding: 1rem;
             border-radius: 50%;
             font-size: 1.5rem;
             display: none;
             z-index: 1000;
-            box-shadow(0 0 15px rgba(0, 255, 153, 0.5));
+            box-shadow: 0 0 15px rgba(51, 255, 170, 0.5);
         }
+
         #back-to-top:hover {
             transform: scale(1.1);
-            box-shadow(0 0 25px rgba(0, 255, 153, 1));
+        }
+
+        /* Skeleton Loading */
+        .skeleton {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            animation: skeleton-pulse 1.5s infinite;
+        }
+
+        .skeleton .blog-image {
+            width: 200px;
+            height: 150px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .skeleton .blog-content {
+            flex: 1;
+        }
+
+        .skeleton .blog-content h3 {
+            width: 60%;
+            height: 1.8rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 0.3rem;
+        }
+
+        .skeleton .blog-meta {
+            width: 40%;
+            height: 0.9rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 0.3rem;
+        }
+
+        .skeleton .blog-content p {
+            width: 80%;
+            height: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 0.3rem;
+        }
+
+        @keyframes skeleton-pulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 0.8; }
+            100% { opacity: 0.6; }
         }
 
         /* Responsive Design */
+        @media (max-width: 1280px) {
+            .blog-container {
+                max-width: 1000px;
+            }
+        }
+
         @media (max-width: 1024px) {
             .blog-container {
                 flex-direction: column;
-            }
-            .blog-sidebar {
-                order: 1;
-            }
-            .blog-posts {
-                order: 2;
+                gap: 3rem;
             }
             .blog-post {
                 flex-direction: column;
@@ -759,89 +760,113 @@
                 max-width: 300px;
             }
         }
+
         @media (max-width: 768px) {
-            .header-container {
-                flex-wrap: wrap;
+            .menu-toggle {
+                display: block;
             }
             nav ul {
                 display: none;
                 flex-direction: column;
                 width: 100%;
-                text-align: center;
+                text-align: left;
+                background: rgba(0, 0, 0, 0.9);
+                position: fixed;
+                top: 0;
+                right: -100%;
+                height: 100vh;
+                padding: 2rem;
+                transition: right 0.4s ease;
             }
             nav ul.active {
                 display: flex;
+                right: 0;
             }
             nav ul li {
                 margin: 1rem 0;
             }
-            .dropdown:hover .dropdown-menu {
-                display: none;
-            }
-            .dropdown.active .dropdown-menu {
-                display: block;
+            .dropdown-menu {
                 position: static;
-            }
-            .menu-toggle {
-                display: block;
-            }
-            .hero-overlay h2 {
-                font-size: 2.5rem;
-            }
-            .hero-overlay p {
-                font-size: 1.2rem;
+                background: none;
+                backdrop-filter: none;
             }
             .hero-video-container {
                 width: 80%;
+            }
+            .hero-overlay h2 {
+                font-size: clamp(1.8rem, 5vw, 2.5rem);
+            }
+            .hero-overlay p {
+                font-size: clamp(1rem, 3vw, 1.2rem);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                width: 60px;
+                height: 60px;
+            }
+            .brand h1 {
+                font-size: 1.5rem;
             }
             .assistant-tooltip {
                 width: 200px;
             }
         }
+
+        @media (prefers-reduced-motion: reduce) {
+            .hero, .btn, .card, .logo, .assistant-orb {
+                animation: none;
+                transition: none;
+            }
+        }
     </style>
     <script type="application/ld+json">
-[{
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    "headline": "5 Tips for Visiting Ambururu Waterfalls",
-    "datePublished": "2025-05-20",
-    "author": {"@type": "Organization", "name": "Ambururu Waterfalls Resort", "url": "https://ambururuwaterfalls.com"},
-    "publisher": {"@type": "Organization", "name": "Ambururu Waterfalls Resort", "logo": {"@type": "ImageObject", "url": "logo/B2.jpg"}},
-    "image": "images/30.jpg",
-    "description": "Plan your trip with our expert advice for a memorable experience at Ambururu Waterfalls.",
-    "mainEntityOfPage": {"@type": "WebPage", "@id": "https://ambururuwaterfalls.com/blog.html#post-1"}
-}, {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    "headline": "New Trail Opens at Ambururu Waterfalls",
-    "datePublished": "2025-05-15",
-    "author": {"@type": "Organization", "name": "Ambururu Waterfalls Resort", "url": "https://ambururuwaterfalls.com"},
-    "publisher": {"@type": "Organization", "name": "Ambururu Waterfalls Resort", "logo": {"@type": "ImageObject", "url": "logo/B2.jpg"}},
-    "image": "images/4.jpg",
-    "description": "Discover our new hiking trail with stunning views.",
-    "mainEntityOfPage": {"@type": "WebPage", "@id": "https://ambururuwaterfalls.com/blog.html#post-2"}
-}, {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    "headline": "Conservation Efforts at Ambururu",
-    "datePublished": "2025-05-05",
-    "author": {"@type": "Organization", "name": "Ambururu Waterfalls Resort", "url": "https://ambururuwaterfalls.com"},
-    "publisher": {"@type": "Organization", "name": "Ambururu Waterfalls Resort", "logo": {"@type": "ImageObject", "url": "logo/B2.jpg"}},
-    "image": "images/26.jpg",
-    "description": "Learn about our initiatives to protect the local ecosystem.",
-    "mainEntityOfPage": {"@type": "WebPage", "@id": "https://ambururuwaterfalls.com/blog.html#post-3"}
-}]
+    [{
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "5 Tips for Visiting Ambururu Waterfalls",
+        "datePublished": "2025-05-20",
+        "author": {"@type": "Organization", "name": "Ambururu Waterfalls Resort", "url": "https://ambururuwaterfalls.com"},
+        "publisher": {"@type": "Organization", "name": "Ambururu Waterfalls Resort", "logo": {"@type": "ImageObject", "url": "/logo/B2.jpg"}},
+        "image": "/images/30.jpg",
+        "description": "Plan your trip with our expert advice for a memorable experience at Ambururu Waterfalls.",
+        "keywords": "travel tips, Ambururu Waterfalls, Kakamega, Kenya",
+        "mainEntityOfPage": {"@type": "WebPage", "@id": "https://ambururuwaterfalls.com/blog.html#post-1"}
+    }, {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "New Trail Opens at Ambururu Waterfalls",
+        "datePublished": "2025-05-15",
+        "author": {"@type": "Organization", "name": "Ambururu Waterfalls Resort", "url": "https://ambururuwaterfalls.com"},
+        "publisher": {"@type": "Organization", "name": "Ambururu Waterfalls Resort", "logo": {"@type": "ImageObject", "url": "/logo/B2.jpg"}},
+        "image": "/images/4.jpg",
+        "description": "Discover our new hiking trail with stunning views.",
+        "keywords": "hiking trail, Ambururu Waterfalls, news, Kakamega",
+        "mainEntityOfPage": {"@type": "WebPage", "@id": "https://ambururuwaterfalls.com/blog.html#post-2"}
+    }, {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Conservation Efforts at Ambururu",
+        "datePublished": "2025-05-05",
+        "author": {"@type": "Organization", "name": "Ambururu Waterfalls Resort", "url": "https://ambururuwaterfalls.com"},
+        "publisher": {"@type": "Organization", "name": "Ambururu Waterfalls Resort", "logo": {"@type": "ImageObject", "url": "/logo/B2.jpg"}},
+        "image": "/images/26.jpg",
+        "description": "Learn about our initiatives to protect the local ecosystem.",
+        "keywords": "conservation, Ambururu Waterfalls, Kakamega, eco-tourism",
+        "mainEntityOfPage": {"@type": "WebPage", "@id": "https://ambururuwaterfalls.com/blog.html#post-3"}
+    }]
     </script>
 </head>
 <body>
-    <!-- Header -->
-    <header class="sticky-header" role="banner">
+    <div class="progress-bar"></div>
+    <header class="sticky-header" role="blog-header">
         <div class="header-container">
             <div class="brand">
-                <img src="logo/B2.jpg" alt="Ambururu Waterfalls Resort Logo" class="logo" loading="lazy" width="80" height="80" onerror="this.src='https://via.placeholder.com/80?text=Logo';">
+                <img src="/images/B2Logo.jpg" alt="Logo" class="logo" loading="lazy" width="80" height="80" onerror="this.src='https://via.placeholder.com/80?text=Logo';">
                 <h1>Ambururu Waterfalls</h1>
             </div>
-            <nav id="main-nav" aria-label="Main navigation">
+            <nav id="main-nav" role="sidebar">
                 <ul>
                     <li><a href="index.html">Home</a></li>
                     <li class="dropdown">
@@ -856,15 +881,16 @@
                         <a href="activities.html">Activities <i class="fas fa-chevron-down"></i></a>
                         <ul class="dropdown-menu">
                             <li><a href="activities.html#swimming">Swimming</a></li>
-                            <li><a href="activities.html#hiking">Hiking</a></li>
+                            <li><a href="activities.html#hiking">Hiking</li>
                         </ul>
                     </li>
-                    <li><a href="accommodations.html">Accommodations</a></li>
+                    <li><a href="accommodations.html">Accommodations</a></a></li>
                     <li><a href="dining.html">Dining</a></li>
                     <li><a href="events.html">Events</a></li>
                     <li><a href="contact.html">Contact</a></li>
-                    <li><a href="blog.html" class="active" aria-current="page">Blog</a></li>
-                    <li><a href="#book-event" class="cta-button nav-cta">Book Now</a></li>
+                    <li><a href="blog.html" class="active" aria-current="page">Blog</a></a>
+                    </li>
+                    <li><a href="#book-now" class="btn nav-btn-cta">Book Now</a></li>
                 </ul>
             </nav>
             <button class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
@@ -874,138 +900,134 @@
     </header>
 
     <main>
-        <!-- Hero Section -->
         <section class="hero" role="region" aria-label="Blog hero section">
             <canvas id="hero-canvas"></canvas>
             <div class="hero-video-container">
                 <video class="hero-video" autoplay muted playsinline loop>
-                    <source src="images/41.mp4" type="video/mp4" onerror="console.error('Video not found: images/41.mp4');">
-                    Your browser does not support the video tag.
+                    <source src="/images/41.mp4" type="video/mp4" onerror="this.parentElement.nextElementSibling.style.display='block'; this.parentElement.removeChild(this);">
+                    Your browser does not support video.
                 </video>
+                <img src="/images/30.jpg" alt="Ambururu Waterfalls fallback image" />
             </div>
             <div class="hero-overlay">
                 <h2>Ambururu Stories</h2>
                 <p>Dive into travel tips, news, and conservation tales from the heart of Kakamega.</p>
-                <div class="hero-ctas">
-                    <a href="#blog-feed" class="cta-button">Explore Now</a>
-                    <a href="#newsletter-form" class="cta-button secondary">Join Newsletter</a>
+                <div class="hero-cts">
+                    <a href="#blog-feed" class="btn" aria-label="Explore Blog">Explore Now</a>
+                    <a href="#newsletter-form" class="btn secondary" aria-label="Join Newsletter">Join Newsletter</a>
                 </div>
             </div>
         </section>
 
-        <!-- Virtual Assistant -->
         <div class="virtual-assistant">
-            <div class="assistant-orb">
+            <div class="assistant-orb" role="button" tab-index="0">
                 <div class="assistant-tooltip">
                     <p>Explore our blog!</p>
-                    <a href="#category-filter" style="color: #00ccff;">Browse Categories</a> | 
-                    <a href="#contact-form" style="color: #00ccff;">Contact Us</a> | 
-                    <a href="#newsletter-form" style="color: #00ccff;">Subscribe</a>
+                    <a href="#category-filter" style="color: var(--neon-blue);">Browse Categories</a> | 
+                    <a href="#contact-form" style="color: var(--neon-blue);">Contact Us</a> | 
+                    <a href="#newsletter-form" style="color: var(--neon-blue);">Subscribe</a>
                 </div>
             </div>
         </div>
 
-        <!-- Blog Feed -->
         <section class="blog-feed" id="blog-feed" role="region" aria-label="Blog posts">
             <div id="particles-js"></div>
             <div class="blog-container">
                 <aside class="blog-sidebar">
                     <h3>Filter Posts</h3>
                     <input type="text" class="blog-search" id="blog-search" placeholder="Search posts..." aria-label="Search blog posts">
-                    <ul class="category-filter" id="category-filter">
-                        <li><button type="button" class="filter-btn active" data-category="all" aria-pressed="true">All</button></li>
-                        <li><button type="button" class="filter-btn" data-category="travel-tips" aria-pressed="false">Travel Tips</button></li>
-                        <li><button type="button" class="filter-btn" data-category="news" aria-pressed="false">News</button></li>
-                        <li><button type="button" class="filter-btn" data-category="conservation" aria-pressed="false">Conservation</button></li>
+                    <ul class="category-filter" id="category-filter" role="list">
+                        <li role="list-item"><button type="button" class="filter-btn active" data-category="all" aria-pressed="true" aria-label="All">All</button></li>
+                        <li role="listitem"><button type="button" class="filter-btn" data-category="travel-tips" aria-pressed="false" aria-label="Travel Tips">Travel Tips</button></li>
+                        <li role="listitem"><button type="li" class="filter-btn" data-category="news" aria-pressed="false" aria-label="News">News</button></li>
+                        <li role="listitem"><button type="button" class="filter-btn" data-category="conservation" aria-pressed="false" aria-label="Conservation">Conservation</button></li>
                     </ul>
-                    <div class="recent-posts">
-                        <h3>Recent Posts</h3>
-                        <ul>
-                            <li><a href="#post-1">5 Tips for Visiting Ambururu</a></li>
-                            <li><a href="#post-2">New Trail Opens</a></li>
-                            <li><a href="#post-3">Conservation Efforts</a></li>
-                        </ul>
-                    </div>
-                    <div class="newsletter">
-                        <h4>Stay Updated</h4>
-                        <form id="newsletter-form" action="https://formspree.io/f/xbloeqdy" method="POST">
-                            <input type="email" name="email" placeholder="Enter your email" required aria-label="Email address for newsletter">
-                            <button type="submit" class="cta-button" aria-label="Subscribe to newsletter">Subscribe</button>
-                        </form>
-                    </div>
-                </aside>
-                <div class="blog-posts">
-                    <article class="blog-post" data-category="travel-tips" id="post-1" role="article">
-                        <img src="images/30.jpg" alt="Ambururu Waterfall scenery" class="blog-image" loading="lazy" onerror="this.src='https://via.placeholder.com/200x150?text=Travel+Tips';">
-                        <div class="blog-content">
-                            <h3>5 Tips for Visiting Ambururu Waterfalls</h3>
-                            <p class="blog-meta">Posted on May 20, 2025 | By Ambururu Team | 4 min read (800 words)</p>
-                            <p>Plan your trip with our expert advice for a memorable experience at Ambururu Waterfalls.</p>
-                            <div class="blog-actions">
-                                <div>
-                                    <a href="#post-1" class="cta-button">Read More</a>
-                                    <button class="save-btn" data-post-id="1" aria-label="Save this post">Save</button>
-                                </div>
-                                <div class="social-share">
-                                    <a href="#" class="share-btn" data-platform="facebook" aria-label="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
-                                    <a href="#" class="share-btn" data-platform="twitter" aria-label="Share on Twitter"><i class="fab fa-x-twitter"></i></a>
-                                    <a href="#" class="share-btn" data-platform="whatsapp" aria-label="Share on WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                                    <a href="#" class="share-btn" data-platform="copy" aria-label="Copy link"><i class="fas fa-link"></i></a>
-                                </div>
+                <div class="recent-posts">
+                    <h3>Recent Posts</h3>
+                    <ul>
+                        <li><a href="#post-1">5 Tips for Visiting Ambururu</a></a></li>
+                        <li><a href="#post-2">New Trail Event</a></li>
+                        <li><a href="#post-3">Conservation Efforts</a></li>
+                    </ul>
+                </div>
+                <div class="newsletter">
+                    <h4 id="Subscribe-title">Stay Updated</h4>
+                    <form id="newsletter-form" action="https://formspree.io/f/xbloeqdy" method="POST">
+                        <input type="email" name="email" placeholder="Enter your email" required aria-label="Email address for newsletter">
+                        <button type="submit" class="cta-button" aria-label="Subscribe to newsletter">Subscribe</button>
+                    </form>
+                </div>
+            </aside>
+            <div class="blog-posts">
+                <article class="blog-post card" data-category="travel-tips" id="post-1" role="article">
+                    <img src="/images/30.jpg" alt="Ambururu Waterfall scenery" class="blog-image" loading="lazy" onerror="this.src='https://via.placeholder.com/200x150?text=Travel+Tips';">
+                    <div class="blog-content">
+                        <h3>5 Tips for Visiting Ambururu Waterfalls</h3>
+                        <p class="blog-meta">Posted on May 20, 2025 | By Ambururu Team | 4 min read (800 words)</p>
+                        <p>Plan your trip with our expert advice for a memorable experience at Ambururu Waterfalls.</p>
+                        <div class="blog-actions">
+                            <div>
+                                <a href="#post-1" class="btn">Read More</a>
+                                <button class="save-btn" data-post-id="post-id-1" aria-label="Save this post">Save</button>
+                            </div>
+                            <div class="social-share">
+                                <a href="#" class="share-btn" data-platform="facebook" aria-label="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" class="share-btn" data-platform="twitter" aria-label="Share on Twitter"><i class="fab fa-x-twitter"></i></a>
+                                <a href="#" class="share-btn" data-platform="whatsapp" aria-label="Share on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                                <a href="#" class="share-btn" data-platform="copy" aria-label="Copy link"><i class="fas fa-link"></i></a>
                             </div>
                         </div>
-                        <div class="blog-comments" id="disqus_thread_1"></div>
-                    </article>
-                    <article class="blog-post" data-category="events" id="post-2" role="article">
-                        <img src="images/4.jpg" alt="New hiking trail at Ambururu" class="blog-image" loading="lazy" onerror="this.src='https://via.placeholder.com/200x150?text=New+Trail';">
-                        <div class="blog-content">
-                            <h3>New Trail Event at Ambururu Waterfalls</h3>
-                            <p class="blog-meta">Posted on May 15, 2025 | By Ambururu Team | 3 min read (600 words)</p>
-                            <p>Discover our new hiking trail with stunning views of the falls.</p>
-                            <div class="blog-actions">
-                                <div>
-                                    <a href="#post-2" class="cta-button">Read More</a>
-                                    <button class="save-btn" data-post-id="2" aria-label="Save this post">Save</button>
-                                </div>
-                                <div class="social-share">
-                                    <a href="#" class="share-btn" data-platform="facebook" aria-label="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
-                                    <a href="#" class="share-btn" data-platform="twitter" aria-label="Share on Twitter"><i class="fab fa-x-twitter"></i></a>
-                                    <a href="#" class="share-btn" data-platform="whatsapp" aria-label="Share on WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                                    <a href="#" class="share-btn" data-platform="copy" aria-label="Copy link"><i class="fas fa-link"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="blog-comments" id="disqus_thread_2"></div>
-                    </article>
-                    <article class="blog-post" data-category="conservation" id="post-3" role="article">
-                        <img src="images/26.jpg" alt="Conservation efforts at Ambururu" class="blog-image" loading="lazy" onerror="this.src='https://via.placeholder.com/200x150?text=Conservation';">
-                        <div class="blog-content">
-                            <h3>Conservation Efforts at Ambururu</h3>
-                            <p class="blog-meta">Posted on May 5, 2025 | By Ambururu | 5 min read (1000 words)</p>
-                            <p>Learn about our initiatives to protect the local ecosystem.</p>
-                            <div class="blog-actions">
-                                <div>
-                                    <a href="#post-3" class="cta-button">Read More</a>
-                                    <button class="save-btn" data-post-id="3" aria-label="Save this post">Save</button>
-                                </div>
-                                <div class="social-share">
-                                    <a href="#" class="share-btn" data-platform="facebook" aria-label="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
-                                    <a href="#" class="share-btn" data-platform="twitter" aria-label="Share on Twitter"><i class="fab fa-x-twitter"></i></a>
-                                    <a href="#" class="share-btn" data-platform="whatsapp" aria-label="Share on WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                                    <a href="#" class="share-btn" data-platform="copy" aria-label="Copy link"><i class="fas fa-link"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="blog-comments" id="disqus_thread_3"></div>
-                    </article>
-                    <div class="load-more">
-                        <button id="load-more-btn" class="cta-button" aria-label="Load more blog posts">Load More</button>
                     </div>
+                    <div class="blog-comments" id="disqus_thread_1"></div>
+                </article>
+                <article class="blog-post card" data-category="events" id="post-2" role="article">
+                    <img src="/images/4.jpg" alt="New hiking trail event at Ambururu" class="blog-image" loading="lazy" onerror="this.src='https://via.placeholder.com/200x150?text=New+Trail';">
+                    <div class="blog-content">
+                        <h3>New Trail Event at Ambururu Waterfalls</h3>
+                        <p class="blog-meta">Posted on May 15, 2025 | By Ambururu Team | 3 min read (600 words)</p>
+                        <p>Discover our new hiking trail with stunning views of the falls.</p>
+                        <div class="blog-actions">
+                            <div>
+                                <a href="#post-2" class="btn">Read More</a>
+                                <button class="save-btn" data-post-id="2" aria-label="Save this post">Save</button>
+                            </div>
+                            <div class="social-share">
+                                <a href="#" class="share-btn" data-platform="facebook" aria-label="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" class="share-btn" data-platform="twitter" aria-label="Share on Twitter"><i class="fab fa-x-twitter"></i></a>
+                                <a href="#" class="share-btn" data-platform="whatsapp" aria-label="Share on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                                <a href="#" class="share-btn" data-platform="copy" aria-label="Copy link"><i class="fas fa-link"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="blog-comments" id="disqus_thread_2"></div>
+                </article>
+                <article class="blog-post card" data-category="conservation" id="post-3" role="article">
+                    <img src="/images/26.jpg" alt="Conservation efforts at Ambururu" class="blog-image" loading="lazy" onerror="this.src='https://via.placeholder.com/200x150?text=Conservation';">
+                    <div class="blog-content">
+                        <h3>Conservation Efforts at Ambururu</h3>
+                        <p class="blog-meta">Posted on May 5, 2025 | By Ambururu | 5 min read (1000 words)</p>
+                        <p>Learn about our initiatives to protect the local ecosystem.</p>
+                        <div class="blog-actions">
+                            <div>
+                                <a href="#post-3" class="btn">Read More</a>
+                                <button class="save-btn" data-post-id="3" aria-label="Save this post">Save</button>
+                            </div>
+                            <div class="social-share">
+                                <a href="#" class="share-btn" data-platform="facebook" aria-label="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" class="share-btn" data-platform="twitter" aria-label="Share on Twitter"><i class="fab fa-x-twitter"></i></a>
+                                <a href="#" class="share-btn" data-platform="whatsapp" aria-label="Share on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                                <a href="#" class="share-btn" data-platform="copy" aria-label="Copy link"><i class="fas fa-link"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="blog-comments" id="disqus_thread_3"></div>
+                </article>
+                <div class="load-more">
+                    <button id="load-more-btn" class="btn" aria-label="Load more blog posts">Load More</button>
                 </div>
             </div>
         </section>
 
-        <!-- Contact Section -->
         <section class="contact-section" id="contact-form" role="region" aria-label="Contact us">
             <h2>Contact Us</h2>
             <p>For inquiries or feedback, reach out via the form below or contact us directly:</p>
@@ -1016,45 +1038,44 @@
             <form action="https://formspree.io/f/xldbzjdz" method="POST" id="contact-form">
                 <input type="text" id="name" name="name" placeholder="Your Name" required aria-label="Your full name">
                 <input type="email" id="email" name="email" placeholder="Your Email" required aria-label="Your email address">
-                <textarea id="message" name="message" placeholder="Your Message" required aria-label="Your message" rows="5"></textarea>
-                <button type="submit" class="cta-button" aria-label="Send message">Send</button>
+                <textarea id="message" name="message" placeholder="Your Message" required aria-label="Your message"></textarea>
+                <button type="submit" class="btn" aria-label="Send message">Send</button>
                 <p class="form-success" style="display:none;">Message sent successfully!</p>
             </form>
         </section>
 
-        <!-- Social Media -->
         <section class="social-media" role="region" aria-label="Social media">
             <h2>Connect With Us</h2>
             <div class="social-links">
                 <a href="https://www.facebook.com/ambururu/" target="_blank" aria-label="Visit our Facebook page"><i class="fab fa-facebook-f"></i></a>
                 <a href="https://x.com/Ambururu_W" target="_blank" aria-label="Visit our Twitter profile"><i class="fab fa-x-twitter"></i></a>
-                <a href="https://www.instagram.com/ambururu1/" target="_blank" aria-label="Visit our Instagram page"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.instagram.com/ambururu1/" target="_blank" aria-label="Visit Instagram"><i class="fab fa-instagram"></i></a>
             </div>
             <div class="x-feed" id="x-feed">
-                <div class="x-post"><p>New blog post: 5 Tips for Visiting Ambururu! 🌊 #TravelKenya</p><span class="x-posted">Posted May 20, 2025</span></div>
+                <div class="x-post"><p>New blog post: 5 Tips for Visiting Ambururu! 🌊✨ #TravelKenya</p><span class="x-posted">Posted May 20, 2025</span></div>
                 <div class="x-post"><p>Explore our new hiking trail in our latest blog! 🥾 #Ambururu</p><span class="x-posted">Posted May 15, 2025</span></div>
             </div>
         </section>
 
-        <!-- Map Section -->
         <section class="map" role="region" aria-label="Map section">
             <h2>Our Location</h2>
             <div id="map"></div>
-            <p class="map-description">Nestled in Kakamega, Kenya, easily accessible via the Kisumu-Kakamega road.</p>
+            <p class="map-description">Nestled in the lush Kakamega region, Kenya, accessible via Kisumu-Kakamega road.</p>
+            </div>
         </section>
     </main>
 
     <footer role="contentinfo">
-        <div class="container">
-            <p>© 2025 Ambururu Waterfalls Resort. All rights reserved.</p>
+        <div class="footer-container">
+            <p>© 2024 Ambururu Waterfalls Resort. All rights reserved</p>
             <div class="social-links">
-                <a href="https://www.facebook.com/ambururu/" target="_blank" aria-label="Visit our main Facebook page"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://x.com/Ambururu_W" target="_blank" aria-label="Visit our Twitter profile"><i class="fab fa-x-twitter"></i></a>
+                <a href="https://www.facebook.com/ambururu/" target="_blank" aria-label="Visit main Facebook page"><i class="fab fa-f"></i></a>
+                <a href="https://x.com/Ambururu_W" target="_blank" aria-label="Visit Twitter profile"><i class="fab fa-x"></i></a>
             </div>
             <div class="newsletter">
-                <h4>Stay Updated</h4>
+                <h4 id="subscribe-title">Stay Updated</h4>
                 <form id="newsletter-form-footer" action="https://formspree.io/f/xbloeqdy" method="POST">
-                    <input type="email" name="email" placeholder="Enter your email" required aria-label="Email address for newsletter">
+                    <input type="email" name="email" id="email-footer" placeholder="Enter your email" required aria-label="Email address for newsletter">
                     <button type="submit" class="cta-button" aria-label="Subscribe to newsletter">Subscribe</button>
                 </form>
             </div>
@@ -1063,195 +1084,202 @@
 
     <a href="#" id="back-to-top" class="cta-button" aria-label="Back to top">↑</a>
 
-    <!-- Disqus Comments -->
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/j-query-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script defer src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js" integrity="sha256-8vB6W5y5L5L5L5z5L5L5z5z5w5L5L5vB6W5y5L5L5z=" crossorigin="anonymous"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.0/dist/confetti.browser.min.js"></script>
+
+    <!-- Disqus -->
     <script>
-        (function() {
+        var disqus_config = function () {
+            this.page.url = 'https://ambururuwaterfalls.com/blog.html';
+            this.page.identifier = '';
+        };
+        function loadDisqus() {
             var d = document, s = d.createElement('script');
             s.src = 'https://ambururu-waterfalls.disqus.com/embed.js';
             s.setAttribute('data-timestamp', +new Date());
             (d.head || d.body).appendChild(s);
-        })();
+        }
+        window.addEventListener('load', loadDisqus);
     </script>
 
-    <!-- Tawk.to Live Chat -->
-    <script>
-        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-        (function(){
-            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-            s1.async=true;
-            s1.src='https://embed.tawk.to/68360ce00f6bcf190fc26624/1is9i4jf2';
-            s1.charset='UTF-8';
-            s1.setAttribute('crossorigin','*');
-            s0.parentNode.insertBefore(s1,s0);
-        })();
-    </script>
+    <!-- Tawk.to -->
+    <script async src="https://embed.tawk.to/68360ce00f6bcf190fc26624/1is9i4jf2"></script>
 
     <script>
         // Menu Toggle
-        $(document).ready(function() {
-            $('.menu-toggle').on('click', function() {
-                $('#main-nav ul').toggleClass('active');
-                const expanded = $(this).attr('aria-expanded') === 'true' ? 'false' : 'true';
-                $(this).attr('aria-expanded', expanded);
-            });
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            const nav = document.querySelector('#main-nav ul');
+            nav.classList.toggle('active');
+            const expanded = this.getAttribute('aria-expanded') === 'true' ? 'false' : 'true';
+            this.setAttribute('aria-expanded', expanded);
+        });
 
-            // Dropdown Toggle on Mobile
-            $('.dropdown').on('click', function() {
-                if ($(window).width() < 768) {
-                    $(this).toggleClass('active');
+        // Dropdown Toggle
+        document.querySelectorAll('.dropdown').forEach(dropdown => {
+            dropdown.addEventListener('click', function(e) {
+                if (window.innerWidth <= 768) {
+                    this.classList.toggle('active');
                 }
             });
+        });
 
-            // Category Filter
-            $('.filter-btn').on('click', function() {
-                $('.filter-btn').removeClass('active').attr('aria-pressed', 'false');
-                $(this).addClass('active').attr('aria-pressed', 'true');
-                const category = $(this).data('category');
-                $('.blog-post').each(function() {
-                    const postCategory = $(this).data('category');
-                    if (category === 'all' || postCategory === category) {
-                        $(this).fadeIn(300);
+        // Category Filter
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(el => {
+                    el.classList.remove('active');
+                    el.setAttribute('aria-pressed', 'false');
+                });
+                this.classList.add('active');
+                this.setAttribute('aria-pressed', 'true');
+                const category = this.dataset.category;
+                document.querySelectorAll('.blog-post').forEach(post => {
+                    if (category === 'all' || post.dataset.category === category) {
+                        post.style.display = 'flex';
                     } else {
-                        $(this).fadeOut(300);
+                        post.style.display = 'none';
                     }
                 });
             });
+        });
 
-            // Search Functionality
-            $('#blog-search').on('input', function() {
-                const query = $(this).val().toLowerCase();
-                $('.blog-post').each(function() {
-                    const title = $(this).find('h3').text().toLowerCase();
-                    const content = $(this).find('p').text().toLowerCase();
-                    if (title.includes(query) || content.includes(query)) {
-                        $(this).fadeIn(300);
+        // Search Functionality
+        document.querySelector('#blog-search').addEventListener('input', function() {
+            const query = this.value.toLowerCase();
+            document.querySelectorAll('.blog-post').forEach(post => {
+                const title = post.querySelector('h3').textContent.toLowerCase();
+                const content = post.querySelector('p').textContent.toLowerCase();
+                post.style.display = title.includes(query) || content.includes(query) ? 'flex' : 'none';
+            });
+        });
+
+        // Form Validation
+        document.querySelectorAll('#contact-form, #newsletter-form, #newsletter-form-footer').forEach(form => {
+            form.querySelectorAll('input, textarea').forEach(input => {
+                input.addEventListener('input', function() {
+                    if (this.checkValidity()) {
+                        this.classList.add('valid');
+                        this.classList.remove('invalid');
                     } else {
-                        $(this).fadeOut(300);
+                        this.classList.add('invalid');
+                        this.classList.remove('valid');
                     }
                 });
             });
+        });
 
-            // Form Validation
-            const forms = $('#contact-form, #newsletter-form, #newsletter-form-footer');
-            forms.each(function() {
-                const form = $(this);
-                const inputs = form.find('input, textarea');
-                inputs.on('input change', function() {
-                    const input = $(this);
-                    if (input[0].checkValidity()) {
-                        input.addClass('valid').removeClass('invalid');
-                    } else {
-                        input.addClass('invalid').removeClass('valid');
-                    }
-                });
-            });
-
-            // Contact Form Submission
-            $('#contact-form').on('submit', function(e) {
-                e.preventDefault();
-                const button = $(this).find('button');
-                button.prop('disabled', true).append('<span class="loading"></span>');
-                $.ajax({
-                    url: this.action,
+        // Contact Form Submission
+        document.querySelector('#contact-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const button = this.querySelector('button');
+            button.disabled = true;
+            button.insertAdjacentHTML('beforeend', '<span class="loading"></span>');
+            try {
+                const response = await fetch(this.action, {
                     method: this.method,
-                    data: $(this).serialize(),
-                    success: function() {
-                        button.remove();
-                        $('.form-success').show();
-                        confetti({
-                            particleCount: 100,
-                            spread: 70,
-                            origin: { y: 0.6 }
-                        });
-                        $('#contact-form')[0].reset();
-                        $('#contact-form input, #contact-form textarea').removeClass('valid invalid');
-                        setTimeout(() => $('.form-success').fadeOut(), 3000);
-                    },
-                    error: function() {
-                        alert('Error sending message. Please try again later.');
-                        button.prop('disabled', false).find('.loading').remove();
-                    }
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: new URLSearchParams(new FormData(this))
                 });
-            });
+                if (response.ok) {
+                    button.remove();
+                    this.querySelector('.form-success').style.display = 'block';
+                    confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+                    this.reset();
+                    this.querySelectorAll('input, textarea').forEach(input => input.classList.remove('valid', 'invalid'));
+                    setTimeout(() => this.querySelector('.form-success').style.display = 'none', 3000);
+                } else {
+                    throw new Error('Submission failed');
+                }
+            } catch {
+                alert('Error sending message. Please try again later.');
+                button.disabled = false;
+                button.querySelector('.loading').remove();
+            }
+        });
 
-            // Newsletter Form Submission
-            $('#newsletter-form, #newsletter-form-footer').on('submit', function(e) {
+        // Newsletter Form Submission
+        document.querySelectorAll('#newsletter-form, #newsletter-form-footer').forEach(form => {
+            form.addEventListener('submit', async function(e) {
                 e.preventDefault();
-                const button = $(this).find('button');
-                button.prop('disabled', true).append('<span class="loading"></span>');
-                $.ajax({
-                    url: this.action,
-                    method: this.method,
-                    data: $(this).serialize(),
-                    success: function() {
+                const button = this.querySelector('button');
+                button.disabled = true;
+                button.insertAdjacentHTML('beforeend', '<span class="loading"></span>');
+                try {
+                    const response = await fetch(this.action, {
+                        method: this.method,
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        body: new URLSearchParams(new FormData(this))
+                    });
+                    if (response.ok) {
                         button.remove();
-                        confetti({
-                            particleCount: 100,
-                            spread: 70,
-                            origin: { y: 0.6 }
-                        });
-                        $(this).prepend('<p style="color: #00ff99; font-family: Orbitron;">Subscribed successfully!</p>');
-                        $(this)[0].reset();
-                        $(this).find('input').removeClass('valid invalid');
-                    },
-                    error: function() {
-                        alert('Error subscribing. Please try again later.');
-                        button.prop('disabled', false).find('.loading').remove();
+                        confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+                        this.insertAdjacentHTML('afterbegin', '<p style="color: var(--neon-green); font-family: Orbitron;">Subscribed successfully!</p>');
+                        this.reset();
+                        this.querySelectorAll('input').forEach(input => input.classList.remove('valid', 'invalid'));
+                    } else {
+                        throw new Error('Submission failed');
                     }
-                });
+                } catch {
+                    alert('Error subscribing. Please try again later.');
+                    button.disabled = false;
+                    button.querySelector('.loading').remove();
+                }
             });
+        });
 
-            // Social Sharing
-            $('.share-btn').on('click', function(e) {
+        // Social Sharing
+        document.querySelectorAll('.share-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
                 e.preventDefault();
-                const platform = $(this).data('platform');
-                const url = window.location.href + $(this).closest('.blog-post').attr('id');
-                const title = $(this).closest('.blog-post').find('h3').text();
+                const platform = this.dataset.platform;
+                const url = window.location.href + this.closest('.blog-post').id;
+                const title = this.closest('.blog-post').querySelector('h3').textContent;
                 let shareUrl;
                 if (platform === 'facebook') {
                     shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
-                    window.open(shareUrl, '_blank');
                 } else if (platform === 'twitter') {
                     shareUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`;
-                    window.open(shareUrl, '_blank');
                 } else if (platform === 'whatsapp') {
                     shareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(title + ' ' + url)}`;
-                    window.open(shareUrl, '_blank');
                 } else if (platform === 'copy') {
-                    navigator.clipboard.writeText(url).then(() => {
-                        alert('Link copied to clipboard!');
-                    });
+                    navigator.clipboard.writeText(url).then(() => alert('Link copied to clipboard!'));
+                    return;
                 }
+                window.open(shareUrl, '_blank');
             });
+        });
 
-            // Save Post
-            $('.save-btn').on('click', function() {
-                const postId = $(this).data('post-id');
-                const postTitle = $(this).closest('.blog-post').find('h3').text();
+        // Save Post
+        document.querySelectorAll('.save-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const postId = this.dataset.postId;
+                const postTitle = this.closest('.blog-post').querySelector('h3').textContent;
                 let savedPosts = JSON.parse(localStorage.getItem('savedPosts') || '[]');
-                if ($(this).hasClass('saved')) {
+                if (this.classList.contains('saved')) {
                     savedPosts = savedPosts.filter(p => p.id !== postId);
-                    $(this).removeClass('saved').text('Save');
+                    this.classList.remove('saved');
+                    this.textContent = 'Save';
                     alert('Post removed from saved.');
                 } else {
                     savedPosts.push({ id: postId, title: postTitle });
-                    $(this).addClass('saved').text('Saved');
+                    this.classList.add('saved');
+                    this.textContent = 'Saved';
                     alert('Post saved!');
                 }
                 localStorage.setItem('savedPosts', JSON.stringify(savedPosts));
             });
-            $('.save-btn').each(function() {
-                const postId = $(this).data('post-id');
-                const savedPosts = JSON.parse(localStorage.getItem('savedPosts') || '[]');
-                if (savedPosts.some(p => p.id === postId)) {
-                    $(this).addClass('saved').text('Saved');
-                }
-            });
-
-            // Debug Missing Assets
-            $('img, video').on('error', function() {
-                console.log(`Asset not found: ${this.src}`);
-            });
+            const postId = btn.dataset.postId;
+            const savedPosts = JSON.parse(localStorage.getItem('savedPosts') || '[]');
+            if (savedPosts.some(p => p.id === postId)) {
+                btn.classList.add('saved');
+                btn.textContent = 'Saved';
+            }
         });
 
         // 3D Waterfall Animation
@@ -1260,7 +1288,7 @@
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
-        const particleCount = 5000;
+        const particleCount = 2000; // Reduced for performance
         const particles = new THREE.BufferGeometry();
         const positions = new Float32Array(particleCount * 3);
         const velocities = new Float32Array(particleCount * 3);
@@ -1269,13 +1297,13 @@
             positions[i * 3 + 1] = Math.random() * 100;
             positions[i * 3 + 2] = Math.random() * 100 - 50;
             velocities[i * 3] = 0;
-            velocities[i * 3 + 1] = -Math.random() * 2 - 1;
+            velocities[i * 3 + 1] = -Math.random() * 1 - 0.5;
             velocities[i * 3 + 2] = 0;
         }
         particles.setAttribute('position', new THREE.BufferAttribute(positions, 3));
         const particleMaterial = new THREE.PointsMaterial({
             color: 0x00ccff,
-            size: 0.5,
+            size: 0.3,
             transparent: true,
             opacity: 0.7
         });
@@ -1283,7 +1311,7 @@
         scene.add(particleSystem);
         const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
         scene.add(ambientLight);
-        const pointLight = new THREE.PointLight(0x00ff99, 1, 100);
+        const pointLight = new THREE.PointLight(0x33ffaa, 1, 100);
         pointLight.position.set(0, 50, 50);
         scene.add(pointLight);
         camera.position.z = 50;
@@ -1306,16 +1334,16 @@
             renderer.setSize(window.innerWidth, window.innerHeight);
         });
 
-        // Particles.js for Blog Feed
+        // Particles.js
         particlesJS('particles-js', {
             particles: {
-                number: { value: 80, density: { enable: true, value_area: 800 } },
-                color: { value: '#00ff99' },
+                number: { value: 50, density: { enable: true, value_area: 800 } },
+                color: { value: '#33ffaa' },
                 shape: { type: 'circle' },
                 opacity: { value: 0.5, random: true },
                 size: { value: 3, random: true },
                 line_linked: { enable: true, distance: 150, color: '#00ccff', opacity: 0.4, width: 1 },
-                move: { enable: true, speed: 2, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false }
+                move: { enable: true, speed: 1, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false }
             },
             interactivity: {
                 detect_on: 'canvas',
@@ -1327,121 +1355,180 @@
 
         // GSAP Animations
         gsap.registerPlugin(ScrollTrigger);
-        gsap.from('.hero-video-container', {
-            opacity: 0,
-            scale: 0.8,
-            duration: 1.5,
-            ease: 'power3.out'
-        });
-        gsap.from('.hero-overlay', {
-            opacity: 0,
-            y: 100,
-            duration: 1.5,
-            delay: 0.5,
-            ease: 'power3.out'
-        });
+        gsap.from('.hero-video-container', { opacity: 0, scale: 0.8, duration: 1.5, ease: 'power3.out' });
+        gsap.from('.hero-overlay', { opacity: 0, y: 100, duration: 1.5, delay: 0.5, ease: 'power3.out' });
         gsap.from('.blog-post', {
             opacity: 0,
             y: 100,
             duration: 1.5,
             stagger: 0.3,
             ease: 'power3.out',
-            scrollTrigger: {
-                trigger: '.blog-feed',
-                start: 'top 80%'
-            }
+            scrollTrigger: { trigger: '.blog-feed', start: 'top 80%' }
         });
         gsap.from('.blog-sidebar', {
             opacity: 0,
             x: -100,
             duration: 1,
             ease: 'power3.out',
-            scrollTrigger: {
-                trigger: '.blog-feed',
-                start: 'top 80%'
-            }
+            scrollTrigger: { trigger: '.blog-feed', start: 'top 80%' }
         });
         gsap.from('#contact-form', {
             opacity: 0,
             y: 100,
             duration: 1.5,
             ease: 'power3.out',
-            scrollTrigger: {
-                trigger: '.contact-section',
-                start: 'top 80%'
-            }
+            scrollTrigger: { trigger: '.contact-section', start: 'top 80%' }
         });
         gsap.from('#map', {
             opacity: 0,
             scale: 0.8,
             duration: 1.5,
             ease: 'power3.out',
-            scrollTrigger: {
-                trigger: '.map',
-                start: 'top 80%'
-            }
+            scrollTrigger: { trigger: '.map', start: 'top 80%' }
         });
 
-        // Back to Top Button
-        $(window).on('scroll', function() {
-            if ($(this).scrollTop() > 300) {
-                $('#back-to-top').fadeIn();
-            } else {
-                $('#back-to-top').fadeOut();
-            }
+        // Back to Top
+        window.addEventListener('scroll', () => {
+            document.getElementById('back-to-top').style.display = window.scrollY > 300 ? 'block' : 'none';
         });
-        $('#back-to-top').on('click', function(e) {
+        document.getElementById('back-to-top').addEventListener('click', e => {
             e.preventDefault();
-            $('html, body').animate({ scrollTop: 0 }, 500);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
         // Smooth Scrolling
-        $('a[href^="#"]').on('click', function(e) {
-            e.preventDefault();
-            const target = $(this.getAttribute('href'));
-            if (target.length) {
-                $('html, body').animate({
-                    scrollTop: target.offset().top
-                }, 500);
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Ambient Audio
+        const audio = new Audio('/audio/waterfall.mp3'); // Host locally
+        audio.loop = true;
+        audio.volume = 0.3;
+        const audioToggle = document.createElement('button');
+        audioToggle.innerHTML = '<i class="fas fa-volume-up"></i>';
+        audioToggle.style.position = 'fixed';
+        audioToggle.style.bottom = '100px';
+        audioToggle.style.right = '20px';
+        audioToggle.style.background = 'rgba(0, 0, 0, 0.7)';
+        audioToggle.style.color = 'var(--neon-green)';
+        audioToggle.style.border = 'none';
+        audioToggle.style.padding = '1rem';
+        audioToggle.style.borderRadius = '50%';
+        audioToggle.style.cursor = 'pointer';
+        document.body.appendChild(audioToggle);
+        audioToggle.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play().catch(() => console.log('Audio playback failed'));
+                audioToggle.innerHTML = '<i class="fas fa-volume-up"></i>';
+            } else {
+                audio.pause();
+                audioToggle.innerHTML = '<i class="fas fa-volume-mute"></i>';
             }
         });
 
-        // Ambient Waterfall Sound
-        const audio = new Audio('https://www.zapsplat.com/wp-content/uploads/2015/sound-effects-77317/zapsplat-nature-waterfall-small-flowing-loop-001_81338.mp3');
-        audio.loop = true;
-        audio.volume = 0.3;
-        audio.play().catch(() => console.log('Audio playback failed. Autoplay may be blocked.'));
-
-        // Mapbox 3D Globe
-        mapboxgl.accessToken = 'pk.eyJ1IjoiZXhhbXBsZSIsImEiOiJja3dhcmk1c3QwNTQ1MnFtb3J0c2d5c2e2In0.8fakeToken1234567890';
-        const map = new mapboxgl.Map({
-            container: 'map',
-            style: 'mapbox://styles/mapbox/satellite-v9',
-            center: [34.751865, 0.282730],
-            zoom: 12,
-            pitch: 60,
-            bearing: -60,
-            projection: 'globe'
-        });
-        map.on('load', () => {
-            map.addLayer({
-                id: 'sky',
-                type: 'sky',
-                paint: {
-                    'sky-type': 'atmosphere',
-                    'sky-atmosphere-sun': [0, 0],
-                    'sky-atmosphere-sun-intensity': 5
-                }
+        // Mapbox
+        const mapboxToken = 'YOUR_VALID_MAPBOX_TOKEN'; // Replace with valid token
+        if (mapboxToken !== 'YOUR_VALID_MAPBOX_TOKEN') {
+            mapboxgl.accessToken = mapboxToken;
+            const map = new mapboxgl.Map({
+                container: 'map',
+                style: 'mapbox://styles/mapbox/satellite-v9',
+                center: [34.751865, 0.282730],
+                zoom: 12,
+                pitch: 60,
+                bearing: -60,
+                projection: 'globe'
             });
-            new mapboxgl.Marker({ color: '#00ff99' })
-                .setLngLat([34.751865, 0.282730])
-                .setPopup(new mapboxgl.Popup().setHTML(`
-                    <h3>Ambururu Waterfalls</h3>
-                    <p>Kakamega, Kenya</p>
-                    <a href="https://www.google.com/maps/dir/?api=1&destination=0.282730,34.751865" target="_blank" style="color: #00ccff;">Get Directions</a>
-                `))
-                .addTo(map);
+            map.on('load', () => {
+                map.addLayer({
+                    id: 'sky',
+                    type: 'sky',
+                    paint: {
+                        'sky-type': 'atmosphere',
+                        'sky-atmosphere-sun': [0, 0],
+                        'sky-atmosphere-sun-intensity': 5
+                    }
+                });
+                new mapboxgl.Marker({ color: '#33ffaa' })
+                    .setLngLat([34.751865, 0.282730])
+                    .setPopup(new mapboxgl.Popup().setHTML(`
+                        <h3>Ambururu Waterfalls</h3>
+                        <p>Kakamega, Kenya</p>
+                        <a href="https://www.google.com/maps/dir/?api=1&destination=0.282730,34.751865" target="_blank" style="color: var(--neon-blue);">Get Directions</a>
+                    `))
+                    .addTo(map);
+            });
+        } else {
+            document.getElementById('map').innerHTML = '<p style="color: #fff; text-align: center;">Map unavailable. Please check your Mapbox configuration.</p>';
+        }
+
+        // Infinite Scroll
+        let page = 1;
+        const loadMoreBtn = document.getElementById('load-more-btn');
+        const blogPosts = document.querySelector('.blog-posts');
+        window.addEventListener('scroll', () => {
+            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 200 && !loadMoreBtn.disabled) {
+                loadMoreBtn.disabled = true;
+                loadMorePosts();
+            }
         });
-    </script>
-</body>
-</html>
+        async function loadMorePosts() {
+            const skeleton = document.createElement('article');
+            skeleton.className = 'skeleton';
+            skeleton.innerHTML = `
+                <div class="blog-image"></div>
+                <div class="blog-content">
+                    <h3></h3>
+                    <p class="blog-meta"></p>
+                    <p></p>
+                </div>
+            `;
+            blogPosts.insertBefore(skeleton, loadMoreBtn.parentElement);
+            try {
+                // Simulate API call (replace with actual API endpoint)
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                const newPost = document.createElement('article');
+                newPost.className = 'blog-post card';
+                newPost.dataset.category = 'travel-tips';
+                newPost.id = `post-${page + 3}`;
+                newPost.innerHTML = `
+                    <img src="/images/30.jpg" alt="Sample post" class="blog-image" loading="lazy">
+                    <div class="blog-content">
+                        <h3>Sample Post ${page + 3}</h3>
+                        <p class="blog-meta">Posted on May 1, 2025 | By Ambururu Team | 3 min read</p>
+                        <p>This is a sample post loaded dynamically.</p>
+                        <div class="blog-actions">
+                            <div>
+                                <a href="#post-${page + 3}" class="btn">Read More</a>
+                                <button class="save-btn" data-post-id="${page + 3}" aria-label="Save this post">Save</button>
+                            </div>
+                            <div class="social-share">
+                                <a href="#" class="share-btn" data-platform="facebook" aria-label="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" class="share-btn" data-platform="twitter" aria-label="Share on Twitter"><i class="fab fa-x-twitter"></i></a>
+                                <a href="#" class="share-btn" data-platform="whatsapp" aria-label="Share on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                                <a href="#" class="share-btn" data-platform="copy" aria-label="Copy link"><i class="fas fa-link"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="blog-comments" id="disqus_thread_${page + 3}"></div>
+                `;
+                blogPosts.insertBefore(newPost, loadMoreBtn.parentElement);
+                skeleton.remove();
+                page++;
+                loadMoreBtn.disabled = false;
+            } catch {
+                skeleton.remove();
+                loadMoreBtn.disabled = false;
+            }
+        }
+
+        // Debug Assets
+        document.querySelectorAll('img, video').forEach(el => {
+            el.addEventListener('error', () => console.error(`Asset not

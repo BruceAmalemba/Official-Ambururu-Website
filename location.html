@@ -1,23 +1,26 @@
-<!-- Location Section -->
-<section id="location">
-    <h2>📍 Location</h2>
-    <p><strong>Address:</strong> Ruwe Sub-location, Sidindi Ward, Ugunja Sub-county, Siaya County, Kenya</p>
-    <h2>Find Us</h2>
-    <p>Ambururu Waterfalls is located at:</p>
-    <p>Latitude: 0.3360° N<br>Longitude: 34.5530° E</p>
-    <div class="map-container">
-      <iframe
-        src="https://www.google.com/maps?q=0.3360,34.5530&z=15&output=embed"
-        width="100%"
-        height="450"
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade">
-      </iframe>
-    </div>
-    <div id="weather-widget">
-      <h3>Current Weather</h3>
-      <div id="weather-info" class="weather-card">
-        <div class="weather-loading">Loading weather data...</div>
-      </div>
-    </div>
-  </section>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Mapbox GL JS map</title>
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+<link href="https://api.mapbox.com/mapbox-gl-js/v3.12.0/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v3.12.0/mapbox-gl.js"></script>
+<style>
+body { margin: 0; padding: 0; }
+#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+</style>
+</head>
+<body>
+<div id="map"></div>
+<script>
+	mapboxgl.accessToken = 'pk.eyJ1IjoidW5kZXJyYXRlZCIsImEiOiJjbWJnZm56a2IwOGpzMmtwaGd2ZGVmMXZ2In0.j7BvrNlRYPqCLH0g-0gMug';
+    const map = new mapboxgl.Map({
+        container: 'map', // container ID
+        center: [-74.5, 40], // starting position [lng, lat]. Note that lat must be set between -90 and 90
+        zoom: 9 // starting zoom
+    });
+</script>
+
+</body>
+</html>

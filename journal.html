@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Journal | Ambururu Waterfalls & Resort</title>
+    <meta name="description" content="Read stories, insights, and updates from Ambururu Waterfalls & Resort, celebrating Luo heritage, sustainability, and eco-luxury in Siaya, Kenya.">
+    <meta name="keywords" content="Ambururu Waterfalls, Siaya, Kenya, journal, Luo culture, sustainable travel, eco-luxury, Yala Valley">
+    <meta name="author" content="Ambururu Waterfalls & Resort">
+    <meta name="robots" content="index, follow">
+    <!-- Open Graph -->
+    <meta property="og:title" content="Journal | Ambururu Waterfalls & Resort">
+    <meta property="og:description" content="Explore stories and insights from Ambururu, Siaya’s eco-luxury retreat.">
+    <meta property="og:image" content="images/hero.jpg">
+    <meta property="og:url" content="https://www.ambururuwaterfalls.com/journal.html">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <!-- Schema Markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Blog",
+        "name": "Ambururu Waterfalls Journal",
+        "description": "Stories and insights from Ambururu Waterfalls & Resort, celebrating Luo heritage and sustainability in Siaya, Kenya.",
+        "url": "https://www.ambururuwaterfalls.com/journal.html",
+        "publisher": {
+            "@type": "Organization",
+            "name": "Ambururu Waterfalls & Resort",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "images/logo.jpg"
+            }
+        },
+        "sameAs": [
+            "https://www.facebook.com/ambururu",
+            "https://x.com/Ambururu_W",
+            "https://www.instagram.com/ambururu1"
+        ]
+    }
+    </script>
+    <!-- Preload Critical Assets -->
+    <link rel="preload" href="images/21.jpg" as="image" fetchpriority="high">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://api.mapbox.com" crossorigin>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Lora:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <!-- Mapbox -->
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.css" rel="stylesheet">
+    <!-- Swiper -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper@10/swiper-bundle.min.css">
+    <!-- Google Analytics (Optional, remove if not in update) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=YOUR_GA4_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'YOUR_GA4_ID');
+    </script>
+    <style>
+        :root {
+            --primary: #1a3c34; /* Jade green */
+            --secondary: #f5e6cc; /* Ivory */
+            --accent: #d4a017; /* Gold */
+            --dark: #0a1a2e; /* Midnight blue */
+            --light: #f8f1e9; /* Soft cream */
+            --luo-accent: #8b1e3f; /* Luo-inspired red */
+            --glow: rgba(212, 160, 23, 0.5);
+        }
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 100px;
+        }
+        body {
+            font-family: 'Lora', serif;
+            color: var(--secondary);
+            background: var(--dark);
+            line-height: 1.8;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Cinzel Decorative', serif;
+            font-weight: 700;
+        }
+        /* Header */
+        .sticky-header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(10, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+        .sticky-header.scrolled {
+            background: rgba(10, 26, 46, 1);
+        }
+        .sticky-header.hidden {
+            transform: translateY(-100%);
+        }
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+        .brand {
+            display: flex;
+            align-items: center;
+        }
+        .logo {
+            width: 80px;
+            height: 80px;
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+        .logo:hover {
+            transform: scale(1.05);
+            filter: drop-shadow(0 0 5px var(--glow));
+        }
+        .brand h1 {
+            font-size: 2rem;
+            color: var(--accent);
+            margin: 0 0 0 1rem;
+            letter-spacing: 2px;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        nav ul li {
+            margin-left: 2rem;
+            position: relative;
+        }
+        nav ul li a {
+            font-size: 1.1rem;
+            color: var(--secondary);
+            padding: 0.5rem;
+            transition: color 0.3s ease, border-bottom 0.3s ease;
+        }
+        nav ul li a:hover,
+        nav ul li a.active {
+            color: var(--accent);
+            border-bottom: 1px solid var(--accent);
+        }
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: rgba(10, 26, 46, 0.95);
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            min-width: 200px;
+            opacity: 0;
+            transform: translateY(5px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        .dropdown:hover .dropdown-menu,
+        .dropdown:focus-within .dropdown-menu {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .dropdown-menu li {
+            margin: 0;
+        }
+        .dropdown-menu li a {
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            display: block;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+        .dropdown-menu li a:hover {
+            color: var(--accent);
+            background: rgba(212, 160, 23, 0.1);
+        }
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--accent);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        .language-toggle {
+            margin-left: 2rem;
+            position: relative;
+        }
+        .language-toggle select {
+            background: transparent;
+            border: 1px solid var(--accent);
+            color: var(--secondary);
+            font-size: 1rem;
+            padding: 0.3rem 2rem 0.3rem 0.5rem;
+            cursor: pointer;
+            border-radius: 4px;
+            appearance: none;
+        }
+        .language-toggle select:focus {
+            outline: none;
+            box-shadow: 0 0 5px var(--glow);
+        }
+        .language-toggle::after {
+            content: '\f078';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: var(--accent);
+            position: absolute;
+            right: 0.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+        }
+        /* Audio Control */
+        .audio-control {
+            position: fixed;
+            top: 20px;
+            right: 80px;
+            z-index: 1000;
+            background: rgba(10, 26, 46, 0.8);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .audio-control:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 5px var(--glow);
+        }
+        .audio-control i {
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+        /* Sticky Booking CTA */
+        .sticky-booking {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: var(--accent);
+            color: var(--dark);
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .sticky-booking:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 10px var(--glow);
+        }
+        /* Concierge Contact */
+        .contact-popup {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--accent);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .contact-popup:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 5px var(--glow);
+        }
+        .contact-popup i {
+            color: var(--dark);
+            font-size: 1.5rem;
+        }
+        .contact-form {
+            display: none;
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            max-width: 300px;
+            z-index: 1000;
+        }
+        .contact-form.active {
+            display: block;
+        }
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 0.5rem;
+            border: 1px solid var(--dark);
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-family: 'Lora', serif;
+        }
+        .contact-form button {
+            background: var(--accent);
+            color: var(--dark);
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Cinzel Decorative', serif;
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+        .contact-form button:hover {
+            background: var(--luo-accent);
+            box-shadow: 0 0 5px var(--glow);
+        }
+        /* Luo Pattern Divider */
+        .luo-divider {
+            width: 100%;
+            height: 40px;
+            background: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 10"%3E%3Cpath fill="%238b1e3f" d="M0 5 L10 0 L20 5 L30 0 L40 5 L50 0 L60 5 L70 0 L80 5 L90 0 L100 5 V10 H0 Z"/%3E%3C/svg%3E') repeat-x center;
+            margin: 2rem 0;
+        }
+        /* Journal Section */
+        .journal {
+            padding: 6rem 0;
+            text-align: center;
+            background: var(--dark);
+        }
+        .journal h2 {
+            font-size: 3rem;
+            color: var(--accent);
+            margin: 0 0 1rem;
+        }
+        .journal-subtitle {
+            font-size: 1.2rem;
+            color: var(--light);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+        }
+        .journal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        .journal-post {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 12px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: left;
+        }
+        .journal-post:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 10px var(--glow);
+        }
+        .journal-post img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        .journal-post h3 {
+            font-size: 1.8rem;
+            color: var(--accent);
+            margin: 0 0 0.5rem;
+        }
+        .journal-post .meta {
+            font-size: 0.9rem;
+            color: var(--light);
+            margin-bottom: 1rem;
+        }
+        .journal-post p {
+            font-size: 1rem;
+            color: var(--light);
+            margin-bottom: 1rem;
+        }
+        .journal-post a {
+            color: var(--accent);
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .journal-post a:hover {
+            color: var(--luo-accent);
+        }
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: var(--light);
+            padding: 4rem 0;
+            text-align: center;
+        }
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        .footer-logo {
+            width: 100px;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+        .footer-logo:hover {
+            transform: scale(1.05);
+        }
+        .social-links {
+            margin: 2rem 0;
+        }
+        .social-links a {
+            color: var(--accent);
+            margin: 0 1.5rem;
+            font-size: 1.5rem;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+        .social-links a:hover {
+            color: var(--luo-accent);
+            transform: scale(1.2);
+        }
+        .newsletter h4 {
+            font-size: 2rem;
+            color: var(--accent);
+            margin: 0 0 1.5rem;
+        }
+        .newsletter-form {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .newsletter-form input {
+            padding: 0.8rem;
+            border: none;
+            border-radius: 8px;
+            width: 300px;
+            font-size: 1rem;
+            font-family: 'Lora', serif;
+            background: var(--light);
+            color: var(--dark);
+            transition: box-shadow 0.3s ease;
+        }
+        .newsletter-form input:focus {
+            box-shadow: 0 0 5px var(--glow);
+            outline: none;
+        }
+        .newsletter-form button {
+            background: var(--accent);
+            color: var(--dark);
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 1rem;
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+        .newsletter-form button:hover {
+            background: var(--luo-accent);
+            box-shadow: 0 0 10px var(--glow);
+        }
+        .footer-links {
+            margin-top: 2rem;
+        }
+        .footer-links a {
+            color: var(--light);
+            margin: 0 1rem;
+            font-size: 1rem;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
+        .footer-links a:hover {
+            color: var(--accent);
+            text-shadow: 0 0 5px var(--glow);
+        }
+        .footer-certifications {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+        .footer-certifications img {
+            width: 80px;
+            height: auto;
+            transition: transform 0.3s ease;
+        }
+        .footer-certifications img:hover {
+            transform: scale(1.1);
+        }
+        /* Scroll to Top Button (Optional, remove if not in update) */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 80px;
+            z-index: 1000;
+            background: var(--accent);
+            color: var(--dark);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+        }
+        .scroll-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        .scroll-to-top:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 5px var(--glow);
+        }
+        .scroll-to-top i {
+            font-size: 1.2rem;
+        }
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .journal-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+        }
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                padding: 1rem 0;
+                background: rgba(10, 26, 46, 0.95);
+                position: absolute;
+                top: 100%;
+                left: 0;
+            }
+            nav ul.active {
+                display: flex;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .journal {
+                padding: 4rem 1rem;
+            }
+            .newsletter-form {
+                flex-direction: column;
+                align-items: center;
+            }
+            .newsletter-form input {
+                width: 100%;
+                max-width: 300px;
+            }
+            .audio-control {
+                right: 60px;
+            }
+            .scroll-to-top {
+                right: 60px;
+            }
+        }
+        @media (max-width: 480px) {
+            .journal h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="sticky-header" role="banner">
+        <div class="header-container">
+            <div class="brand">
+                <img src="logo/B2.jpg" alt="Ambururu Waterfalls & Resort Logo" class="logo" width="80" height="80" loading="eager">
+                <h1>Ambururu Waterfalls</h1>
+            </div>
+            <nav id="main-nav" aria-label="Main navigation">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li class="dropdown">
+                        <a href="about.html" aria-haspopup="true" aria-expanded="false">About <i class="fas fa-caret-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="about.html#heritage">Luo Heritage</a></li>
+                            <li><a href="about.html#founder">Our Founder</a></li>
+                            <li><a href="about.html#sustainability">Sustainability</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li class="dropdown">
+                        <a href="activities.html" aria-haspopup="true" aria-expanded="false">Experiences <i class="fas fa-caret-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="activities.html#cultural-tours">Cultural Tours</a></li>
+                            <li><a href="activities.html#hiking">Yala Valley Trails</a></li>
+                            <li><a href="activities.html#wellness">Wellness Retreats</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="accommodations.html">Accommodations</a></li>
+                    <li><a href="dining.html">Dining</a></li>
+                    <li><a href="events.html">Events</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="journal.html" class="active" aria-current="page">Journal</a></li>
+                </ul>
+            </nav>
+            <div class="language-toggle">
+                <select id="language-select" aria-label="Select language">
+                    <option value="en">English</option>
+                    <option value="sw">Swahili</option>
+                    <option value="luo">Luo</option>
+                </select>
+            </div>
+            <button class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+    <main>
+        <!-- Audio Control -->
+        <div class="audio-control" role="button" aria-label="Toggle ambient waterfall sound">
+            <i class="fas fa-volume-up"></i>
+        </div>
+        <!-- Sticky Booking CTA -->
+        <a href="index.html#booking" class="sticky-booking" role="button" aria-label="Book your stay">Book Now</a>
+        <!-- Contact Popup -->
+        <div class="contact-popup" role="button" aria-label="Open contact form">
+            <i class="fas fa-concierge-bell"></i>
+        </div>
+        <div class="contact-form" role="form" aria-label="Contact concierge">
+            <input type="text" placeholder="Name" aria-label="Name" required>
+            <input type="email" placeholder="Email" aria-label="Email" required>
+            <textarea placeholder="Message" aria-label="Message" required></textarea>
+            <button type="submit">Send</button>
+        </div>
+        <!-- Scroll to Top Button (Optional, remove if not in update) -->
+        <div class="scroll-to-top" role="button" aria-label="Scroll to top">
+            <i class="fas fa-chevron-up"></i>
+        </div>
+        <!-- Journal Section -->
+        <section class="journal" role="region" aria-label="Journal articles">
+            <h2>Our Journal</h2>
+            <p class="journal-subtitle">Discover stories, insights, and updates from Ambururu’s Yala Valley.</p>
+            <div class="journal-grid">
+                <article class="journal-post">
+                    <img src="images/9.jpg" alt="Luo cultural ceremony" loading="lazy" width="300" height="200">
+                    <h3>Luo Heritage Unveiled</h3>
+                    <p class="meta">Posted on May 15, 2025 by Ambururu Team</p>
+                    <p>Explore the vibrant traditions of the Luo people through our guided cultural tours, where storytelling and history come alive.</p>
+                    <a href="#read-more">Read More</a>
+                </article>
+                <article class="journal-post">
+                    <img src="images/14.jpg" alt="Sustainable suite at Ambururu" loading="lazy" width="300" height="200">
+                    <h3>Sustainability in Siaya</h3>
+                    <p class="meta">Posted on April 20, 2025 by Ambururu Team</p>
+                    <p>Learn how our eco-luxury suites are built with local materials to preserve Yala Valley’s natural beauty.</p>
+                    <a href="#read-more">Read More</a>
+                </article>
+                <article class="journal-post">
+                    <img src="images/10.jpg" alt="Luo-inspired dining" loading="lazy" width="300" height="200">
+                    <h3>Flavors of Yala</h3>
+                    <p class="meta">Posted on March 10, 2025 by Ambururu Team</p>
+                    <p>Our farm-to-table dining celebrates Siaya’s culinary heritage with dishes inspired by Luo traditions.</p>
+                    <a href="#read-more">Read More</a>
+                </article>
+            </div>
+        </section>
+        <div class="luo-divider"></div>
+    </main>
+    <footer role="contentinfo" aria-label="Footer">
+        <div class="footer-container">
+            <img src="logo/B2.jpg" alt="Ambururu Waterfalls & Resort Footer Logo" class="footer-logo" width="100" height="100" loading="lazy">
+            <p>© 2025 Ambururu Waterfalls & Resort. All rights reserved.</p>
+            <div class="social-links" role="navigation" aria-label="Social media links">
+                <a href="https://www.facebook.com/ambururu" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://x.com/Ambururu_W" target="_blank" rel="noopener" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+                <a href="https://www.instagram.com/ambururu1" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+            <div class="newsletter" role="form" aria-label="Newsletter subscription">
+                <h4>Stay Connected</h4>
+                <form class="newsletter-form" id="newsletter-form" action="/api/newsletter" method="POST">
+                    <input type="email" name="email" placeholder="Enter your email" required aria-label="Email for newsletter">
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+            <nav class="footer-links" role="navigation" aria-label="Footer navigation">
+                <a href="about.html">About Us</a>
+                <a href="contact.html">Contact</a>
+                <a href="sustainability.html">Sustainability</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms & Conditions</a>
+            </nav>
+            <div class="footer-certifications" role="contentinfo" aria-label="Certifications and awards">
+                <img src="logo/B8.jpeg" alt="Eco Warrior Award" loading="lazy" width="80" height="40">
+                <img src="logo/B7.jpeg" alt="Green Globe Certified" loading="lazy" width="80" height="40">
+            </div>
+        </div>
+    </footer>
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.js"></script>
+    <script src="https://unpkg.com/swiper@10/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script>
+        // Menu Toggle
+        $(document).ready(function() {
+            $('.menu-toggle').on('click', function() {
+                $('#main-nav ul').toggleClass('active');
+                const isExpanded = $(this).attr('aria-expanded') === 'true';
+                $(this).attr('aria-expanded', !isExpanded);
+                $(this).find('i').toggleClass('fa-bars fa-times');
+            });
+            $('.dropdown').on('click', function(e) {
+                if ($(window).width() < 768) {
+                    e.preventDefault();
+                    $(this).find('.dropdown-menu').toggleClass('active');
+                }
+            });
+            // Newsletter Form
+            $('#newsletter-form').on('submit', async function(e) {
+                e.preventDefault();
+                const email = $(this).find('input[name="email"]').val();
+                if (!email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)) {
+                    alert('Please enter a valid email.');
+                    return;
+                }
+                try {
+                    const response = await fetch('/api/newsletter', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email })
+                    });
+                    if (response.ok) {
+                        $(this).find('input').val('');
+                        $(this).append('<p class="success">Subscribed!</p>');
+                        setTimeout(() => $('.success').fadeOut(), 5000);
+                    } else {
+                        alert('Subscription failed.');
+                    }
+                } catch (error) {
+                    alert('An error occurred.');
+                }
+            });
+            // Contact Popup
+            $('.contact-popup').on('click', function() {
+                $('.contact-form').toggleClass('active');
+            });
+            // Contact Form Submission
+            $('.contact-form').on('submit', async function(e) {
+                e.preventDefault();
+                const formData = new FormData(this);
+                try {
+                    const response = await fetch('/api/contact', {
+                        method: 'POST',
+                        body: JSON.stringify(Object.fromEntries(formData)),
+                        headers: { 'Content-Type': 'application/json' }
+                    });
+                    if (response.ok) {
+                        $(this).find('input, textarea').val('');
+                        alert('Message sent successfully!');
+                        $('.contact-form').removeClass('active');
+                    } else {
+                        alert('Message failed to send.');
+                    }
+                } catch (error) {
+                    alert('An error occurred.');
+                }
+            });
+        });
+        // Audio Control
+        const audio = new Audio('images/waterfall-ambient.mp3');
+        audio.loop = true;
+        audio.volume = 0.3;
+        let isPlaying = false;
+        $('.audio-control').on('click', function() {
+            if (isPlaying) {
+                audio.pause();
+                $(this).html('<i class="fas fa-volume-mute"></i>').attr('aria-label', 'Play ambient waterfall sound');
+            } else {
+                audio.play().catch(e => console.error('Audio playback failed:', e));
+                $(this).html('<i class="fas fa-volume-up"></i>').attr('aria-label', 'Pause ambient waterfall sound');
+            }
+            isPlaying = !isPlaying;
+        });
+        // GSAP Animations
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.from('.journal h2', { opacity: 0, y: 50, duration: 1.5, ease: 'power2.out' });
+        gsap.from('.journal-subtitle', { opacity: 0, x: -50, duration: 1.5, delay: 0.5 });
+        gsap.from('.journal-post', { opacity: 0, y: 50, stagger: 0.2, duration: 1, scrollTrigger: { trigger: '.journal', start: 'top 80%' } });
+        // Header Scroll
+        let lastScroll = 0;
+        $(window).on('scroll', function() {
+            const scroll = $(this).scrollTop();
+            $('.sticky-header').toggleClass('hidden', scroll > lastScroll && scroll > 80);
+            $('.sticky-header').toggleClass('scrolled', scroll > 80);
+            $('.scroll-to-top').toggleClass('visible', scroll > 400);
+        });
+        // Scroll to Top (Optional, remove if not in update)
+        $('.scroll-to-top').on('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>

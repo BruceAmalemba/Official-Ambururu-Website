@@ -3,240 +3,713 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Book your eco-luxe stay at Ambururu Waterfalls Resort with a cyberpunk, AI-powered interface.">
+    <meta name="description" content="Book your eco-luxury stay at Ambururu Waterfalls & Resort in Siaya, Kenya. Enjoy a seamless, interactive booking experience.">
+    <meta name="keywords" content="Ambururu Waterfalls, Siaya, Kenya, eco-luxury resort, booking, sustainable travel, Luo culture">
+    <meta name="author" content="Ambururu Waterfalls & Resort">
+    <meta name="robots" content="index, follow">
+    <!-- Open Graph -->
+    <meta property="og:title" content="Book Your Stay at Ambururu Waterfalls & Resort">
+    <meta property="og:description" content="Experience eco-luxury in Siaya, Kenya. Book your stay with ease and explore our sustainable resort.">
+    <meta property="og:image" content="/assets/images/hero-bg.webp">
+    <meta property="og:url" content="https://www.ambururuwaterfalls.com/booking">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@Ambururu_W">
+    <meta name="twitter:creator" content="@Ambururu_W">
     <title>Booking - Ambururu Waterfalls Resort</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Preload Critical Assets -->
+    <link rel="preload" href="videos/An_airplane_soaring_through_a_vibrant_sky,_capture_1c02f3ae-0f78-4b37-a2ec-aa5b9a0e4460.mp4" as="image">
+    <link rel="preload" href="/assets/fonts/CinzelDecorative-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://api.exchangerate-api.com" crossorigin>
+    <link rel="preconnect" href="https://api.coingecko.com" crossorigin>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Cinzel+Decorative:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous">
+    <!-- A-Frame for AR/VR -->
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js" defer></script>
+    <!-- GSAP for Animations -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+    <!-- Confetti for Celebration -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js" defer></script>
     <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            color: #ffffff;
-            background: #000;
+        /* Custom Properties */
+        :root {
+            --jade-deep: #1a3c34;
+            --jade-light: #2a5c4e;
+            --gold-luxe: #d4a017;
+            --luo-crimson: #a81c07;
+            --midnight: #0a1a24;
+            --cream-soft: #f0e0b0;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            --transition: all 0.3s ease;
+            --glow: rgba(212, 160, 23, 0.5);
+        }
+        /* Dark Mode */
+        [data-theme="dark"] {
+            --jade-deep: #0f2a24;
+            --cream-soft: #d8c88c;
+            --midnight: #051015;
+        }
+        /* Reset and Base Styles */
+        * {
+            box-sizing: border-box;
             margin: 0;
+            padding: 0;
+        }
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 100px;
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--cream-soft);
+            background: var(--midnight);
+            line-height: 1.6;
             overflow-x: hidden;
         }
-        #three-canvas {
+        a, button {
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Cinzel Decorative', serif;
+            font-weight: 700;
+        }
+        /* Skip Link */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--gold-luxe);
+            color: var(--midnight);
+            padding: 8px;
+            z-index: 10000;
+            transition: top 0.3s;
+        }
+        .skip-link:focus {
+            top: 0;
+        }
+        /* Progress Bar (Scroll Indicator) */
+        .progress-bar {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
+            height: 4px;
+            background: var(--gold-luxe);
+            width: 0;
+            z-index: 1001;
+            transition: width 0.2s ease;
         }
+        /* Header */
         .sticky-header {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(10px);
             z-index: 1000;
-            padding: 1rem;
+            background: rgba(10, 26, 46, 0.95);
+            backdrop-filter: blur(12px);
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+        .sticky-header.hidden {
+            transform: translateY(-100%);
+        }
+        .sticky-header.scrolled {
+            background: rgba(10, 26, 46, 0.98);
         }
         .header-container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 0 2rem;
+        }
+        .brand {
+            display: flex;
+            align-items: center;
+        }
+        .logo {
+            width: 70px;
+            height: 70px;
+            transition: transform 0.3s ease;
+        }
+        .logo:hover {
+            transform: scale(1.1);
         }
         .brand h1 {
-            font-family: 'Orbitron', sans-serif;
-            color: #00ff99;
-            font-size: 2rem;
-            text-shadow: 0 0 15px #00ff99;
+            font-size: clamp(1.5rem, 3vw, 1.8rem);
+            color: var(--gold-luxe);
+            margin-left: 1rem;
         }
         nav ul {
             display: flex;
             list-style: none;
-            padding: 0;
         }
         nav ul li {
-            margin-left: 2rem;
+            margin-left: 1.5rem;
+            position: relative;
         }
         nav ul li a {
-            color: #00ff99;
-            text-decoration: none;
-            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            color: var(--cream-soft);
+            padding: 0.5rem 1rem;
+            transition: var(--transition);
         }
-        nav ul li a:hover, nav ul li a.active {
-            color: #00ccff;
-            text-shadow: 0 0 20px #00ccff;
+        nav ul li a:hover,
+        nav ul li a.active {
+            color: var(--gold-luxe);
+        }
+        .dropdown {
+            position: relative;
+        }
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--jade-deep);
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            min-width: 200px;
+            z-index: 1000;
+        }
+        .dropdown:hover .dropdown-menu,
+        .dropdown:focus-within .dropdown-menu {
+            display: block;
+        }
+        .dropdown-menu a {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: var(--cream-soft);
+            transition: background 0.3s ease;
+        }
+        .dropdown-menu a:hover {
+            background: var(--jade-light);
+            color: var(--gold-luxe);
+        }
+        .language-toggle {
+            margin-left: 1rem;
+        }
+        #language-select {
+            padding: 0.5rem;
+            background: var(--jade-deep);
+            color: var(--cream-soft);
+            border: 1px solid var(--gold-luxe);
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+        #language-select:hover {
+            background: var(--jade-light);
+        }
+        .dark-mode-toggle {
+            background: none;
+            border: none;
+            color: var(--gold-luxe);
+            font-size: 1.5rem;
+            margin-left: 1rem;
+            transition: var(--transition);
+        }
+        .dark-mode-toggle:hover {
+            color: var(--luo-crimson);
         }
         .menu-toggle {
             display: none;
             background: none;
             border: none;
-            color: #00ff99;
+            color: var(--gold-luxe);
             font-size: 1.5rem;
         }
+        /* Hero Section */
         .hero {
             position: relative;
-            height: 100vh;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
+            color: var(--cream-soft);
+            z-index: 1;
+            overflow: hidden;
+        }
+        .hero-bg video,
+        .hero-bg img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('videos/An_airplane_soaring_through_a_vibrant_sky\,_capture_1c02f3ae-0f78-4b37-a2ec-aa5b9a0e4460.mp4') repeat;
+            opacity: 0.2;
+            z-index: 0;
+            animation: moveParticles 60s linear infinite;
+        }
+        @keyframes moveParticles {
+            0% { background-position: 0 0; }
+            100% { background-position: 1000px 1000px; }
         }
         .hero-overlay {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(0, 0, 0, 0.6);
+            background: var(--glass-bg);
+            backdrop-filter: blur(8px);
             padding: 3rem;
-            border-radius: 15px;
-            box-shadow: 0 0 40px #00ff99;
+            border-radius: 12px;
+            border: 1px solid var(--jade-light);
+            max-width: 800px;
+            animation: fadeInHero 1s ease-out forwards;
+        }
+        @keyframes fadeInHero {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
         .hero-overlay h2 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 5rem;
-            color: #00ff99;
-            text-shadow: 0 0 30px #00ff99;
-            animation: hologram 2s infinite alternate;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: var(--gold-luxe);
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
         }
-        @keyframes hologram {
-            0% { opacity: 0.7; transform: translateY(0); }
-            100% { opacity: 1; transform: translateY(-15px); }
+        .hero-overlay p {
+            font-size: clamp(1rem, 2vw, 1.4rem);
+            margin-bottom: 2rem;
         }
         .cta-button {
-            background: linear-gradient(45deg, #00ff99, #00ccff);
-            color: #000;
+            background: var(--gold-luxe);
+            color: var(--midnight);
             padding: 1rem 2rem;
-            border: none;
-            border-radius: 50px;
-            font-family: 'Orbitron', sans-serif;
-            cursor: pointer;
-            box-shadow: 0 0 20px #00ff99;
-            transition: transform 0.3s;
+            border-radius: 8px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            position: relative;
+            display: inline-block;
         }
         .cta-button:hover {
-            transform: scale(1.15);
-            box-shadow: 0 0 30px #00ccff;
+            background: var(--luo-crimson);
+            transform: translateY(-3px);
         }
-        .secondary {
+        .cta-button.loading::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            border: 2px solid var(--midnight);
+            border-top: 2px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            top: 50%;
+            right: 1rem;
+            transform: translateY(-50%);
+        }
+        @keyframes spin {
+            0% { transform: translateY(-50%) rotate(0deg); }
+            100% { transform: translateY(-50%) rotate(360deg); }
+        }
+        .cta-button.secondary {
             background: none;
-            border: 2px solid #00ff99;
-            color: #00ff99;
+            border: 2px solid var(--gold-luxe);
+            color: var(--gold-luxe);
+            margin-left: 1rem;
         }
+        .cta-button.secondary:hover {
+            background: var(--gold-luxe);
+            color: var(--midnight);
+        }
+        /* Virtual Assistant */
+        .virtual-assistant {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            z-index: 1000;
+        }
+        .assistant-orb {
+            width: 60px;
+            height: 60px;
+            background: var(--gold-luxe);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 20px var(--glow);
+            transition: var(--transition);
+        }
+        .assistant-orb:hover,
+        .assistant-orb:focus {
+            transform: scale(1.1);
+        }
+        .assistant-orb i {
+            font-size: 1.8rem;
+            color: var(--midnight);
+        }
+        .assistant-tooltip {
+            display: none;
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            background: var(--jade-deep);
+            color: var(--cream-soft);
+            padding: 1rem;
+            border-radius: 8px;
+            width: 280px;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+        .assistant-orb.active + .assistant-tooltip {
+            display: block;
+        }
+        .assistant-tooltip button {
+            margin: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+        /* Currency Selector */
+        #currency-selector {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            z-index: 1000;
+            padding: 0.5rem;
+            background: var(--gold-luxe);
+            color: var(--midnight);
+            border-radius: 4px;
+            border: none;
+            font-family: 'Montserrat', sans-serif;
+            transition: var(--transition);
+        }
+        #currency-selector:hover,
+        #currency-selector:focus {
+            transform: scale(1.05);
+        }
+        /* Section Transition */
+        .section-transition {
+            height: 60px;
+            background: linear-gradient(to bottom, var(--midnight), var(--jade-deep));
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 50%);
+            margin: 2rem 0;
+        }
+        /* Interactive Banner */
+        .booking-banner {
+            max-width: 1000px;
+            margin: 2rem auto 1rem;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, var(--jade-deep), var(--jade-light));
+            border-radius: 12px;
+            border: 2px solid var(--gold-luxe);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: var(--shadow);
+            position: relative;
+            animation: pulseBanner 2s infinite ease-in-out;
+            z-index: 10;
+        }
+        @keyframes pulseBanner {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+        .booking-banner-content {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .booking-banner i {
+            font-size: 2rem;
+            color: var(--gold-luxe);
+        }
+        .booking-banner-text h3 {
+            font-size: clamp(1.2rem, 2vw, 1.5rem);
+            color: var(--gold-luxe);
+            margin-bottom: 0.5rem;
+        }
+        .booking-banner-text p {
+            font-size: clamp(0.9rem, 1.5vw, 1rem);
+            color: var(--cream-soft);
+        }
+        .booking-banner-actions {
+            display: flex;
+            gap: 1rem;
+        }
+        .banner-button {
+            background: var(--gold-luxe);
+            color: var(--midnight);
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .banner-button:hover {
+            background: var(--luo-crimson);
+            transform: translateY(-3px);
+        }
+        @media (max-width: 768px) {
+            .booking-banner {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+            .booking-banner-actions {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            .banner-button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+        /* Booking Section */
         .booking-section {
             max-width: 1000px;
-            margin: 5rem auto;
-            padding: 3rem;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
+            margin: 2rem auto 5rem;
+            padding: clamp(2rem, 5vw, 3rem);
+            background: var(--glass-bg);
             backdrop-filter: blur(10px);
-            box-shadow: 0 0 40px #00ff99;
+            border-radius: 15px;
+            border: 1px solid var(--jade-light);
+            box-shadow: var(--shadow);
             position: relative;
             z-index: 10;
         }
-        .progress-bar {
+        .booking-section h2 {
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            color: var(--gold-luxe);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .progress-bar-steps {
             display: flex;
             justify-content: space-between;
             margin-bottom: 2rem;
+            position: relative;
+        }
+        .progress-bar-steps::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--jade-light);
+            z-index: 0;
+        }
+        .progress-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            height: 4px;
+            background: var(--gold-luxe);
+            z-index: 1;
+            transition: width 0.5s ease;
         }
         .step {
             flex: 1;
             text-align: center;
             padding: 1rem;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            color: #00ccff;
-            font-family: 'Orbitron', sans-serif;
-            box-shadow: 0 0 10px #00ff99;
+            background: var(--midnight);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--cream-soft);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            box-shadow: var(--shadow);
+            position: relative;
+            z-index: 2;
+            transition: var(--transition);
         }
         .step.active {
-            background: linear-gradient(45deg, #00ff99, #00ccff);
-            color: #000;
+            background: var(--gold-luxe);
+            color: var(--midnight);
+        }
+        .step-label {
+            display: none;
+            position: absolute;
+            top: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.9rem;
+            color: var(--cream-soft);
+        }
+        .step:hover .step-label,
+        .step:focus .step-label {
+            display: block;
         }
         .form-step {
             display: none;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
         }
         .form-step.active {
             display: block;
+            opacity: 1;
+            transform: translateY(0);
         }
         .form-group {
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
             position: relative;
         }
         .form-group label {
             display: block;
-            color: #00ccff;
+            color: var(--cream-soft);
             margin-bottom: 0.5rem;
-            text-shadow: 0 0 5px #00ccff;
+            font-weight: 700;
         }
         .form-group input, .form-group select, .form-group textarea {
             width: 100%;
             padding: 1rem;
-            border: none;
-            border-radius: 5px;
-            background: rgba(255, 255, 255, 0.1);
-            color: #ffffff;
-            box-shadow: 0 0 10px #00ff99;
+            border: 1px solid var(--jade-light);
+            border-radius: 4px;
+            background: var(--midnight);
+            color: var(--cream-soft);
+            font-family: 'Montserrat', sans-serif;
+            transition: border-color 0.3s;
         }
         .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
             outline: none;
-            box-shadow: 0 0 15px #00ccff;
+            border-color: var(--gold-luxe);
+        }
+        .form-group input:invalid, .form-group select:invalid {
+            border-color: var(--luo-crimson);
+        }
+        .availability-message {
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            color: var(--luo-crimson);
+        }
+        .availability-message.success {
+            color: var(--jade-light);
         }
         .room-options {
-            display: flex;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
-            flex-wrap: wrap;
         }
         .room-option {
-            flex: 1 1 45%;
             padding: 1.5rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
+            background: var(--midnight);
+            border-radius: 8px;
             cursor: pointer;
-            transition: transform 0.3s;
+            transition: var(--transition);
+            border: 2px solid transparent;
         }
-        .room-option:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 25px #00ff99;
+        .room-option:hover,
+        .room-option:focus {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
         }
         .room-option.selected {
-            border: 2px solid #00ff99;
+            border-color: var(--gold-luxe);
         }
         .room-option img {
             width: 100%;
-            height: 150px;
+            height: 200px;
             object-fit: cover;
-            border-radius: 10px;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        .room-option h3 {
+            font-size: 1.6rem;
+            color: var(--gold-luxe);
+            margin-bottom: 0.5rem;
+        }
+        .room-option p {
+            font-size: 1rem;
+            color: var(--cream-soft);
+            margin-bottom: 1rem;
+        }
+        .room-option .price {
+            font-weight: 700;
+            color: var(--gold-luxe);
         }
         .ar-button, .vr-button {
-            background: #00ccff;
-            color: #000;
-            padding: 0.5rem;
-            border-radius: 5px;
-            margin-top: 0.5rem;
-            cursor: pointer;
+            background: var(--gold-luxe);
+            color: var(--midnight);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            margin: 0.5rem 0.5rem 0 0;
+            transition: var(--transition);
+        }
+        .ar-button:hover, .vr-button:hover,
+        .ar-button:focus, .vr-button:focus {
+            background: var(--luo-crimson);
+        }
+        #booking-summary {
+            background: var(--midnight);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+        #booking-summary h3 {
+            font-size: 1.8rem;
+            color: var(--gold-luxe);
+            margin-bottom: 1rem;
+        }
+        #booking-summary p {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--cream-soft);
+        }
+        .payment-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
         }
         .payment-button {
             width: 100%;
-            margin-bottom: 1rem;
+            padding: 1rem;
+            background: var(--gold-luxe);
+            color: var(--midnight);
+            border: none;
+            border-radius: 4px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        .payment-button:hover,
+        .payment-button:focus {
+            background: var(--luo-crimson);
         }
         .form-buttons {
             display: flex;
             justify-content: space-between;
             margin-top: 2rem;
+            gap: 1rem;
         }
-        #booking-summary {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 1.5rem;
-            border-radius: 10px;
-            margin-bottom: 2rem;
-            box-shadow: 0 0 15px #00ff99;
-        }
+        /* Confirmation Modal */
         #confirmation-modal {
             display: none;
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: rgba(0, 0, 0, 0.9);
+            background: var(--midnight);
             padding: 3rem;
-            border-radius: 15px;
+            border-radius: 12px;
+            border: 1px solid var(--jade-light);
             z-index: 1002;
             max-width: 600px;
-            color: #ffffff;
-            box-shadow: 0 0 50px #00ff99;
+            color: var(--cream-soft);
+            box-shadow: var(--shadow);
         }
         #modal-overlay {
             display: none;
@@ -248,277 +721,715 @@
             background: rgba(0, 0, 0, 0.7);
             z-index: 1001;
         }
-        .virtual-assistant {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1000;
+        #confirmation-modal h3 {
+            font-size: 2rem;
+            color: var(--gold-luxe);
+            margin-bottom: 1.5rem;
         }
-        .assistant-orb {
-            width: 80px;
-            height: 80px;
-            background: radial-gradient(circle, #00ff99, #00ccff);
-            border-radius: 50%;
-            cursor: pointer;
-            box-shadow: 0 0 30px #00ff99;
-            animation: pulse 1.5s infinite;
+        #modal-content p {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
         }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-            100% { transform: scale(1); }
-        }
-        .assistant-tooltip {
-            display: none;
-            position: absolute;
-            bottom: 100px;
-            right: 0;
-            background: rgba(0, 0, 0, 0.8);
-            color: #00ff99;
-            padding: 1rem;
-            border-radius: 10px;
-            width: 300px;
-            text-align: center;
-            box-shadow: 0 0 20px #00ff99;
-        }
-        .assistant-orb:hover .assistant-tooltip {
-            display: block;
-        }
-        #currency-selector {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            padding: 0.5rem;
-            background: rgba(255, 255, 255, 0.1);
-            color: #00ff99;
-            border-radius: 5px;
-            box-shadow: 0 0 10px #00ff99;
-        }
+        /* Social Feed */
         .x-feed {
-            max-width: 600px;
-            margin: 2rem auto;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 1.5rem;
-            border-radius: 15px;
-            box-shadow: 0 0 20px #00ff99;
+            max-width: 800px;
+            margin: 5rem auto;
+            padding: 2rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            border: 1px solid var(--jade-light);
+            text-align: center;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .x-feed.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .x-feed h2 {
+            font-size: clamp(1.8rem, 3vw, 2.2rem);
+            color: var(--gold-luxe);
+            margin-bottom: 1rem;
         }
         .x-post {
             padding: 1rem;
-            border-bottom: 1px solid #00ff99;
+            background: var(--midnight);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow);
+            color: var(--cream-soft);
         }
+        .x-post span {
+            font-size: 0.9rem;
+            color: var(--jade-light);
+        }
+        /* AR/VR Overlay */
+        .ar-vr-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1003;
+            overflow: hidden;
+        }
+        .ar-vr-overlay.active {
+            display: block;
+        }
+        .ar-vr-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--gold-luxe);
+            color: var(--midnight);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            z-index: 1004;
+            transition: var(--transition);
+        }
+        .ar-vr-close:hover,
+        .ar-vr-close:focus {
+            background: var(--luo-crimson);
+        }
+        a-scene {
+            width: 100%;
+            height: 100%;
+        }
+        /* Footer */
+        footer {
+            background: var(--jade-deep);
+            color: var(--cream-soft);
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        .footer-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .footer-logo {
+            width: 100px;
+            margin-bottom: 1rem;
+        }
+        .social-links a {
+            color: var(--gold-luxe);
+            margin: 0 1rem;
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+        .social-links a:hover,
+        .social-links a:focus {
+            color: var(--luo-crimson);
+        }
+        .footer-links a {
+            color: var(--cream-soft);
+            margin: 0 1rem;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+        .footer-links a:hover,
+        .footer-links a:focus {
+            color: var(--gold-luxe);
+        }
+        /* Floating Controls */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--gold-luxe);
+            color: var(--midnight);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 999;
+        }
+        .scroll-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        .scroll-to-top:hover,
+        .scroll-to-top:focus {
+            background: var(--luo-crimson);
+        }
+        .audio-control {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: var(--gold-luxe);
+            color: var(--midnight);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            z-index: 999;
+        }
+        .audio-control:hover,
+        .audio-control:focus {
+            background: var(--luo-crimson);
+        }
+        .sticky-booking {
+            position: fixed;
+            bottom: 80px;
+            left: 20px;
+            background: var(--gold-luxe);
+            color: var(--midnight);
+            padding: 0.75rem 1.5rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            z-index: 999;
+        }
+        .sticky-booking:hover,
+        .sticky-booking:focus {
+            background: var(--luo-crimson);
+        }
+        .contact-popup {
+            position: fixed;
+            bottom: 140px;
+            right: 20px;
+            background: var(--gold-luxe);
+            color: var(--midnight);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            z-index: 999;
+        }
+        .contact-popup:hover,
+        .contact-popup:focus {
+            background: var(--luo-crimson);
+        }
+        .contact-form {
+            display: none;
+            position: fixed;
+            bottom: 200px;
+            right: 20px;
+            background: var(--jade-deep);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            z-index: 999;
+            width: 300px;
+        }
+        .contact-form.active {
+            display: block;
+        }
+        .contact-form h4 {
+            color: var(--gold-luxe);
+            margin-bottom: 1rem;
+        }
+        .contact-form label {
+            display: block;
+            color: var(--cream-soft);
+            margin-bottom: 0.5rem;
+        }
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid var(--jade-light);
+            border-radius: 4px;
+            background: var(--midnight);
+            color: var(--cream-soft);
+        }
+        .contact-form button {
+            background: var(--gold-luxe);
+            color: var(--midnight);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            border: none;
+            transition: var(--transition);
+        }
+        .contact-form button:hover,
+        .contact-form button:focus {
+            background: var(--luo-crimson);
+        }
+        /* Cookie Consent */
+        .cookie-consent {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--jade-deep);
+            color: var(--cream-soft);
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease;
+        }
+        .cookie-consent.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .cookie-consent a {
+            color: var(--gold-luxe);
+            text-decoration: underline;
+        }
+        .cookie-consent button {
+            background: var(--gold-luxe);
+            color: var(--midnight);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            border: none;
+            transition: var(--transition);
+        }
+        .cookie-consent button:hover,
+        .cookie-consent button:focus {
+            background: var(--luo-crimson);
+        }
+        /* Live Region */
+        .live-region {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+        /* Media Queries */
         @media (max-width: 768px) {
             nav ul {
                 display: none;
                 flex-direction: column;
+                width: 100%;
+                background: var(--jade-deep);
+                position: absolute;
+                top: 100%;
+                left: 0;
+                padding: 1rem;
             }
             nav ul.active {
                 display: flex;
             }
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+            .dropdown-menu {
+                position: static;
+                background: var(--jade-light);
+                margin-top: 0.5rem;
+            }
             .menu-toggle {
                 display: block;
             }
-            .progress-bar {
-                flex-direction: column;
-                gap: 1rem;
+            .language-toggle {
+                margin: 0.5rem 0;
             }
-            .room-options {
-                flex-direction: column;
-            }
-            .room-option {
-                width: 100%;
+            .hero {
+                height: 60vh;
             }
             .hero-overlay h2 {
-                font-size: 3rem;
+                font-size: clamp(1.8rem, 4vw, 2.5rem);
+            }
+            .progress-bar-steps {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+            .progress-bar-steps::before,
+            .progress-line {
+                display: none;
+            }
+            .step {
+                width: 40px;
+                height: 40px;
+                font-size: 0.9rem;
+            }
+            .step-label {
+                display: block;
+                position: static;
+                transform: none;
+                margin-top: 0.5rem;
+            }
+            .room-options {
+                grid-template-columns: 1fr;
+            }
+            .room-option img {
+                height: 150px;
+            }
+            .form-buttons {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            #currency-selector {
+                top: 160px;
+            }
+            .virtual-assistant {
+                bottom: 140px;
+            }
+        }
+        @media (max-width: 480px) {
+            .hero-overlay h2 {
+                font-size: clamp(1.5rem, 3vw, 2rem);
+            }
+            .booking-section h2 {
+                font-size: clamp(1.5rem, 3vw, 2rem);
+            }
+            .header-container {
+                padding: 0 1rem;
+            }
+            .cta-button {
+                padding: 0.75rem 1.5rem;
+                font-size: 1rem;
             }
         }
     </style>
 </head>
 <body>
-    <canvas id="three-canvas"></canvas>
-    <header class="sticky-header">
+    <!-- Skip Link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar" role="progressbar" aria-label="Page scroll progress"></div>
+
+    <!-- Header -->
+    <header class="sticky-header" role="banner">
         <div class="header-container">
-            <div class="brand"><h1>Ambururu Waterfalls</h1></div>
-            <nav id="main-nav">
+            <div class="brand">
+                <a href="index.html" aria-label="Return to homepage">
+                    <picture>
+                        <source srcset="logo/B2.jpg" type="logo/B2.jpg">
+                        <img src="logo/B2.jpg" alt="Ambururu Waterfall Resort Logo" class="logo" width="70" height="70" loading="eager">
+                    </picture>
+                    <h1>Ambururu</h1>
+                </a>
+            </div>
+            <button class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav role="navigation" aria-label="Main navigation">
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="booking.html" class="active">Book Now</a></li>
+                    <li><a href="index.html" data-translate="nav.home">Home</a></li>
+                    <li><a href="about.html" data-translate="nav.about">About</a></li>
+                    <li><a href="booking.html" class="active" aria-current="page" data-translate="nav.book">Book Now</a></li>
+                    <li><a href="gallery.html" data-translate="nav.gallery">Gallery</a></li>
+                    <li class="dropdown">
+                        <a href="activities.html" aria-haspopup="true" aria-expanded="false" data-translate="nav.experiences">Experiences</a>
+                        <div class="dropdown-menu">
+                            <a href="accommodations.html">Accommodations</a>
+                            <a href="dining.html">Dining</a>
+                            <a href="events.html">Events</a>
+                        </div>
+                    </li>
+                    <li><a href="journal.html" data-translate="nav.journal">Journal</a></li>
+                    <li><a href="contact.html" data-translate="nav.contact">Contact</a></li>
                 </ul>
             </nav>
-            <button class="menu-toggle" aria-label="Toggle navigation"><i class="fas fa-bars"></i></button>
+            <div class="language-toggle">
+                <select id="language-select" aria-label="Select website language">
+                    <option value="en">English</option>
+                    <option value="sw">Swahili</option>
+                    <option value="luo">Luo</option>
+                </select>
+            </div>
+            <button class="dark-mode-toggle" aria-label="Toggle dark mode">
+                <i class="fas fa-moon"></i>
+            </button>
         </div>
     </header>
 
-    <section class="hero">
-        <div class="hero-overlay">
-            <h2>Cyber-Eco Paradise</h2>
-            <p>Book with AI, AR, and blockchain tech</p>
-            <a href="#booking" class="cta-button">Book Now</a>
-            <a href="#vr-tour" class="cta-button secondary">VR Tour</a>
-        </div>
-    </section>
+    <!-- Main Content -->
+    <main id="main-content" role="main">
+        <!-- Hero Section -->
+        <section class="hero" id="hero" role="region" aria-label="Hero section">
+            <div class="hero-bg">
+                <video autoplay muted loop playsinline preload="metadata" poster="images/30.jpg" aria-hidden="true">
+                    <source src="videos/A_breathtaking_view_of_Earth_rotating_in_the_vastn_6c2edb5d-dd81-49a8-a330-5c2664eb2f8a.webm" type="video/mp4">
+                    <img src="images/29.jpg" alt="Fallback booking hero image">
+                </video>
+            </div>
+            <div class="particles"></div>
+            <div class="hero-overlay">
+                <h2 data-translate="hero.title">Book Your Sanctuary</h2>
+                <p data-translate="hero.subtitle">Experience eco-luxury at Ambururu Waterfalls & Resort in Siaya, Kenya.</p>
+                <a href="#booking" class="cta-button" data-translate="hero.cta">Book Now</a>
+                <a href="#vr-tour" class="cta-button secondary" data-translate="hero.vrTour">Take a VR Tour</a>
+            </div>
+        </section>
 
-    <div class="virtual-assistant">
-        <div class="assistant-orb">
+        <!-- Virtual Assistant -->
+        <div class="virtual-assistant">
+            <div class="assistant-orb" role="button" aria-label="Open virtual assistant" tabindex="0">
+                <i class="fas fa-robot"></i>
+            </div>
             <div class="assistant-tooltip">
-                <p>Ask Grok: "Recommend a room" or "Help!"</p>
-                <button class="cta-button secondary" id="video-call">Video Concierge</button>
-                <button class="cta-button secondary" id="ai-recommend">AI Suggest</button>
+                <p data-translate="assistant.prompt">Ask our AI Concierge: "Recommend a room" or "Help!"</p>
+                <button class="cta-button secondary" id="video-call" data-translate="assistant.videoCall">Video Concierge</button>
+                <button class="cta-button secondary" id="ai-recommend" data-translate="assistant.aiRecommend">AI Recommend</button>
             </div>
         </div>
-    </div>
 
-    <select id="currency-selector">
-        <option value="USD">USD</option>
-        <option value="KES">KES</option>
-        <option value="EUR">EUR</option>
-        <option value="ETH">ETH</option>
-    </select>
+        <!-- Currency Selector -->
+        <select id="currency-selector" aria-label="Select currency">
+            <option value="USD">USD</option>
+            <option value="KES">KES</option>
+            <option value="EUR">EUR</option>
+            <option value="ETH">ETH</option>
+        </select>
 
-    <section class="booking-section" id="booking">
-        <h2>Secure Your Cyber-Luxe Stay</h2>
-        <div class="progress-bar">
-            <div class="step active">1. Dates & Guests</div>
-            <div class="step">2. Room</div>
-            <div class="step">3. Details</div>
-            <div class="step">4. Payment</div>
+        <!-- Booking Banner -->
+        <div class="booking-banner" role="alert" aria-live="polite">
+            <div class="booking-banner-content">
+                <i class="fas fa-info-circle"></i>
+                <div class="booking-banner-text">
+                    <h3 data-translate="banner.title">Our Online Booking System is Under Development</h3>
+                    <p data-translate="banner.message">Please book manually by emailing us at <a href="mailto:ambururuwaterfalls@gmail.com">ambururuwaterfalls@gmail.com</a>, calling us at <a href="tel:+254 720 215 511">+254 720 215 511</a>, or pay on arrival.</p>
+                </div>
+            </div>
+            <div class="booking-banner-actions">
+                <a href="mailto:ambururuwaterfalls@gmail.com" class="banner-button" data-translate="banner.email"><i class="fas fa-envelope"></i> Email Us</a>
+                <a href="tel:+254 720 215 511" class="banner-button" data-translate="banner.call"><i class="fas fa-phone"></i> Call Us</a>
+            </div>
         </div>
-        <form id="booking-form">
-            <div class="form-step active" id="step-1">
-                <div class="form-group">
-                    <label for="check-in">Check-In Date</label>
-                    <input type="date" id="check-in" name="check_in" required>
-                </div>
-                <div class="form-group">
-                    <label for="check-out">Check-Out Date</label>
-                    <input type="date" id="check-out" name="check_out" required>
-                </div>
-                <div class="form-group">
-                    <label for="adults">Adults</label>
-                    <select id="adults" name="adults" required>
-                        <option value="1">1</option>
-                        <option value="2" selected>2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="children">Children</label>
-                    <select id="children" name="children" required>
-                        <option value="0" selected>0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                    </select>
-                </div>
-                <div class="form-buttons">
-                    <button type="button" class="cta-button next-step" data-step="1">Next</button>
-                    <button type="button" class="cta-button secondary save-progress">Save Progress</button>
-                </div>
+
+        <!-- Booking Section -->
+        <section class="booking-section" id="booking" role="region" aria-label="Booking form">
+            <h2 data-translate="booking.title">Reserve Your Eco-Luxe Stay</h2>
+            <div class="progress-bar-steps">
+                <div class="progress-line" style="width: 0%;"></div>
+                <div class="step active" data-step="1"><span>1</span><span class="step-label" data-translate="booking.step1">Dates & Guests</span></div>
+                <div class="step" data-step="2"><span>2</span><span class="step-label" data-translate="booking.step2">Room Selection</span></div>
+                <div class="step" data-step="3"><span>3</span><span class="step-label" data-translate="booking.step3">Guest Details</span></div>
+                <div class="step" data-step="4"><span>4</span><span class="step-label" data-translate="booking.step4">Payment</span></div>
             </div>
-            <div class="form-step" id="step-2">
-                <div class="room-options">
-                    <div class="room-option" data-price="100" data-room="Standard Room">
-                        <img src="images/14.jpg" alt="Standard Room" onerror="this.src='https://via.placeholder.com/300x150?text=Standard+Room';">
-                        <h3>Standard Room</h3>
-                        <p>$100/night - Cozy eco-luxe</p>
-                        <button class="ar-button" data-room="standard">AR View</button>
-                        <button class="vr-button" data-room="standard">VR Tour</button>
+            <form id="booking-form" action="https://formspree.io/f/xzbxyklq" method="POST" novalidate>
+                <div class="form-step active" id="step-1">
+                    <div class="form-group">
+                        <label for="check-in" data-translate="booking.checkInLabel">Check-In Date</label>
+                        <input type="date" id="check-in" name="check_in" required aria-required="true" aria-describedby="check-in-message">
+                        <p class="availability-message" id="check-in-message"></p>
                     </div>
-                    <div class="room-option" data-price="150" data-room="Deluxe Room">
-                        <img src="images/15.jpg" alt="Deluxe Room" onerror="this.src='https://via.placeholder.com/300x150?text=Deluxe+Room';">
-                        <h3>Deluxe Room</h3>
-                        <p>$150/night - Spacious serenity</p>
-                        <button class="ar-button" data-room="deluxe">AR View</button>
-                        <button class="vr-button" data-room="deluxe">VR Tour</button>
+                    <div class="form-group">
+                        <label for="check-out" data-translate="booking.checkOutLabel">Check-Out Date</label>
+                        <input type="date" id="check-out" name="check_out" required aria-required="true" aria-describedby="check-out-message">
+                        <p class="availability-message" id="check-out-message"></p>
+                    </div>
+                    <div class="form-group">
+                        <label for="adults" data-translate="booking.adultsLabel">Adults</label>
+                        <select id="adults" name="adults" required aria-required="true">
+                            <option value="1">1</option>
+                            <option value="2" selected>2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="children" data-translate="booking.childrenLabel">Children</label>
+                        <select id="children" name="children" required aria-required="true">
+                            <option value="0" selected>0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                        </select>
+                    </div>
+                    <div class="form-buttons">
+                        <button type="button" class="cta-button next-step" data-step="1" data-translate="booking.next">Next</button>
+                        <button type="button" class="cta-button secondary save-progress" data-translate="booking.saveProgress">Save Progress</button>
                     </div>
                 </div>
-                <div class="form-buttons">
-                    <button type="button" class="cta-button secondary prev-step" data-step="2">Previous</button>
-                    <button type="button" class="cta-button next-step" data-step="2">Next</button>
-                    <button type="button" class="cta-button secondary save-progress">Save Progress</button>
+                <div class="form-step" id="step-2">
+                    <div class="room-options">
+                        <div class="room-option" data-price="100" data-room="Standard Room" tabindex="0">
+                            <picture>
+                                <source srcset="images/15.jpg" type="images/jpg">
+                                <img src="images/15.jpg" alt="Standard Room at Ambururu Waterfall Resort" loading="lazy" width="300" height="200">
+                            </picture>
+                            <h3 data-translate="rooms.standard.title">Standard Room</h3>
+                            <p data-translate="rooms.standard.desc">Cozy eco-luxe retreat with serene views.</p>
+                            <p class="price" data-translate="rooms.standard.price">Ksh3000/night</p>
+                            <button type="button" class="ar-button" data-room="standard" aria-label="View Standard Room in AR" data-translate="rooms.arView">AR View</button>
+                            <button type="button" class="vr-button" data-room="standard" aria-label="Take a VR tour of Standard Room" data-translate="rooms.vrTour">VR Tour</button>
+                        </div>
+                        <div class="room-option" data-price="150" data-room="Deluxe Room" tabindex="0">
+                            <picture>
+                                <source srcset="images/14.jpg" type="images/jpg">
+                                <img src="images/14.jpg" alt="Deluxe Room at Ambururu Waterfall Resort" loading="lazy" width="300" height="200">
+                            </picture>
+                            <h3 data-translate="rooms.deluxe.title">Deluxe Room</h3>
+                            <p data-translate="rooms.deluxe.desc">Spacious serenity with premium amenities.</p>
+                            <p class="price" data-translate="rooms.deluxe.price">Ksh5000/night</p>
+                            <button type="button" class="ar-button" data-room="deluxe" aria-label="View Deluxe Room in AR" data-translate="rooms.arView">AR View</button>
+                            <button type="button" class="vr-button" data-room="deluxe" aria-label="Take a VR tour of Deluxe Room" data-translate="rooms.vrTour">VR Tour</button>
+                        </div>
+                    </div>
+                    <div class="form-buttons">
+                        <button type="button" class="cta-button secondary prev-step" data-step="2" data-translate="booking.prev">Previous</button>
+                        <button type="button" class="cta-button next-step" data-step="2" disabled data-translate="booking.next">Next</button>
+                        <button type="button" class="cta-button secondary save-progress" data-translate="booking.saveProgress">Save Progress</button>
+                    </div>
                 </div>
-            </div>
-            <div class="form-step" id="step-3">
-                <div class="form-group">
-                    <label for="name">Full Name</label>
-                    <input type="text" id="name" name="name" required>
+                <div class="form-step" id="step-3">
+                    <div class="form-group">
+                        <label for="name" data-translate="booking.nameLabel">Full Name</label>
+                        <input type="text" id="name" name="name" required aria-required="true" aria-describedby="name-error">
+                        <p class="availability-message" id="name-error"></p>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" data-translate="booking.emailLabel">Email</label>
+                        <input type="email" id="email" name="email" required aria-required="true" aria-describedby="email-error">
+                        <p class="availability-message" id="email-error"></p>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone" data-translate="booking.phoneLabel">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" required aria-required="true" aria-describedby="phone-error">
+                        <p class="availability-message" id="phone-error"></p>
+                    </div>
+                    <div class="form-group">
+                        <label for="country" data-translate="booking.countryLabel">Country</label>
+                        <select id="country" name="country" required aria-required="true" aria-describedby="country-error">
+                            <option value="KE" selected>Kenya</option>
+                            <option value="US">United States</option>
+                            <option value="UK">United Kingdom</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <p class="availability-message" id="country-error"></p>
+                    </div>
+                    <div class="form-group">
+                        <label for="requests" data-translate="booking.requestsLabel">Special Requests</label>
+                        <textarea id="requests" name="requests" rows="4" aria-label="Enter any special requests"></textarea>
+                        <p id="sentiment-feedback" class="availability-message"></p>
+                    </div>
+                    <div class="form-buttons">
+                        <button type="button" class="cta-button secondary prev-step" data-step="3" data-translate="booking.prev">Previous</button>
+                        <button type="button" class="cta-button next-step" data-step="3" data-translate="booking.next">Next</button>
+                        <button type="button" class="cta-button secondary save-progress" data-translate="booking.saveProgress">Save Progress</button>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
+                <div class="form-step" id="step-4">
+                    <div id="booking-summary">
+                        <h3 data-translate="booking.summaryTitle">Booking Summary</h3>
+                        <p data-translate="booking.summaryRoom">Room: <span id="summary-room"></span></p>
+                        <p data-translate="booking.summaryDates">Dates: <span id="summary-dates"></span></p>
+                        <p data-translate="booking.summaryGuests">Guests: <span id="summary-guests"></span></p>
+                        <p data-translate="booking.summarySeasonal">Seasonal Adjustment: <span id="summary-seasonal"></span></p>
+                        <p data-translate="booking.summarySubtotal">Subtotal: <span id="summary-subtotal"></span></p>
+                        <p data-translate="booking.summaryTax">Tax (10%): <span id="summary-tax"></span></p>
+                        <p data-translate="booking.summaryTotal">Total: <span id="summary-total"></span></p>
+                    </div>
+                    <div class="payment-options">
+                        <button type="button" class="payment-button" id="paypal-button" data-translate="payment.paypal">Pay with PayPal</button>
+                        <button type="button" class="payment-button" id="stripe-button" data-translate="payment.card">Pay with Card</button>
+                        <button type="button" class="payment-button" id="mpesa-button" data-translate="payment.mpesa">Pay with M-Pesa</button>
+                        <button type="button" class="payment-button" id="crypto-button" data-translate="payment.crypto">Pay with Ethereum</button>
+                    </div>
+                    <div class="form-buttons">
+                        <button type="button" class="cta-button secondary prev-step" data-step="4" data-translate="booking.prev">Previous</button>
+                        <button type="button" class="cta-button secondary save-progress" data-translate="booking.saveProgress">Save Progress</button>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="phone">Phone Number</label>
-                    <input type="tel" id="phone" name="phone" required>
-                </div>
-                <div class="form-group">
-                    <label for="country">Country</label>
-                    <select id="country" name="country" required>
-                        <option value="KE" selected>Kenya</option>
-                        <option value="US">United States</option>
-                        <option value="UK">United Kingdom</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="requests">Special Requests</label>
-                    <textarea id="requests" name="requests" rows="4"></textarea>
-                    <p id="sentiment-feedback"></p>
-                </div>
-                <div class="form-buttons">
-                    <button type="button" class="cta-button secondary prev-step" data-step="3">Previous</button>
-                    <button type="button" class="cta-button next-step" data-step="3">Next</button>
-                    <button type="button" class="cta-button secondary save-progress">Save Progress</button>
-                </div>
-            </div>
-            <div class="form-step" id="step-4">
-                <div id="booking-summary">
-                    <h3>Booking Summary</h3>
-                    <p>Room: <span id="summary-room"></span></p>
-                    <p>Dates: <span id="summary-dates"></span></p>
-                    <p>Guests: <span id="summary-guests"></span></p>
-                    <p>Total: <span id="summary-total"></span></p>
-                </div>
-                <div class="payment-options">
-                    <button type="button" class="cta-button payment-button" id="paypal-button">Pay with PayPal</button>
-                    <button type="button" class="cta-button payment-button" id="stripe-button">Pay with Card</button>
-                    <button type="button" class="cta-button payment-button" id="mpesa-button">M-Pesa/Bank Transfer</button>
-                    <button type="button" class="cta-button payment-button" id="crypto-button">Pay with Ethereum</button>
-                </div>
-                <div class="form-buttons">
-                    <button type="button" class="cta-button secondary prev-step" data-step="4">Previous</button>
-                    <button type="button" class="cta-button secondary save-progress">Save Progress</button>
-                </div>
-            </div>
-        </form>
-    </section>
+            </form>
+            <div class="live-region" aria-live="polite" id="form-announcer"></div>
+        </section>
 
-    <section class="x-feed">
-        <h2>Live from @Ambururu_W</h2>
-        <div id="x-posts"></div>
-    </section>
+        <div class="section-transition"></div>
 
-    <div id="modal-overlay"></div>
-    <div id="confirmation-modal">
-        <h3>Booking Confirmed!</h3>
-        <div id="modal-content"></div>
-        <button type="button" class="cta-button" id="modal-close">Close</button>
-    </div>
+        <!-- Social Feed -->
+        <section class="x-feed" role="region" aria-label="Social media feed">
+            <h2 data-translate="social.title">Latest Updates from @AmbururuResort</h2>
+            <div id="x-posts"></div>
+        </section>
 
-    <footer>
-        <p>© 2025 Ambururu Waterfalls Resort. All rights reserved.</p>
+        <!-- Modals -->
+        <div id="modal-overlay"></div>
+        <div id="confirmation-modal" role="dialog" aria-label="Booking confirmation">
+            <h3 data-translate="booking.confirmationTitle">Booking Confirmed!</h3>
+            <div id="modal-content"></div>
+            <button type="button" class="cta-button" id="modal-close" data-translate="booking.closeModal">Close</button>
+        </div>
+
+        <!-- AR/VR Overlay -->
+        <div class="ar-vr-overlay" id="ar-vr-overlay">
+            <button type="button" class="ar-vr-close" data-translate="booking.closeARVR">Close</button>
+            <div id="ar-vr-content"></div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer role="contentinfo" aria-label="Footer">
+        <div class="footer-container">
+            <a href="index.html">
+                <picture>
+                    <source srcset="logo/B2.jpg" type="image/webp">
+                    <img src="logo/B2.jpg" alt="Ambururu Waterfall Resort Footer Logo" class="footer-logo" width="100" height="100" loading="lazy">
+                </picture>
+            </a>
+            <p>© 2025 Ambururu Waterfalls & Resort. All rights reserved.</p>
+            <div class="social-links" role="navigation" aria-label="Social media links">
+                <a href="https://www.facebook.com/ambururu" target="_blank" rel="noopener" aria-label="Follow us on Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://x.com/AmbururuResort" target="_blank" rel="noopener" aria-label="Follow us on X"><i class="fab fa-x-twitter"></i></a>
+                <a href="https://www.instagram.com/ambururu1" target="_blank" rel="noopener" aria-label="Follow us on Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+            <nav class="footer-links" role="navigation" aria-label="Footer navigation">
+                <a href="about.html" data-translate="footer.about">About Us</a>
+                <a href="contact.html" data-translate="footer.contact">Contact</a>
+                <a href="sustainability.html" data-translate="footer.sustainability">Sustainability</a>
+                <a href="privacy.html" data-translate="footer.privacy">Privacy Policy</a>
+                <a href="terms.html" data-translate="footer.terms">Terms & Conditions</a>
+            </nav>
+        </div>
     </footer>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.glitch.min.js"></script>
-    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/web3@1.7.0/dist/web3.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/webgazer@0.0.2/dist/webgazer.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.13.0/dist/tf.min.js"></script>
+    <!-- Floating Controls -->
+    <button class="scroll-to-top" aria-label="Scroll to top"><i class="fas fa-chevron-up"></i></button>
+    <audio id="background-audio" loop src="videos/1 (1).mp3" preload="metadata"></audio>
+    <button class="audio-control" aria-label="Toggle audio"><i class="fas fa-volume-up"></i></button>
+    <a href="#booking" class="sticky-booking" data-translate="sticky.book">Book Now</a>
+    <button class="contact-popup" aria-label="Open contact form"><i class="fas fa-envelope"></i></button>
+    <div class="contact-form">
+        <h4 data-translate="contact.title">Contact Us</h4>
+        <form id="contact-form" aria-label="Contact form">
+            <label for="contact-name" data-translate="contact.nameLabel">Name</label>
+            <input type="text" id="contact-name" required aria-required="true">
+            <label for="contact-email" data-translate="contact.emailLabel">Email</label>
+            <input type="email" id="contact-email" required aria-required="true">
+            <label for="message" data-translate="contact.messageLabel">Message</label>
+            <textarea id="message" rows="4" required aria-required="true"></textarea>
+            <button type="submit" data-translate="contact.submit">Send</button>
+        </form>
+    </div>
+
+    <!-- Cookie Consent -->
+    <div class="cookie-consent" role="dialog" aria-labelledby="cookie-title">
+        <p id="cookie-title" data-translate="cookie.text">We use cookies to enhance your experience. <a href="privacy.html" data-translate="cookie.privacy">Learn more</a>.</p>
+        <button id="accept-cookies" data-translate="cookie.accept">Accept</button>
+    </div>
+
     <script>
+        // Constants
+        const BASE_URL = '/';
         let bookingData = {
             checkIn: '',
             checkOut: '',
@@ -531,352 +1442,824 @@
             phone: '',
             country: 'KE',
             requests: '',
-            currency: 'USD'
+            currency: 'USD',
+            subtotal: 0,
+            tax: 0,
+            total: 0,
+            seasonalAdjustment: ''
         };
         let currentStep = 0;
         let currencyRates = { USD: 1, KES: 129, EUR: 0.95, ETH: 0.00025 };
+        const fullyBookedDates = [
+            { start: '2025-06-10', end: '2025-06-15' },
+            { start: '2025-07-01', end: '2025-07-05' }
+        ];
+        const seasonalRates = {
+            peak: { months: [6, 7, 12], multiplier: 1.2 },
+            offPeak: { months: [1, 2, 3], multiplier: 0.9 }
+        };
 
-        // 3D Resort Model
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('three-canvas'), alpha: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        const geometry = new THREE.SphereGeometry(10, 32, 32);
-        const material = new THREE.MeshPhongMaterial({ color: 0x00ff99, emissive: 0x00ccff });
-        const resort = new THREE.Mesh(geometry, material);
-        scene.add(resort);
-        const light = new THREE.PointLight(0xffffff, 1, 100);
-        light.position.set(10, 10, 10);
-        scene.add(light);
-        camera.position.z = 20;
-        function animate() {
-            requestAnimationFrame(animate);
-            resort.rotation.y += 0.005;
-            renderer.render(scene, camera);
-        }
-        animate();
-
-        // Vanta.js Glitch
-        VANTA.GLITCH({
-            el: "body",
-            highlightColor: 0x00ff99,
-            midtoneColor: 0x00ccff,
-            lowlightColor: 0x000000,
-            baseColor: 0x000000,
-            scale: 1.5
-        });
-
-        // WebGazer Eye Tracking
-        webgazer.setGazeListener((data, elapsedTime) => {
-            if (data && data.x > window.innerWidth * 0.8 && currentStep < 3) {
-                $('.next-step').click();
+        // Translations
+        const translations = {
+            en: {
+                nav: { 
+                    home: "Home", 
+                    about: "About", 
+                    book: "Book Now", 
+                    gallery: "Gallery", 
+                    experiences: "Experiences", 
+                    journal: "Journal", 
+                    contact: "Contact" 
+                },
+                hero: { 
+                    title: "Book Your Sanctuary", 
+                    subtitle: "Experience eco-luxury at Ambururu Waterfalls & Resort in Siaya, Kenya.", 
+                    cta: "Book Now", 
+                    vrTour: "Take a VR Tour" 
+                },
+                assistant: { 
+                    prompt: "Ask our AI Concierge: 'Recommend a room' or 'Help!'", 
+                    videoCall: "Video Concierge", 
+                    aiRecommend: "AI Recommend" 
+                },
+                banner: {
+                    title: "Our Online Booking System is Under Development",
+                    message: "Please book manually by emailing us at ambururuwaterfalls@gmail.com, calling us at +254 721 205 511, or pay on arrival.",
+                    email: "Email Us",
+                    call: "Call Us"
+                },
+                booking: { 
+                    title: "Reserve Your Eco-Luxe Stay", 
+                    step1: "Dates & Guests", 
+                    step2: "Room Selection", 
+                    step3: "Guest Details", 
+                    step4: "Payment", 
+                    checkInLabel: "Check-In Date", 
+                    checkOutLabel: "Check-Out Date", 
+                    adultsLabel: "Adults", 
+                    childrenLabel: "Children", 
+                    nameLabel: "Full Name", 
+                    emailLabel: "Email", 
+                    phoneLabel: "Phone Number", 
+                    countryLabel: "Country", 
+                    requestsLabel: "Special Requests", 
+                    prev: "Previous", 
+                    next: "Next", 
+                    saveProgress: "Save Progress", 
+                    summaryTitle: "Booking Summary", 
+                    summaryRoom: "Room:", 
+                    summaryDates: "Dates:", 
+                    summaryGuests: "Guests:", 
+                    summarySeasonal: "Seasonal Adjustment:", 
+                    summarySubtotal: "Subtotal:", 
+                    summaryTax: "Tax (10%):", 
+                    summaryTotal: "Total:", 
+                    confirmationTitle: "Booking Confirmed!", 
+                    closeModal: "Close", 
+                    closeARVR: "Close" 
+                },
+                rooms: {
+                    standard: { title: "Standard Room", desc: "Cozy eco-luxe retreat with serene views.", price: "Ksh3000/night" },
+                    deluxe: { title: "Deluxe Room", desc: "Spacious serenity with premium amenities.", price: "Ksh5000/night" },
+                    arView: "AR View",
+                    vrTour: "VR Tour"
+                },
+                payment: { 
+                    paypal: "Pay with PayPal", 
+                    card: "Pay with Card", 
+                    mpesa: "Pay with M-Pesa", 
+                    crypto: "Pay with Ethereum" 
+                    cash:"pay on arrivall"
+                },
+                social: { title: "Latest Updates from @Ambururu_W" },
+                footer: { 
+                    about: "About Us", 
+                    contact: "Contact", 
+                    sustainability: "Sustainability", 
+                    privacy: "Privacy Policy", 
+                    terms: "Terms & Conditions" 
+                },
+                contact: { 
+                    title: "Contact Us", 
+                    nameLabel: "Name", 
+                    emailLabel: "Email", 
+                    messageLabel: "Message", 
+                    submit: "Send" 
+                },
+                cookie: { 
+                    text: "We use cookies to enhance your experience.", 
+                    privacy: "Learn more", 
+                    accept: "Accept" 
+                },
+                sticky: { book: "Book Now" }
+            },
+            sw: {
+                nav: { 
+                    home: "Nyumbani", 
+                    about: "Kuhusu", 
+                    book: "Hifadhi Sasa", 
+                    gallery: "Matunzio", 
+                    experiences: "Mauzo", 
+                    journal: "Jarida", 
+                    contact: "Wasiliana" 
+                },
+                hero: { 
+                    title: "Hifadhi Makao Yako", 
+                    subtitle: "Pata uzoefu wa kifahari wa mazingira huko Ambururu Waterfalls & Resort, Siaya, Kenya.", 
+                    cta: "Hifadhi Sasa", 
+                    vrTour: "Chukua Ziara ya VR" 
+                },
+                assistant: { 
+                    prompt: "Uliza Mshauri wetu wa AI: 'Pendekeza chumba' au 'Msaada!'", 
+                    videoCall: "Video Mshauri", 
+                    aiRecommend: "Pendekeza AI" 
+                },
+                banner: {
+                    title: "Mfumo Wetu wa Kuhifadhi Mtandaoni Uko Chini ya Maendeleo",
+                    message: "Tafadhali hifadhi kwa mkono kwa kututumia barua pepe kwa reservations@ambururuwaterfalls.com, kutupigia simu kwa +254 700 123 456, au lipa ukifika.",
+                    email: "Tutumie Barua Pepe",
+                    call: "Tupigie Simu"
+                },
+                booking: { 
+                    title: "Hifadhi Kukaa Kwako kwa Kifahari cha Mazingira", 
+                    step1: "Tarehe na Wageni", 
+                    step2: "Uchaguzi wa Chumba", 
+                    step3: "Maelezo ya Mgeni", 
+                    step4: "Malipo", 
+                    checkInLabel: "Tarehe ya Kuingia", 
+                    checkOutLabel: "Tarehe ya Kutoka", 
+                    adultsLabel: "Watu Wazima", 
+                    childrenLabel: "Watoto", 
+                    nameLabel: "Jina Kamili", 
+                    emailLabel: "Barua Pepe", 
+                    phoneLabel: "Namba ya Simu", 
+                    countryLabel: "Nchi", 
+                    requestsLabel: "Maombi ya Kipekee", 
+                    prev: "Iliyotangulia", 
+                    next: "Inayofuata", 
+                    saveProgress: "Hifadhi Maendeleo", 
+                    summaryTitle: "Muhtasari wa Hifadhi", 
+                    summaryRoom: "Chumba:", 
+                    summaryDates: "Tarehe:", 
+                    summaryGuests: "Wageni:", 
+                    summarySeasonal: "Marekebisho ya Msimu:", 
+                    summarySubtotal: "Jumla Ndogo:", 
+                    summaryTax: "Kodi (10%):", 
+                    summaryTotal: "Jumla:", 
+                    confirmationTitle: "Hifadhi Imethibitishwa!", 
+                    closeModal: "Funga", 
+                    closeARVR: "Funga" 
+                },
+                rooms: {
+                    standard: { title: "Chumba cha Kawaida", desc: "Makao ya kifahari ya mazingira yenye mandhari ya utulivu.", price: "Ksh3000/usiku" },
+                    deluxe: { title: "Chumba cha Deluxe", desc: "Nafasi ya utulivu yenye vifaa vya hali ya juu.", price: "Ksh5000/usiku" },
+                    arView: "Mwonekano wa AR",
+                    vrTour: "Ziara ya VR"
+                },
+                payment: { 
+                    paypal: "Lipa na PayPal", 
+                    card: "Lipa na Kadi", 
+                    mpesa: "Lipa na M-Pesa", 
+                    crypto: "Lipa na Ethereum" 
+                },
+                social: { title: "Sasisho za Hivi Karibuni kutoka @AmbururuResort" },
+                footer: { 
+                    about: "Kuhusu Sisi", 
+                    contact: "Wasiliana", 
+                    sustainability: "Endeleo", 
+                    privacy: "Sera ya Faragha", 
+                    terms: "Masharti na Vigezo" 
+                },
+                contact: { 
+                    title: "Wasiliana Nasi", 
+                    nameLabel: "Jina", 
+                    emailLabel: "Barua Pepe", 
+                    messageLabel: "Ujumbe", 
+                    submit: "Tuma" 
+                },
+                cookie: { 
+                    text: "Tunatumia cookies ili kuboresha uzoefu wako.", 
+                    privacy: "Jifunze zaidi", 
+                    accept: "Kubali" 
+                },
+                sticky: { book: "Hifadhi Sasa" }
+            },
+            luo: {
+                nav: { 
+                    home: "Ber", 
+                    about: "Kwe", 
+                    book: "Kaw Bende", 
+                    gallery: "Picha", 
+                    experiences: "Ber marach", 
+                    journal: "Nyer", 
+                    contact: "Konywa" 
+                },
+                hero: { 
+                    title: "Kaw Ber Maber", 
+                    subtitle: "Ng’iel ber marach e Ambururu Waterfalls & Resort e Siaya, Kenya.", 
+                    cta: "Kaw Bende", 
+                    vrTour: "Ng’iel gi VR" 
+                },
+                assistant: { 
+                    prompt: "Peny wuon AI: 'Ber marach' kata 'Kony!'", 
+                    videoCall: "Video Wuon", 
+                    aiRecommend: "Pendekeza AI" 
+                },
+                banner: {
+                    title: "Migaw wadu marach e Internet koro idoko",
+                    message: "Kaw gi chieth kaka itimo barua e reservations@ambururuwaterfalls.com, penjwa e +254 700 123 456, kata chul ka idhi.",
+                    email: "Wach Email",
+                    call: "Penjwa"
+                },
+                booking: { 
+                    title: "Kaw Ber Marach", 
+                    step1: "Ber gi Jo", 
+                    step2: "Chumba", 
+                    step3: "Maelez", 
+                    step4: "Chulo", 
+                    checkInLabel: "Ber Kalo", 
+                    checkOutLabel: "Ber Wuok", 
+                    adultsLabel: "Jo Madongo", 
+                    childrenLabel: "Nyithindo", 
+                    nameLabel: "Nying Duto", 
+                    emailLabel: "Barua", 
+                    phoneLabel: "Namba", 
+                    countryLabel: "Piny", 
+                    requestsLabel: "Ber Maber", 
+                    prev: "Ber Mokalo", 
+                    next: "Ber Maluwo", 
+                    saveProgress: "Hifadhi Ber", 
+                    summaryTitle: "Ber Moko", 
+                    summaryRoom: "Chumba:", 
+                    summaryDates: "Ber:", 
+                    summaryGuests: "Jo:", 
+                    summarySeasonal: "Marekebisho:", 
+                    summarySubtotal: "Jumla:", 
+                    summaryTax: "Kodi:", 
+                    summaryTotal: "Duto:", 
+                    confirmationTitle: "Ber Kwi!", 
+                    closeModal: "Lor", 
+                    closeARVR: "Lor" 
+                },
+                rooms: {
+                    standard: { title: "Chum Kich", desc: "Ber maber gi kwe", price: "Ksh3000/us duto" },
+                    deluxe: { title: "Chum Maber", desc: "Nen maber gi gik moko", price: "Ksh5000/us duto" },
+                    arView: "Nen Maber",
+                    vrTour: "Wuoth Maber"
+                },
+                payment: { 
+                    paypal: "Chul gi PayPal", 
+                    card: "Chul gi Kadi", 
+                    mpesa: "Chul gi M-Pesa", 
+                    crypto: "Chul gi Ethereum" 
+                },
+                social: { title: "Ber maber @Nen" },
+                footer: { 
+                    about: "Kwe Wadu", 
+                    contact: "Konywa", 
+                    sustainability: "Ber Madero", 
+                    privacy: "Sera", 
+                    terms: "Ber Maber" 
+                },
+                contact: { 
+                    title: "Konywa", 
+                    nameLabel: "Nying", 
+                    emailLabel: "Barua", 
+                    messageLabel: "Wach", 
+                    submit: "Tum" 
+                },
+                cookie: { 
+                    text: "Wan gi cookie mondo ber maber.", 
+                    privacy: "Ng’pi", 
+                    accept: "Yie" 
+                },
+                sticky: { book: "Kaw" }
             }
-        }).begin();
+        };
 
-        $(document).ready(function() {
-            $('.menu-toggle').click(function() {
-                $('#main-nav ul').toggleClass('active');
-            });
-
-            $('.next-step').click(function() {
-                if (validateStep(currentStep)) {
-                    anime({
-                        targets: $('.form-step').eq(currentStep)[0],
-                        opacity: 0,
-                        translateX: -100,
-                        duration: 300,
-                        easing: 'easeInOutQuad',
-                        complete: () => {
-                            $('.form-step').eq(currentStep).removeClass('active');
-                            $('.step').eq(currentStep).removeClass('active');
-                            currentStep++;
-                            $('.form-step').eq(currentStep).addClass('active');
-                            $('.step').eq(currentStep).addClass('active');
-                            updateSummary();
-                            anime({
-                                targets: $('.form-step').eq(currentStep)[0],
-                                opacity: [0, 1],
-                                translateX: [100, 0],
-                                duration: 300,
-                                easing: 'easeInOutQuad'
-                            });
-                        }
-                    });
-                }
-            });
-
-            $('.prev-step').click(function() {
-                anime({
-                    targets: $('.form-step').eq(currentStep)[0],
-                    opacity: 0,
-                    translateX: 100,
-                    duration: 300,
-                    easing: 'easeInOutQuad',
-                    complete: () => {
-                        $('.form-step').eq(currentStep).removeClass('active');
-                        $('.step').eq(currentStep).removeClass('active');
-                        currentStep--;
-                        $('.form-step').eq(currentStep).addClass('active');
-                        $('.step').eq(currentStep).addClass('active');
-                        anime({
-                            targets: $('.form-step').eq(currentStep)[0],
-                            opacity: [0, 1],
-                            translateX: [-100, 0],
-                            duration: 300,
-                            easing: 'easeInOutQuad'
-                        });
+        // Utility Functions
+        function updateTranslations(lang) {
+            document.querySelectorAll('[data-translate]').forEach(el => {
+                const key = el.getAttribute('data-translate');
+                const keys = key.split('.');
+                let translation = translations[lang];
+                keys.forEach(k => translation = translation[k]);
+                if (el.tagName === 'A' && el.hasAttribute('href')) {
+                    const href = el.getAttribute('href');
+                    if (href.includes('reservations@ambururuwaterfalls.com') || href.includes('+254700123456')) {
+                        el.innerHTML = translation;
+                    } else {
+                        el.textContent = translation;
                     }
-                });
-            });
-
-            $('.room-option').click(function() {
-                $('.room-option').removeClass('selected');
-                $(this).addClass('selected');
-                bookingData.room = $(this).data('room');
-                bookingData.price = parseFloat($(this).data('price'));
-                updateSummary();
-            });
-
-            $('.ar-button').click(function() {
-                const room = $(this).data('room');
-                const arScene = `
-                    <a-scene embedded arjs>
-                        <a-box position="0 0 -5" rotation="0 45 0" color="${room === 'standard' ? '#00ff99' : '#00ccff'}" scale="2 2 2"></a-box>
-                        <a-camera></a-camera>
-                    </a-scene>
-                `;
-                $('body').append(`<div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1003;">${arScene}<button class="cta-button" style="position: absolute; top: 20px; right: 20px;">Close AR</button></div>`);
-                $('body').on('click', '.cta-button', function() {
-                    $(this).parent().remove();
-                });
-            });
-
-            $('.vr-button').click(function() {
-                const vrScene = `
-                    <a-scene vr-mode-ui="enabled: true">
-                        <a-sky color="#00ccff"></a-sky>
-                        <a-box position="0 1 -5" color="${bookingData.room === 'Standard Room' ? '#00ff99' : '#00ccff'}" scale="3 3 3"></a-box>
-                        <a-camera></a-camera>
-                    </a-scene>
-                `;
-                $('body').append(`<div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1003;">${vrScene}<button class="cta-button" style="position: absolute; top: 20px; right: 20px;">Exit VR</button></div>`);
-                $('body').on('click', '.cta-button', function() {
-                    $(this).parent().remove();
-                });
-            });
-
-            $('.save-progress').click(function() {
-                updateBookingData();
-                localStorage.setItem('bookingData', JSON.stringify(bookingData));
-                alert('Progress saved!');
-            });
-
-            $('#paypal-button, #stripe-button, #mpesa-button').click(function() {
-                if (!validateStep(2)) {
-                    alert('Please complete all steps.');
-                    return;
-                }
-                updateBookingData();
-                showConfirmation();
-                submitBooking(this.id.replace('-button', ''));
-            });
-
-            $('#crypto-button').click(async function() {
-                if (!validateStep(2)) {
-                    alert('Please complete all steps.');
-                    return;
-                }
-                updateBookingData();
-                if (window.ethereum) {
-                    const web3 = new Web3(window.ethereum);
-                    await window.ethereum.request({ method: 'eth_requestAccounts' });
-                    alert('Crypto payment initiated (mock).');
-                    showConfirmation();
-                    submitBooking('Ethereum');
                 } else {
-                    alert('MetaMask not detected. Install MetaMask to pay with Ethereum.');
+                    el.textContent = translation;
                 }
             });
+            updateSummary();
+        }
 
-            $('#modal-close, #modal-overlay').click(function() {
-                $('#confirmation-modal, #modal-overlay').hide();
-            });
+        function toggleDarkMode() {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
+            localStorage.setItem('theme', isDark ? 'light' : 'dark');
+            document.querySelector('.dark-mode-toggle i').className = isDark ? 'fas fa-moon' : 'fas fa-sun';
+        }
 
-            $('#currency-selector').change(function() {
-                bookingData.currency = $(this).val();
-                updateSummary();
-            });
+        function updateProgressBar() {
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const progress = (scrollTop / scrollHeight) * 100;
+            document.querySelector('.progress-bar').style.width = `${progress}%`;
+        }
 
-            $('#video-call').click(function() {
-                alert('Initiating video concierge (WebRTC setup required).');
-            });
+        function toggleMenu() {
+            const nav = document.querySelector('nav ul');
+            const toggle = document.querySelector('.menu-toggle');
+            const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+            nav.classList.toggle('active');
+            toggle.setAttribute('aria-expanded', !isExpanded);
+            toggle.querySelector('i').className = isExpanded ? 'fas fa-bars' : 'fas fa-times';
+        }
 
-            $('#ai-recommend').click(function() {
-                const recommendation = bookingData.adults > 2 ? 'Deluxe Room for extra space!' : 'Standard Room for cozy vibes!';
-                alert(`Grok suggests: ${recommendation}`);
-            });
-
-            // Sentiment Analysis
-            $('#requests').on('input', async function() {
-                const text = $(this).val();
-                if (text) {
-                    // Mock sentiment (replace with real TensorFlow.js model)
-                    $('#sentiment-feedback').text('We sense excitement in your request! 😊');
-                } else {
-                    $('#sentiment-feedback').text('');
-                }
-            });
-
-            // Mock X Feed
-            $('#x-posts').html(`
-                <div class="x-post"><p>🌿 Book your eco-luxe stay now! #Ambururu</p><span>May 31, 2025</span></div>
-                <div class="x-post"><p>10% off this week! 🏝️ #TravelKenya</p><span>May 30, 2025</span></div>
-            `);
-
-            // Load saved data
-            const savedData = localStorage.getItem('bookingData');
-            if (savedData) {
-                bookingData = JSON.parse(savedData);
-                $('#check-in').val(bookingData.checkIn);
-                $('#check-out').val(bookingData.checkOut);
-                $('#adults').val(bookingData.adults);
-                $('#children').val(bookingData.children);
-                $('.room-option[data-room="' + bookingData.room + '"]').addClass('selected');
-                $('#name').val(bookingData.name);
-                $('#email').val(bookingData.email);
-                $('#phone').val(bookingData.phone);
-                $('#country').val(bookingData.country);
-                $('#requests').val(bookingData.requests);
-                $('#currency-selector').val(bookingData.currency);
-                updateSummary();
+        // Cookie Consent
+        function showCookieConsent() {
+            if (!localStorage.getItem('cookiesAccepted')) {
+                document.querySelector('.cookie-consent').classList        // Cookie Consent (continued)
+        add('active');
             }
+        }
+        document.querySelector('#accept-cookies')?.addEventListener('click', () => {
+            localStorage.setItem('cookiesAccepted', 'true');
+            document.querySelector('.cookie-consent').classList.remove('active');
         });
 
-        function validateStep(step) {
-            if (step === 0) {
-                bookingData.checkIn = $('#check-in').val();
-                bookingData.checkOut = $('#check-out').val();
-                if (!bookingData.checkIn || !bookingData.checkOut) {
-                    alert('Please select dates.');
-                    return false;
-                }
-                const checkIn = new Date(bookingData.checkIn);
-                const checkOut = new Date(bookingData.checkOut);
-                const today = new Date('2025-05-31');
-                if (checkIn < today || checkOut <= checkIn) {
-                    alert('Invalid dates.');
-                    return false;
-                }
-                return true;
+        // Audio Control
+        const audio = document.querySelector('#background-audio');
+        function toggleAudio() {
+            if (audio.paused) {
+                audio.play().catch(e => console.error('Audio play failed:', e));
+                document.querySelector('.audio-control i').className = 'fas fa-volume-up';
+            } else {
+                audio.pause();
+                document.querySelector('.audio-control i').className = 'fas fa-volume-mute';
             }
-            if (step === 1 && !bookingData.room) {
-                alert('Please select a room.');
+        }
+
+        // Scroll to Top
+        function toggleScrollToTop() {
+            const btn = document.querySelector('.scroll-to-top');
+            if (window.scrollY > 300) {
+                btn.classList.add('visible');
+            } else {
+                btn.classList.remove('visible');
+            }
+        }
+
+        // Header Scroll Behavior
+        let lastScroll = 0;
+        function handleHeaderScroll() {
+            const header = document.querySelector('.sticky-header');
+            const currentScroll = window.scrollY;
+            if (currentScroll > lastScroll && currentScroll > 100) {
+                header.classList.add('hidden');
+            } else {
+                header.classList.remove('hidden');
+                header.classList.toggle('scrolled', currentScroll > 50);
+            }
+            lastScroll = currentScroll;
+        }
+
+        // Fetch dynamic currency rates
+        async function fetchCurrencyRates() {
+            try {
+                const fiatResponse = await fetch('https://api.exchangerate-api.com/v4/latest/USD');
+                const fiatData = await fiatResponse.json();
+                const cryptoResponse = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd');
+                const cryptoData = await cryptoResponse.json();
+                currencyRates = {
+                    USD: 1,
+                    KES: fiatData.rates.KES || 129,
+                    EUR: fiatData.rates.EUR || 0.95,
+                    ETH: cryptoData.ethereum ? (1 / cryptoData.ethereum.usd) : 0.00025
+                };
+                updateSummary();
+            } catch (error) {
+                console.warn('Failed to fetch currency rates. Using defaults.', error);
+            }
+        }
+
+        // Progress Bar Animation
+        function updateProgressBarSteps() {
+            const progress = (currentStep / 3) * 100;
+            document.querySelector('.progress-line').style.width = `${progress}%`;
+        }
+
+        // Date Validation
+        function isDateFullyBooked(checkIn, checkOut) {
+            const checkInDate = new Date(checkIn);
+            const checkOutDate = new Date(checkOut);
+            return fullyBookedDates.some(range => {
+                const start = new Date(range.start);
+                const end = new Date(range.end);
+                return (checkInDate <= end && checkOutDate >= start);
+            });
+        }
+
+        function validateDates(checkIn, checkOut) {
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            const checkInDate = new Date(checkIn);
+            const checkOutDate = new Date(checkOut);
+            const checkInMessage = document.querySelector('#check-in-message');
+            const checkOutMessage = document.querySelector('#check-out-message');
+
+            if (!checkIn || !checkOut) {
+                checkInMessage.textContent = translations[currentLang].booking.datesRequired || 'Please select dates.';
                 return false;
             }
-            if (step === 2) {
-                bookingData.name = $('#name').val();
-                bookingData.email = $('#email').val();
-                bookingData.phone = $('#phone').val();
-                bookingData.country = $('#country').val();
-                if (!bookingData.name || !bookingData.email || !bookingData.phone || !bookingData.country) {
-                    alert('Please fill all required fields.');
-                    return false;
-                }
-                if (!/\S+@\S+\.\S+/.test(bookingData.email)) {
-                    alert('Invalid email.');
-                    return false;
-                }
-                return true;
+
+            if (checkInDate < today) {
+                checkInMessage.textContent = translations[currentLang].booking.pastDateError || 'Check-in date cannot be in the past.';
+                return false;
+            }
+
+            if (checkOutDate <= checkInDate) {
+                checkOutMessage.textContent = translations[currentLang].booking.invalidCheckout || 'Check-out must be after check-in.';
+                return false;
+            }
+
+            if (isDateFullyBooked(checkIn, checkOut)) {
+                checkInMessage.textContent = translations[currentLang].booking.fullyBooked || 'Selected dates are fully booked.';
+                return false;
+            }
+
+            checkInMessage.textContent = '';
+            checkOutMessage.textContent = '';
+            return true;
+        }
+
+        // Form Validation Functions
+        function validateStep1() {
+            const checkIn = document.querySelector('#check-in').value;
+            const checkOut = document.querySelector('#check-out').value;
+            if (!validateDates(checkIn, checkOut)) return false;
+            bookingData.checkIn = checkIn;
+            bookingData.checkOut = checkOut;
+            bookingData.adults = parseInt(document.querySelector('#adults').value);
+            bookingData.children = parseInt(document.querySelector('#children').value);
+            return true;
+        }
+
+        function validateStep2() {
+            if (!bookingData.room) {
+                document.querySelector('#form-announcer').textContent = translations[currentLang].booking.selectRoom || 'Please select a room.';
+                return false;
             }
             return true;
         }
 
-        function updateBookingData() {
-            bookingData.adults = parseInt($('#adults').val());
-            bookingData.children = parseInt($('#children').val());
-            bookingData.requests = $('#requests').val();
+        function validateStep3() {
+            const name = document.querySelector('#name').value.trim();
+            const email = document.querySelector('#email').value.trim();
+            const phone = document.querySelector('#phone').value.trim();
+            const nameError = document.querySelector('#name-error');
+            const emailError = document.querySelector('#email-error');
+            const phoneError = document.querySelector('#phone-error');
+            let isValid = true;
+
+            if (name.length < 2) {
+                nameError.textContent = translations[currentLang].booking.nameError || 'Please enter a valid name.';
+                isValid = false;
+            } else {
+                nameError.textContent = '';
+            }
+
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                emailError.textContent = translations[currentLang].booking.emailError || 'Please enter a valid email.';
+                isValid = false;
+            } else {
+                emailError.textContent = '';
+            }
+
+            if (!/^\+?\d{10,15}$/.test(phone)) {
+                phoneError.textContent = translations[currentLang].booking.phoneError || 'Please enter a valid phone number.';
+                isValid = false;
+            } else {
+                phoneError.textContent = '';
+            }
+
+            if (isValid) {
+                bookingData.name = name;
+                bookingData.email = email;
+                bookingData.phone = phone;
+                bookingData.country = document.querySelector('#country').value;
+                bookingData.requests = document.querySelector('#requests').value;
+            }
+
+            return isValid;
         }
 
-        function updateSummary() {
-            if (bookingData.room) {
-                $('#summary-room').text(bookingData.room);
-                $('#summary-dates').text(`${bookingData.checkIn} to ${bookingData.checkOut}`);
-                $('#summary-guests').text(`${bookingData.adults} Adult${bookingData.adults > 1 ? 's' : ''}${bookingData.children > 0 ? `, ${bookingData.children} Child${bookingData.children > 1 ? 'ren' : ''}` : ''}`);
-                const nights = Math.ceil((new Date(bookingData.checkOut) - new Date(bookingData.checkIn)) / (1000 * 60 * 60 * 24));
-                const baseTotal = bookingData.price * nights;
-                const convertedTotal = (baseTotal * currencyRates[bookingData.currency]).toFixed(4);
-                $('#summary-total').text(`${convertedTotal} ${bookingData.currency}`);
+        // Form Navigation
+        function showStep(stepIndex) {
+            const steps = document.querySelectorAll('.form-step');
+            const progressSteps = document.querySelectorAll('.step');
+            const announcer = document.querySelector('#form-announcer');
+
+            steps[currentStep].classList.remove('active');
+            progressSteps[currentStep].classList.remove('active');
+
+            currentStep = stepIndex;
+
+            steps[currentStep].classList.add('active');
+            progressSteps[currentStep].classList.add('active');
+
+            updateProgressBarSteps();
+
+            // Focus on the first input of the new step for accessibility
+            const firstInput = steps[currentStep].querySelector('input, select, textarea');
+            if (firstInput) firstInput.focus();
+
+            // Announce the new step for screen readers
+            announcer.textContent = translations[currentLang].booking[`step${currentStep + 1}`] || `Step ${currentStep + 1} of 4`;
+        }
+
+        function handleNextStep(step) {
+            let isValid = false;
+            switch (parseInt(step)) {
+                case 1:
+                    isValid = validateStep1();
+                    break;
+                case 2:
+                    isValid = validateStep2();
+                    break;
+                case 3:
+                    isValid = validateStep3();
+                    break;
+                case 4:
+                    isValid = true; // Payment step validation handled separately
+                    break;
+            }
+
+            if (isValid) {
+                showStep(currentStep + 1);
             }
         }
 
-        function showConfirmation() {
-            const modalContent = `
-                <p><strong>Room:</strong> ${bookingData.room}</p>
-                <p><strong>Dates:</strong> ${bookingData.checkIn} to ${bookingData.checkOut}</p>
-                <p><strong>Guests:</strong> ${bookingData.adults} Adult${bookingData.adults > 1 ? 's' : ''}${bookingData.children > 0 ? `, ${bookingData.children} Child${bookingData.children > 1 ? 'ren' : ''}` : ''}</p>
-                <p><strong>Total:</strong> ${$('#summary-total').text()}</p>
-                <p><strong>Name:</strong> ${bookingData.name}</p>
-                <p><strong>Email:</strong> ${bookingData.email}</p>
-            `;
-            $('#modal-content').html(modalContent);
-            $('#confirmation-modal, #modal-overlay').show();
-            anime({
-                targets: '#confirmation-modal',
-                opacity: [0, 1],
-                scale: [0.8, 1],
-                duration: 500,
-                easing: 'easeInOutQuad'
-            });
-            confetti({ particleCount: 300, spread: 120 });
+        function handlePrevStep(step) {
+            showStep(currentStep - 1);
         }
 
-        function submitBooking(paymentMethod) {
-            $.ajax({
-                url: 'https://formspree.io/f/xzbxyklq', // REPLACE WITH YOUR ENDPOINT
-                method: 'POST',
-                data: { ...bookingData, payment_method: paymentMethod },
-                success: function() {
-                    localStorage.removeItem('bookingData');
-                    $('#booking-form')[0].reset();
-                    $('.room-option').removeClass('selected');
-                    currentStep = 0;
-                    $('.form-step').removeClass('active').eq(0).addClass('active');
-                    $('.step').removeClass('active').eq(0).addClass('active');
-                },
-                error: function() {
-                    alert('Submission failed. Check Formspree endpoint.');
+        // Room Selection
+        function handleRoomSelection() {
+            const roomOptions = document.querySelectorAll('.room-option');
+            const nextButton = document.querySelector('#step-2 .next-step');
+
+            roomOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    roomOptions.forEach(opt => opt.classList.remove('selected'));
+                    option.classList.add('selected');
+                    bookingData.room = option.getAttribute('data-room');
+                    bookingData.price = parseFloat(option.getAttribute('data-price'));
+                    nextButton.disabled = false;
+                });
+
+                option.addEventListener('keypress', e => {
+                    if (e.key === 'Enter') option.click();
+                });
+            });
+        }
+
+        // Calculate Seasonal Adjustment
+        function calculateSeasonalAdjustment(checkInDate) {
+            const month = new Date(checkInDate).getMonth() + 1;
+            if (seasonalRates.peak.months.includes(month)) {
+                return seasonalRates.peak.multiplier;
+            } else if (seasonalRates.offPeak.months.includes(month)) {
+                return seasonalRates.offPeak.multiplier;
+            }
+            return 1;
+        }
+
+        // Update Booking Summary
+        function updateSummary() {
+            if (!bookingData.checkIn || !bookingData.checkOut) return;
+
+            const checkInDate = new Date(bookingData.checkIn);
+            const checkOutDate = new Date(bookingData.checkOut);
+            const nights = (checkOutDate - checkInDate) / (1000 * 60 * 60 * 24);
+            const multiplier = calculateSeasonalAdjustment(bookingData.checkIn);
+            bookingData.subtotal = bookingData.price * nights * multiplier;
+            bookingData.tax = bookingData.subtotal * 0.1;
+            bookingData.total = bookingData.subtotal + bookingData.tax;
+
+            const currencyRate = currencyRates[bookingData.currency] || 1;
+            const formatCurrency = (amount) => {
+                if (bookingData.currency === 'ETH') {
+                    return `${(amount * currencyRate).toFixed(6)} ${bookingData.currency}`;
                 }
+                return `${(amount * currencyRate).toFixed(2)} ${bookingData.currency}`;
+            };
+
+            document.querySelector('#summary-room').textContent = bookingData.room || '-';
+            document.querySelector('#summary-dates').textContent = `${bookingData.checkIn} to ${bookingData.checkOut}`;
+            document.querySelector('#summary-guests').textContent = `${bookingData.adults} Adults, ${bookingData.children} Children`;
+            document.querySelector('#summary-seasonal').textContent = multiplier === 1 ? 'None' : `${((multiplier - 1) * 100).toFixed(0)}% ${multiplier > 1 ? 'Surcharge' : 'Discount'}`;
+            document.querySelector('#summary-subtotal').textContent = formatCurrency(bookingData.subtotal);
+            document.querySelector('#summary-tax').textContent = formatCurrency(bookingData.tax);
+            document.querySelector('#summary-total').textContent = formatCurrency(bookingData.total);
+        }
+
+        // Currency Selector
+        function handleCurrencyChange() {
+            const selector = document.querySelector('#currency-selector');
+            selector.addEventListener('change', () => {
+                bookingData.currency = selector.value;
+                updateSummary();
             });
         }
 
-        // PWA Service Worker
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/sw.js').then(() => console.log('Service Worker Registered'));
+        // Virtual Assistant Toggle
+        function toggleAssistant() {
+            const orb = document.querySelector('.assistant-orb');
+            orb.addEventListener('click', () => {
+                orb.classList.toggle('active');
+            });
+            orb.addEventListener('keypress', e => {
+                if (e.key === 'Enter') orb.click();
+            });
         }
-    </script>
-    <script>
-        // Service Worker (save as sw.js in project root)
-        /*
-        self.addEventListener('install', event => {
-            event.waitUntil(
-                caches.open('ambururu-v1').then(cache => {
-                    return cache.addAll([
-                        '/',
-                        '/booking.html',
-                        '/images/standard_room.jpg',
-                        '/images/deluxe_room.jpg'
-                    ]);
-                })
-            );
+
+        // Contact Form Toggle
+        function toggleContactForm() {
+            const popup = document.querySelector('.contact-popup');
+            const form = document.querySelector('.contact-form');
+            popup.addEventListener('click', () => {
+                form.classList.toggle('active');
+            });
+            popup.addEventListener('keypress', e => {
+                if (e.key === 'Enter') popup.click();
+            });
+        }
+
+        // AR/VR Functionality (Placeholder)
+        function initARVR() {
+            const arButtons = document.querySelectorAll('.ar-button');
+            const vrButtons = document.querySelectorAll('.vr-button');
+            const overlay = document.querySelector('#ar-vr-overlay');
+            const content = document.querySelector('#ar-vr-content');
+            const closeButton = document.querySelector('.ar-vr-close');
+
+            const showOverlay = (type, room) => {
+                overlay.classList.add('active');
+                content.innerHTML = `
+                    <a-scene embedded>
+                        <a-box position="0 1 -3" rotation="0 45 0" color="${type === 'ar' ? '#d4a017' : '#a81c07'}" animation="property: rotation; to: 0 405 0; loop: true; dur: 5000"></a-box>
+                        <a-text value="${type.toUpperCase()} View: ${room}" position="0 2.5 -3" color="#FFF"></a-text>
+                        <a-camera position="0 1.6 0"></a-camera>
+                    </a-scene>
+                `;
+            };
+
+            arButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    showOverlay('ar', btn.getAttribute('data-room'));
+                });
+            });
+
+            vrButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    showOverlay('vr', btn.getAttribute('data-room'));
+                });
+            });
+
+            closeButton.addEventListener('click', () => {
+                overlay.classList.remove('active');
+                content.innerHTML = '';
+            });
+        }
+
+        // Social Feed (Placeholder)
+        function loadSocialFeed() {
+            const postsContainer = document.querySelector('#x-posts');
+            const mockPosts = [
+                { content: 'Enjoying the serene views at Ambururu! 🌊 #EcoLuxury', date: '2025-06-01' },
+                { content: 'Our new eco-suites are now open! Book now. 🏡 #SustainableTravel', date: '2025-05-28' }
+            ];
+
+            mockPosts.forEach(post => {
+                const postElement = document.createElement('div');
+                postElement.classList.add('x-post');
+                postElement.innerHTML = `<p>${post.content}</p><span>${post.date}</span>`;
+                postsContainer.appendChild(postElement);
+            });
+
+            const feed = document.querySelector('.x-feed');
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        feed.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            observer.observe(feed);
+        }
+
+        // Confirmation Modal
+        function showConfirmationModal() {
+            const modal = document.querySelector('#confirmation-modal');
+            const overlay = document.querySelector('#modal-overlay');
+            const closeButton = document.querySelector('#modal-close');
+            const content = document.querySelector('#modal-content');
+
+            content.innerHTML = `
+                <p>${translations[currentLang].booking.summaryRoom} ${bookingData.room}</p>
+                <p>${translations[currentLang].booking.summaryDates} ${bookingData.checkIn} to ${bookingData.checkOut}</p>
+                <p>${translations[currentLang].booking.summaryGuests} ${bookingData.adults} Adults, ${bookingData.children} Children</p>
+                <p>${translations[currentLang].booking.summaryTotal} ${(bookingData.total * currencyRates[bookingData.currency]).toFixed(2)} ${bookingData.currency}</p>
+            `;
+
+            modal.style.display = 'block';
+            overlay.style.display = 'block';
+
+            closeButton.addEventListener('click', () => {
+                modal.style.display = 'none';
+                overlay.style.display = 'none';
+                confetti({
+                    particleCount: 100,
+                    spread: 70,
+                    origin: { y: 0.6 }
+                });
+            });
+        }
+
+        // Initialize Language
+        let currentLang = localStorage.getItem('language') || 'en';
+        document.querySelector('#language-select').value = currentLang;
+        updateTranslations(currentLang);
+
+        document.querySelector('#language-select').addEventListener('change', (e) => {
+            currentLang = e.target.value;
+            localStorage.setItem('language', currentLang);
+            updateTranslations(currentLang);
         });
-        self.addEventListener('fetch', event => {
-            event.respondWith(
-                caches.match(event.request).then(response => {
-                    return response || fetch(event.request);
-                })
-            );
+
+        // Initialize Theme
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        document.querySelector('.dark-mode-toggle i').className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+
+        // Event Listeners
+        window.addEventListener('scroll', () => {
+            updateProgressBar();
+            toggleScrollToTop();
+            handleHeaderScroll();
         });
-        */
+
+        document.querySelector('.scroll-to-top').addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        document.querySelector('.audio-control').addEventListener('click', toggleAudio);
+        document.querySelector('.dark-mode-toggle').addEventListener('click', toggleDarkMode);
+        document.querySelector('.menu-toggle').addEventListener('click', toggleMenu);
+
+        document.querySelectorAll('.next-step').forEach(btn => {
+            btn.addEventListener('click', () => handleNextStep(btn.getAttribute('data-step')));
+        });
+
+        document.querySelectorAll('.prev-step').forEach(btn => {
+            btn.addEventListener('click', () => handlePrevStep(btn.getAttribute('data-step')));
+        });
+
+        document.querySelectorAll('.save-progress').forEach(btn => {
+            btn.addEventListener('click', () => {
+                localStorage.setItem('bookingData', JSON.stringify(bookingData));
+                alert(translations[currentLang].booking.progressSaved || 'Progress saved!');
+            });
+        });
+
+        document.querySelectorAll('.payment-button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                showConfirmationModal();
+            });
+        });
+
+        // Initialize Functions
+        fetchCurrencyRates();
+        handleRoomSelection();
+        handleCurrencyChange();
+        toggleAssistant();
+        toggleContactForm();
+        initARVR();
+        loadSocialFeed();
+        showCookieConsent();
+
+        // Load Saved Progress
+        const savedBookingData = localStorage.getItem('bookingData');
+        if (savedBookingData) {
+            bookingData = JSON.parse(savedBookingData);
+            updateSummary();
+        }
     </script>
 </body>
 </html>

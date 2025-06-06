@@ -2,513 +2,970 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accommodations - Ambururu Waterfalls & Resort</title>
-    <meta name="description" content="Discover eco-luxury accommodations at Ambururu Waterfalls & Resort in Kakamega, Kenya, with stunning views and refined amenities.">
-    <meta name="keywords" content="Ambururu Waterfalls, Kakamega, Kenya, accommodations, eco-luxury, resort, hotels">
-    <link rel="preload" href="images/accommodations-hero.jpg" as="image">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Playfair+Display:wght@700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
-    <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet">
-    <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-    <style>
-        /* General Styles (from index.html) */
-        body {
-            font-family: 'Roboto', sans-serif;
-            color: #ffffff;
-            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
-            margin: 0;
-            overflow-x: hidden;
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Accommodations - Ambururu Waterfalls & Resort | Siaya, Kenya</title>
+    <meta name="description" content="Experience eco-luxury accommodations at Ambururu Waterfalls & Resort in Siaya, Kenya, blending Luo heritage with sustainable elegance.">
+    <meta name="keywords" content="Ambururu Waterfalls, Siaya, Kenya, eco-luxury, resort, Luo heritage, sustainable travel">
+    <meta name="author" content="Ambururu Waterfalls & Resort">
+    <meta name="robots" content="index, follow">
+    <!-- Open Graph -->
+    <meta property="og:title" content="Accommodations at Ambururu Waterfalls & Resort">
+    <meta property="og:description" content="Discover sustainable suites in Siaya’s Yala Valley, inspired by Luo culture.">
+    <meta property="og:image" content="images/accommodations-hero.jpg">
+    <meta property="og:url" content="https://www.ambururuwaterfalls.com/accommodations.html">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <!-- Schema Markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Resort",
+        "name": "Ambururu Waterfalls & Resort",
+        "description": "Eco-luxury accommodations in Siaya, Kenya, with sustainable design and Luo heritage.",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Musanda, Siaya",
+            "addressRegion": "Siaya County",
+            "addressCountry": "KE",
+            "postalCode": "40600"
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": -0.062,
+            "longitude": 34.267
+        },
+        "accommodation": [
+            {
+                "@type": "HotelRoom",
+                "name": "Standard Room",
+                "description": "Cozy elegance for solo travelers or couples with eco-friendly design.",
+                "priceRange": "$100/night",
+                "amenityFeature": ["WiFi", "Queen Bed", "Coffee Maker"]
+            },
+            {
+                "@type": "HotelRoom",
+                "name": "Deluxe Suite",
+                "description": "Spacious luxury for groups with sustainable amenities.",
+                "priceRange": "$150/night",
+                "amenityFeature": ["WiFi", "King Bed", "Jacuzzi", "Smart TV"]
+            }
+        ],
+        "url": "https://www.ambururuwaterfalls.com/accommodations.html",
+        "telephone": "+254-721-202-551",
+        "email": "reservations@ambururuwaterfalls.com",
+        "image": "images/accommodations-hero.jpg",
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.9",
+            "reviewCount": "320"
         }
-
-        /* Header (from index.html) */
+    }
+    </script>
+    <!-- Preload Critical Assets -->
+    <link rel="preload" href="images/14.jpg" as="image" fetchpriority="high">
+    <link rel="preload" href="videos/A_breathtaking_view_of_Earth_rotating_in_the_vastn_6c2edb5d-dd81-49a8-a330-5c2664eb2f8a.webm" as="video" fetchpriority="high">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://api.mapbox.com" crossorigin>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Lora:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous">
+    <!-- Mapbox -->
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.css" rel="stylesheet">
+    <!-- Swiper -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper@10/swiper-bundle.min.css">
+    <style>
+        :root {
+            --primary: #1a3c34; /* Jade green */
+            --secondary: #f5e6cc; /* Ivory */
+            --accent: #d4a017; /* Gold */
+            --dark: #0a1a2e; /* Midnight blue */
+            --light: #f8f1e9; /* Soft cream */
+            --luo-accent: #8b1e3f; /* Luo-inspired red */
+            --shadow: rgba(0, 0, 0, 0.3);
+        }
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 120px;
+        }
+        body {
+            font-family: 'Lora', serif;
+            color: var(--secondary);
+            background: var(--dark);
+            line-height: 1.8;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Cinzel Decorative', serif;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        /* Header */
         .sticky-header {
             position: fixed;
             top: 0;
             width: 100%;
             z-index: 1000;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(10px);
-            padding: 1rem 0;
-            box-shadow: 0 2px 20px rgba(0, 255, 153, 0.2);
+            background: rgba(10, 26, 46, 0.95);
+            backdrop-filter: blur(12px);
+            padding: 1.5rem 0;
+            box-shadow: 0 4px 16px var(--shadow);
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+        .sticky-header.scrolled {
+            background: rgba(10, 26, 46, 1);
+        }
+        .sticky-header.hidden {
+            transform: translateY(-100%);
         }
         .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
+            padding: 0 2rem;
         }
         .brand {
             display: flex;
             align-items: center;
         }
         .logo {
-            width: 80px;
-            height: 80px;
-            margin-right: 1rem;
-            filter: drop-shadow(0 0 10px rgba(0, 255, 153, 0.5));
-            transition: transform 0.5s;
+            width: 90px;
+            height: 90px;
+            transition: transform 0.3s ease;
         }
         .logo:hover {
-            transform: rotate(360deg);
+            transform: scale(1.05);
         }
         .brand h1 {
-            font-family: 'Orbitron', sans-serif;
-            color: #00ff99;
-            font-size: 1.8rem;
-            margin: 0;
-            text-shadow: 0 0 10px rgba(0, 255, 153, 0.7);
+            font-size: 2.2rem;
+            color: var(--accent);
+            margin: 0 0 0 1rem;
+            text-shadow: 0 2px 4px var(--shadow);
         }
         nav ul {
             display: flex;
             list-style: none;
-            padding: 0;
-            margin: 0;
         }
         nav ul li {
-            margin-left: 2rem;
+            margin-left: 2.5rem;
+            position: relative;
         }
         nav ul li a {
-            color: #00ff99;
-            text-decoration: none;
-            font-weight: 500;
-            font-family: 'Orbitron', sans-serif;
-            transition: all 0.3s;
-            text-shadow: 0 0 5px rgba(0, 255, 153, 0.5);
+            font-size: 1.1rem;
+            color: var(--secondary);
+            transition: color 0.3s, border-bottom 0.3s;
         }
         nav ul li a:hover,
         nav ul li a.active {
-            color: #ffffff;
-            text-shadow: 0 0 15px rgba(0, 255, 153, 1);
+            color: var(--accent);
+            border-bottom: 2px solid var(--accent);
+        }
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: rgba(10, 26, 46, 0.95);
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 4px 12px var(--shadow);
+            min-width: 220px;
+            opacity: 0;
+            transform: translateY(5px);
+            transition: opacity 0.3s, transform 0.3s;
+        }
+        .dropdown:hover .dropdown-menu {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .dropdown-menu li {
+            margin: 0;
+        }
+        .dropdown-menu li a {
+            font-size: 1rem;
+            padding: var(--secondary);
+            display: block;
+        }
+        .dropdown-menu li a:hover {
+            color: var(--primary);
+            background-color: var(--accent);
         }
         .menu-toggle {
             display: none;
             background: none;
             border: none;
-            color: #00ff99;
-            font-size: 1.5rem;
+            color: var(--accent);
+            font-size: 1.8rem;
             cursor: pointer;
         }
-
-        /* Hero Section (from index.html) */
+        .language-toggle {
+            margin-left: 2rem;
+            position: relative;
+        }
+        .language-toggle select {
+            background: transparent;
+            border: none;
+            color: var(--secondary);
+            font-size: 1rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            appearance: none;
+        }
+        .language-toggle select:focus {
+            outline: none;
+        }
+        .language-toggle::after {
+            content: '\f078';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: var(--accent);
+            position: absolute;
+            right: 0.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        /* Hero Section */
         .hero {
             position: relative;
-            height: 100vh;
+            height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
             overflow: hidden;
+            background: linear-gradient(180deg, rgba(10, 26, 46, 0.7), rgba(10, 26, 46, 0.9)), url('images/15.jpg') no-repeat center/cover;
         }
-        #hero-canvas {
+        .hero-video {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+            object-fit: cover;
             z-index: 1;
+            filter: brightness(0.6);
         }
         .hero-overlay {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
+            position: relative;
             z-index: 2;
+            max-width: 1100px;
+            padding: 0 2rem;
         }
         .hero-overlay h2 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 5rem;
-            color: #00ff99;
-            text-shadow: 0 0 20px rgba(0, 255, 153, 0.8);
-            animation: hologram 2s infinite alternate;
+            font-size: 5.5rem;
+            color: var(--secondary);
+            letter-spacing: 4px;
+            margin: 0 0 1.5rem;
+            line-height: 1.1;
+            text-shadow: 0 4px 8px var(--shadow);
         }
         .hero-overlay p {
-            font-size: 1.5rem;
-            color: #ffffff;
-            margin: 1rem 0;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            font-size: 1.6rem;
+            color: var(--light);
+            margin: 0 0 2.5rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 400;
         }
         .cta-button {
-            background: linear-gradient(45deg, #00ff99, #00ccff);
-            color: #000000;
-            padding: 1rem 2rem;
-            text-decoration: none;
+            background: var(--accent);
+            color: var(--dark);
+            padding: 1.2rem 3rem;
             border-radius: 50px;
-            font-family: 'Orbitron', sans-serif;
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 1.3rem;
             font-weight: 700;
-            transition: all 0.3s;
-            box-shadow: 0 0 20px rgba(0, 255, 153, 0.5);
+            letter-spacing: 2px;
+            transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 12px rgba(212, 160, 23, 0.4);
         }
         .cta-button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 30px rgba(0, 255, 153, 1);
+            background: var(--luo-accent);
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgba(139, 30, 63, 0.5);
         }
         .secondary {
             background: transparent;
-            border: 2px solid #00ff99;
-            margin-left: 1rem;
-            color: #00ff99;
+            border: 3px solid var(--accent);
+            color: var(--accent);
+            margin-left: 1.5rem;
         }
         .secondary:hover {
-            background: #00ff99;
-            color: #000000;
+            background: var(--accent);
+            color: var(--dark);
+            box-shadow: 0 6px 16px rgba(212, 160, 23, 0.5);
         }
-        @keyframes hologram {
-            0% { opacity: 0.8; transform: translateY(0); }
-            100% { opacity: 1; transform: translateY(-10px); }
-        }
-
-        /* Virtual Assistant (from index.html) */
-        .virtual-assistant {
+        /* Audio Control */
+        .audio-control {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            top: 20px;
+            right: 80px;
             z-index: 1000;
+            background: rgba(10, 26, 46, 0.9);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 2px 8px var(--shadow);
         }
-        .assistant-orb {
+        .audio-control:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+        .audio-control i {
+            color: var(--accent);
+            font-size: 1.4rem;
+        }
+        /* Contact Popup */
+        .contact-popup {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            background: var(--accent);
+            border-radius: 50%;
             width: 60px;
             height: 60px;
-            background: radial-gradient(circle, #00ff99, #00ccff);
-            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
-            box-shadow: 0 0 20px rgba(0, 255, 153, 0.7);
-            animation: pulse 2s infinite;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 12px rgba(212, 160, 23, 0.4);
         }
-        .assistant-tooltip {
+        .contact-popup:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(212, 160, 23, 0.5);
+        }
+        .contact-popup i {
+            color: var(--dark);
+            font-size: 1.8rem;
+        }
+        .contact-form {
             display: none;
-            position: absolute;
-            bottom: 80px;
-            right: 0;
-            background: rgba(0, 0, 0, 0.8);
-            color: #00ff99;
-            padding: 1rem;
-            border-radius: 10px;
-            width: 250px;
-            text-align: center;
-            box-shadow: 0 0 15px rgba(0, 255, 153, 0.5);
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            background: var(--light);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 6px 16px var(--shadow);
+            max-width: 320px;
+            z-index: 1000;
         }
-        .assistant-orb:hover .assistant-tooltip {
+        .contact-form.active {
             display: block;
         }
-        @keyframes pulse {
-            0% { transform: scale(1); box-shadow: 0 0 20px rgba(0, 255, 153, 0.7); }
-            50% { transform: scale(1.1); box-shadow: 0 0 30px rgba(0, 255, 153, 1); }
-            100% { transform: scale(1); box-shadow: 0 0 20px rgba(0, 255, 153, 0.7); }
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            border: 1px solid var(--dark);
+            border-radius: 8px;
+            font-family: 'Lora', serif;
+            font-size: 1rem;
         }
-
-        /* Accommodations Section (styled like index.html's features) */
-        .accommodations {
-            padding: 5rem 0;
+        .contact-form button {
+            background: var(--accent);
+            color: var(--dark);
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+        .contact-form button:hover {
+            background: var(--luo-accent);
+        }
+        /* Room Filters */
+        .room-filters {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 1.5rem 2rem;
             text-align: center;
-            position: relative;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            box-shadow: 0 4px 12px var(--shadow);
         }
-        #particles-js {
+        .room-filters button {
+            background: transparent;
+            border: 3px solid var(--accent);
+            color: var(--accent);
+            padding: 1rem 2rem;
+            margin: 0.5rem;
+            border-radius: 50px;
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+        }
+        .room-filters button.active,
+        .room-filters button:hover {
+            background: var(--accent);
+            color: var(--dark);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(212, 160, 23, 0.4);
+        }
+        /* Accommodations Section */
+        .accommodations {
+            padding: 8rem 0;
+            text-align: center;
+            background: linear-gradient(180deg, var(--dark) 0%, #12263a 100%);
+        }
+        .accommodations h3 {
+            font-size: 4rem;
+            color: var(--accent);
+            margin: 0 0 1.5rem;
+            text-shadow: 0 2px 8px var(--shadow);
+        }
+        .accommodations p {
+            font-size: 1.4rem;
+            color: var(--light);
+            margin: 0 0 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 400;
+        }
+        .rooms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        .room-card {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 2.5rem;
+            border-radius: 16px;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 6px 16px var(--shadow);
+            transition: transform 0.4s, box-shadow 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+        .room-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 24px rgba(212, 160, 23, 0.3);
+        }
+        .room-card::before {
+            content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
-            z-index: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--accent), var(--luo-accent));
+            opacity: 0;
+            transition: opacity 0.3s;
         }
-        .accommodations h3 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 3rem;
-            color: #00ff99;
-            text-shadow: 0 0 15px rgba(0, 255, 153, 0.7);
-            margin: 0 0 2rem;
-            z-index: 1;
-            position: relative;
-        }
-        .rooms-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-            position: relative;
-            z-index: 1;
-        }
-        .room-card {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 2rem;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 0 20px rgba(0, 255, 153, 0.2);
-            transition: transform 0.5s, box-shadow 0.5s;
-        }
-        .room-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 0 30px rgba(0, 255, 153, 0.5);
+        .room-card:hover::before {
+            opacity: 1;
         }
         .room-card img {
             width: 100%;
-            height: 200px;
+            height: 240px;
             object-fit: cover;
-            border-radius: 10px;
-            margin-bottom: 1rem;
-            filter: brightness(0.9);
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            transition: transform 0.4s;
+        }
+        .room-card:hover img {
+            transform: scale(1.05);
         }
         .room-card h4 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.8rem;
-            color: #00ff99;
-            margin: 0 0 0.5rem;
-            text-shadow: 0 0 10px rgba(0, 255, 153, 0.5);
+            font-size: 2rem;
+            color: var(--accent);
+            margin: 0 0 0.8rem;
+            text-shadow: 0 2px 4px var(--shadow);
         }
         .room-card p {
-            color: #ffffff;
-            margin: 0 0 1rem;
+            font-size: 1.1rem;
+            color: var(--light);
+            margin: 0 0 1.2rem;
         }
         .room-card .price {
             font-weight: 700;
-            color: #00ccff;
-        }
-        .room-overlay {
-            display: none; /* Hide original overlay, use quick-view modal instead */
+            font-size: 1.3rem;
+            color: var(--luo-accent);
         }
         .badge {
-            display: block;
-            background: #00ff99;
-            color: #000000;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            margin-bottom: 1rem;
-            font-family: 'Orbitron', sans-serif;
+            display: inline-block;
+            background: var(--accent);
+            color: var(--dark);
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            margin-bottom: 1.2rem;
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
         }
         .amenities {
             list-style: none;
             padding: 0;
-            margin: 0 0 1rem;
+            margin: 0 0 1.5rem;
             text-align: left;
-            color: #ffffff;
+            color: var(--light);
         }
         .amenities li {
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.8rem;
             position: relative;
-            padding-left: 1.5rem;
+            padding-left: 2rem;
+            font-size: 1rem;
         }
-        .amenities li:before {
+        .amenities li::before {
             content: '\f058';
             font-family: 'Font Awesome 6 Free';
             font-weight: 900;
-            color: #00ff99;
+            color: var(--accent);
             position: absolute;
             left: 0;
-        }
-        .quick-view {
-            background: transparent;
-            border: 2px solid #00ff99;
-            color: #00ff99;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            cursor: pointer;
-            font-family: 'Orbitron', sans-serif;
-        }
-        .quick-view:hover {
-            background: #00ff99;
-            color: #000000;
+            font-size: 1.2rem;
         }
         .room-actions {
             display: flex;
-            gap: 1rem;
+            gap: 1.2rem;
             justify-content: center;
+            flex-wrap: wrap;
+        }
+        .quick-view {
+            background: transparent;
+            border: 3px solid var(--accent);
+            color: var(--accent);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 1rem;
+            transition: background 0.3s, color 0.3s, transform 0.3s;
+        }
+        .quick-view:hover {
+            background: var(--accent);
+            color: var(--dark);
+            transform: translateY(-3px);
         }
         .virtual-tour {
-            color: #00ccff;
-            text-decoration: none;
-            font-family: 'Orbitron', sans-serif;
+            color: var(--accent);
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 1rem;
+            transition: color 0.3s, text-shadow 0.3s;
         }
         .virtual-tour:hover {
-            text-shadow: 0 0 10px rgba(0, 204, 255, 0.7);
+            color: var(--luo-accent);
+            text-shadow: 0 2px 8px rgba(139, 30, 63, 0.5);
         }
-
-        /* Nearby Hotels Section (styled like index.html) */
-        .nearby-hotels {
-            padding: 5rem 0;
-            text-align: center;
-            background: rgba(0, 0, 0, 0.3);
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal.active {
+            display: flex;
+        }
+        .modal-content {
+            background: var(--light);
+            padding: 3rem;
+            border-radius: 16px;
+            max-width: 900px;
+            width: 90%;
+            color: var(--dark);
             position: relative;
+            box-shadow: 0 8px 24px var(--shadow);
+            animation: fadeIn 0.5s ease;
+        }
+        .modal-content iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+            border-radius: 12px;
+        }
+        .close-modal {
+            background: var(--accent);
+            color: var(--dark);
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 1.5rem;
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+        .close-modal:hover {
+            background: var(--luo-accent);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        /* Nearby Hotels Section */
+        .nearby-hotels {
+            padding: 8rem 0;
+            text-align: center;
+            background: var(--secondary);
+            color: var(--dark);
         }
         .nearby-hotels h3 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 3rem;
-            color: #00ff99;
-            text-shadow: 0 0 15px rgba(0, 255, 153, 0.7);
-            margin: 0 0 2rem;
+            font-size: 4rem;
+            color: var(--primary);
+            margin: 0 0 1.5rem;
+            text-shadow: 0 2px 8px var(--shadow);
         }
         .hotel-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 3rem;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 0 1.5rem;
-            position: relative;
-            z-index: 1;
+            padding: 0 2rem;
         }
         .hotel-card {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 2rem;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 0 20px rgba(0, 255, 153, 0.2);
-            transition: transform 0.5s, box-shadow 0.5s;
+            background: var(--light);
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 6px 16px var(--shadow);
+            transition: transform 0.4s, box-shadow 0.4s;
         }
         .hotel-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 0 30px rgba(0, 255, 153, 0.5);
+            box-shadow: 0 8px 24px var(--shadow);
         }
         .hotel-card h4 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.8rem;
-            color: #00ff99;
-            margin: 0 0 0.5rem;
+            font-size: 2rem;
+            color: var(--primary);
+            margin: 0 0 0.8rem;
         }
         .hotel-card p {
-            color: #ffffff;
-            margin: 0.5rem 0;
+            font-size: 1.1rem;
+            color: var(--dark);
+            margin: 0.8rem 0;
         }
-
-        /* Booking Form (styled like index.html) */
-        .booking-form {
-            padding: 5rem 0;
+        /* Testimonials Section */
+        .testimonials {
+            padding: 8rem 0;
             text-align: center;
-            background: linear-gradient(45deg, #00ff99, #00ccff);
-            position: relative;
-            box-shadow: 0 0 50px rgba(0, 255, 153, 0.5);
+            background: var(--dark);
+        }
+        .testimonials h3 {
+            font-size: 4rem;
+            color: var(--accent);
+            margin: 0 0 3rem;
+            text-shadow: 0 2px 8px var(--shadow);
+        }
+        .swiper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        .swiper-slide {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 2.5rem;
+            border-radius: 16px;
+            backdrop-filter: blur(8px);
+            text-align: left;
+            box-shadow: 0 6px 16px var(--shadow);
+        }
+        .swiper-slide p {
+            font-size: 1.2rem;
+            font-style: italic;
+            color: var(--light);
+            margin: 0 0 1.8rem;
+        }
+        .swiper-slide .guest {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+        }
+        .swiper-slide .guest img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 3px solid var(--accent);
+        }
+        .swiper-slide .guest span {
+            font-size: 1.1rem;
+            color: var(--secondary);
+        }
+        .swiper-pagination-bullet {
+            background: var(--accent);
+            opacity: 0.7;
+            width: 12px;
+            height: 12px;
+        }
+        .swiper-pagination-bullet-active {
+            opacity: 1;
+        }
+        .swiper-button-next,
+        .swiper-button-prev {
+            color: var(--accent);
+            background: rgba(10, 26, 46, 0.5);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            transition: background 0.3s;
+        }
+        .swiper-button-next:hover,
+        .swiper-button-prev:hover {
+            background: rgba(10, 26, 46, 0.8);
+        }
+        /* Booking Form */
+        .booking-form {
+            padding: 8rem 0;
+            text-align: center;
+            background: linear-gradient(45deg, var(--primary), #2a5c4e);
+            box-shadow: 0 8px 24px var(--shadow);
         }
         .booking-form h3 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 3rem;
-            color: #000000;
-            margin: 0 0 2rem;
+            font-size: 4rem;
+            color: var(--secondary);
+            margin: 0 0 1.5rem;
+            text-shadow: 0 2px 8px var(--shadow);
+        }
+        .booking-form p {
+            font-size: 1.4rem;
+            color: var(--light);
+            margin: 0 0 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
         .booking-form form {
-            max-width: 600px;
+            max-width: 800px;
             margin: 0 auto;
             display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            padding: 0 1.5rem;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 3rem;
+            border-radius: 16px;
+            box-shadow: 0 6px 16px var(--shadow);
         }
-        .booking-form input {
-            padding: 0.75rem;
+        .booking-form input,
+        .booking-form select {
+            padding: 1rem;
             border: none;
-            border-radius: 5px;
-            font-size: 1rem;
-            background: rgba(255, 255, 255, 0.1);
-            color: #ffffff;
+            border-radius: 12px;
+            width: 240px;
+            font-size: 1.1rem;
+            background: var(--light);
+            color: var(--dark);
+            transition: box-shadow 0.3s;
+        }
+        .booking-form input:focus,
+        .booking-form select:focus {
+            outline: none;
+            box-shadow: 0 0 8px rgba(212, 160, 23, 0.5);
         }
         .booking-form button {
-            background: linear-gradient(45deg, #00ff99, #00ccff);
-            color: #000000;
-            padding: 0.75rem 2rem;
+            background: var(--accent);
+            color: var(--dark);
+            padding: 1rem 3rem;
             border: none;
-            border-radius: 5px;
+            border-radius: 50px;
             cursor: pointer;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
-            box-shadow: 0 0 20px rgba(0, 255, 153, 0.5);
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 1.2rem;
+            transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 12px rgba(212, 160, 23, 0.4);
         }
         .booking-form button:hover {
-            box-shadow: 0 0 30px rgba(0, 255, 153, 1);
+            background: var(--luo-accent);
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgba(139, 30, 63, 0.5);
         }
-
-        /* Map Section (from index.html) */
+        #booking-feedback {
+            margin-top: 1.5rem;
+            font-size: 1.2rem;
+            color: var(--light);
+        }
+        .error {
+            color: #ff4d4d;
+        }
+        .success {
+            color: var(--accent);
+        }
+        /* Map Section */
         .map {
-            padding: 5rem 0;
+            padding: 8rem 0;
             text-align: center;
+            background: var(--dark);
         }
         .map h3 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 3rem;
-            color: #00ff99;
-            text-shadow: 0 0 15px rgba(0, 255, 153, 0.7);
+            font-size: 4rem;
+            color: var(--accent);
             margin: 0 0 2rem;
+            text-shadow: 0 2px 8px var(--shadow);
         }
         #map {
             width: 100%;
-            height: 500px;
-            border-radius: 15px;
-            box-shadow: 0 0 30px rgba(0, 255, 153, 0.3);
+            height: 600px;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px var(--shadow);
         }
         .map-description {
-            margin-top: 1rem;
-            font-size: 1.2rem;
-            color: #ffffff;
+            font-size: 1.3rem;
+            color: var(--light);
+            margin-top: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
-
-        /* Footer (from index.html) */
+        .map-description a {
+            color: var(--accent);
+            transition: color 0.3s;
+        }
+        .map-description a:hover {
+            color: var(--luo-accent);
+        }
+        /* Footer */
         footer {
-            background: rgba(0, 0, 0, 0.8);
-            color: #ffffff;
-            padding: 3rem 0;
+            background: var(--dark);
+            color: var(--light);
+            padding: 6rem 0;
             text-align: center;
+            box-shadow: 0 -4px 12px var(--shadow);
         }
         .footer-container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 0 1.5rem;
+            padding: 0 2rem;
+        }
+        .footer-logo {
+            width: 120px;
+            margin-bottom: 2rem;
+            transition: transform 0.3s;
+        }
+        .footer-logo:hover {
+            transform: scale(1.05);
+        }
+        .social-links {
+            margin: 2.5rem 0;
         }
         .social-links a {
-            color: #00ff99;
-            margin: 0 1.5rem;
-            font-size: 1.8rem;
-            transition: all 0.3s;
+            color: var(--accent);
+            margin: 0 2rem;
+            font-size: 2rem;
+            transition: color 0.3s, transform 0.3s;
         }
         .social-links a:hover {
-            color: #ffffff;
-            text-shadow: 0 0 15px rgba(0, 255, 153, 1);
+            color: var(--luo-accent);
+            transform: scale(1.2);
         }
         .newsletter h4 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2rem;
-            color: #00ff99;
-            margin: 0 0 1.5rem;
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin: 0 0 2rem;
+            text-shadow: 0 2px 4px var(--shadow);
         }
         .newsletter form {
             display: flex;
             justify-content: center;
             gap: 1.5rem;
+            max-width: 700px;
+            margin: 0 auto;
         }
         .newsletter input {
-            padding: 0.75rem;
+            padding: 1rem;
             border: none;
-            border-radius: 5px;
-            width: 320px;
-            font-size: 1rem;
-            background: rgba(255, 255, 255, 0.1);
-            color: #ffffff;
+            border-radius: 12px;
+            width: 350px;
+            font-size: 1.1rem;
+            background: var(--light);
+            color: var(--dark);
         }
         .newsletter button {
-            background: linear-gradient(45deg, #00ff99, #00ccff);
-            color: #000000;
-            padding: 0.75rem 2rem;
+            background: var(--accent);
+            color: var(--dark);
+            padding: 1rem 2rem;
             border: none;
-            border-radius: 5px;
+            border-radius: 12px;
             cursor: pointer;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
-            box-shadow: 0 0 20px rgba(0, 255, 153, 0.5);
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 1.1rem;
+            transition: background 0.3s, transform 0.3s;
         }
         .newsletter button:hover {
-            box-shadow: 0 0 30px rgba(0, 255, 153, 1);
+            background: var(--luo-accent);
+            transform: translateY(-3px);
         }
-
-        /* Responsive Design (from index.html) */
-        @media (max-width: 768px) {
-            .header-container {
-                flex-wrap: wrap;
+        .footer-links {
+            margin-top: 2.5rem;
+        }
+        .footer-links a {
+            color: var(--light);
+            margin: 0 1.5rem;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+        .footer-certifications {
+            margin-top: 3rem;
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+        }
+        .footer-certifications img {
+            width: 100px;
+            height: auto;
+            transition: transform 0.3s;
+        }
+        .footer-certifications img:hover {
+            transform: scale(1.1);
+        }
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .hero-overlay h2 {
+                font-size: 4.5rem;
             }
+            .rooms-grid,
+            .hotel-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+        }
+        @media (max-width: 768px) {
             nav ul {
                 display: none;
                 flex-direction: column;
                 width: 100%;
-                text-align: center;
+                background: rgba(10, 26, 46, 0.95);
+                padding: 2rem 0;
+                position: absolute;
+                top: 100%;
+                left: 0;
             }
             nav ul.active {
                 display: flex;
@@ -516,15 +973,45 @@
             nav ul li {
                 margin: 1rem 0;
             }
+            .dropdown-menu {
+                position: static;
+                background: transparent;
+                box-shadow: none;
+                padding: 1rem 0;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .language-toggle {
+                margin-left: 1rem;
+            }
             .hero-overlay h2 {
-                font-size: 3rem;
+                font-size: 3.5rem;
             }
             .hero-overlay p {
-                font-size: 1.2rem;
+                font-size: 1.3rem;
             }
-            .rooms-grid,
-            .hotel-grid {
-                grid-template-columns: 1fr;
+            .cta-button {
+                font-size: 1.1rem;
+                padding: 1rem 2rem;
+            }
+            .accommodations,
+            .nearby-hotels,
+            .testimonials,
+            .booking-form,
+            .map {
+                padding: 5rem 1.5rem;
+            }
+            .accommodations h3,
+            .nearby-hotels h3,
+            .testimonials h3,
+            .booking-form h3,
+            .map h3 {
+                font-size: 3rem;
+            }
+            .booking-form input,
+            .booking-form select {
+                width: 100%;
             }
             .newsletter form {
                 flex-direction: column;
@@ -534,73 +1021,133 @@
                 width: 100%;
                 max-width: 300px;
             }
-            .assistant-tooltip {
-                width: 200px;
+            .audio-control {
+                right: 20px;
+                top: 15px;
+            }
+            .contact-popup {
+                right: 20px;
+                bottom: 20px;
+            }
+            .contact-form {
+                right: 20px;
+                bottom: 80px;
+                max-width: 280px;
+            }
+        }
+        @media (max-width: 480px) {
+            .hero-overlay h2 {
+                font-size: 2.8rem;
+            }
+            .hero-overlay p {
+                font-size: 1.1rem;
+            }
+            .accommodations h3,
+            .nearby-hotels h3,
+            .testimonials h3,
+            .booking-form h3,
+            .map h3 {
+                font-size: 2.5rem;
+            }
+            .room-card img {
+                height: 200px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header (from index.html, removed dropdowns and Book Now CTA) -->
+    <!-- Header -->
     <header class="sticky-header" role="banner">
         <div class="header-container">
             <div class="brand">
-                <img src="logo/B2.jpg" alt="Ambururu Waterfalls & Resort Logo" class="logo" width="80" height="80" onerror="this.src='https://via.placeholder.com/80?text=Logo';">
+                <img src="logo/B2.jpg" alt="Ambururu Waterfall Resort Logo" class="logo" width="90" height="90" loading="eager" onerror="this.src='https://via.placeholder.com/90?text=Logo';">
                 <h1>Ambururu Waterfalls</h1>
             </div>
             <nav id="main-nav" aria-label="Main navigation">
                 <ul>
                     <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About</a></li>
+                    <li class="dropdown">
+                        <a href="about.html" aria-haspopup="true">About <i class="fas fa-caret-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="about.html#heritage">Luo Heritage</a></li>
+                            <li><a href="about.html#founder">Our Founder</a></li>
+                            <li><a href="about.html#sustainability">Sustainability</a></li>
+                        </ul>
+                    </li>
                     <li><a href="gallery.html">Gallery</a></li>
-                    <li><a href="activities.html">Activities</a></li>
+                    <li class="dropdown">
+                        <a href="activities.html" aria-haspopup="true">Experiences <i class="fas fa-caret-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="activities.html#cultural-tours">Cultural Tours</a></li>
+                            <li><a href="activities.html#hiking">Yala Valley Trails</a></li>
+                            <li><a href="activities.html#wellness">Wellness Retreats</a></li>
+                        </ul>
+                    </li>
                     <li><a href="accommodations.html" class="active" aria-current="page">Accommodations</a></li>
                     <li><a href="dining.html">Dining</a></li>
                     <li><a href="events.html">Events</a></li>
                     <li><a href="contact.html">Contact</a></li>
-                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="journal.html">Journal</a></li>
                 </ul>
             </nav>
+            <div class="language-toggle">
+                <select id="language-select" aria-label="Select language">
+                    <option value="en">English</option>
+                    <option value="sw">Swahili</option>
+                    <option value="luo">Luo</option>
+                </select>
+            </div>
             <button class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
                 <i class="fas fa-bars"></i>
             </button>
         </div>
     </header>
     <main>
-        <!-- Hero Section (from index.html) -->
+        <!-- Audio Control -->
+        <div class="audio-control" role="button" aria-label="Toggle ambient waterfall sound">
+            <i class="fas fa-volume-up"></i>
+        </div>
+        <!-- Contact Popup -->
+        <div class="contact-popup" role="button" aria-label="Open contact form">
+            <i class="fas fa-concierge-bell"></i>
+        </div>
+        <div class="contact-form" role="form" aria-label="Contact concierge">
+            <input type="text" placeholder="Name" aria-label="Name" required>
+            <input type="email" placeholder="Email" aria-label="Email address" required>
+            <textarea placeholder="Message" aria-label="Message" required></textarea>
+            <button type="submit">Send</button>
+        </div>
+        <!-- Hero Section -->
         <section class="hero" role="region" aria-label="Hero section">
-            <canvas id="hero-canvas"></canvas>
+            <video class="hero-video" autoplay muted loop playsinline poster="imagees/16.jpg">
+                <source src="videos/A_serene_and_enchanting_misty_forest_bathed_in_the_8b65cda9-3b83-473f-84ff-6071a138369b.mp4" type="video/mp4">
+            </video>
             <div class="hero-overlay">
-                <h2>Unwind in Timeless Luxury</h2>
-                <p>Rejuvenate in eco-luxury with stunning waterfall vistas and refined amenities.</p>
+                <h2>Serene Eco-Luxury Awaits</h2>
+                <p>Indulge in sustainable suites inspired by Luo heritage, nestled in Siaya’s breathtaking Yala Valley.</p>
                 <div class="hero-ctas">
-                    <a href="booking.html" class="cta-button">Reserve Your Retreat</a>
-                    <a href="#accommodations" class="cta-button secondary">Explore Rooms</a>
+                    <a href="booking.html" class="cta-button">Reserve Your Stay</a>
+                    <a href="#accommodations" class="cta-button secondary">Discover Rooms</a>
                 </div>
             </div>
         </section>
-        <!-- Virtual Assistant (from index.html) -->
-        <div class="virtual-assistant">
-            <div class="assistant-orb">
-                <div class="assistant-tooltip">
-                    <p>Find your perfect stay! Explore our eco-luxury rooms.</p>
-                    <a href="#standard" style="color: #00ccff;">Standard Room</a> | 
-                    <a href="#deluxe" style="color: #00ccff;">Deluxe Suite</a>
-                </div>
-            </div>
-        </div>
-        <!-- Accommodations Section (styled like index.html's features) -->
-        <section class="accommodations" role="region" aria-label="Accommodations section" id="accommodations">
-            <div id="particles-js"></div>
-            <h3>Resort Rooms</h3>
-            <p>Elegant accommodations blending futuristic luxury with nature’s serenity.</p>
+        <!-- Room Filters -->
+        <section class="room-filters" role="region" aria-label="Room filters">
+            <button class="filter-btn active" data-filter="all">All Rooms</button>
+            <button class="filter-btn" data-filter="standard">Standard</button>
+            <button class="filter-btn" data-filter="deluxe">Deluxe</button>
+        </section>
+        <!-- Accommodations Section -->
+        <section class="accommodations" id="accommodations" role="region" aria-label="Accommodations section">
+            <h3>Our Eco-Luxury Retreats</h3>
+            <p>Immerse yourself in elegant accommodations that blend Luo cultural heritage with sustainable sophistication.</p>
             <div class="rooms-grid">
-                <div class="room-card" id="standard" tabindex="0" role="article">
-                    <img src="images/15.jpg" alt="Standard Room with lush views at Ambururu Waterfalls Resort" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300?text=Standard+Room';">
+                <article class="room-card" id="standard" data-category="standard" tabindex="0">
+                    <img src="images/15.jpg" alt="Standard Room with lush views at Ambururu Waterfalls Resort" loading="lazy" onerror="this.src='https://via.placeholder.com/400x240?text=Standard+Room';">
                     <div class="badge">Best Value</div>
                     <h4>Standard Room</h4>
-                    <p>Cozy elegance for solo travelers or couples with AR-enhanced views.</p>
-                    <p class="price">$100/night</p>
+                    <p>Cozy elegance for solo travelers or couples with eco-friendly design and serene views.</p>
+                    <p class="price">Ksh3000/night</p>
                     <ul class="amenities">
                         <li>High-Speed WiFi</li>
                         <li>Queen Bed</li>
@@ -608,15 +1155,16 @@
                     </ul>
                     <div class="room-actions">
                         <a href="booking.html" class="cta-button">Book Now</a>
-                        <a href="#virtual-tour" class="virtual-tour" data-room="standard">Virtual Tour</a>
+                        <button class="quick-view" data-room="standard">Quick View</button>
+                        <a href="#" class="virtual-tour" data-room="standard">Virtual Tour</a>
                     </div>
-                </div>
-                <div class="room-card" id="deluxe" tabindex="0" role="article">
-                    <img src="images/14.jpg" alt="Deluxe Suite with balcony at Ambururu Waterfalls Resort" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300?text=Deluxe+Suite';">
-                    <div class="badge">Premium</div>
+                </article>
+                <article class="room-card" id="deluxe" data-category="deluxe" tabindex="0">
+                    <img src="images/14.jpg" alt="Deluxe Suite with balcony at Ambururu" loading="lazy" onerror="this.src='https://via.placeholder.com/400x240?text=Deluxe+Suite';">
+                    <div class="badge">Premium Luxury</div>
                     <h4>Deluxe Suite</h4>
-                    <p>Spacious luxury for families or groups with holographic controls.</p>
-                    <p class="price">$150/night</p>
+                    <p>Spacious luxury for families or groups, featuring sustainable amenities and advanced comfort.</p>
+                    <p class="price">Ksh5000/night</p>
                     <ul class="amenities">
                         <li>High-Speed WiFi</li>
                         <li>King Bed</li>
@@ -625,273 +1173,371 @@
                     </ul>
                     <div class="room-actions">
                         <a href="booking.html" class="cta-button">Book Now</a>
-                        <a href="#virtual-tour" class="virtual-tour" data-room="deluxe">Virtual Tour</a>
+                        <button class="quick-view" data-room="deluxe">Quick View</button>
+                        <a href="#" class="virtual-tour" data-room="deluxe">Virtual Tour</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+        <!-- Testimonials Section -->
+        <section class="testimonials" role="region" aria-label="Guest testimonials">
+            <h3>Guest Stories</h3>
+            <div class="swiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <p>“The Standard Room was a cozy haven with eco-friendly touches!”</p>
+                        <div class="guest">
+                            <img src="images/48.jpg" alt="Jane M." loading="lazy" width="60" height="60" onerror="this.src='https://via.placeholder.com/60?text=Guest';">
+                            <span>Jane M., Nairobi, 2025</span>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <p>“The Deluxe Suite’s jacuzzi was pure bliss!”</p>
+                        <div class="guest">
+                            <img src="logo/3.jpg" alt="David K." loading="lazy" width="60" height="60" onerror="this.src='https://via.placeholder.com/60?text=Guest';">
+                            <span>David K., Kisumu, 2025</span>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <p>“A sustainable stay that felt truly luxurious!”</p>
+                        <div class="guest">
+                            <img src="images/5.jpg" alt="Sarah L." loading="lazy" width="60" height="60" onerror="this.src='https://via.placeholder.com/60?text=Guest';">
+                            <span>Sarah L., Eldoret, 2024</span>
+                        </div>
                     </div>
                 </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
             </div>
         </section>
-        <!-- Nearby Hotels Section (styled like index.html) -->
+        <!-- Nearby Hotels Section -->
         <section class="nearby-hotels" role="region" aria-label="Nearby hotels section">
-            <h3>Nearby Hotels</h3>
+            <h3>Explore Nearby Stays</h3>
             <div class="hotel-grid">
-                <div class="hotel-card" tabindex="0" role="article">
+                <article class="hotel-card" tabindex="0">
                     <h4>Golf Hotel Kakamega</h4>
-                    <p><i class="fas fa-map-marker-alt"></i> 5.67 mi</p>
-                    <p><i class="fas fa-star"></i> 7.6/10</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 5.2 mi</p>
+                    <p><i class="fas fa-star"></i> 3.8/5</p>
                     <p><i class="fas fa-swimming-pool"></i> Pool, Restaurant, WiFi</p>
                     <a href="#" class="cta-button">Book Now</a>
-                </div>
-                <div class="hotel-card" tabindex="0" role="article">
+                </article>
+                <article class="hotel-card" tabindex="0">
                     <h4>Siaya Guest House</h4>
-                    <p><i class="fas fa-map-marker-alt"></i> 5.88 mi</p>
-                    <p><i class="fas fa-star"></i> 4.5/5</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 3.2 mi</p>
+                    <p><i class="fas fa-star"></i> 4.2/5</p>
                     <p><i class="fas fa-utensils"></i> Breakfast, WiFi, Parking</p>
                     <a href="#" class="cta-button">Book Now</a>
-                </div>
+                </article>
             </div>
         </section>
-        <!-- Booking Form (styled like index.html) -->
-        <section class="booking-form" role="region" aria-label="Booking section" id="booking-form">
-            <h3>Check Availability</h3>
-            <form id="booking-form-submit" action="https://formspree.io/f/your-form-id" method="POST">
-                <input type="text" name="name" placeholder="Your Name" required aria-label="Your name">
-                <input type="email" name="email" placeholder="Your Email" required aria-label="Email address">
-                <input type="date" name="check-in" required aria-label="Check-in date" min="2025-06-01">
-                <input type="date" name="check-out" required aria-label="Check-out date" min="2025-06-01">
-                <button type="submit" class="cta-button">Submit</button>
+        <!-- Booking Form -->
+        <section class="booking-form" role="region" aria-label="Booking section">
+            <h3>Plan Your Escape</h3>
+            <p>Secure your eco-luxury retreat in Siaya’s Yala Valley today.</p>
+            <form id="booking-form" action="https://formspree.io/f/xbloeqdy" method="POST" novalidate>
+                <input type="text" name="name" placeholder="Your Name" required aria-label="Full name">
+                <input type="email" name="email" placeholder="Email Address" required aria-label="Email address">
+                <select name="room" required aria-label="Room type">
+                    <option value="" disabled selected>Select Room</option>
+                    <option value="standard">Standard Room</option>
+                    <option value="deluxe">Deluxe Suite</option>
+                </select>
+                <input type="date" name="check-in" id="check-in" required aria-label="Check-in date" min="2025-06-03">
+                <input type="date" name="check-out" id="check-out" required aria-label="Check-out date" min="2025-06-04">
+                <button type="submit">Check Availability</button>
             </form>
+            <div id="booking-feedback" role="alert"></div>
         </section>
-        <!-- Map Section (from index.html) -->
+        <!-- Map Section -->
         <section class="map" role="region" aria-label="Map section">
-            <h3>Find Us in Kakamega</h3>
-            <div id="map"></div>
-            <p class="map-description">Nestled in Kakamega, Kenya, easily accessible via the Kisumu-Busia road.</p>
+            <h3>Discover Our Location</h3>
+            <div id="map" role="application" aria-label="Map of Ambururu Waterfalls"></div>
+            </div>
+            <p class="map-description">Nestled in Musanda, Siaya, Kenya. Coordinates: -0.062, 34.267. <a href="https://maps.windows.com/?form=WNAMSH&entity=local_ypid%3AYN8091x9956867690424910424&collection=point.0.199973_34.741566_Ambururu%20Water%20Falls" target="_blank" rel="noopener" aria-label="Get directions to Ambururu">Get directions</a></p>
         </section>
     </main>
-    <!-- Footer (from index.html) -->
-    <footer role="contentinfo">
+    <!-- Footer -->
+    <footer role="contentinfo" aria-label="Footer">
         <div class="footer-container">
-            <p>© 2025 Ambururu Waterfalls. All rights reserved.</p>
-            <div class="social-links">
-                <a href="https://www.facebook.com/ambururu/" target="_blank" aria-label="Visit our Facebook page"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://x.com/Ambururu_W" target="_blank" aria-label="Visit our Twitter profile"><i class="fab fa-x-twitter"></i></a>
-                <a href="https://www.instagram.com/ambururu1/" target="_blank" aria-label="Visit our Instagram page"><i class="fab fa-instagram"></i></a>
+            <img src="logo/B2.jpg" alt="Ambururu Waterfall Resort Footer Logo" class="footer-logo" width="120" height="120" loading="lazy" onerror="this.src='https://via.placeholder.com/120?text=Logo';">
+            <p>© 2025 Ambururu Waterfalls & Resort. All rights reserved.</p>
+            <div class="social-links" role="navigation" aria-label="Social media links">
+                <a href="https://www.facebook.com/ambururu" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://x.com/Ambururu_W" target="_blank" rel="noopener" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+                <a href="https://www.instagram.com/ambururu1" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
             </div>
-            <div class="newsletter">
-                <h4>Stay Updated</h4>
-                <form id="newsletter-form" action="https://formspree.io/f/your-form-id" method="POST">
-                    <input type="email" name="email" placeholder="Enter your email" required aria-label="Email address for newsletter">
+            <div class="newsletter" role="form" aria-label="Newsletter subscription">
+                <h4>Stay Connected</h4>
+                <form id="newsletter-form" action="https://formspree.io/f/xqabandb" method="POST">
+                    <input type="email" name="email" placeholder="Enter your email" required aria-label="Email for newsletter">
                     <button type="submit">Subscribe</button>
                 </form>
             </div>
+            <nav class="footer-links" role="navigation" aria-label="Footer navigation">
+                <a href="about.html">About Us</a>
+                <a href="contact.html">Contact</a>
+                <a href="accommodations.html">accommodations</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms & Conditions</a>
+            </nav>
+            <div class="footer-certifications">
+                <img src="logo/EW.jpeg" alt="Eco Warrior Award" loading="lazy" width="100" height="50" onerror="this.src='https://via.placeholder.com/100x50?text=Certification';">
+                    <img src="logo/GE.jpeg" alt="Green Globe Certified" loading="lazy" width="100" height="50" onerror="this.src='https://via.placeholder.com/100x50?text=Certification';">
+            </div>
         </div>
     </footer>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Scripts -->
+    <script defer src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script defer src="https://api.mapbox.com/mapbox-gl-js/v3.8.1/mapbox-gl.js"></script>
+    <script defer src="https://unpkg.com/swiper@10/swiper-bundle.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
     <script>
-        // Menu Toggle (from index.html)
+        // Menu Toggle
         $(document).ready(function() {
+            // Header Scroll Effect
+            $(window).on('scroll', function() {
+                $('.sticky-header').toggleClass('scrolled', $(window).scrollTop()) > 50);
+            });
             $('.menu-toggle').on('click', function() {
                 $('#main-nav ul').toggleClass('active');
-                const expanded = $(this).attr('aria-expanded') === 'true' ? 'false' : 'true';
-                $(this).attr('aria-expanded', expanded);
+                const isExpanded = $(this).attr('aria-expanded') === 'true';
+                $(this).attr('aria-expanded', !isExpanded);
+                $(this).find('i').toggleClass('fa-bars fa-times');
             });
-
-            // Form Submission Handling
-            $('#booking-form-submit').on('submit', function(e) {
-                e.preventDefault();
-                const name = $(this).find('input[name="name"]').val();
-                const email = $(this).find('input[name="email"]').val();
-                if (name && email) {
-                    alert('Thank you for your inquiry! We’ll get back to you soon.');
-                    $(this)[0].reset();
+            $('.dropdown').on('click', function(e) {
+                if ($(window).width() < 768) {
+                    e.preventDefault();
+                    $(this).find('.dropdown-menu').toggleClass('active');
                 }
             });
-
-            $('#newsletter-form').on('submit', function(e) {
-                e.preventDefault();
-                const email = $(this).find('input[name="email"]').val();
-                if (email) {
-                    alert('Thank you for subscribing!');
-                    $(this)[0].reset();
-                }
+            // Room Filters
+            $('.filter-btn').on('click', function() {
+                $('.filter-btn').removeClass('active');
+                $(this).addClass('active');
+                const filter = $(this).data('filter');
+                $('.room-card').fadeOut(300);
+                setTimeout(() => {
+                    $('.room-card').each(function() {
+                        const category = $(this).data('category');
+                        if (filter === 'all' || category === filter)) {
+                            $(this).fadeIn(300);
+                        }
+                    });
+                }, 300);
             });
-
-            // Debug Missing Assets
-            $('img').on('error', function() {
-                console.log(`Image not found: ${this.src}`);
-            });
-
-            // Quick View Toggle
+            // Quick View Modal
             $('.quick-view').on('click', function() {
                 const roomCard = $(this).closest('.room-card');
-                const amenities = roomCard.find('.amenities').clone();
+                const room = $(this).data('room');
+                const title = roomCard.find('h4').text();
                 const badge = roomCard.find('.badge').text();
+                const amenities = roomCard.find('.amenities').clone();
                 const modalContent = `
-                    <div style="background: rgba(0, 0, 0, 0.8); padding: 2rem; border-radius: 10px; color: #ffffff;">
-                        <h3 style="font-family: 'Orbitron', sans-serif; color: #00ff99;">${roomCard.find('h4').text()}</h3>
-                        <p style="color: #00ff99;">${badge}</p>
+                    <div class="modal-content">
+                        <h3>${title}</h3>
+                        <p class="badge">${badge}</p>
                         ${amenities.prop('outerHTML')}
-                        <button class="close-modal" style="background: #00ff99; color: #000000; padding: 0.5rem 1rem; border: none; border-radius: 5px; cursor: pointer;">Close</button>
+                        <button class="close-modal">Close</button>
                     </div>
                 `;
-                const modal = $('<div>').css({
-                    position: 'fixed',
-                    top: 0,
-                    left: 0,
-                    width: '100%',
-                    height: '100%',
-                    background: 'rgba(0, 0, 0, 0.5)',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    zIndex: 2000
-                }).html(modalContent);
-                $('body').append(modal);
-                $('.close-modal').on('click', function() {
-                    modal.remove();
+                const modal = $('<div class="modal active">').html(modalContent);
+                $('body').append(modal');
+                $('.close-modal').on('click', () => modal.remove());
+                modal.on('click', (e) => {
+                    if (e.target === modal[0]) modal.remove();
                 });
             });
-        });
-
-        // 3D Waterfall Animation (from index.html)
-        const canvas = document.getElementById('hero-canvas');
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        const particleCount = 5000;
-        const particles = new THREE.BufferGeometry();
-        const positions = new Float32Array(particleCount * 3);
-        const velocities = new Float32Array(particleCount * 3);
-        for (let i = 0; i < particleCount; i++) {
-            positions[i * 3] = Math.random() * 100 - 50;
-            positions[i * 3 + 1] = Math.random() * 100;
-            positions[i * 3 + 2] = Math.random() * 100 - 50;
-            velocities[i * 3] = 0;
-            velocities[i * 3 + 1] = -Math.random() * 2 - 1;
-            velocities[i * 3 + 2] = 0;
-        }
-        particles.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-        const particleMaterial = new THREE.PointsMaterial({
-            color: 0x00ccff,
-            size: 0.5,
-            transparent: true,
-            opacity: 0.7
-        });
-        const particleSystem = new THREE.Points(particles, particleMaterial);
-        scene.add(particleSystem);
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-        scene.add(ambientLight);
-        const pointLight = new THREE.PointLight(0x00ff99, 1, 100);
-        pointLight.position.set(0, 50, 50);
-        scene.add(pointLight);
-        camera.position.z = 50;
-        function animate() {
-            requestAnimationFrame(animate);
-            const positions = particleSystem.geometry.attributes.position.array;
-            for (let i = 0; i < particleCount; i++) {
-                positions[i * 3 + 1] += velocities[i * 3 + 1];
-                if (positions[i * 3 + 1] < -50) {
-                    positions[i * 3 + 1] = 50;
+            // Virtual Tour Modal
+            $('.virtual-tour').on('click', function(e) {
+                e.preventDefault();
+                const room = $(this).data('room');
+                const tourUrl = room === 'standard' ? 'https://my.matterport.com/show/?m=exampleStandard' : 'https://my.matterport.com/show/?m=exampleDeluxe';
+                const modalContent = `
+                    <div class="modal-content">
+                        <h3>${room === 'standard' ? 'Standard Room' : 'Deluxe Suite'} Virtual Tour</h3>
+                        <iframe src="${tourUrl}" title="${room} virtual tour"></iframe>
+                        <button class="close-modal">Close</button>
+                    </div>
+                `;
+                const modal = $('<div class="modal active">').html(modalContent);
+                $('body').append(modal);
+                $('.close-modal').on('click', () => modal.remove());
+                modal.on('click', (e) => {
+                    if (e.target === modal[0]) {
+                        modal.remove();
+                    }
+                });
+            });
+            // Booking Form Validation and Submission
+            $('#booking-form').on('submit', async function(e) {
+                e.preventDefault();
+                const checkIn = new Date($('#check-in').val());
+                const checkOut = new Date($('#check-out').val());
+                if (checkIn >= checkOut) {
+                    $('#booking-feedback').text('Check-out must be after check-in.').removeClass('success').addClass('error');
+                    return;
                 }
-            }
-            particleSystem.geometry.attributes.position.needsUpdate = true;
-            renderer.render(scene, camera);
-        }
-        animate();
-        window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-        });
-
-        // Particles.js for Accommodations Section
-        particlesJS('particles-js', {
-            particles: {
-                number: { value: 80, density: { enable: true, value_area: 800 } },
-                color: { value: '#00ff99' },
-                shape: { type: 'circle' },
-                opacity: { value: 0.5, random: true },
-                size: { value: 3, random: true },
-                line_linked: { enable: true, distance: 150, color: '#00ccff', opacity: 0.4, width: 1 },
-                move: { enable: true, speed: 2, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false }
-            },
-            interactivity: {
-                detect_on: 'canvas',
-                events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' }, resize: true },
-                modes: { repulse: { distance: 100, duration: 0.4 }, push: { particles_nb: 4 } }
-            },
-            retina_detect: true
-        });
-
-        // GSAP Animations
-        gsap.registerPlugin(ScrollTrigger);
-        gsap.from('.room-card', {
-            opacity: 0,
-            y: 100,
-            duration: 1.5,
-            stagger: 0.3,
-            ease: 'power3.out',
-            scrollTrigger: {
-                trigger: '.accommodations',
-                start: 'top 80%'
-            }
-        });
-
-        gsap.from('.hotel-card', {
-            opacity: 0,
-            y: 100,
-            duration: 1.5,
-            stagger: 0.3,
-            ease: 'power3.out',
-            scrollTrigger: {
-                trigger: '.nearby-hotels',
-                start: 'top 80%'
-            }
-        });
-
-        gsap.from('.booking-form form', {
-            opacity: 0,
-            y: 100,
-            duration: 1.5,
-            ease: 'power3.out',
-            scrollTrigger: {
-                trigger: '.booking-form',
-                start: 'top 80%'
-            }
-        });
-
-        // Ambient Waterfall Sound
-        const audio = new Audio('https://www.zapsplat.com/wp-content/uploads/2015/sound-effects-77317/zapsplat_nature_waterfall_small_flowing_loop_001_81338.mp3');
-        audio.loop = true;
-        audio.volume = 0.3;
-        audio.play().catch(() => console.log('Audio playback failed. Autoplay may be blocked.'));
-
-        // Mapbox 3D Globe
-        mapboxgl.accessToken = 'pk.eyJ1IjoiZXhhbXBsZSIsImEiOiJja3Zhcmk1c3QwNTQ1MnFtb3J0c2d5c2E2In0.8fakeToken1234567890';
-        const map = new mapboxgl.Map({
-            container: 'map',
-            style: 'mapbox://styles/mapbox/satellite-v9',
-            center: [34.751865, 0.282730],
-            zoom: 12,
-            pitch: 60,
-            bearing: -60,
-            projection: 'globe'
-        });
-        map.on('load', () => {
-            map.addLayer({
-                id: 'sky',
-                type: 'sky',
-                paint: {
-                    'sky-type': 'atmosphere',
-                    'sky-atmosphere-sun': [0, 0],
-                    'sky-atmosphere-sun-intensity': 5
+                try {
+                    const formData = new FormData(this);
+                    const response = await fetch('https://formspree.io/f/your-form-id', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(Object.fromEntries(formData))
+                    });
+                    if (response.ok) {
+                        $('#booking-feedback').text('Booking inquiry sent! We’ll confirm soon.').removeClass('error').addClass('success');
+                        this.reset();
+                    } else {
+                        $('#booking-feedback').text('Submission failed. Please try again.').removeClass('success').addClass('error');
+                    }
+                } catch (error) {
+                    $('#booking-feedback').text('An error occurred. Please contact us.').removeClass('success').addClass('error');
                 }
             });
-            new mapboxgl.Marker({ color: '#00ff99' })
-                .setLngLat([34.751865, 0.282730])
-                .setPopup(new mapboxgl.Popup().setHTML('<h3>Ambururu Waterfalls</h3><p>Kakamega, Kenya</p>'))
+            // Newsletter Form
+            $('#newsletter-form').on('submit', async function(e) {
+                e.preventDefault();
+                const email = $(this).find('input[name="email"]').val();
+                try {
+                    const response = await fetch('https://formspree.io/f/your-form-id', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email })
+                    });
+                    if (response.ok) {
+                        $(this).find('input').val('');
+                        $('#booking-feedback').text('Subscribed! Thank you for joining us.').removeClass('error').addClass('success');
+                        setTimeout(() => $('#booking-feedback').fadeOut(), 5000);
+                    } else {
+                        $('#booking-feedback').text('Subscription failed.').removeClass('success').addClass('error');
+                    }
+                } catch (error) {
+                    $('#booking-feedback').text('An error occurred.').removeClass('success').addClass('error');
+                }
+            });
+            // Contact Popup
+            $('.contact-popup').on('click', function() {
+                $('.contact-form').toggleClass('active');
+            });
+            $('.contact-form button').on('click', async function(e) {
+                e.preventDefault();
+                const form = $(this).closest('.contact-form');
+                const data = {
+                    name: form.find('input[name="name"]').val(),
+                    email: form.find('input[name="email"]').val(),
+                    message: form.find('textarea').val()
+                };
+                try {
+                    const response = await fetch('https://formspree.io/f/your-form-id', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data)
+                    });
+                    if (response.ok) {
+                        form.find('input').val('');
+                        form.find('textarea').val('');
+                        form.removeClass('active');
+                        $('#booking-feedback').text('Message sent!').removeClass('error').addClass('success');
+                    } else {
+                        $('#booking-feedback').text('Message failed.').removeClass('success').addClass('error');
+                    }
+                } catch (error) {
+                    $('#booking-feedback').text('Error sending message.').removeClass('success').addClass('error');
+                }
+            });
+            // Image Error Handling
+            $('img').on('error', function() {
+                console.error(`Image not found: ${this.src}`);
+            });
+        });
+        // Audio Control
+        const audio = new Audio('https://www.zapsplat.com/wp-content/uploads/2015/sound-effects/77317/zapsplat_nature_waterfall_small_flowing_loop_001_81338.mp3');
+        audio.loop = true;
+        audio.volume = 0.5;
+        let isPlaying = false;
+        $('.audio-control').on('click', function() {
+            if (isPlaying) {
+                audio.pause();
+                $(this).html('<i class="fas fa-volume-mute"></i>').attr('aria-label', 'Play ambient waterfall sound');
+            } else {
+                audio.play().catch(() => console.error('Audio playback failed'));
+                $(this).html('<i class="fas fa-volume-up"></i>').attr('aria-label', 'Pause ambient waterfall sound');
+            }
+            isPlaying = !isPlaying;
+        });
+        // Swiper Slider
+        const swiper = new Swiper('.swiper', {
+            loop: true,
+            slidesPerView: 1,
+            spaceBetween: 30,
+            autoplay: { delay: 4000, disableOnInteraction: false },
+            pagination: { el: '.swiper-pagination', clickable: true },
+            navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+            breakpoints: {
+                768: { slidesPerView: 2 },
+                1200: { slidesPerView: 3 }
+            }
+        });
+        // GSAP Animations
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.from('.hero-overlay h2', { opacity: 0, y: 50, duration: 1.5, ease: 'power3.out' });
+        gsap.from('.hero-overlay p', { opacity: 0, y: 30, duration: 1.5, delay: 0.3, ease: 'power3.out' });
+        gsap.from('.hero-ctas', { opacity: 0, y: 20, duration: 1.5, delay: 0.6, ease: 'power3.out' });
+        gsap.from('.room-card', {
+            opacity: 0,
+            y: 80,
+            stagger: 0.3,
+            duration: 1,
+            ease: 'power3.out',
+            scrollTrigger: { trigger: '.accommodations', start: 'top 80%' }
+        });
+        gsap.from('.hotel-card', {
+            opacity: 0,
+            y: 80,
+            stagger: 0.3,
+            duration: 1,
+            ease: 'power3.out',
+            scrollTrigger: { trigger: '.nearby-hotels', start: 'top 80%' }
+        });
+        gsap.from('.swiper-slide', {
+            opacity: 0,
+            y: 50,
+            stagger: 0.2,
+            duration: 1,
+            ease: 'power3.out',
+            scrollTrigger: { trigger: '.testimonials', start: 'top 80%' }
+        });
+        gsap.from('.booking-form form', {
+            opacity: 0,
+            y: 60,
+            duration: 1.5,
+            ease: 'power3.out',
+            scrollTrigger: { trigger: '.booking-form', start: 'top 80%' }
+        });
+        // Mapbox
+        mapboxgl.accessToken = 'YOUR_MAPBOX_ACCESS_TOKEN';
+        const map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/outdoors-v11',
+            center: [34.267, -0.062],
+            zoom: 14,
+            pitch: 45,
+            bearing: 0'
+        });
+        map.on('load', () => {
+            new mapboxgl.Marker({ color: '#d4a017' })
+                .setLngLat([34.267, -0.062])
+                .setPopup(new mapboxgl.Popup().setHTML('<h3>Ambururu Waterfalls</h3><p>Musanda, Siaya, Kenya</p>'))
                 .addTo(map);
+        });
+        // Header Scroll
+        let lastScroll = 0;
+        $(window).on('scroll', function() {
+            const scroll = $(this).scrollTop();
+            $('.sticky-header').toggleClass('hidden', scroll > lastScroll && scroll > 100);
+            lastScroll = scroll;
         });
     </script>
 </body>

@@ -2,345 +2,473 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Dive into the joy and fun of Ambururu Waterfalls & Resort in Siaya, Kenya, through stunning photos, videos, and interactive experiences. Be inspired to visit!">
-    <meta name="keywords" content="Ambururu Waterfalls, Siaya, Kenya, gallery, photos, videos, resort, eco-tourism, fun, joy, activities, events">
-    <title>Gallery - Ambururu Waterfalls & Resort</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.36/dist/fancybox/fancybox.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
-    <!-- Three.js for 3D Effects -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-    <!-- GSAP for Animations -->
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-    <!-- Particles.js for Particle Effects -->
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-    <!-- Pannellum for 360 Panorama -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pannellum/2.5.6/pannellum.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pannellum/2.5.6/pannellum.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Gallery - Ambururu Waterfalls & Resort | Siaya, Kenya</title>
+    <meta name="description" content="Explore vibrant photos, videos, and 360° tours of Ambururu Waterfalls & Resort in Siaya, Kenya, showcasing eco-luxury, Luo heritage, and joyful moments.">
+    <meta name="keywords" content="Ambururu Waterfalls, Siaya, Kenya, gallery, photos, videos, 360 tour, eco-tourism, Luo culture, resort, activities, events">
+    <meta name="author" content="Ambururu Waterfalls & Resort">
+    <meta name="robots" content="index, follow">
+    <!-- Open Graph -->
+    <meta property="og:title" content="Gallery - Ambururu Waterfalls & Resort">
+    <meta property="og:description" content="Dive into stunning visuals of Ambururu’s waterfalls, eco-luxury resort, and cultural events in Siaya, Kenya.">
+    <meta property="og:image" content="/assets/images/gallery-hero.webp">
+    <meta property="og:url" content="https://www.ambururuwaterfalls.com/gallery">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@AmbururuResort">
+    <meta name="twitter:creator" content="@AmbururuResort">
+    <!-- Schema Markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ImageGallery",
+        "name": "Ambururu Waterfalls & Resort Gallery",
+        "description": "A collection of photos, videos, and 360° tours showcasing the beauty and experiences at Ambururu Waterfalls & Resort in Siaya, Kenya.",
+        "url": "https://www.ambururuwaterfalls.com/gallery",
+        "image": [
+            "/assets/images/sunrise-cascades.webp",
+            "/assets/images/eco-luxury-suite.webp",
+            "/assets/images/cultural-festival.webp"
+        ],
+        "associatedMedia": [
+            {
+                "@type": "VideoObject",
+                "name": "Ambururu Waterfalls Experience",
+                "description": "A video tour of Ambururu’s scenic views, dining, and activities.",
+                "contentUrl": "/assets/videos/ambururu-tour.mp4",
+                "thumbnailUrl": "/assets/images/video-poster.webp",
+                "uploadDate": "2025-01-01",
+                "duration": "PT1M30S"
+            }
+        ]
+    }
+    </script>
+    <!-- Preload Critical Assets -->
+    <link rel="preload" href="/assets/images/gallery-hero.webp" as="image" fetchpriority="high">
+    <link rel="preload" href="/assets/fonts/CinzelDecorative-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Cinzel+Decorative:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous">
+    <!-- Fancybox -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css">
+    <!-- Plyr for Video Player -->
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css">
+    <!-- Swiper -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper@10/swiper-bundle.min.css">
+    <!-- A-Frame for 360 Panorama -->
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js" defer></script>
+    <!-- GSAP and ScrollTrigger -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
     <style>
-        /* General Styles */
-        body {
-            font-family: 'Roboto', sans-serif;
-            color: #ffffff;
-            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+        /* Custom Properties */
+        :root {
+            --jade-deep: #1a3c34;
+            --jade-light: #2a5c4e;
+            --gold-luxe: #d4a017;
+            --luo-crimson: #a81c07;
+            --midnight: #0a1a24;
+            --cream-soft: #f0e0b0;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            --transition: all 0.3s ease;
+            --glow: rgba(212, 160, 23, 0.5);
+        }
+        /* Dark Mode */
+        [data-theme="dark"] {
+            --jade-deep: #0f2a24;
+            --cream-soft: #d8c88c;
+            --midnight: #051015;
+        }
+        /* Reset and Base Styles */
+        * {
+            box-sizing: border-box;
             margin: 0;
+            padding: 0;
+        }
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 100px;
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--cream-soft);
+            background: var(--midnight);
+            line-height: 1.6;
             overflow-x: hidden;
         }
-
+        a, button {
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Cinzel Decorative', serif;
+            font-weight: 700;
+        }
+        /* Skip Link */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--gold-luxe);
+            color: var(--midnight);
+            padding: 8px;
+            z-index: 10000;
+            transition: top 0.3s;
+        }
+        .skip-link:focus {
+            top: 0;
+        }
+        /* Progress Bar (Scroll Indicator) */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: var(--gold-luxe);
+            width: 0;
+            z-index: 1001;
+            transition: width 0.2s ease;
+        }
         /* Header */
         .sticky-header {
             position: fixed;
             top: 0;
             width: 100%;
             z-index: 1000;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(10px);
+            background: rgba(10, 26, 46, 0.95);
+            backdrop-filter: blur(12px);
             padding: 1rem 0;
-            box-shadow: 0 2px 20px rgba(0, 255, 153, 0.2);
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+        .sticky-header.hidden {
+            transform: translateY(-100%);
+        }
+        .sticky-header.scrolled {
+            background: rgba(10, 26, 46, 0.98);
         }
         .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
+            padding: 0 2rem;
+        }
+        .brand {
+            display: flex;
+            align-items: center;
         }
         .logo {
-            width: 80px;
-            height: 80px;
-            margin-right: 1rem;
-            filter: drop-shadow(0 0 10px rgba(0, 255, 153, 0.5));
-            transition: transform 0.5s;
+            width: 70px;
+            height: 70px;
+            transition: transform 0.3s ease;
         }
         .logo:hover {
-            transform: rotate(360deg);
+            transform: scale(1.1);
         }
-        .header-container h1 {
-            font-family: 'Orbitron', sans-serif;
-            color: #00ff99;
-            font-size: 1.8rem;
-            margin: 0;
-            text-shadow: 0 0 10px rgba(0, 255, 153, 0.7);
+        .brand h1 {
+            font-size: clamp(1.5rem, 3vw, 1.8rem);
+            color: var(--gold-luxe);
+            margin-left: 1rem;
         }
         nav ul {
             display: flex;
             list-style: none;
-            padding: 0;
-            margin: 0;
         }
         nav ul li {
+            margin-left: 1.5rem;
             position: relative;
-            margin-left: 2rem;
         }
         nav ul li a {
-            color: #00ff99;
-            text-decoration: none;
-            font-weight: 500;
-            font-family: 'Orbitron', sans-serif;
-            transition: all 0.3s;
-            text-shadow: 0 0 5px rgba(0, 255, 153, 0.5);
+            font-size: 1rem;
+            color: var(--cream-soft);
+            padding: 0.5rem 1rem;
+            transition: var(--transition);
         }
         nav ul li a:hover,
         nav ul li a.active {
-            color: #ffffff;
-            text-shadow: 0 0 15px rgba(0, 255, 153, 1);
+            color: var(--gold-luxe);
         }
-        .dropdown:hover .dropdown-menu {
-            display: block;
+        .dropdown {
+            position: relative;
         }
         .dropdown-menu {
             display: none;
             position: absolute;
-            background: rgba(0, 0, 0, 0.8);
-            list-style: none;
-            padding: 0.5rem 0;
-            margin-top: 0.5rem;
-            border-radius: 5px;
-            box-shadow: 0 0 15px rgba(0, 255, 153, 0.3);
+            top: 100%;
+            left: 0;
+            background: var(--jade-deep);
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            min-width: 200px;
+            z-index: 1000;
         }
-        .dropdown-menu li a {
-            padding: 0.5rem 1rem;
+        .dropdown:hover .dropdown-menu,
+        .dropdown:focus-within .dropdown-menu {
             display: block;
-            color: #00ff99;
         }
-        .dropdown-menu li a:hover {
-            color: #ffffff;
-            background: rgba(0, 255, 153, 0.2);
+        .dropdown-menu a {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: var(--cream-soft);
+            transition: background 0.3s ease;
+        }
+        .dropdown-menu a:hover {
+            background: var(--jade-light);
+            color: var(--gold-luxe);
+        }
+        .language-toggle {
+            margin-left: 1rem;
+        }
+        #language-select {
+            padding: 0.5rem;
+            background: var(--jade-deep);
+            color: var(--cream-soft);
+            border: 1px solid var(--gold-luxe);
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+        #language-select:hover {
+            background: var(--jade-light);
+        }
+        .dark-mode-toggle {
+            background: none;
+            border: none;
+            color: var(--gold-luxe);
+            font-size: 1.5rem;
+            margin-left: 1rem;
+            transition: var(--transition);
+        }
+        .dark-mode-toggle:hover {
+            color: var(--luo-crimson);
         }
         .menu-toggle {
             display: none;
             background: none;
             border: none;
-            color: #00ff99;
+            color: var(--gold-luxe);
             font-size: 1.5rem;
-            cursor: pointer;
         }
-
         /* Hero Section */
         .hero {
             position: relative;
-            height: 100vh;
-            overflow: hidden;
-        }
-        #three-canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-        }
-        .hero-overlay {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            z-index: 2;
-            max-width: 90%;
-        }
-        .hero-overlay h2 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 5rem;
-            color: #00ff99;
-            text-shadow: 0 0 20px rgba(0, 255, 153, 0.8);
-            animation: hologram 2s infinite alternate;
-        }
-        .hero-overlay p {
-            font-size: 1.5rem;
-            color: #ffffff;
-            margin: 1rem 0;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-        }
-        .cta-button {
-            background: linear-gradient(45deg, #00ff99, #00ccff);
-            color: #000000;
-            padding: 1rem 2rem;
-            text-decoration: none;
-            border-radius: 50px;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
-            transition: all 0.3s;
-            box-shadow: 0 0 20px rgba(0, 255, 153, 0.5);
-        }
-        .cta-button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 30px rgba(0, 255, 153, 1);
-        }
-        @keyframes hologram {
-            0% { opacity: 0.8; transform: translateY(0); }
-            100% { opacity: 1; transform: translateY(-10px); }
-        }
-
-        /* Video Showcase */
-        .video-hero {
-            padding: 5rem 0;
-            text-align: center;
-            position: relative;
-        }
-        #video-particles {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-        }
-        .video-hero h2 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 3rem;
-            color: #00ff99;
-            text-shadow: 0 0 15px rgba(0, 255, 153, 0.7);
-            margin: 0 0 2rem;
-            z-index: 1;
-            position: relative;
-        }
-        .video-container {
-            position: relative;
-            max-width: 900px;
-            margin: 0 auto;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 0 30px rgba(0, 255, 153, 0.3);
-            z-index: 1;
-        }
-        .video-container video {
-            width: 100%;
-            display: block;
-        }
-        .video-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            height: 60vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(0, 0, 0, 0.5);
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        .video-container:hover .video-overlay {
-            opacity: 1;
-        }
-        .play-button i {
-            font-size: 4rem;
-            color: #00ff99;
-            cursor: pointer;
-            transition: transform 0.3s;
-            text-shadow: 0 0 15px rgba(0, 255, 153, 0.7);
-        }
-        .play-button i:hover {
-            transform: scale(1.2);
-        }
-        .waterfall-icon i {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 2.5rem;
-            color: #00ff99;
-            animation: pulse 2s infinite;
-            text-shadow: 0 0 10px rgba(0, 255, 153, 0.5);
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.2); opacity: 0.7; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-        .video-cta {
-            margin-top: 1.5rem;
-            font-size: 1.3rem;
-            color: #00ff99;
-            font-weight: 700;
-            text-shadow: 0 0 10px rgba(0, 255, 153, 0.5);
-            animation: fadeIn 2s infinite;
-        }
-        @keyframes fadeIn {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
-        }
-
-        /* Gallery Section */
-        .gallery {
-            padding: 5rem 0;
             text-align: center;
-            position: relative;
+            color: var(--cream-soft);
+            z-index: 1;
+            overflow: hidden;
         }
-        #gallery-particles {
+        .hero-bg {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            filter: brightness(0.7);
+        }
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('/assets/images/particles.png') repeat;
+            opacity: 0.2;
             z-index: 0;
+            animation: moveParticles 60s linear infinite;
+        }
+        @keyframes moveParticles {
+            0% { background-position: 0 0; }
+            100% { background-position: 1000px 1000px; }
+        }
+        .hero-overlay {
+            background: var(--glass-bg);
+            backdrop-filter: blur(8px);
+            padding: 3rem;
+            border-radius: 12px;
+            border: 1px solid var(--jade-light);
+            max-width: 800px;
+            animation: fadeInHero 1s ease-out forwards;
+        }
+        @keyframes fadeInHero {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .hero-overlay h2 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: var(--gold-luxe);
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        .hero-overlay p {
+            font-size: clamp(1rem, 2vw, 1.4rem);
+            margin-bottom: 2rem;
+        }
+        .cta-button {
+            background: var(--gold-luxe);
+            color: var(--midnight);
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            display: inline-block;
+        }
+        .cta-button:hover {
+            background: var(--luo-crimson);
+            transform: translateY(-3px);
+        }
+        /* Virtual Assistant */
+        .virtual-assistant {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            z-index: 1000;
+        }
+        .assistant-orb {
+            width: 60px;
+            height: 60px;
+            background: var(--gold-luxe);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 20px var(--glow);
+            transition: var(--transition);
+        }
+        .assistant-orb:hover,
+        .assistant-orb:focus {
+            transform: scale(1.1);
+        }
+        .assistant-orb i {
+            font-size: 1.8rem;
+            color: var(--midnight);
+        }
+        .assistant-tooltip {
+            display: none;
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            background: var(--jade-deep);
+            color: var(--cream-soft);
+            padding: 1rem;
+            border-radius: 8px;
+            width: 280px;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+        .assistant-orb.active + .assistant-tooltip {
+            display: block;
+        }
+        .assistant-tooltip button {
+            margin: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+        /* Section Transition */
+        .section-transition {
+            height: 60px;
+            background: linear-gradient(to bottom, var(--midnight), var(--jade-deep));
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 50%);
+            margin: 2rem 0;
+        }
+        /* Video Showcase */
+        .video-hero {
+            padding: 6rem 2rem;
+            text-align: center;
+            position: relative;
+            background: var(--cream-soft);
+            color: var(--midnight);
+        }
+        .video-hero h2 {
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            color: var(--jade-deep);
+            margin-bottom: 1rem;
+        }
+        .video-container {
+            max-width: 900px;
+            margin: 0 auto;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        .plyr__video-wrapper video {
+            width: 100%;
+            display: block;
+        }
+        .video-cta {
+            margin-top: 1.5rem;
+            font-size: 1.2rem;
+            color: var(--luo-crimson);
+            font-weight: 700;
+        }
+        /* Gallery Section */
+        .gallery {
+            padding: 6rem 2rem;
+            text-align: center;
+            background: var(--midnight);
         }
         .gallery h2 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 3rem;
-            color: #00ff99;
-            text-shadow: 0 0 15px rgba(0, 255, 153, 0.7);
-            margin: 0 0 2rem;
-            z-index: 1;
-            position: relative;
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            color: var(--gold-luxe);
+            margin-bottom: 1rem;
         }
         .gallery-filters {
             display: flex;
             justify-content: center;
-            gap: 1.5rem;
-            margin-bottom: 3rem;
-            z-index: 1;
-            position: relative;
+            gap: 1rem;
+            margin-bottom: 2rem;
         }
         .gallery-filters button {
-            background: rgba(255, 255, 255, 0.1);
-            border: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 25px;
+            background: var(--jade-deep);
+            border: 1px solid var(--gold-luxe);
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
             cursor: pointer;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
-            color: #ffffff;
-            transition: all 0.3s;
-            box-shadow: 0 0 10px rgba(0, 255, 153, 0.3);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            color: var(--cream-soft);
+            transition: var(--transition);
         }
         .gallery-filters button.active,
         .gallery-filters button:hover {
-            background: linear-gradient(45deg, #00ff99, #00ccff);
-            color: #000000;
-            transform: scale(1.1);
-            box-shadow: 0 0 20px rgba(0, 255, 153, 0.7);
+            background: var(--gold-luxe);
+            color: var(--midnight);
+            transform: scale(1.05);
         }
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 1.5rem;
-            z-index: 1;
-            position: relative;
         }
         .gallery-item {
             position: relative;
             overflow: hidden;
-            border-radius: 15px;
-            box-shadow: 0 0 20px rgba(0, 255, 153, 0.3);
-            transition: transform 0.3s, box-shadow 0.3s;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
         }
         .gallery-item:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(0, 255, 153, 0.7);
+            transform: scale(1.03);
         }
         .gallery-item img {
             width: 100%;
             height: 250px;
             object-fit: cover;
             transition: transform 0.5s;
-            filter: brightness(0.9);
         }
         .gallery-item:hover img {
             transform: scale(1.1);
@@ -350,616 +478,1413 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            color: #00ff99;
+            background: rgba(10, 26, 46, 0.8);
+            color: var(--cream-soft);
             padding: 1rem;
             text-align: center;
             opacity: 0;
             transition: opacity 0.3s;
-            font-weight: 700;
-            text-shadow: 0 0 10px rgba(0, 255, 153, 0.5);
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 1.1rem;
         }
         .gallery-item:hover .caption {
             opacity: 1;
         }
-        .emoji-overlay {
+        .cultural-note {
             position: absolute;
             top: 10px;
-            left: 10px;
-            font-size: 2rem;
+            right: 10px;
+            background: var(--luo-crimson);
+            color: var(--cream-soft);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
             opacity: 0;
             transition: opacity 0.3s;
         }
-        .gallery-item:hover .emoji-overlay {
+        .gallery-item:hover .cultural-note {
             opacity: 1;
         }
-
-        /* Interactive 360 Panorama Section */
+        /* Panorama Section */
         .panorama-section {
-            padding: 5rem 0;
+            padding: 6rem 2rem;
             text-align: center;
-            background: rgba(0, 0, 0, 0.3);
+            background: var(--cream-soft);
+            color: var(--midnight);
         }
         .panorama-section h2 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 3rem;
-            color: #00ff99;
-            text-shadow: 0 0 15px rgba(0, 255, 153, 0.7);
-            margin: 0 0 2rem;
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            color: var(--jade-deep);
+            margin-bottom: 1rem;
         }
         .panorama-container {
             max-width: 900px;
             margin: 0 auto;
-            border-radius: 15px;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 0 30px rgba(0, 255, 153, 0.3);
+            box-shadow: var(--shadow);
             height: 400px;
+            position: relative;
         }
-        .panorama-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
+        a-scene {
             width: 100%;
             height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(0, 0, 0, 0.5);
-            opacity: 0;
-            transition: opacity 0.3s;
         }
-        .panorama-container:hover .panorama-overlay {
-            opacity: 1;
+        .hotspot {
+            cursor: pointer;
         }
-        .panorama-overlay span {
-            font-size: 1.5rem;
-            color: #ffffff;
-            font-weight: 700;
-            background: linear-gradient(45deg, #00ff99, #00ccff);
-            padding: 1rem 2rem;
-            border-radius: 5px;
-            box-shadow: 0 0 20px rgba(0, 255, 153, 0.5);
+        .hotspot-label {
+            display: none;
+            position: absolute;
+            background: var(--gold-luxe);
+            color: var(--midnight);
+            padding: 0.5rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
         }
-
-        /* Share Your Moments */
+        .hotspot:hover .hotspot-label {
+            display: block;
+        }
+        /* Share Moments */
         .share-moments {
-            background: rgba(0, 0, 0, 0.8);
-            color: #ffffff;
-            padding: 3rem 1.5rem;
-            border-radius: 15px;
+            padding: 4rem 2rem;
             text-align: center;
-            margin: 3rem 0;
-            box-shadow: 0 0 30px rgba(0, 255, 153, 0.3);
+            background: var(--midnight);
         }
         .share-moments h2 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2.5rem;
-            color: #00ff99;
-            margin-bottom: 1.5rem;
-            text-shadow: 0 0 15px rgba(0, 255, 153, 0.7);
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            color: var(--gold-luxe);
+            margin-bottom: 1rem;
         }
         .share-moments p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            font-weight: 500;
+            font-size: 1.2rem;
+            color: var(--cream-soft);
+            margin: 0 0 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
         .share-moments a {
-            margin: 0 1rem;
-            color: #00ff99;
-            text-decoration: none;
-            transition: all 0.3s;
+            color: var(--gold-luxe);
+            font-weight: 700;
+            margin: 0 0.5rem;
         }
         .share-moments a:hover {
-            color: #ffffff;
-            text-shadow: 0 0 15px rgba(0, 255, 153, 1);
+            color: var(--luo-crimson);
         }
-        .share-moments div a {
-            font-size: 2.5rem;
+        .share-moments .social-icons a {
+            font-size: 2rem;
+            margin: 0 1rem;
             transition: transform 0.3s;
         }
-        .share-moments div a:hover {
+        .share-moments .social-icons a:hover {
             transform: scale(1.2);
         }
         .share-moments span {
-            color: #00ccff;
-            font-weight: bold;
-            text-shadow: 0 0 10px rgba(0, 204, 255, 0.7);
+            color: var(--luo-crimson);
+            font-weight: 700;
         }
-
+        .ugc-carousel {
+            max-width: 1000px;
+            margin: 2rem auto 0;
+        }
+        .ugc-carousel .swiper-slide {
+            text-align: center;
+        }
+        .ugc-carousel img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        .ugc-carousel .swiper-pagination-bullet {
+            background: var(--gold-luxe);
+        }
         /* Footer */
         footer {
-            background: rgba(0, 0, 0, 0.8);
-            color: #ffffff;
-            padding: 3rem 0;
+            background: var(--jade-deep);
+            color: var(--cream-soft);
+            padding: 4rem 2rem;
             text-align: center;
         }
         .footer-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 1.5rem;
+        }
+        .footer-logo {
+            width: 100px;
+            margin-bottom: 1.5rem;
         }
         .social-links a {
-            color: #00ff99;
+            color: var(--gold-luxe);
             margin: 0 1.5rem;
-            font-size: 1.8rem;
-            transition: all 0.3s;
+            font-size: 1.5rem;
+            transition: var(--transition);
         }
         .social-links a:hover {
-            color: #ffffff;
-            text-shadow: 0 0 15px rgba(0, 255, 153, 1);
+            color: var(--luo-crimson);
         }
         .newsletter h4 {
-            font-family: 'Orbitron', sans-serif;
             font-size: 2rem;
-            color: #00ff99;
-            margin: 0 0 1.5rem;
-            text-shadow: 0 0 10px rgba(0, 255, 153, 0.5);
+            color: var(--gold-luxe);
+            margin-bottom: 1.5rem;
         }
-        .newsletter form {
+        .newsletter-form {
             display: flex;
             justify-content: center;
-            gap: 1.5rem;
-            margin-top: 1rem;
+            gap: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
         }
-        .newsletter input {
-            padding: 0.75rem;
+        .newsletter-form input {
+            padding: 0.8rem;
             border: none;
-            border-radius: 5px;
-            width: 320px;
+            border-radius: 8px;
+            width: 300px;
             font-size: 1rem;
-            background: rgba(255, 255, 255, 0.1);
-            color: #ffffff;
+            background: var(--midnight);
+            color: var(--cream-soft);
         }
-        .newsletter button {
-            background: linear-gradient(45deg, #00ff99, #00ccff);
-            color: #000000;
-            padding: 0.75rem 2rem;
+        .newsletter-form button {
+            background: var(--gold-luxe);
+            color: var(--midnight);
+            padding: 0.8rem 1.5rem;
             border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
-            box-shadow: 0 0 20px rgba(0, 255, 153, 0.5);
+            border-radius: 8px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            transition: var(--transition);
         }
-        .newsletter button:hover {
-            box-shadow: 0 0 30px rgba(0, 255, 153, 1);
+        .newsletter-form button:hover {
+            background: var(--luo-crimson);
         }
-
+        .footer-links {
+            margin-top: 2rem;
+        }
+        .footer-links a {
+            color: var(--cream-soft);
+            margin: 0 1rem;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        .footer-links a:hover {
+            color: var(--gold-luxe);
+        }
+        .footer-certifications {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+        .footer-certifications img {
+            width: 80px;
+            height: auto;
+        }
+        /* Floating Controls */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--gold-luxe);
+            color: var(--midnight);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 999;
+        }
+        .scroll-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        .scroll-to-top:hover {
+            background: var(--luo-crimson);
+        }
+        .sticky-booking {
+            position: fixed;
+            bottom: 80px;
+            left: 20px;
+            background: var(--gold-luxe);
+            color: var(--midnight);
+            padding: 0.75rem 1.5rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            z-index: 999;
+        }
+        .sticky-booking:hover {
+            background: var(--luo-crimson);
+        }
+        .contact-popup {
+            position: fixed;
+            bottom: 140px;
+            right: 20px;
+            background: var(--gold-luxe);
+            color: var(--midnight);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            z-index: 999;
+        }
+        .contact-popup:hover {
+            background: var(--luo-crimson);
+        }
+        .contact-form {
+            display: none;
+            position: fixed;
+            bottom: 200px;
+            right: 20px;
+            background: var(--jade-deep);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            z-index: 999;
+            width: 300px;
+        }
+        .contact-form.active {
+            display: block;
+        }
+        .contact-form h4 {
+            color: var(--gold-luxe);
+            margin-bottom: 1rem;
+        }
+        .contact-form label {
+            display: block;
+            color: var(--cream-soft);
+            margin-bottom: 0.5rem;
+        }
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid var(--jade-light);
+            border-radius: 4px;
+            background: var(--midnight);
+            color: var(--cream-soft);
+        }
+        .contact-form button {
+            background: var(--gold-luxe);
+            color: var(--midnight);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            border: none;
+            transition: var(--transition);
+        }
+        .contact-form button:hover {
+            background: var(--luo-crimson);
+        }
+        /* Cookie Consent */
+        .cookie-consent {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--jade-deep);
+            color: var(--cream-soft);
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease;
+        }
+        .cookie-consent.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .cookie-consent a {
+            color: var(--gold-luxe);
+            text-decoration: underline;
+        }
+        .cookie-consent button {
+            background: var(--gold-luxe);
+            color: var(--midnight);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            border: none;
+            transition: var(--transition);
+        }
+        .cookie-consent button:hover {
+            background: var(--luo-crimson);
+        }
+        /* Live Region */
+        .live-region {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
         /* Responsive Design */
-        @media (max-width: 1024px) {
+        @media (max-width: 1200px) {
             .gallery-grid {
-                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            }
-            .panorama-container {
-                height: 300px;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             }
         }
         @media (max-width: 768px) {
-            .header-container {
-                flex-wrap: wrap;
-            }
             nav ul {
                 display: none;
                 flex-direction: column;
                 width: 100%;
-                text-align: center;
+                background: var(--jade-deep);
+                position: absolute;
+                top: 100%;
+                left: 0;
+                padding: 1rem;
             }
             nav ul.active {
                 display: flex;
             }
             nav ul li {
-                margin: 1rem 0;
+                margin: 0.5rem 0;
+            }
+            .dropdown-menu {
+                position: static;
+                background: var(--jade-light);
+                margin-top: 0.5rem;
             }
             .menu-toggle {
                 display: block;
             }
-            .dropdown:hover .dropdown-menu {
-                display: none;
-            }
-            .dropdown.active .dropdown-menu {
-                display: block;
-                position: static;
-            }
             .hero {
-                height: 60vh;
+                height: 50vh;
             }
             .hero-overlay h2 {
-                font-size: 2.5rem;
-            }
-            .hero-overlay p {
-                font-size: 1rem;
-            }
-            .video-hero h2,
-            .gallery h2,
-            .panorama-section h2 {
-                font-size: 2.2rem;
+                font-size: clamp(1.8rem, 4vw, 2.5rem);
             }
             .gallery-grid {
                 grid-template-columns: 1fr;
             }
             .panorama-container {
-                height: 250px;
+                height: 300px;
             }
-            .newsletter form {
+            .newsletter-form {
                 flex-direction: column;
                 align-items: center;
             }
-            .newsletter input {
+            .newsletter-form input {
                 width: 100%;
                 max-width: 300px;
+            }
+            .virtual-assistant {
+                bottom: 140px;
+            }
+        }
+        @media (max-width: 480px) {
+            .hero-overlay h2 {
+                font-size: clamp(1.5rem, 3vw, 2rem);
+            }
+            .video-hero h2,
+            .gallery h2,
+            .panorama-section h2,
+            .share-moments h2 {
+                font-size: clamp(1.5rem, 3vw, 2rem);
+            }
+            .header-container {
+                padding: 0 1rem;
+            }
+            .cta-button {
+                padding: 0.75rem 1.5rem;
+                font-size: 1rem;
             }
         }
     </style>
 </head>
 <body>
-    <header class="sticky-header">
+    <!-- Skip Link -->
+    <a href="#main-content" class="skip-link" data-translate="skipLink">Skip to main content</a>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar" role="progressbar" aria-label="Page scroll progress"></div>
+
+    <!-- Header -->
+    <header class="sticky-header" role="banner">
         <div class="header-container">
-            <img src="logo/B2.jpg" alt="Ambururu Waterfalls Logo" class="logo" onerror="this.src='https://via.placeholder.com/80?text=Logo';">
-            <h1>Ambururu Waterfalls</h1>
-            <nav aria-label="Main navigation">
+            <div class="brand">
+                <a href="index.html" aria-label="Return to homepage">
+                    <picture>
+                        <source srcset="logo/B2.jpg" type="logo/B2.jpg">
+                        <img src="logo/B2.jpg" alt="Ambururu Waterfalls & Resort Logo" class="logo" width="70" height="70" loading="eager">
+                    </picture>
+                    <h1>Ambururu</h1>
+                </a>
+            </div>
+            <button class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav role="navigation" aria-label="Main navigation">
                 <ul>
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html" data-translate="nav.home">Home</a></li>
                     <li class="dropdown">
-                        <a href="about.html">About <i class="fas fa-chevron-down"></i></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="about.html#history">History</a></li>
-                            <li><a href="about.html#location">Location</a></li>
-                            <li><a href="about.html#owner">Our Owner</a></li>
-                        </ul>
+                        <a href="about.html" aria-haspopup="true" aria-expanded="false" data-translate="nav.about">About <i class="fas fa-caret-down"></i></a>
+                        <div class="dropdown-menu">
+                            <a href="about.html#history" data-translate="nav.aboutHistory">History</a>
+                            <a href="about.html#owner" data-translate="nav.aboutFounder">Our Founder</a>
+                            <a href="about.html#community-impact" data-translate="nav.aboutCommunity">Community Impact</a>
+                            <a href="about.html#attractions" data-translate="nav.aboutAttractions">Nearby Attractions</a>
+                        </div>
                     </li>
-                    <li><a href="gallery.html" class="active" aria-current="page">Gallery</a></li>
+                    <li><a href="gallery.html" class="active" aria-current="page" data-translate="nav.gallery">Gallery</a></li>
                     <li class="dropdown">
-                        <a href="activities.html">Activities <i class="fas fa-chevron-down"></i></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="activities.html#tree-planting">Tree Planting</a></li>
-                            <li><a href="activities.html#hiking">Hiking</a></li>
-                        </ul>
+                        <a href="activities.html" aria-haspopup="true" aria-expanded="false" data-translate="nav.experiences">Experiences <i class="fas fa-caret-down"></i></a>
+                        <div class="dropdown-menu">
+                            <a href="activities.html#cultural-tours" data-translate="nav.experiencesCultural">Cultural Tours</a>
+                            <a href="activities.html#hiking" data-translate="nav.experiencesHiking">Yala Valley Trails</a>
+                            <a href="activities.html#wellness" data-translate="nav.experiencesWellness">Wellness Retreats</a>
+                        </div>
                     </li>
-                    <li><a href="accommodations.html">Accommodations</a></li>
-                    <li><a href="dining.html">Dining</a></li>
-                    <li><a href="events.html">Events</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="accommodations.html" data-translate="nav.accommodations">Accommodations</a></li>
+                    <li><a href="dining.html" data-translate="nav.dining">Dining</a></li>
+                    <li><a href="events.html" data-translate="nav.events">Events</a></li>
+                    <li><a href="contact.html" data-translate="nav.contact">Contact</a></li>
+                    <li><a href="journal.html" data-translate="nav.journal">Journal</a></li>
                 </ul>
             </nav>
-            <button class="menu-toggle" aria-label="Toggle menu">
-                <i class="fas fa-bars"></i>
+            <div class="language-toggle">
+                <select id="language-select" aria-label="Select website language">
+                    <option value="en">English</option>
+                    <option value="sw">Swahili</option>
+                    <option value="luo">Luo</option>
+                </select>
+            </div>
+            <button class="dark-mode-toggle" aria-label="Toggle dark mode">
+                <i class="fas fa-moon"></i>
             </button>
         </div>
     </header>
-    <main>
+
+    <!-- Main Content -->
+    <main id="main-content" role="main">
+        <!-- Virtual Assistant -->
+        <div class="virtual-assistant">
+            <div class="assistant-orb" role="button" aria-label="Open virtual assistant" tabindex="0">
+                <i class="fas fa-robot"></i>
+            </div>
+            <div class="assistant-tooltip">
+                <p data-translate="assistant.prompt">Ask our AI Concierge: "Show me waterfall photos" or "Help!"</p>
+                <button class="cta-button secondary" id="video-call" data-translate="assistant.videoCall">Video Concierge</button>
+                <button class="cta-button secondary" id="ai-recommend" data-translate="assistant.aiRecommend">AI Recommend</button>
+            </div>
+        </div>
+
         <!-- Hero Section -->
-        <section class="hero">
-            <canvas id="three-canvas"></canvas>
+        <section class="hero" role="region" aria-label="Hero section">
+            <picture class="hero-bg">
+                <source srcset="/assets/images/gallery-hero.webp" type="image/webp">
+                <img src="images/6.jpg" alt="Ambururu Waterfalls at dusk" loading="eager">
+            </picture>
+            <div class="particles"></div>
             <div class="hero-overlay">
-                <h2>Feel the Joy of Ambururu!</h2>
-                <p>Explore vibrant visuals that capture the fun and magic of Siaya’s premier waterfall resort.</p>
-                <a href="#gallery" class="cta-button">Dive into the Fun</a>
+                <h2 data-translate="hero.title">Feel the Joy of Ambururu</h2>
+                <p data-translate="hero.subtitle">Explore vibrant visuals that capture the magic of Siaya’s premier eco-luxury resort.</p>
+                <a href="#gallery" class="cta-button" data-translate="hero.cta">Dive into the Experience</a>
             </div>
         </section>
+
+        <div class="section-transition"></div>
+
         <!-- Video Showcase -->
         <section class="video-hero" role="region" aria-label="Video showcase section">
-            <div id="video-particles"></div>
-            <h2>Experience the Magic</h2>
+            <h2 data-translate="video.title">Experience the Magic</h2>
             <div class="video-container">
-                <video controls poster="images/43.jpg" preload="metadata" aria-label="Video tour of Ambururu Waterfalls showcasing scenic views and dining" onerror="this.poster='https://via.placeholder.com/900x506?text=Video+Poster';">
-                    <source src="images/41.mp4" type="video/mp4">
-                    <track kind="captions" src="captions/41.vtt" srclang="en" label="English" default>
+                <video class="plyr" controls poster="videos/0529-Cover.jpg" preload="metadata" aria-label="Video tour of Ambururu Waterfalls">
+                    <source src="videos/0529.mp4" type="video/mp4">
+                    <track kind="captions" src="videos/0529.MP3" srclang="en" label="English" default>
                     Your browser does not support the video tag.
                 </video>
-                <div class="video-overlay">
-                    <span class="play-button"><i class="fas fa-play"></i></span>
-                    <span class="waterfall-icon"><i class="fas fa-water"></i></span>
-                </div>
-                <p class="video-cta">Watch the Fun Unfold!</p>
             </div>
+            <p class="video-cta" data-translate="video.cta">Witness the beauty of Ambururu unfold!</p>
         </section>
+
+        <div class="section-transition"></div>
+
         <!-- Gallery Section -->
-        <section class="gallery" id="gallery">
-            <div id="gallery-particles"></div>
-            <h2>Moments of Joy</h2>
-            <div class="gallery-filters">
-                <button data-filter="all" class="active">All</button>
-                <button data-filter="waterfalls">Waterfalls</button>
-                <button data-filter="resort">Resort</button>
-                <button data-filter="activities">Activities</button>
-                <button data-filter="events">Events</button>
+        <section class="gallery" id="gallery" role="region" aria-label="Photo gallery">
+            <h2 data-translate="gallery.title">Moments of Joy</h2>
+            <div class="gallery-filters" role="tablist">
+                <button data-filter="all" class="active" role="tab" aria-selected="true" data-translate="gallery.filterAll">All</button>
+                <button data-filter="waterfalls" role="tab" aria-selected="false" data-translate="gallery.filterWaterfalls">Waterfalls</button>
+                <button data-filter="resort" role="tab" aria-selected="false" data-translate="gallery.filterResort">Resort</button>
+                <button data-filter="activities" role="tab" aria-selected="false" data-translate="gallery.filterActivities">Activities</button>
+                <button data-filter="events" role="tab" aria-selected="false" data-translate="gallery.filterEvents">Events</button>
             </div>
-            <div class="gallery-grid">
-                <a href="images/1.jpg" class="gallery-item" data-fancybox="gallery" data-caption="Cascading Ambururu Waterfalls at sunrise" data-category="waterfalls">
-                    <img src="images/26.jpg" alt="Ambururu Waterfalls at sunrise" loading="lazy" onerror="this.src='https://via.placeholder.com/320x250?text=Sunrise+Cascades';">
-                    <div class="caption">Sunrise Cascades</div>
-                    <span class="emoji-overlay">🌅</span>
+            <div class="gallery-grid" role="grid">
+                <a href="images/1.jpg" class="gallery-item" data-fancybox="gallery" data-caption="Sunrise Cascades" data-category="waterfalls" role="gridcell">
+                    <picture>
+                        <source srcset="images/26.jpg" type="images/26.jpg">
+                        <img src="images/26.jpg" alt="Ambururu Waterfalls at sunrise" loading="lazy" width="300" height="250">
+                    </picture>
+                    <div class="caption" data-translate="gallery.captionSunrise">Sunrise Cascades</div>
+                    <span class="cultural-note" data-translate="gallery.noteWaterfalls">Luo sacred waters</span>
                 </a>
-                <a href="images/21.jpg" class="gallery-item" data-fancybox="gallery" data-caption="Majestic falls surrounded by lush greenery" data-category="waterfalls">
-                    <img src="images/19.jpg" alt="Majestic Ambururu Waterfalls" loading="lazy" onerror="this.src='https://via.placeholder.com/320x250?text=Lush+Falls';">
-                    <div class="caption">Lush Falls</div>
-                    <span class="emoji-overlay">🌿</span>
+                <a href="images/29.jpg" class="gallery-item" data-fancybox="gallery" data-caption="Lush Falls" data-category="waterfalls" role="gridcell">
+                    <picture>
+                        <source srcset="images/30.jpg" type="images/30.jpg">
+                        <img src="images/30.jpg" alt="Majestic Ambururu Waterfalls" loading="lazy" width="300" height="250">
+                    </picture>
+                    <div class="caption" data-translate="gallery.captionLush">Lush Falls</div>
+                    <span class="cultural-note" data-translate="gallery.noteYala">Yala River heritage</span>
                 </a>
-                <a href="images/39.jpg" class="gallery-item" data-fancybox="gallery" data-caption="Eco-luxury suite with waterfall view" data-category="resort">
-                    <img src="images/31.jpg" alt="Eco-luxury suite at Ambururu" loading="lazy" onerror="this.src='https://via.placeholder.com/320x250?text=Eco-Luxury+Suite';">
-                    <div class="caption">Eco-Luxury Suite</div>
-                    <span class="emoji-overlay">🏡</span>
+                <a href="images/14.jpg" class="gallery-item" data-fancybox="gallery" data-caption="Eco-Luxury Suite" data-category="resort" role="gridcell">
+                    <picture>
+                        <source srcset="images/15.jpg" type="images/15.jpg">
+                        <img src="images/15.jpg" alt="Eco-luxury suite at Ambururu" loading="lazy" width="300" height="250">
+                    </picture>
+                    <div class="caption" data-translate="gallery.captionSuite">Eco-Luxury Suite</div>
+                    <span class="cultural-note" data-translate="gallery.noteDesign">Luo-inspired design</span>
                 </a>
-                <a href="images/18.jpg" class="gallery-item" data-fancybox="gallery" data-caption="Infinity pool overlooking the falls" data-category="resort">
-                    <img src="images/2.jpg" alt="Infinity pool at Ambururu Resort" loading="lazy" onerror="this.src='https://via.placeholder.com/320x250?text=Infinity+Pool';">
-                    <div class="caption">Infinity Pool</div>
-                    <span class="emoji-overlay">🏊</span>
+                <a href="images/2.jpg" class="gallery-item" data-fancybox="gallery" data-caption="Ambururu's Future" data-category="resort" role="gridcell">
+                    <picture>
+                        <source srcset="images/23.jpg" type="images/23.jpg">
+                        <img src="images/23.jpg" alt="Visitors at Ambururu Waterfalls Resort" loading="lazy" width="300" height="250">
+                    </picture>
+                    <div class="caption" data-translate="gallery.captionFuture">Ambururu's Future</div>
+                    <span class="cultural-note" data-translate="gallery.noteSerenity">Serenity meets luxury</span>
                 </a>
-                <a href="images/27.jpg" class="gallery-item" data-fancybox="gallery" data-caption="Guests planting native trees" data-category="activities">
-                    <img src="images/28.jpg" alt="Tree planting activity at Ambururu" loading="lazy" onerror="this.src='https://via.placeholder.com/320x250?text=Tree+Planting';">
-                    <div class="caption">Tree Planting</div>
-                    <span class="emoji-overlay">🌳</span>
+                <a href="images/9.jpg" class="gallery-item" data-fancybox="gallery" data-caption="Tree Planting" data-category="activities" role="gridcell">
+                    <picture>
+                        <source srcset="images/49.jpg" type="image/webp">
+                        <img src="images/49.jpg" alt="Tree planting activity at Ambururu" loading="lazy" width="300" height="250">
+                    </picture>
+                    <div class="caption" data-translate="gallery.captionTree">Tree Planting</div>
+                    <span class="cultural-note" data-translate="gallery.noteReforestation">Community reforestation</span>
                 </a>
-                <a href="images/21.jpg" class="gallery-item" data-fancybox="gallery" data-caption="Scenic hiking trail near the falls" data-category="activities">
-                    <img src="images/4.jpg" alt="Hiking trail at Ambururu" loading="lazy" onerror="this.src='https://via.placeholder.com/320x250?text=Hiking+Adventure';">
-                    <div class="caption">Hiking Adventure</div>
-                    <span class="emoji-overlay">🥾</span>
+                <a href="images/47.jpg" class="gallery-item" data-fancybox="gallery" data-caption="Hiking Adventure" data-category="activities" role="gridcell">
+                    <picture>
+                        <source srcset="images/21.jpg" type="images/21.jpg">
+                        <img src="images/21.jpg" alt="Hiking trail at Ambururu" loading="lazy" width="300" height="250">
+                    </picture>
+                    <div class="caption" data-translate="gallery.captionHiking">Hiking Adventure</div>
+                    <span class="cultural-note" data-translate="gallery.noteValley">Explore Yala Valley</span>
                 </a>
-                <a href="images/25.jpg" class="gallery-item" data-fancybox="gallery" data-caption="Romantic wedding by the falls" data-category="events">
-                    <img src="images/40.jpg" alt="Wedding ceremony at Ambururu" loading="lazy" onerror="this.src='https://via.placeholder.com/320x250?text=Dream+Wedding';">
-                    <div class="caption">Dream Wedding</div>
-                    <span class="emoji-overlay">💍</span>
+                <a href="images/25.jpg" class="gallery-item" data-fancybox="gallery" data-caption="Dream Wedding" data-category="events" role="gridcell">
+                    <picture>
+                        <source srcset="images/50.jpg" type="images/50.jpg">
+                        <img src="images/50.jpg" alt="Wedding ceremony at Ambururu" loading="lazy" width="300" height="250">
+                    </picture>
+                    <div class="caption" data-translate="gallery.captionWedding">Dream Wedding</div>
+                    <span class="cultural-note" data-translate="gallery.noteWedding">Luo wedding traditions</span>
                 </a>
-                <a href="images/8.jpg" class="gallery-item" data-fancybox="gallery" data-caption="Luo cultural festival celebration" data-category="events">
-                    <img src="images/12.jpg" alt="Luo cultural festival at Ambururu" loading="lazy" onerror="this.src='https://via.placeholder.com/320x250?text=Cultural+Festival';">
-                    <div class="caption">Cultural Festival</div>
-                    <span class="emoji-overlay">🎉</span>
+                <a href="images/11.jpg" class="gallery-item" data-fancybox="gallery" data-caption="Cultural Festival" data-category="events" role="gridcell">
+                    <picture>
+                        <source srcset="images/44.jpg" type="images/44.jpg">
+                        <img src="images/44.jpg" alt="Luo cultural festival at Ambururu" loading="lazy" width="300" height="250">
+                    </picture>
+                    <div class="caption" data-translate="gallery.captionFestival">Cultural Festival</div>
+                    <span class="cultural-note" data-translate="gallery.noteHeritage">Celebrating Luo heritage</span>
                 </a>
+            </div>
+            <div class="live-region" aria-live="polite" id="gallery-announcer"></div>
+        </section>
+
+        <div class="section-transition"></div>
+
+        <!-- Panorama Section -->
+        <section class="panorama-section" role="region" aria-label="360 panorama tour">
+            <h2 data-translate="panorama.title">Take a 360° Virtual Tour</h2>
+            <div class="panorama-container" id="panorama">
+                <a-scene embedded>
+                    <a-sky src="/assets/images/360-panorama.webp" rotation="0 -90 0"></a-sky>
+                    <a-entity class="hotspot" position="-2 1 -5">
+                        <a-circle radius="0.3" color="#d4a017" opacity="0.8"></a-circle>
+                        <a-text class="hotspot-label" value="Waterfall Viewpoint" position="0 0.5 0" align="center" color="#d4a017"></a-text>
+                    </a-entity>
+                    <a-entity class="hotspot" position="2 1 5">
+                        <a-circle radius="0.3" color="#d4a017" opacity="0.8"></a-circle>
+                        <a-text class="hotspot-label" value="Resort Lounge" position="0 0.5 0" align="center" color="#d4a017"></a-text>
+                    </a-entity>
+                    <a-camera position="0 1.6 0"></a-camera>
+                </a-scene>
             </div>
         </section>
-        <!-- Interactive 360 Panorama Section -->
-        <section class="panorama-section">
-            <h2>Take a 360° Virtual Tour</h2>
-            <div class="panorama-container" id="panorama"></div>
-        </section>
-        <!-- Share Your Moments -->
-        <section class="share-moments">
-            <h2>Share Your Ambururu Moments</h2>
-            <p>
-                Capture the fun and tag us on 
-                <a href="https://www.instagram.com/ambururu1/" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>, 
-                <a href="https://x.com/Ambururu_W" target="_blank"><i class="fab fa-x-twitter"></i> Twitter</a>, and 
-                <a href="https://www.facebook.com/ambururu/" target="_blank"><i class="fab fa-facebook-f"></i> Facebook</a> 
+
+        <div class="section-transition"></div>
+
+        <!-- Share Moments -->
+        <section class="share-moments" role="region" aria-label="Share your moments">
+            <h2 data-translate="share.title">Share Your Ambururu Moments</h2>
+            <p data-translate="share.message">
+                Capture the magic and tag us on
+                <a href="https://www.instagram.com/ambururu1/" target="_blank" rel="noopener">Instagram</a>,
+                <a href="https://x.com/AmbururuResort" target="_blank" rel="noopener">Twitter</a>, and
+                <a href="https://www.facebook.com/ambururu/" target="_blank" rel="noopener">Facebook</a>
                 with <span>#AmbururuMoments</span> to be featured!
             </p>
-            <div>
-                <a href="https://www.instagram.com/ambururu1/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="https://x.com/Ambururu_W" target="_blank" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
-                <a href="https://www.facebook.com/ambururu/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <div class="social-icons">
+                <a href="https://www.instagram.com/ambururu1/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://x.com/AmbururuResort" target="_blank" rel="noopener" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+                <a href="https://www.facebook.com/ambururu/" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            </div>
+            <div class="ugc-carousel swiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <picture>
+                            <source srcset="images/18.jpg" type="image/webp">
+                            <img src="images/18.jpg" alt="Guest photo at Ambururu Waterfalls" loading="lazy" width="300" height="200">
+                        </picture>
+                    </div>
+                    <div class="swiper-slide">
+                        <picture>
+                            <source srcset="images/33.jpg" type="image/webp">
+                            <img src="images/33.jpg" alt="Guest enjoying Ambururu event" loading="lazy" width="300" height="200">
+                        </picture>
+                    </div>
+                    <div class="swiper-slide">
+                        <picture>
+                            <source srcset="images/43.jpg" type="images/43.jpg">
+                            <img src="images/43.jpg" alt="Guest at Ambururu festival" loading="lazy" width="300" height="200">
+                        </picture>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
             </div>
         </section>
     </main>
-    <footer>
+
+    <!-- Footer -->
+    <footer role="contentinfo" aria-label="Footer">
         <div class="footer-container">
-            <p>© 2025 Ambururu Waterfalls. All rights reserved.</p>
-            <div class="social-links">
-                <a href="https://www.facebook.com/ambururu/" target="_blank" aria-label="Visit our Facebook page"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://x.com/Ambururu_W" target="_blank" aria-label="Visit our Twitter profile"><i class="fab fa-x-twitter"></i></a>
-                <a href="https://www.instagram.com/ambururu1/" target="_blank" aria-label="Visit our Instagram page"><i class="fab fa-instagram"></i></a>
+            <a href="index.html">
+                <picture>
+                    <source srcset="/assets/images/logo.webp" type="image/webp">
+                    <img src="logo/B2.jpg" alt="Ambururu Waterfalls & Resort Footer Logo" class="footer-logo" width="100" height="100" loading="lazy">
+                </picture>
+            </a>
+            <p>© 2025 Ambururu Waterfalls & Resort. All rights reserved.</p>
+            <div class="social-links" role="navigation" aria-label="Social media links">
+                <a href="https://www.facebook.com/ambururu" target="_blank" rel="noopener" aria-label="Follow us on Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://x.com/AmbururuResort" target="_blank" rel="noopener" aria-label="Follow us on Twitter"><i class="fab fa-x-twitter"></i></a>
+                <a href="https://www.instagram.com/ambururu1/" target="_blank" rel="noopener" aria-label="Follow us on Instagram"><i class="fab fa-instagram"></i></a>
             </div>
-            <div class="newsletter">
-                <h4>Stay Updated</h4>
-                <form id="newsletter-form" action="https://formspree.io/f/your-form-id" method="POST">
-                    <input type="email" name="email" placeholder="Enter your email" required aria-label="Email address">
-                    <button type="submit">Subscribe</button>
+            <div class="newsletter" role="form" aria-label="Newsletter subscription">
+                <h4 data-translate="footer.newsletterTitle">Stay Connected</h4>
+                <form class="newsletter-form" id="newsletter-form" action="/api/newsletter" method="POST">
+                    <input type="email" name="email" placeholder="Enter your email" required aria-label="Email for newsletter" data-translate-placeholder="footer.newsletterPlaceholder">
+                    <button type="submit" data-translate="footer.subscribe">Subscribe</button>
                 </form>
+            </div>
+            <nav class="footer-links" role="navigation" aria-label="Footer navigation">
+                <a href="about.html" data-translate="footer.about">About Us</a>
+                <a href="contact.html" data-translate="footer.contact">Contact</a>
+                <a href="sustainability.html" data-translate="footer.sustainability">Sustainability</a>
+                <a href="privacy.html" data-translate="footer.privacy">Privacy Policy</a>
+                <a href="terms.html" data-translate="footer.terms">Terms & Conditions</a>
+            </nav>
+            <div class="footer-certifications" role="contentinfo" aria-label="Certifications and awards">
+                <picture>
+                    <source srcset="/assets/images/eco-award.webp" type="image/webp">
+                    <img src="/assets/images/eco-award.jpg" alt="Eco Warrior Award" loading="lazy" width="80" height="40">
+                </picture>
+                <picture>
+                    <source srcset="/assets/images/green-globe.webp" type="image/webp">
+                    <img src="/assets/images/green-globe.jpg" alt="Green Globe Certified" loading="lazy" width="80" height="40">
+                </picture>
             </div>
         </div>
     </footer>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.36/dist/fancybox/fancybox.umd.js"></script>
+
+    <!-- Floating Controls -->
+    <button class="scroll-to-top" aria-label="Scroll to top"><i class="fas fa-chevron-up"></i></button>
+    <a href="booking.html" class="sticky-booking" data-translate="sticky.book">Book Now</a>
+    <div class="contact-popup" role="button" aria-label="Open contact form">
+        <i class="fas fa-concierge-bell"></i>
+    </div>
+    <div class="contact-form" role="form" aria-label="Contact concierge">
+        <h4 data-translate="contact.title">Contact Us</h4>
+        <form id="contact-form" aria-label="Contact form">
+            <label for="contact-name" data-translate="contact.nameLabel">Name</label>
+            <input type="text" id="contact-name" required aria-required="true">
+            <label for="contact-email" data-translate="contact.emailLabel">Email</label>
+            <input type="email" id="contact-email" required aria-required="true">
+            <label for="message" data-translate="contact.messageLabel">Message</label>
+            <textarea id="message" rows="4" required aria-required="true"></textarea>
+            <button type="submit" data-translate="contact.submit">Send</button>
+        </form>
+    </div>
+
+    <!-- Cookie Consent -->
+    <div class="cookie-consent" role="dialog" aria-labelledby="cookie-title">
+        <p id="cookie-title" data-translate="cookie.text">We use cookies to enhance your experience. <a href="privacy.html" data-translate="cookie.privacy">Learn more</a>.</p>
+        <button id="accept-cookies" data-translate="cookie.accept">Accept</button>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js" defer></script>
+    <script src="https://cdn.plyr.io/3.7.8/plyr.min.js" defer></script>
+    <script src="https://unpkg.com/swiper@10/swiper-bundle.min.js" defer></script>
     <script>
-        // Menu Toggle
-        $(document).ready(function() {
-            $('.menu-toggle').on('click', function() {
-                $('nav ul').toggleClass('active');
-                const expanded = $(this).attr('aria-expanded') === 'true' ? 'false' : 'true';
-                $(this).attr('aria-expanded', expanded);
-            });
-
-            // Dropdown Toggle on Mobile
-            $('.dropdown').on('click', function() {
-                if ($(window).width() < 768) {
-                    $(this).toggleClass('active');
-                }
-            });
-
-            // Fancybox Initialization
-            Fancybox.bind('[data-fancybox="gallery"]', {
-                caption: function (fancybox, carousel, slide) {
-                    return slide.$trigger.dataset.caption || '';
+        // Translations
+        const translations = {
+            en: {
+                skipLink: "Skip to main content",
+                nav: {
+                    home: "Home",
+                    about: "About",
+                    aboutHistory: "History",
+                    aboutFounder: "Our Founder",
+                    aboutCommunity: "Community Impact",
+                    aboutAttractions: "Nearby Attractions",
+                    gallery: "Gallery",
+                    experiences: "Experiences",
+                    experiencesCultural: "Cultural Tours",
+                    experiencesHiking: "Yala Valley Trails",
+                    experiencesWellness: "Wellness Retreats",
+                    accommodations: "Accommodations",
+                    dining: "Dining",
+                    events: "Events",
+                    contact: "Contact",
+                    journal: "Journal"
                 },
-                keyboard: {
-                    Escape: "close",
-                    Delete: "close",
-                    Backspace: "close",
-                    PageUp: "next",
-                    PageDown: "prev",
-                    ArrowUp: "next",
-                    ArrowDown: "prev",
-                    ArrowRight: "next",
-                    ArrowLeft: "prev",
+                hero: {
+                    title: "Feel the Joy of Ambururu",
+                    subtitle: "Explore vibrant visuals that capture the magic of Siaya’s premier eco-luxury resort.",
+                    cta: "Dive into the Experience"
+                },
+                assistant: {
+                    prompt: "Ask our AI Concierge: 'Show me waterfall photos' or 'Help!'",
+                    videoCall: "Video Concierge",
+                    aiRecommend: "AI Recommend"
+                },
+                video: {
+                    title: "Experience the Magic",
+                    cta: "Witness the beauty of Ambururu unfold!"
+                },
+                gallery: {
+                    title: "Moments of Joy",
+                    filterAll: "All",
+                    filterWaterfalls: "Waterfalls",
+                    filterResort: "Resort",
+                    filterActivities: "Activities",
+                    filterEvents: "Events",
+                    captionSunrise: "Sunrise Cascades",
+                    captionLush: "Lush Falls",
+                    captionSuite: "Eco-Luxury Suite",
+                    captionFuture: "Ambururu's Future",
+                    captionTree: "Tree Planting",
+                    captionHiking: "Hiking Adventure",
+                    captionWedding: "Dream Wedding",
+                    captionFestival: "Cultural Festival",
+                    noteWaterfalls: "Luo sacred waters",
+                    noteYala: "Yala River heritage",
+                    noteDesign: "Luo-inspired design",
+                    noteSerenity: "Serenity meets luxury",
+                    noteReforestation: "Community reforestation",
+                    noteValley: "Explore Yala Valley",
+                    noteWedding: "Luo wedding traditions",
+                    noteHeritage: "Celebrating Luo heritage"
+                },
+                panorama: {
+                    title: "Take a 360° Virtual Tour"
+                },
+                share: {
+                    title: "Share Your Ambururu Moments",
+                    message: "Capture the magic and tag us on Instagram, Twitter, and Facebook with #AmbururuMoments to be featured!"
+                },
+                footer: {
+                    newsletterTitle: "Stay Connected",
+                    newsletterPlaceholder: "Enter your email",
+                    subscribe: "Subscribe",
+                    about: "About Us",
+                    contact: "Contact",
+                    sustainability: "Sustainability",
+                    privacy: "Privacy Policy",
+                    terms: "Terms & Conditions"
+                },
+                contact: {
+                    title: "Contact Us",
+                    nameLabel: "Name",
+                    emailLabel: "Email",
+                    messageLabel: "Message",
+                    submit: "Send"
+                },
+                cookie: {
+                    text: "We use cookies to enhance your experience.",
+                    privacy: "Learn more",
+                    accept: "Accept"
+                },
+                sticky: {
+                    book: "Book Now"
                 }
-            });
+            },
+            sw: {
+                skipLink: "Ruka hadi maudhui ya msingi",
+                nav: {
+                    home: "Nyumbani",
+                    about: "Kuhusu",
+                    aboutHistory: "Historia",
+                    aboutFounder: "Mwanzilishi Wetu",
+                    aboutCommunity: "Athari za Jamii",
+                    aboutAttractions: "Vivutio vya Karibu",
+                    gallery: "Matunzio",
+                    experiences: "Mauzo",
+                    experiencesCultural: "Ziara za Utamaduni",
+                    experiencesHiking: "Njia za Yala Valley",
+                    experiencesWellness: "Retreat za Afya",
+                    accommodations: "Makao",
+                    dining: "Chakula",
+                    events: "Matukio",
+                    contact: "Wasiliana",
+                    journal: "Jarida"
+                },
+                hero: {
+                    title: "Hisi Furaha ya Ambururu",
+                    subtitle: "Chunguza picha za kupendeza zinazonasa uchawi wa hoteli ya kifahari ya mazingira huko Siaya.",
+                    cta: "Ingia kwenye Uzoefu"
+                },
+                assistant: {
+                    prompt: "Uliza Mshauri wetu wa AI: 'Nionyeshe picha za maporomoko ya maji' au 'Msaada!'",
+                    videoCall: "Video Mshauri",
+                    aiRecommend: "Pendekeza AI"
+                },
+                video: {
+                    title: "Pata Uzoefu wa Uchawi",
+                    cta: "Shuhudia uzuri wa Ambururu ukiibuka!"
+                },
+                gallery: {
+                    title: "Muda wa Furaha",
+                    filterAll: "Zote",
+                    filterWaterfalls: "Maporomoko ya Maji",
+                    filterResort: "Hoteli",
+                    filterActivities: "Shughuli",
+                    filterEvents: "Matukio",
+                    captionSunrise: "Maporomoko ya Jua la Asubuhi",
+                    captionLush: "Maporomoko ya Kijani",
+                    captionSuite: "Chumba cha Kifahari cha Mazingira",
+                    captionFuture: "Mustakabali wa Ambururu",
+                    captionTree: "Upandaji Miti",
+                    captionHiking: "Safari ya Kupanda",
+                    captionWedding: "Harusi ya Ndoto",
+                    captionFestival: "Sherehe za Utamaduni",
+                    noteWaterfalls: "Maji takatifu ya Luo",
+                    noteYala: "Urithi wa Mto Yala",
+                    noteDesign: "Muundo wa Luo",
+                    noteSerenity: "Utulivu unakutana na kifahari",
+                    noteReforestation: "Upandaji miti wa jamii",
+                    noteValley: "Chunguza Bonde la Yala",
+                    noteWedding: "Mila ya harusi ya Luo",
+                    noteHeritage: "Kusherehekea urithi wa Luo"
+                },
+                panorama: {
+                    title: "Chukua Ziara ya 360° ya Moja kwa Moja"
+                },
+                share: {
+                    title: "Shiriki Muda Wako wa Ambururu",
+                    message: "Nasa uchawi na ututag kwenye Instagram, Twitter, na Facebook kwa #AmbururuMoments ili uonekane!"
+                },
+                footer: {
+                    newsletterTitle: "Endelea Kuunganishwa",
+                    newsletterPlaceholder: "Ingiza barua pepe yako",
+                    subscribe: "Jiandikishe",
+                    about: "Kuhusu Sisi",
+                    contact: "Wasiliana",
+                    sustainability: "Endeleo",
+                    privacy: "Sera ya Faragha",
+                    terms: "Masharti na Vigezo"
+                },
+                contact: {
+                    title: "Wasiliana Nasi",
+                    nameLabel: "Jina",
+                    emailLabel: "Barua Pepe",
+                    messageLabel: "Ujumbe",
+                    submit: "Tuma"
+                },
+                cookie: {
+                    text: "Tunatumia cookies ili kuboresha uzoefu wako.",
+                    privacy: "Jifunze zaidi",
+                    accept: "Kubali"
+                },
+                sticky: {
+                    book: "Hifadhi Sasa"
+                }
+            },
+            luo: {
+                skipLink: "Ng’iel kwe",
+                nav: {
+                    home: "Ber",
+                    about: "Kwe",
+                    aboutHistory: "Kwe Madwaro",
+                    aboutFounder: "Jadwaro",
+                    aboutCommunity: "Ber Jo",
+                    aboutAttractions: "Gik Moko",
+                    gallery: "Picha",
+                    experiences: "Ber marach",
+                    experiencesCultural: "Wuoth Madwaro",
+                    experiencesHiking: "Njia Yala",
+                    experiencesWellness: "Ber Maber",
+                    accommodations: "Ber Maber",
+                    dining: "Chiemo",
+                    events: "Gik Moko",
+                    contact: "Konywa",
+                    journal: "Nyer"
+                },
+                hero: {
+                    title: "Ng’iel Ber Ambururu",
+                    subtitle: "Nen picha moko ma kwe e Siaya.",
+                    cta: "Ng’iel Wuoth"
+                },
+                assistant: {
+                    prompt: "Peny wuon AI: 'Nen picha maji' kata 'Kony!'",
+                    videoCall: "Video Wuon",
+                    aiRecommend: "Pendekeza AI"
+                },
+                video: {
+                    title: "Ng’iel Ber Maber",
+                    cta: "Nen ber Ambururu kwe!"
+                },
+                gallery: {
+                    title: "Ber Maber",
+                    filterAll: "Duto",
+                    filterWaterfalls: "Maji",
+                    filterResort: "Ber",
+                    filterActivities: "Gik Moko",
+                    filterEvents: "Sherehe",
+                    captionSunrise: "Maji Ber",
+                    captionLush: "Maji Kijani",
+                    captionSuite: "Chum Maber",
+                    captionFuture: "Ber Ambururu",
+                    captionTree: "Pand Miti",
+                    captionHiking: "Wuoth Maber",
+                    captionWedding: "Ber Harusi",
+                    captionFestival: "Sherehe Maber",
+                    noteWaterfalls: "Maji Luo",
+                    noteYala: "Mto Yala",
+                    noteDesign: "Muundo Luo",
+                    noteSerenity: "Kwe gi Maber",
+                    noteReforestation: "Pand Miti Jo",
+                    noteValley: "Nen Yala",
+                    noteWedding: "Harusi Luo",
+                    noteHeritage: "Sherehe Luo"
+                },
+                panorama: {
+                    title: "Ng’iel 360° Wuoth"
+                },
+                share: {
+                    title: "Wach Ber Ambururu",
+                    message: "Nen kwe gi Instagram, Twitter, gi Facebook gi #AmbururuMoments mondo inen!"
+                },
+                footer: {
+                    newsletterTitle: "Endelea Kwe",
+                    newsletterPlaceholder: "Ket barua pepe",
+                    subscribe: "Jiandikish",
+                    about: "Kwe Wadu",
+                    contact: "Konywa",
+                    sustainability: "Ber Madero",
+                    privacy: "Sera",
+                    terms: "Ber Maber"
+                },
+                contact: {
+                    title: "Konywa",
+                    nameLabel: "Nying",
+                    emailLabel: "Barua",
+                    messageLabel: "Wach",
+                    submit: "Tum"
+                },
+                cookie: {
+                    text: "Wan gi cookie mondo ber maber.",
+                    privacy: "Ng’pi",
+                    accept: "Yie"
+                },
+                sticky: {
+                    book: "Kaw"
+                }
+            }
+        };
 
-            // Gallery Filters
-            $('.gallery-filters button').on('click', function() {
-                const filter = $(this).data('filter');
-                $('.gallery-filters button').removeClass('active');
-                $(this).addClass('active');
-
-                if (filter === 'all') {
-                    $('.gallery-item').show();
+        // Utility Functions
+        function updateTranslations(lang) {
+            document.querySelectorAll('[data-translate]').forEach(el => {
+                const key = el.getAttribute('data-translate');
+                const keys = key.split('.');
+                let translation = translations[lang];
+                keys.forEach(k => translation = translation[k]);
+                if (el.tagName === 'A' && el.hasAttribute('href')) {
+                    const href = el.getAttribute('href');
+                    if (href.includes('instagram.com') || href.includes('x.com') || href.includes('facebook.com')) {
+                        el.innerHTML = translation;
+                    } else {
+                        el.textContent = translation;
+                    }
                 } else {
-                    $('.gallery-item').hide();
-                    $(`.gallery-item[data-category="${filter}"]`).show();
+                    el.textContent = translation;
                 }
             });
 
-            // Video Play Button
-            $('.play-button').on('click', function() {
-                const video = $(this).closest('.video-container').find('video')[0];
-                video.play();
-                $(this).closest('.video-overlay').fadeOut();
+            document.querySelectorAll('[data-translate-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-translate-placeholder');
+                const keys = key.split('.');
+                let translation = translations[lang];
+                keys.forEach(k => translation = translation[k]);
+                el.setAttribute('placeholder', translation);
             });
+        }
 
-            // Newsletter Form Submission
-            $('#newsletter-form').on('submit', function(e) {
-                e.preventDefault();
-                const email = $(this).find('input[name="email"]').val();
-                if (email) {
-                    this.animate([
-                        { transform: 'scale(1)', opacity: 1 },
-                        { transform: 'scale(0.95)', opacity: 0.7 },
-                        { transform: 'scale(1)', opacity: 1 }
-                    ], { duration: 500, easing: 'ease-in-out' });
-                    alert('Thank you for subscribing!');
-                    $(this)[0].reset();
-                }
-            });
+        function toggleDarkMode() {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
+            localStorage.setItem('theme', isDark ? 'light' : 'dark');
+            document.querySelector('.dark-mode-toggle i').className = isDark ? 'fas fa-moon' : 'fas fa-sun';
+        }
 
-            // Debug Missing Assets
-            $('img').on('error', function() {
-                console.log(`Image not found: ${this.src}`);
-            });
+        function updateProgressBar() {
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const progress = (scrollTop / scrollHeight) * 100;
+            document.querySelector('.progress-bar').style.width = `${progress}%`;
+        }
+
+        function toggleMenu() {
+            const nav = document.querySelector('nav ul');
+            const toggle = document.querySelector('.menu-toggle');
+            const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+            nav.classList.toggle('active');
+            toggle.setAttribute('aria-expanded', !isExpanded);
+            toggle.querySelector('i').className = isExpanded ? 'fas fa-bars' : 'fas fa-times';
+        }
+
+        // Cookie Consent
+        function showCookieConsent() {
+            if (!localStorage.getItem('cookiesAccepted')) {
+                document.querySelector('.cookie-consent').classList.add('active');
+            }
+        }
+        document.querySelector('#accept-cookies')?.addEventListener('click', () => {
+            localStorage.setItem('cookiesAccepted', 'true');
+            document.querySelector('.cookie-consent').classList.remove('active');
         });
 
-        // 3D Hero Background with Three.js
-        const canvas = document.getElementById('three-canvas');
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-
-        // Particle System for Festive Effect
-        const particleCount = 5000;
-        const particles = new THREE.BufferGeometry();
-        const positions = new Float32Array(particleCount * 3);
-        const velocities = new Float32Array(particleCount * 3);
-        const colors = new Float32Array(particleCount * 3);
-        for (let i = 0; i < particleCount; i++) {
-            positions[i * 3] = Math.random() * 100 - 50;
-            positions[i * 3 + 1] = Math.random() * 100;
-            positions[i * 3 + 2] = Math.random() * 100 - 50;
-            velocities[i * 3] = 0;
-            velocities[i * 3 + 1] = -Math.random() * 2 - 1;
-            velocities[i * 3 + 2] = 0;
-            const color = Math.random();
-            if (color < 0.33) {
-                colors[i * 3] = 0; colors[i * 3 + 1] = 1; colors[i * 3 + 2] = 0.6; // Neon Green
-            } else if (color < 0.66) {
-                colors[i * 3] = 0; colors[i * 3 + 1] = 0.8; colors[i * 3 + 2] = 1; // Cyan
+        // Scroll to Top
+        function toggleScrollToTop() {
+            const btn = document.querySelector('.scroll-to-top');
+            if (window.scrollY > 300) {
+                btn.classList.add('visible');
             } else {
-                colors[i * 3] = 1; colors[i * 3 + 1] = 1; colors[i * 3 + 2] = 0.2; // Yellow
+                btn.classList.remove('visible');
             }
         }
-        particles.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-        particles.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-        const particleMaterial = new THREE.PointsMaterial({
-            size: 0.5,
-            vertexColors: true,
-            transparent: true,
-            opacity: 0.7
-        });
-        const particleSystem = new THREE.Points(particles, particleMaterial);
-        scene.add(particleSystem);
 
-        // Lighting
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-        scene.add(ambientLight);
-        const pointLight = new THREE.PointLight(0x00ff99, 1, 100);
-        pointLight.position.set(0, 50, 50);
-        scene.add(pointLight);
-
-        camera.position.z = 50;
-
-        function animate() {
-            requestAnimationFrame(animate);
-            const positions = particleSystem.geometry.attributes.position.array;
-            for (let i = 0; i < particleCount; i++) {
-                positions[i * 3 + 1] += velocities[i * 3 + 1];
-                if (positions[i * 3 + 1] < -50) {
-                    positions[i * 3 + 1] = 50;
-                }
+        // Header Scroll Behavior
+        let lastScroll = 0;
+        function handleHeaderScroll() {
+            const header = document.querySelector('.sticky-header');
+            const currentScroll = window.scrollY;
+            if (currentScroll > lastScroll && currentScroll > 100) {
+                header.classList.add('hidden');
+            } else {
+                header.classList.remove('hidden');
+                header.classList.toggle('scrolled', currentScroll > 50);
             }
-            particleSystem.geometry.attributes.position.needsUpdate = true;
-            renderer.render(scene, camera);
+            lastScroll = currentScroll;
         }
-        animate();
 
-        window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
+        // Fancybox Initialization
+        Fancybox.bind('[data-fancybox="gallery"]', {
+            caption: function (fancybox, carousel, slide) {
+                return slide.$trigger.dataset.caption || '';
+            },
+            keyboard: {
+                Escape: "close",
+                Delete: "close",
+                Backspace: "close",
+                PageUp: "next",
+                PageDown: "prev",
+                ArrowUp: "next",
+                ArrowDown: "prev",
+                ArrowRight: "next",
+                ArrowLeft: "prev"
+            }
         });
 
-        // Particles.js for Video and Gallery Sections
-        particlesJS('video-particles', {
-            particles: {
-                number: { value: 80, density: { enable: true, value_area: 800 } },
-                color: { value: '#00ff99' },
-                shape: { type: 'circle' },
-                opacity: { value: 0.5, random: true },
-                size: { value: 3, random: true },
-                line_linked: { enable: true, distance: 150, color: '#00ccff', opacity: 0.4, width: 1 },
-                move: { enable: true, speed: 2, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false }
-            },
-            interactivity: {
-                detect_on: 'canvas',
-                events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' }, resize: true },
-                modes: { repulse: { distance: 100, duration: 0.4 }, push: { particles_nb: 4 } }
-            },
-            retina_detect: true
-        });
+        // Gallery Filters
+        function initGalleryFilters() {
+            const buttons = document.querySelectorAll('.gallery-filters button');
+            const items = document.querySelectorAll('.gallery-item');
+            const announcer = document.querySelector('#gallery-announcer');
 
-        particlesJS('gallery-particles', {
-            particles: {
-                number: { value: 80, density: { enable: true, value_area: 800 } },
-                color: { value: '#00ff99' },
-                shape: { type: 'circle' },
-                opacity: { value: 0.5, random: true },
-                size: { value: 3, random: true },
-                line_linked: { enable: true, distance: 150, color: '#00ccff', opacity: 0.4, width: 1 },
-                move: { enable: true, speed: 2, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false }
-            },
-            interactivity: {
-                detect_on: 'canvas',
-                events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' }, resize: true },
-                modes: { repulse: { distance: 100, duration: 0.4 }, push: { particles_nb: 4 } }
-            },
-            retina_detect: true
-        });
+            buttons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const filter = btn.getAttribute('data-filter');
+                    buttons.forEach(b => {
+                        b.classList.remove('active');
+                        b.setAttribute('aria-selected', 'false');
+                    });
+                    btn.classList.add('active');
+                    btn.setAttribute('aria-selected', 'true');
 
-        // GSAP Scroll Animations for Gallery Items
-        gsap.registerPlugin(ScrollTrigger);
-        gsap.utils.toArray('.gallery-item').forEach((item, index) => {
-            gsap.from(item, {
-                opacity: 0,
-                scale: 0.8,
-                y: 50,
-                duration: 1.5,
-                ease: 'back.out(1.7)',
-                scrollTrigger: {
-                    trigger: item,
-                    start: 'top 80%',
-                    end: 'bottom 60%',
-                    toggleActions: 'play none none reverse'
-                },
-                delay: index * 0.1
+                    items.forEach(item => {
+                        if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                            item.style.display = 'block';
+                            gsap.fromTo(item, { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.5 });
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+
+                    announcer.textContent = `Showing ${filter === 'all' ? 'all' : filter} items.`;
+                });
             });
+        }
+
+        // Plyr Video Player
+        const player = new Plyr('.plyr', {
+            controls: ['play', 'progress', 'current-time', 'mute', 'volume', 'captions', 'fullscreen'],
+            captions: { active: true, language: 'en' }
         });
 
-        // Pannellum 360 Panorama
-        pannellum.viewer('panorama', {
-            type: 'equirectangular',
-            panorama: 'images/panorama.jpg',
-            autoLoad: true,
-            autoRotate: -2,
-            showControls: false,
-            onError: function() {
-                document.getElementById('panorama').innerHTML = '<p>Panorama failed to load. Please try again later.</p>';
+        // Swiper for UGC Carousel
+        const ugcCarousel = new Swiper('.ugc-carousel', {
+            loop: true,
+            slidesPerView: 1,
+            spaceBetween: 10,
+            autoplay: { delay: 5000 },
+            pagination: { el: '.swiper-pagination', clickable: true },
+            breakpoints: { 768: { slidesPerView: 2 }, 1000: { slidesPerView: 3 } }
+        });
+
+        // GSAP Animations
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.from('.hero-overlay', { opacity: 0, y: 50, duration: 1.5 });
+        gsap.from('.gallery-item', {
+            opacity: 0, y: 50, stagger: 0.2, duration: 1,
+            scrollTrigger: { trigger: '.gallery', start: 'top 80%' }
+        });
+        gsap.from('.panorama-container', {
+            opacity: 0, y: 50, duration: 1,
+            scrollTrigger: { trigger: '.panorama-section', start: 'top 80%' }
+        });
+
+        // Newsletter Form
+        document.querySelector('#newsletter-form').addEventListener('submit', async e => {
+            e.preventDefault();
+            const email = document.querySelector('#newsletter-form input[name="email"]').value;
+            try {
+                const response = await fetch('/api/newsletter', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email })
+                });
+                if (response.ok) {
+                    document.querySelector('#newsletter-form input').value = '';
+                    const success = document.createElement('p');
+                    success.textContent = translations[currentLang].footer.subscribed || 'Subscribed!';
+                    success.className = 'success';
+                    document.querySelector('#newsletter-form').appendChild(success);
+                    setTimeout(() => success.remove(), 5000);
+                } else {
+                    alert(translations[currentLang].footer.subscriptionFailed || 'Subscription failed.');
+                }
+            } catch (error) {
+                alert(translations[currentLang].footer.error || 'Error occurred.');
             }
+        });
+
+        // Contact Popup
+        function toggleContactForm() {
+            const popup = document.querySelector('.contact-popup');
+            const form = document.querySelector('.contact-form');
+            popup.addEventListener('click', () => {
+                form.classList.toggle('active');
+            });
+            popup.addEventListener('keypress', e => {
+                if (e.key === 'Enter') popup.click();
+            });
+        }
+
+        // Virtual Assistant Toggle
+        function toggleAssistant() {
+            const orb = document.querySelector('.assistant-orb');
+            orb.addEventListener('click', () => {
+                orb.classList.toggle('active');
+            });
+            orb.addEventListener('keypress', e => {
+                if (e.key === 'Enter') orb.click();
+            });
+        }
+
+        // Initialize Language
+        let currentLang = localStorage.getItem('language') || 'en';
+        document.querySelector('#language-select').value = currentLang;
+        updateTranslations(currentLang);
+
+        document.querySelector('#language-select').addEventListener('change', e => {
+            currentLang = e.target.value;
+            localStorage.setItem('language', currentLang);
+            updateTranslations(currentLang);
+        });
+
+        // Initialize Theme
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        document.querySelector('.dark-mode-toggle i').className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+
+        // Event Listeners
+        window.addEventListener('scroll', () => {
+            updateProgressBar();
+            toggleScrollToTop();
+            handleHeaderScroll();
+        });
+
+        document.querySelector('.scroll-to-top').addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        document.querySelector('.dark-mode-toggle').addEventListener('click', toggleDarkMode);
+        document.querySelector('.menu-toggle').addEventListener('click', toggleMenu);
+
+        // Initialize Functions
+        initGalleryFilters();
+        toggleContactForm();
+        toggle        // Panorama Hotspots
+        function initPanoramaHotspots() {
+            const hotspots = document.querySelectorAll('.hotspot');
+            hotspots.forEach(hotspot => {
+                hotspot.addEventListener('click', () => {
+                    const label = hotspot.querySelector('.hotspot-label').getAttribute('value');
+                    alert(`${translations[currentLang].panorama.hotspotClicked || 'You clicked on'} ${label}`);
+                });
+                hotspot.addEventListener('keypress', e => {
+                    if (e.key === 'Enter') hotspot.click();
+                });
+            });
+        }
+
+        // Contact Form Submission
+        function handleContactForm() {
+            const form = document.querySelector('#contact-form');
+            form.addEventListener('submit', async e => {
+                e.preventDefault();
+                const name = document.querySelector('#contact-name').value.trim();
+                const email = document.querySelector('#contact-email').value.trim();
+                const message = document.querySelector('#message').value.trim();
+                if (name && email && message) {
+                    try {
+                        const response = await fetch('/api/contact', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ name, email, message })
+                        });
+                        if (response.ok) {
+                            form.reset();
+                            document.querySelector('.contact-form').classList.remove('active');
+                            alert(translations[currentLang].contact.success || 'Message sent successfully!');
+                        } else {
+                            alert(translations[currentLang].contact.error || 'Failed to send message.');
+                        }
+                    } catch (error) {
+                        alert(translations[currentLang].contact.error || 'Error occurred.');
+                    }
+                } else {
+                    alert(translations[currentLang].contact.fillAllFields || 'Please fill in all fields.');
+                }
+            });
+        }
+
+        // Virtual Assistant Functionality
+        function initVirtualAssistant() {
+            document.querySelector('#video-call').addEventListener('click', () => {
+                window.open('https://video-call-service.com/ambururu', '_blank');
+            });
+
+            document.querySelector('#ai-recommend').addEventListener('click', () => {
+                const recommendation = translations[currentLang].assistant.recommendations || 'I recommend exploring the waterfall photos in the gallery!';
+                alert(recommendation);
+            });
+        }
+
+        // Lazy Load Images
+        function initLazyLoading() {
+            const images = document.querySelectorAll('img[loading="lazy"]');
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.src; // Trigger loading
+                        observer.unobserve(img);
+                    }
+                });
+            }, { rootMargin: '200px' });
+            images.forEach(img => observer.observe(img));
+        }
+
+        // Smooth Scroll for Anchor Links
+        function initSmoothScroll() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', e => {
+                    e.preventDefault();
+                    const target = document.querySelector(anchor.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+        }
+
+        // Accessibility Enhancements
+        function enhanceAccessibility() {
+            // Ensure focus outline for keyboard navigation
+            document.querySelectorAll('button, a, [role="button"]').forEach(el => {
+                el.addEventListener('focus', () => el.classList.add('focused'));
+                el.addEventListener('blur', () => el.classList.remove('focused'));
+            });
+
+            // Announce language change
+            document.querySelector('#language-select').addEventListener('change', () => {
+                const announcer = document.querySelector('.live-region');
+                announcer.textContent = `${translations[currentLang].accessibility.languageChanged || 'Language changed to'} ${currentLang}`;
+            });
+        }
+
+        // Performance Optimization: Defer Non-Critical Scripts
+        function deferScripts() {
+            const scripts = document.querySelectorAll('script[defer]');
+            scripts.forEach(script => {
+                script.setAttribute('async', '');
+            });
+        }
+
+        // Initialize All Functions
+        initPanoramaHotspots();
+        handleContactForm();
+        initVirtualAssistant();
+        initLazyLoading();
+        initSmoothScroll();
+        enhanceAccessibility();
+        deferScripts();
+        showCookieConsent();
+
+        // Additional GSAP Animations
+        gsap.from('.video-container', {
+            opacity: 0,
+            y: 50,
+            duration: 1,
+            scrollTrigger: { trigger: '.video-hero', start: 'top 80%' }
+        });
+
+        gsap.from('.share-moments .social-icons a', {
+            opacity: 0,
+            scale: 0,
+            stagger: 0.2,
+            duration: 0.5,
+            scrollTrigger: { trigger: '.share-moments', start: 'top 80%' }
         });
     </script>
 </body>
