@@ -1,9 +1,9 @@
 ## 🌌 **Join the Web Revolution: Web Odyssey Hub Awaits!**
 
 - ⭐ **Star this repo** to ignite your journey and unlock a universe of cutting-edge web creations! Your support fuels our mission to redefine the digital frontier.
-- 💬 **Dive into the Cosmos**: Connect with visionary creators in our [Discussions Galaxy](https://github.com/yourusername/web-odyssey-hub/discussions) — share ideas, spark collaborations, and shape the web’s future.
-- 🛠️ **Be a Trailblazer**: Spotted a glitch or got a game-changing idea? Open an [Issue](https://github.com/yourusername/web-odyssey-hub/issues) or drop a Pull Request to leave your mark on the digital landscape.
-- 📣 **Stay in Orbit**: Follow us on [X](https://x.com/yourusername) for electrifying updates, pro web dev hacks, and exclusive project reveals that’ll keep you ahead of the curve!
+- 💬 **Dive into the Cosmos**: Connect with visionary creators in our [Discussions Galaxy](https://github.com/BruceAmalemba/web-odyssey-hub/discussions) — share ideas, spark collaborations, and shape the web’s future.
+- 🛠️ **Be a Trailblazer**: Spotted a glitch or got a game-changing idea? Open an [Issue](https://github.com/BruceAmalemba/web-odyssey-hub/issues) or drop a Pull Request to leave your mark on the digital landscape.
+- 📣 **Stay in Orbit**: Follow us on [X](https://x.com/Bruce_Amalemba) for electrifying updates, pro web dev hacks, and exclusive project reveals that’ll keep you ahead of the curve!
 
 ---
 
@@ -63,7 +63,7 @@ The **Web Odyssey Hub** is a supernova of innovation, blending jaw-dropping visu
 
 **Ready to make the web unforgettable?** Dive into the **Web Odyssey Hub**, explore its wonders, and let’s craft digital experiences that echo across the cosmos! 🌍
 
-*Forged with passion by [Your Name]. Licensed under [MIT License](LICENSE). Powered by creativity, code, and an unstoppable vision for the web.*  
+*Forged with passion by Bruce Amalemba. Licensed under [MIT License](LICENSE). Powered by creativity, code, and an unstoppable vision for the web.*  
 *Last Updated: June 10, 2025*
 
 ![Web Odyssey Banner](assets/web_odyssey_banner.gif)
